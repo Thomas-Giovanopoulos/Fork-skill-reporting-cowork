@@ -1,0 +1,25 @@
+  <!-- Widget 1 — Tableau global consolidé (5 catégories fixes + total) -->
+  <table class="synth-table">
+    <thead><tr><th style="width:30%">Catégorie</th><th>Brut (€)</th><th>Dettes (€)</th><th>Net (€)</th><th>% brut</th></tr></thead>
+    <tbody>
+      {% set synth_rows = [("liquidites","Liquidités"),("immobilier","Immobilier"),("financier_cote","Patrimoine financier coté"),("non_cote","Financier non coté"),("dettes","Dettes")] %}
+      {% for key, label in synth_rows %}
+      {%- set s = data.synth.get(key, {}) %}
+      <tr>
+        <td{% if key == "dettes" %} style="color:var(--dn)"{% endif %}>{{ label }}</td>
+        <td data-slot="synth_brut" data-cat="{{ key }}">{{ s.get('brut') or '&mdash;' }}</td>
+        <td data-slot="synth_dettes" data-cat="{{ key }}">{{ s.get('dettes') or '&mdash;' }}</td>
+        <td data-slot="synth_net" data-cat="{{ key }}">{{ s.get('net') or '&mdash;' }}</td>
+        <td style="color:var(--muted);font-size:11.5px" data-slot="synth_pct" data-cat="{{ key }}">{{ s.get('pct') or '&mdash;' }}</td>
+      </tr>
+      {% endfor %}
+      {%- set t = data.synth.get('total', {}) %}
+      <tr class="total-row">
+        <td>TOTAL CONSOLIDÉ</td>
+        <td data-slot="synth_brut" data-cat="total">{{ t.get('brut') or '&mdash;' }}</td>
+        <td class="c-neg-w" data-slot="synth_dettes" data-cat="total">{{ t.get('dettes') or '&mdash;' }}</td>
+        <td class="c-gold" data-slot="synth_net" data-cat="total">{{ t.get('net') or '&mdash;' }}</td>
+        <td style="color:rgba(255,255,255,.5);font-size:11px">actif net</td>
+      </tr>
+    </tbody>
+  </table>

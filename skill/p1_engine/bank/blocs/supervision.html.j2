@@ -1,0 +1,83 @@
+<!-- ═══ BLOC {{ bloc_num.supervision }} — PATRIMOINE SOUS SUPERVISION ═══ -->
+<div class="sec">
+  <div class="sec-hd">
+    <span class="sec-num">{{ bloc_num.supervision }}</span>
+    <h2 class="sec-title">Patrimoine sous supervision au {{ reporting.date_display }}</h2>
+    <div class="sec-rule"></div>
+  </div>
+  {%- set sup = data.supervision %}
+
+  <!-- Widget 1 — bandeau KPI (même structure que le coté) -->
+  <div class="kpi-cards">
+    <div class="card card-gold">
+      <div class="card-lbl">Patrimoine sous supervision</div>
+      <div class="card-val" data-slot="sup_value">{{ sup.kpis.value if sup and sup.kpis else '&mdash;' }}</div>
+      <div class="card-sub">au {{ reporting.date_display }}</div>
+    </div>
+    <div class="card {{ sup.kpis.cote_card if sup and sup.kpis else 'card-pos' }}">
+      <div class="card-lbl">{{ sup.kpis.cote_label if sup and sup.kpis else 'Performance YTD — coté' }}</div>
+      <div class="card-val {{ sup.kpis.cote_cls if sup and sup.kpis else '' }}" data-slot="sup_cote_pct">{{ sup.kpis.cote_pct if sup and sup.kpis else '&mdash;' }}</div>
+      <div class="card-sub" data-slot="sup_cote_eur">{{ sup.kpis.cote_eur if sup and sup.kpis else '&mdash;' }}</div>
+    </div>
+    <div class="card {{ sup.kpis.nc_card if sup and sup.kpis else 'card-pos' }}">
+      <div class="card-lbl">Performance YTD — non coté</div>
+      <div class="card-val {{ sup.kpis.nc_cls if sup and sup.kpis else '' }}" data-slot="sup_nc_pct">{{ sup.kpis.nc_pct if sup and sup.kpis else '&mdash;' }}</div>
+      <div class="card-sub" data-slot="sup_nc_eur">{{ sup.kpis.nc_eur if sup and sup.kpis else '&mdash;' }}</div>
+    </div>
+    <div class="card">
+      <div class="card-lbl">Profil de risque moyen</div>
+      <div class="card-val" data-slot="sup_profil">{{ sup.kpis.profil if (sup and sup.kpis and sup.kpis.get('profil')) else '&mdash;' }}</div>
+      <div class="card-sub">{% if sup and sup.kpis and sup.kpis.get('sri') %}SRI {{ sup.kpis.sri }}/7 · moyen pondéré{% else %}SRI moyen pondéré (1-7){% endif %}</div>
+    </div>
+  </div>
+
+{% include "fragments/donuts_sup.html.j2" %}
+
+  {#- Historique du patrimoine : 1 ligne par arrêté (année en cours par trimestre, années passées par an) -#}
+  {%- set hp = (sup.histo_pat if sup else none) %}
+  {%- if hp %}
+  <div class="exh-card" style="margin-top:16px;">
+    <div class="cote-exh-hd">Historique du patrimoine — financier coté</div>
+    <table class="synth-table">
+      <thead><tr>
+        <th style="text-align:left;width:16%">Période</th><th>Valeur coté</th><th>Non coté</th><th>Patrimoine</th><th>Alloc. coté/NC</th><th>Flux nets</th><th>Perf. période</th><th>Perf € période</th><th style="padding-right:12px">Perf. cumulée (YTD)</th>
+      </tr></thead>
+      <tbody>
+        {%- for h in hp %}
+        <tr><td style="text-align:left"><span class="cname">{{ h.periode }}</span></td>
+            <td>{{ h.valeur | safe }}</td><td>{{ h.nc | safe }}</td><td>{{ h.pat | safe }}</td><td>{{ h.alloc }}</td><td>{{ h.flux | safe }}</td><td>{{ h.perf | safe }}</td><td>{{ h.perf_eur | safe }}</td><td style="padding-right:12px">{{ h.cum | safe }}</td></tr>
+        {%- endfor %}
+      </tbody>
+    </table>
+    <div class="pnc-gloss"><strong>Non coté</strong> : dernière valorisation connue à la date (forward-fill ; 2024 : capital appelé, faute de VL) · <strong>Alloc.</strong> : poids coté/non coté du patrimoine financier · <strong>Flux nets</strong> : versements − retraits de la période · <strong>Perf. période</strong> : variation corrigée des flux (Dietz modifié) — la valeur d'un arrêté se lit : valeur précédente × (1 + perf) + flux nets · <strong>Perf. cumulée</strong> : Dietz depuis le 1ᵉʳ janvier (peut différer légèrement du chaînage des trimestres, effet méthodologique des flux).</div>
+  </div>
+  {%- endif %}
+
+  {#- Rendements annualisés par horizon. Relogé sous le tableau Historique ci-dessus,
+      en pleine largeur (ce tableau occupe toute la largeur, rien ne tient à côté).
+      Le bloc Rendement annuel d'origine est supprimé : le tableau Historique porte déjà
+      la performance annuelle et huit colonnes de plus. Cette synthèse, elle, n'a aucun
+      équivalent ailleurs. N'existe qu'au-delà de 5 ans d'historique (mode graphique).
+      Commentaire Jinja et non HTML : il ne doit pas fuiter dans le document client. -#}
+  {%- set an = (sup.annualise if sup else none) %}
+  {%- if an %}
+  <div class="chart-card" style="margin-top:16px;">
+    <div class="chart-title">Rendements annualisés par horizon</div>
+    <table class="fact-tbl">
+      <thead>
+        <tr><th></th>{% for h in an.heads %}<th>{{ h }}</th>{% endfor %}</tr>
+      </thead>
+      <tbody>
+        {%- if an.has_nc %}
+        <tr class="row-comp"><td>Poche cotée&nbsp;(%)</td>{% for v in an.cote %}<td>{{ v }}</td>{% endfor %}</tr>
+        <tr class="row-comp"><td>Poche non cotée&nbsp;(%)</td>{% for v in an.nc %}<td>{{ v }}</td>{% endfor %}</tr>
+        <tr class="row-glob"><td>Rendement global&nbsp;(%)</td>{% for v in an.glob %}<td>{{ v }}</td>{% endfor %}</tr>
+        {%- else %}
+        <tr class="row-glob"><td>Rendement du portefeuille&nbsp;(%)</td>{% for v in an.cote %}<td>{{ v }}</td>{% endfor %}</tr>
+        {%- endif %}
+      </tbody>
+    </table>
+    <div class="fact-note">{{ an.caption }}{% if an.has_nc %} Pondération : {{ an.wcote }}% coté · {{ an.wnc }}% non coté.{% endif %}</div>
+  </div>
+  {%- endif %}
+</div>

@@ -1,0 +1,561 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rhetores-finance.example/schemas/store_client.schema.json",
+  "title": "Rhetores Store Client (forme-store)",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "client",
+    "reporting"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "2.0-skill"
+    },
+    "client": {
+      "$ref": "#/$defs/client"
+    },
+    "reporting": {
+      "$ref": "#/$defs/reporting"
+    },
+    "_provisional_ids": {
+      "type": "boolean"
+    },
+    "valuations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/valuation"
+      }
+    },
+    "liquidites": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/genericEntry"
+      }
+    },
+    "immobilier": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/genericEntry"
+      }
+    },
+    "financier_cote": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/financierCoteEntry"
+      }
+    },
+    "non_cote": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/nonCoteEntry"
+      }
+    },
+    "dettes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/genericEntry"
+      }
+    },
+    "exotiques": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/genericEntry"
+      }
+    },
+    "historique_annuel": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/genericEntry"
+      }
+    },
+    "mouvements": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/mouvementEntry"
+      }
+    }
+  },
+  "$defs": {
+    "client": {
+      "type": "object",
+      "required": [
+        "id",
+        "label",
+        "entities"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^(tmp_|C-)"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "entities": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "label",
+              "type",
+              "order"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^(tmp_|C-)"
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1
+              },
+              "type": {
+                "enum": [
+                  "pp",
+                  "holding"
+                ]
+              },
+              "order": {
+                "type": "integer",
+                "minimum": 0
+              }
+            }
+          }
+        }
+      }
+    },
+    "reporting": {
+      "type": "object",
+      "required": [
+        "period_short",
+        "period_long",
+        "date_reporting",
+        "date_display",
+        "version",
+        "profile"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "period_short": {
+          "type": "string"
+        },
+        "period_long": {
+          "type": "string"
+        },
+        "date_reporting": {
+          "type": "string",
+          "format": "date"
+        },
+        "date_display": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "profile": {
+          "type": "string"
+        }
+      }
+    },
+    "valuation": {
+      "type": "object",
+      "required": [
+        "position_id",
+        "date",
+        "value"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "position_id": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string",
+          "format": "date"
+        },
+        "value": {
+          "type": "number"
+        },
+        "unit": {
+          "enum": [
+            "eur",
+            "pct"
+          ]
+        }
+      }
+    },
+    "genericEntry": {
+      "type": "object",
+      "required": [
+        "id",
+        "entity_id",
+        "label"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "entity_id": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source": {
+          "type": "string"
+        },
+        "source_document": {
+          "type": "string"
+        },
+        "validated_by": {
+          "type": "string"
+        },
+        "validation_note": {
+          "type": "string"
+        }
+      }
+    },
+    "financierCoteEntry": {
+      "type": "object",
+      "description": "Un contrat financier coté. `attributes.pockets` est REQUIS et non vide (A5) : le tableau de rendu a une ligne par poche, donc un contrat sans poche réelle en déclare une qui le décrit lui-même. Cet invariant supprime le second chemin de code du lecteur, et rend le compte de poches exact par construction.",
+      "required": [
+        "id",
+        "entity_id",
+        "label",
+        "envelope_type",
+        "manager",
+        "value_current",
+        "attributes"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "entity_id": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source": {
+          "type": "string"
+        },
+        "source_document": {
+          "type": "string"
+        },
+        "validated_by": {
+          "type": "string"
+        },
+        "validation_note": {
+          "type": "string"
+        },
+        "envelope_type": {
+          "type": "string"
+        },
+        "manager": {
+          "type": "string"
+        },
+        "custodian": {
+          "type": "string"
+        },
+        "management_mode": {
+          "type": "string"
+        },
+        "risk_profile": {
+          "type": "string"
+        },
+        "invest_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "capital_invested": {
+          "type": "number"
+        },
+        "value_current": {
+          "type": "number"
+        },
+        "value_jan1": {
+          "type": "number"
+        },
+        "value_projected": {
+          "type": "number"
+        },
+        "pledged": {
+          "type": "boolean"
+        },
+        "attributes": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "pockets"
+          ],
+          "properties": {
+            "lines": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/line"
+              }
+            },
+            "pockets": {
+              "type": "array",
+              "minItems": 1,
+              "description": "INVARIANT A5 : au moins une poche, toujours. Un contrat sans poche réelle en porte une, qui le décrit lui-même. Voir $defs/pocket.",
+              "items": {
+                "$ref": "#/$defs/pocket"
+              }
+            },
+            "ps": {
+              "$ref": "#/$defs/ps"
+            }
+          }
+        }
+      }
+    },
+    "line": {
+      "type": "object",
+      "required": [
+        "label",
+        "value",
+        "class"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "isin": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "value": {
+          "type": "number"
+        },
+        "class": {
+          "type": "string"
+        },
+        "geography": {
+          "type": "string"
+        },
+        "sri": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 7
+        },
+        "pocket": {
+          "type": "string"
+        },
+        "perf_pct": {
+          "type": "number",
+          "description": "perf % par ligne — horizon selon la source (YTD, depuis achat, hebdo) ; documenter dans validation_note"
+        }
+      }
+    },
+    "pocket": {
+      "type": "object",
+      "description": "Une poche d'un contrat financier coté. INVARIANT (A5) : un contrat en a TOUJOURS au moins une. Un contrat sans poche réelle porte une poche unique décrivant le contrat lui-même — label = label du contrat. Le lecteur de forme-store n'a donc qu'un seul chemin de code, et le nombre de poches est trivialement exact. Une poche porte le MÊME jeu d'attributs qu'un contrat, parce que c'est elle, et non le contrat, qui correspond à une ligne du tableau de rendu.",
+      "required": [
+        "label",
+        "value"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "description": "Type de poche : FID, FAS, FE, Mono… Colonne 3 du gabarit de transition. DISTINCT de profile (colonne 7) : l'un dit la forme juridique de la poche, l'autre son orientation de risque. Les confondre décale deux colonnes sans rien casser visiblement."
+        },
+        "profile": {
+          "type": "string",
+          "description": "Profil de risque de la poche. Colonne 7 du gabarit de transition."
+        },
+        "manager": {
+          "type": "string"
+        },
+        "custodian": {
+          "type": "string"
+        },
+        "value": {
+          "type": "number"
+        },
+        "capital_invested": {
+          "type": "number"
+        },
+        "value_jan1": {
+          "type": "number",
+          "description": "Valeur au 01/01 de la poche. Sans elle, la perf YTD par poche n'est pas calculable — c'était le manque le plus concret de A5."
+        },
+        "invest_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "pledged": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ps": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "coupon": {
+          "type": "number"
+        },
+        "start_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "duration_years": {
+          "type": "number"
+        },
+        "protection_pct": {
+          "type": "number"
+        },
+        "recall_pct": {
+          "type": "number"
+        },
+        "underlying_level": {
+          "type": "number"
+        }
+      }
+    },
+    "nonCoteEntry": {
+      "type": "object",
+      "required": [
+        "id",
+        "entity_id",
+        "label",
+        "manager",
+        "classe_rhetores",
+        "capital_committed"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "entity_id": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source": {
+          "type": "string"
+        },
+        "source_document": {
+          "type": "string"
+        },
+        "validated_by": {
+          "type": "string"
+        },
+        "validation_note": {
+          "type": "string"
+        },
+        "manager": {
+          "type": "string"
+        },
+        "classe_rhetores": {
+          "type": "string"
+        },
+        "capital_committed": {
+          "type": "number"
+        },
+        "capital_called": {
+          "type": "number"
+        },
+        "value_current": {
+          "type": "number"
+        },
+        "value_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "attributes": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "strategy": {
+              "type": "string"
+            },
+            "segment": {
+              "type": "string"
+            },
+            "vintage": {
+              "type": [
+                "string",
+                "integer"
+              ]
+            },
+            "moic_target": {
+              "type": "number"
+            },
+            "moic_realise": {
+              "type": "number"
+            },
+            "duration_target": {
+              "type": "number"
+            },
+            "instrument_type": {
+              "enum": [
+                "fonds",
+                "titre"
+              ],
+              "description": "Fonds = véhicule à engagement/appels (PE) ; Titre = détention directe ou via support (OCA, obligations, actions non cotées). Pilote le rendu en deux sous-sections et le périmètre des multiples MOIC/TVPI (fonds seuls)."
+            }
+          }
+        }
+      }
+    },
+    "mouvementEntry": {
+      "type": "object",
+      "required": [
+        "id",
+        "entry_ref",
+        "date",
+        "type",
+        "amount"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "entry_ref": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string",
+          "format": "date"
+        },
+        "type": {
+          "enum": [
+            "versement",
+            "retrait",
+            "frais"
+          ]
+        },
+        "amount": {
+          "type": "number"
+        },
+        "comment": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

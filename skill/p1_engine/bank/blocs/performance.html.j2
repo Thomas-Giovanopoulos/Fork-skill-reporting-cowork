@@ -1,0 +1,298 @@
+<!-- ═══ BLOC {{ bloc_num.performance }} — ÉTUDE DE LA PERFORMANCE ═══ -->
+<div class="sec">
+  <div class="sec-hd">
+    <span class="sec-num">{{ bloc_num.performance }}</span>
+    <h2 class="sec-title">Étude de la performance — {{ reporting.period_long }}</h2>
+    <div class="sec-rule"></div>
+  </div>
+  {%- set perf = data.perf %}
+
+  <!-- Widget 1a — Synthèse de performance -->
+  <div class="kpi-cards">
+    <div class="card"><div class="card-lbl">Valeur début de période</div><div class="card-val" data-slot="perf_start_value">{{ perf.kpis.cote_start if perf else '&mdash;' }}</div><div class="card-sub">poche coté au 1ᵉʳ janvier</div></div>
+    <div class="card {{ perf.kpis.ytd_card if perf else 'card-pos' }}"><div class="card-lbl">{{ perf.kpis.ytd_label if perf else 'Performance YTD' }}</div><div class="card-val {{ perf.kpis.ytd_cls if perf else 'c-pos' }}" data-slot="perf_ytd_pct">{{ perf.kpis.ytd_pct if perf else '&mdash;' }}</div><div class="card-sub {{ perf.kpis.ytd_cls if perf else '' }}" data-slot="perf_ytd_eur">{{ perf.kpis.ytd_eur_signed if perf else '&mdash;' }}</div></div>
+    <div class="card card-gold"><div class="card-lbl">Valeur en fin de période</div><div class="card-val" data-slot="portfolio_value">{{ perf.kpis.cote_end if perf else '&mdash;' }}</div><div class="card-sub">au {{ reporting.date_display }}{% if perf and perf.kpis.flow_note %} · {{ perf.kpis.flow_note }}{% endif %}</div></div>
+    <div class="card"><div class="card-lbl">Profil de risque du coté</div><div class="card-val" data-slot="perf_profil_cote">{{ perf.kpis.profil_cote if perf else '&mdash;' }}</div><div class="card-sub">{% if perf and perf.kpis.sri_cote %}SRI {{ perf.kpis.sri_cote }}/7{% else %}SRI moyen pondéré{% endif %}</div></div>
+  </div>
+
+  <div class="alloc-grid">
+    <!-- Widget 1b — Graphe du capital coté (le détail « positions » est retiré en présentée) -->
+    <div class="chart-card" data-pfc="card">
+      <div class="pnc-chart-hd">
+        <div class="chart-title">Évolution du capital coté{% if perf and perf.show_benchmark %} vs benchmark{% endif %} — {{ reporting.period_long }}</div>
+        {%- if reporting.get('mode','presentee') != 'presentee' %}
+        <div class="pnc-toggle" role="tablist">
+          <button type="button" class="pnc-tab pnc-on" data-page="chart">Graphique</button>
+          <button type="button" class="pnc-tab" data-page="table">Détails</button>
+        </div>
+        {%- endif %}
+      </div>
+      <div class="pnc-page" data-pnc-page="chart">
+        <canvas id="perf_evolution" height="200" data-slot="perf_evolution_chart"></canvas>
+        {%- if perf and perf.show_benchmark and perf.profile_text %}<div class="bench-note">{{ perf.profile_text | safe }}</div>{%- endif %}
+      </div>
+      {%- if reporting.get('mode','presentee') != 'presentee' %}
+      <div class="pnc-page" data-pnc-page="table" hidden>
+        {%- if perf and perf.get('positions') %}
+        {%- set pos = perf.get('positions') %}
+        <div class="pnc-scroll">
+          <div class="pnc-unit">Montants en {{ pos.unit }} · période : {{ reporting.period_long }}</div>
+          <table class="synth-table pnc-tbl">
+            <thead><tr><th>Ligne</th><th>Dépositaire</th><th>Nominal investi</th><th>Valeur 01/01</th><th>Valeur</th><th>Gain € période</th><th>Perf. période</th><th>Depuis origine</th></tr></thead>
+            <tbody>
+              {%- for r in pos.rows %}
+              <tr><td><div class="cname">{{ r.name }}</div>{% if r.det %}<div class="cdet">{{ r.det }}</div>{% endif %}</td>
+                  <td>{{ r.depo }}</td><td>{{ r.nom }}</td><td>{{ r.v01 }}</td><td>{{ r.val }}</td>
+                  <td>{{ r.gain | safe }}</td><td>{{ r.ppct | safe }}</td><td>{{ r.ipct | safe }}</td></tr>
+              {%- endfor %}
+              {%- set t = pos.total %}
+              <tr class="total-row"><td>TOTAL</td><td></td><td>{{ t.nom }}</td><td>{{ t.v01 }}</td><td class="c-gold">{{ t.val }}</td>
+                  <td>{{ t.gain | safe }}</td><td>{{ t.ppct | safe }}</td><td>{{ t.ipct | safe }}</td></tr>
+            </tbody>
+          </table>
+          <div class="pnc-gloss"><strong>Perf. période</strong> : du 1ᵉʳ janvier à la date de reporting, à périmètre de valorisation identique · <strong>Depuis origine</strong> : par rapport au nominal investi. Les contrats multi-poches sont détaillés poche par poche.</div>
+        </div>
+        {%- else %}
+        <div class="pnc-empty">&mdash;</div>
+        {%- endif %}
+      </div>
+      {%- endif %}
+    </div>
+
+    <!-- Widget 3 — Commentaire de gestion & arbitrages (remplace la carte benchmark) -->
+    <div class="mgmt-card">
+      <div class="bench-title">Commentaire de gestion</div>
+      <div class="mgmt-text" data-slot="commentaire_gestion">{% if perf and perf.commentaire %}{{ perf.commentaire | safe }}{% else %}<span class="mgmt-ph">Commentaire de gestion à rédiger en phase P4 (éditorial) — synthèse factuelle et commerciale de la période.</span>{% endif %}</div>
+      <div class="bench-title mgmt-sep">Arbitrages de la période</div>
+      {%- if perf and perf.arbitrages %}
+      <div class="arb-list">
+        {%- for a in perf.arbitrages %}
+        <div class="arb-row"><span class="arb-date">{{ a.date }}</span><span class="arb-lbl">{{ a.label }}{% if a.entity %} <span class="arb-ent">· {{ a.entity }}</span>{% endif %}</span></div>
+        {%- endfor %}
+      </div>
+      {%- else %}
+      <div class="arb-empty">Aucun arbitrage significatif sur la période.</div>
+      {%- endif %}
+    </div>
+  </div>
+
+  <!-- Widget 4 — Tableau exhaustif coté par contrat (accordéon ligne à ligne) -->
+  {%- if perf and perf.cote_table %}
+  <div class="cote-exh exh-card">
+    <div class="cote-exh-hd">Supports — Détail par contrat</div>
+    {%- for blk in perf.cote_table %}
+    {%- if blk.entity %}<div class="cote-exh-ent">{{ blk.entity }}</div>{%- endif %}
+    <table class="synth-table cote-acc-tbl">
+      <thead><tr>
+        <th style="text-align:left;width:22%">Contrat / Poche</th><th>Date d'inv.</th><th>Capital investi</th><th>Versements</th><th>Retraits</th><th>Valeur</th>{% if reporting.show_ps_corrige %}<th>Valeur projetée</th>{% endif %}<th>Perf € YTD</th><th>Perf % YTD</th><th>Perf € origine</th><th style="padding-right:12px">Perf % origine</th>
+      </tr></thead>
+      <tbody>
+        {%- for c in blk.contracts %}
+        {%- if c.poches %}
+        {#- multi-poche : poches toujours visibles, indentées ↳, simple dépliant vers les actifs #}
+        <tr class="acc-head">
+          <td><span class="acc-chev acc-chev-off"></span><span class="acc-name"><span class="cname">{{ c.label }}</span><span class="cdet">{{ c.npoches }} poches</span></span></td>
+          <td>{{ c.date_inv }}</td><td>{{ c.nominal }}</td><td>{{ c.vers }}</td><td>{{ c.rach }}</td><td style="font-weight:600">{{ c.valeur }}</td>{% if reporting.show_ps_corrige %}<td class="c-gold">{{ c.valeur_proj }}</td>{% endif %}<td>{{ c.gain_ytd | safe }}</td><td>{{ c.gpct_ytd | safe }}</td><td>{{ c.gain | safe }}</td><td style="padding-right:12px">{{ c.gpct | safe }}</td>
+        </tr>
+        {%- for p in c.poches %}
+        <tr class="acc-head acc-poche{% if p.lines %} acc-clickable{% endif %}">
+          <td><span class="poche-arrow">&#8627;</span><span class="acc-chev{% if not p.lines %} acc-chev-off{% endif %}">{% if p.lines %}&#9656;{% endif %}</span><span class="acc-name"><span class="cname">{{ p.gestion }}</span>{% if p.sub %}<span class="cdet">{{ p.sub }}</span>{% endif %}</span></td>
+          <td>{{ p.date_inv }}</td><td>{{ p.nominal }}</td><td>{{ p.vers }}</td><td>{{ p.rach }}</td><td>{{ p.valeur }}</td>{% if reporting.show_ps_corrige %}<td>&mdash;</td>{% endif %}<td>{{ p.gain_ytd | safe }}</td><td>{{ p.gpct_ytd | safe }}</td><td>{{ p.gain | safe }}</td><td style="padding-right:12px">{{ p.gpct | safe }}</td>
+        </tr>
+        {%- if p.lines %}
+        <tr class="acc-detail" hidden><td colspan="{% if reporting.show_ps_corrige %}11{% else %}10{% endif %}">
+          <table class="acc-lines acc-actifs"><thead><tr><th style="text-align:left">ISIN</th><th style="text-align:left;width:38%">Libellé</th><th>Évaluation</th><th>% alloc.</th><th>Perf €</th><th style="padding-right:8px">Perf % période</th></tr></thead><tbody>
+            {%- for L in p.lines %}
+            <tr><td style="text-align:left" class="acc-isin">{{ L.isin }}</td><td style="text-align:left">{{ L.libelle }}</td><td>{{ L.valeur }}</td><td>{{ L.alloc }}</td><td>{{ L.perfe | safe }}</td><td style="padding-right:8px">{{ L.perf | safe }}</td></tr>
+            {%- endfor %}
+          </tbody></table>
+        </td></tr>
+        {%- endif %}
+        {%- endfor %}
+        {%- if c.lines %}
+        <tr class="acc-head acc-poche acc-clickable">
+          <td><span class="poche-arrow">&#8627;</span><span class="acc-chev">&#9656;</span><span class="acc-name"><span class="cname">Supports non rattachés à une poche</span></span></td>
+          <td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td>{% if reporting.show_ps_corrige %}<td>&mdash;</td>{% endif %}<td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td style="padding-right:12px">&mdash;</td>
+        </tr>
+        <tr class="acc-detail" hidden><td colspan="{% if reporting.show_ps_corrige %}11{% else %}10{% endif %}">
+          <table class="acc-lines"><thead><tr><th style="text-align:left">ISIN</th><th style="text-align:left;width:38%">Libellé</th><th>Évaluation</th><th>% alloc.</th><th>Perf €</th><th style="padding-right:8px">Perf % période</th></tr></thead><tbody>
+            {%- for L in c.lines %}
+            <tr><td style="text-align:left" class="acc-isin">{{ L.isin }}</td><td style="text-align:left">{{ L.libelle }}</td><td>{{ L.valeur }}</td><td>{{ L.alloc }}</td><td>{{ L.perfe | safe }}</td><td style="padding-right:8px">{{ L.perf | safe }}</td></tr>
+            {%- endfor %}
+          </tbody></table>
+        </td></tr>
+        {%- endif %}
+        {%- else %}
+        {#- mono-poche : inchangé #}
+        <tr class="acc-head{% if c.lines %} acc-clickable{% endif %}">
+          <td><span class="acc-chev{% if not c.lines %} acc-chev-off{% endif %}">{% if c.lines %}&#9656;{% endif %}</span><span class="acc-name"><span class="cname">{{ c.label }}</span>{% if c.sub %}<span class="cdet">{{ c.sub }}</span>{% endif %}</span></td>
+          <td>{{ c.date_inv }}</td><td>{{ c.nominal }}</td><td>{{ c.vers }}</td><td>{{ c.rach }}</td><td style="font-weight:600">{{ c.valeur }}</td>{% if reporting.show_ps_corrige %}<td class="c-gold">{{ c.valeur_proj }}</td>{% endif %}<td>{{ c.gain_ytd | safe }}</td><td>{{ c.gpct_ytd | safe }}</td><td>{{ c.gain | safe }}</td><td style="padding-right:12px">{{ c.gpct | safe }}</td>
+        </tr>
+        {%- if c.lines %}
+        <tr class="acc-detail" hidden><td colspan="{% if reporting.show_ps_corrige %}11{% else %}10{% endif %}">
+          <table class="acc-lines"><thead><tr><th style="text-align:left">ISIN</th><th style="text-align:left;width:38%">Libellé</th><th>Évaluation</th><th>% alloc.</th><th>Perf €</th><th style="padding-right:8px">Perf % période</th></tr></thead><tbody>
+            {%- for L in c.lines %}
+            <tr><td style="text-align:left" class="acc-isin">{{ L.isin }}</td><td style="text-align:left">{{ L.libelle }}</td><td>{{ L.valeur }}</td><td>{{ L.alloc }}</td><td>{{ L.perfe | safe }}</td><td style="padding-right:8px">{{ L.perf | safe }}</td></tr>
+            {%- endfor %}
+          </tbody></table>
+        </td></tr>
+        {%- endif %}
+        {%- endif %}
+        {%- endfor %}
+      </tbody>
+    </table>
+    {%- endfor %}
+  </div>
+  {%- endif %}
+
+  <!-- Widgets client — Disponibilités par contrat & détail Matières premières (rendus si données) -->
+  {%- if perf and (perf.dispo or perf.mp) %}
+  <div style="display:grid;grid-template-columns:{% if perf.dispo and perf.mp %}1fr 1fr{% else %}1fr{% endif %};gap:16px;margin-top:16px;">
+    {%- if perf.dispo %}
+    <div class="exh-card">
+      <div class="cote-exh-hd">Disponibilités par contrat</div>
+      <table class="synth-table nw-tbl">
+        <thead><tr><th style="text-align:left;width:52%">Contrat</th><th>Montant</th><th style="padding-right:12px">% du contrat</th></tr></thead>
+        <tbody>
+          {%- for d in perf.dispo.rows %}
+          <tr><td style="text-align:left"><span class="acc-name"><span class="cname">{{ d.contrat }}</span>{% if d.entity %}<span class="cdet">{{ d.entity }}</span>{% endif %}</span></td>
+              <td>{{ d.montant }}</td><td style="padding-right:12px">{{ d.part }}</td></tr>
+          {%- endfor %}
+          <tr class="total-row"><td style="text-align:left">TOTAL</td><td class="c-gold">{{ perf.dispo.total }}</td><td style="padding-right:12px">{{ perf.dispo.part }}</td></tr>
+        </tbody>
+      </table>
+      <div class="pnc-gloss">Liquidités, comptes courants et supports monétaires détenus au sein de chaque contrat (mobilisables pour investissement).</div>
+    </div>
+    {%- endif %}
+    {%- if perf.mp %}
+    <div class="exh-card">
+      <div class="cote-exh-hd">Positions — Matières premières</div>
+      <table class="synth-table nw-tbl">
+        <thead><tr><th style="text-align:left;width:44%">Support</th><th>Contrat</th><th>Valeur</th><th style="padding-right:12px">Perf %</th></tr></thead>
+        <tbody>
+          {%- for m in perf.mp.rows %}
+          <tr><td style="text-align:left"><span class="acc-name"><span class="cname">{{ m.libelle }}</span><span class="cdet acc-isin">{{ m.isin }}</span></span></td>
+              <td>{{ m.contrat }}</td><td>{{ m.valeur }}</td><td style="padding-right:12px">{{ m.perf | safe }}</td></tr>
+          {%- endfor %}
+          <tr class="total-row"><td style="text-align:left">TOTAL</td><td></td><td class="c-gold">{{ perf.mp.total }}</td><td></td></tr>
+        </tbody>
+      </table>
+      <div class="pnc-gloss">Ensemble des supports classés « Matières premières » détenus en portefeuille, tous contrats confondus.</div>
+    </div>
+    {%- endif %}
+  </div>
+  {%- endif %}
+
+  <!-- Section détail Produits structurés + texte légal -->
+  {%- if perf and perf.has_ps %}
+  <div class="cote-exh ps-sec ps-card">
+    <div class="cote-exh-hd">Produits structurés — valorisation proratisée</div>
+    <div class="ps-intro">Chaque produit est revalorisé par <strong>proratisation linéaire du coupon annuel</strong> et réintégration du capital au nominal tant que la barrière de protection tient (sinon la moins-value latente est retenue). <em>Cliquez sur une ligne pour dérouler la chronologie du produit et ses barrières.</em></div>
+    <table class="synth-table ps-tbl">
+      <thead><tr>
+        <th style="text-align:left;width:22%">Produit</th><th>ISIN</th><th>Nominal</th><th>Coupon</th><th>Scénario</th><th>Valeur actuelle</th><th>Gain proratisé</th><th style="padding-right:12px">Valeur proratisée</th>
+      </tr></thead>
+      <tbody>
+        {%- for p in perf.ps %}
+        <tr class="acc-head{% if reporting.mode != 'presentee' %} acc-clickable{% endif %}">
+          <td style="text-align:left"><span class="acc-chev{% if reporting.mode == 'presentee' %} acc-chev-off{% endif %}">{% if reporting.mode != 'presentee' %}&#9656;{% endif %}</span><span class="cname">{{ p.nom }}</span></td>
+          <td class="acc-isin">{{ p.isin }}</td>
+          <td>{{ p.nominal }}</td>
+          <td>{{ p.coupon }}</td>
+          <td><strong class="{{ p.statut_cls }}">{{ p.statut }}</strong>{% if p.seuil_niveau %}<div class="ps-lvl">{{ p.seuil_niveau }}</div>{% endif %}</td>
+          <td>{{ p.vm }}</td>
+          <td>{{ p.gain | safe }}</td>
+          <td style="padding-right:12px;font-weight:600">{{ p.prorat }}</td>
+        </tr>
+        {%- if reporting.mode != 'presentee' %}
+        <tr class="acc-detail" hidden><td colspan="8">
+          <div class="ps-split">
+            <div class="ps-pitch"><div class="ps-pitch-hd">Explicatif :</div>{{ p.pitch | safe }}</div>
+            <div class="ps-graph">
+              <div class="ps-diag-wrap">{{ p.svg | safe }}</div>
+              <div class="ps-diag-legend"><span><i class="ln" style="background:#0D1B2A"></i>Cours du sous-jacent</span><span><i class="ln" style="background:#B04A3A"></i>Barrière de protection</span><span><i class="ln" style="background:#4F7D64"></i>Barrière de rappel</span><span><i class="dt" style="background:#B8975A"></i>Seuil d'obtention du coupon</span></div>
+            </div>
+          </div>
+        </td></tr>
+        {%- endif %}
+        {%- endfor %}
+        <tr class="total-row"><td style="text-align:left">TOTAL</td><td></td><td></td><td></td><td></td><td>{{ perf.ps_totals.vm }}</td><td>{{ perf.ps_totals.gain }}</td><td style="padding-right:12px" class="c-gold">{{ perf.ps_totals.prorat }}</td></tr>
+      </tbody>
+    </table>
+    <div class="ps-legal">Valorisation indicative des produits structurés. La valeur proratisée est estimée par proratisation linéaire du coupon annuel sur la durée écoulée, avec réintégration du capital au nominal tant que le sous-jacent reste au-dessus du seuil de protection ; en cas de franchissement (produit cassé), la valeur de marché est retenue. Cette estimation ne constitue ni une valeur de marché, ni une valeur de rachat, ni un engagement de l'émetteur ou de Rhétorès Finance : seule la valorisation officielle de l'émetteur fait foi. Les performances passées ne préjugent pas des performances futures ; le capital n'est protégé qu'à l'échéance et sous conditions.</div>
+  </div>
+  {%- endif %}
+
+  {%- if perf and (perf.cote_table or perf.has_ps) %}
+  <script>
+  (function(){
+    document.querySelectorAll('.acc-head.acc-clickable').forEach(function(h){
+      if(h.dataset.accBound) return; h.dataset.accBound="1";   // évite une double-liaison inter-blocs
+      h.addEventListener('click',function(e){
+        e.stopPropagation();
+        var d=h.nextElementSibling;
+        if(!d||!d.classList.contains('acc-detail')) return;
+        var open=!d.hidden; d.hidden=open; h.classList.toggle('acc-open',!open);
+      });
+    });
+  })();
+  </script>
+  {%- endif %}
+
+  {%- if perf and perf.get('curve') %}
+  <script>
+  (function(){
+    const el=document.getElementById('perf_evolution'); if(!el||!window.Chart) return;
+    const segPctCote={id:'segPctCote',afterDatasetsDraw(chart){
+      const ctx=chart.ctx; ctx.save(); ctx.font="600 10.5px 'DM Sans',sans-serif"; ctx.textAlign='center'; ctx.textBaseline='middle';
+      chart.data.datasets.forEach(function(ds,di){
+        if(!ds.segLabel) return;
+        const pts=chart.getDatasetMeta(di).data, d=ds.data;
+        for(let i=1;i<pts.length;i++){
+          const a=d[i-1],b=d[i]; if(a==null||b==null||!a) continue;
+          const pc=(b-a)/a*100, txt=(pc>=0?'+':'−')+Math.abs(pc).toFixed(1).replace('.',',')+'%';
+          const x0=pts[i-1].x,y0=pts[i-1].y,x1=pts[i].x,y1=pts[i].y;
+          let dx=x1-x0,dy=y1-y0,L=Math.hypot(dx,dy)||1; let nx=-dy/L,ny=dx/L; if(ny>0){nx=-nx;ny=-ny;}
+          ctx.fillStyle=(pc>=0?'#0D1B2A':'#8B2E2E');
+          ctx.fillText(txt,(x0+x1)/2+nx*15,(y0+y1)/2+ny*15);
+        }
+      });
+      ctx.restore();
+    }};
+    const pchart=new Chart(el.getContext('2d'),{type:'line',plugins:[segPctCote],
+      data:{labels:{{ perf.get('curve').labels_js }},datasets:[
+        {label:'Poche financière',data:{{ perf.get('curve').fin_line_js }},
+          borderColor:'#8A6D2E',backgroundColor:'transparent',borderWidth:2.5,fill:false,pointRadius:2.5,pointHoverRadius:6,pointHitRadius:16,pointBackgroundColor:'#8A6D2E',order:2,segLabel:true}{% if perf.get('curve').has_bench %},
+        {label:'Équivalent benchmark',data:{{ perf.get('curve').bench_line_js }},
+          borderColor:'#5A7A9B',backgroundColor:'transparent',borderWidth:2,borderDash:[5,4],fill:false,pointRadius:2,pointHoverRadius:5,order:1}{% endif %}{% if perf.get('curve').has_ps_corr %},
+        {label:'Coté — produits structurés revalorisés',data:{{ perf.get('curve').ps_corr_line_js }},
+          borderColor:'#B04A3A',backgroundColor:'transparent',borderWidth:2,borderDash:[2,3],fill:false,pointRadius:2.6,pointHoverRadius:5,pointBackgroundColor:'#B04A3A',order:0}{% endif %}]},
+      options:{maintainAspectRatio:false,layout:{padding:{top:20}},interaction:{mode:'nearest',intersect:true},plugins:{legend:{display:true,position:'top',align:'end',labels:{boxWidth:18,boxHeight:2,font:{size:11},usePointStyle:false}},tooltip:{callbacks:{label:c=>' '+c.dataset.label+': '+c.parsed.y.toFixed({{ perf.get('curve').dec }})+' {{ perf.get('curve').unit }}'}}},
+        elements:{line:{tension:0}},
+        scales:{y:{grace:'18%',{% if perf.get('curve').y_min is defined and perf.get('curve').y_min is not none %}min:{{ perf.get('curve').y_min }},max:{{ perf.get('curve').y_max }},{% endif %}ticks:{maxTicksLimit:9,callback:function(v,i){return (i%2===0)?Number(v).toFixed({{ perf.get('curve').dec }})+' {{ perf.get('curve').unit }}':'';}},grid:{color:'rgba(13,27,42,0.05)'}},x:{grid:{display:false},ticks:{maxRotation:0,autoSkip:true,maxTicksLimit:8}}}}});
+    // pagination Graphique / Détails (même pattern que le bloc non coté, scopé à cette carte)
+    const cardEl=document.querySelector('[data-pfc="card"]');
+    const pgChart=cardEl.querySelector('[data-pnc-page="chart"]');
+    const RAF=(typeof requestAnimationFrame!=='undefined') && !(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches);
+    function lockH(){ if(pgChart&&!pgChart.hidden&&pgChart.offsetHeight>0){ cardEl.style.setProperty('--pnc-h', pgChart.offsetHeight+'px'); } }
+    lockH(); window.addEventListener('resize',lockH);
+    function setPage(p){
+      if(p==='table') lockH();
+      cardEl.querySelectorAll('.pnc-page').forEach(function(pg){
+        const show=(pg.getAttribute('data-pnc-page')===p);
+        if(show&&pg.hidden&&RAF){
+          pg.classList.add('pnc-enter'); pg.hidden=false;
+          requestAnimationFrame(function(){requestAnimationFrame(function(){pg.classList.remove('pnc-enter');});});
+        } else { pg.hidden=!show; }
+      });
+      cardEl.querySelectorAll('.pnc-tab').forEach(function(b){b.classList.toggle('pnc-on',b.getAttribute('data-page')===p);});
+  
+      if(p==='chart') pchart.resize();
+    }
+    cardEl.querySelectorAll('.pnc-tab').forEach(function(b){
+      b.addEventListener('click',function(){setPage(b.getAttribute('data-page'));});
+    });
+  })();
+  </script>
+  {%- endif %}
+</div>

@@ -1,0 +1,34 @@
+  {% set type_label = "Personne Physique" if entity.type == "pp" else "Holding" %}
+  {% set cd = data.cards.get(entity.id, {}) %}
+  <div class="struct-card">
+    <div class="struct-card-header">
+      <div>
+        <div class="struct-card-name">{{ entity.label }}</div>
+        <div class="struct-card-type">{{ type_label }}</div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--gold-light)" data-slot="struct_net" data-entity="{{ entity.id }}">{{ cd.get('total', {}).get('net') or '&mdash;' }}</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.4)">actif net</div>
+      </div>
+    </div>
+    <div class="struct-col-hd"><span>Catégorie</span><span>Brut</span><span>Dettes</span><span>Net</span></div>
+    <div class="struct-card-body">
+      {% set card_rows = [("liquidites","Liquidités"),("immobilier","Immobilier"),("financier_cote","Financier coté"),("non_cote","Financier non coté"),("dettes","Dettes")] %}
+      {% for key, label in card_rows %}
+      {%- set c = cd.get(key, {}) %}
+      <div class="struct-row">
+        <div class="struct-row-lbl">{{ label }}</div>
+        <div class="struct-val" data-slot="card_brut" data-entity="{{ entity.id }}" data-cat="{{ key }}">{{ c.get('brut') or '&mdash;' }}</div>
+        <div class="struct-val" data-slot="card_dettes" data-entity="{{ entity.id }}" data-cat="{{ key }}">{{ c.get('dettes') or '&mdash;' }}</div>
+        <div class="struct-val" data-slot="card_net" data-entity="{{ entity.id }}" data-cat="{{ key }}">{{ c.get('net') or '&mdash;' }}</div>
+      </div>
+      {% endfor %}
+      {%- set ct = cd.get('total', {}) %}
+      <div class="struct-row total-struct">
+        <div class="struct-row-lbl">Total {{ entity.label }}</div>
+        <div class="struct-val gold" data-slot="card_brut" data-entity="{{ entity.id }}" data-cat="total">{{ ct.get('brut') or '&mdash;' }}</div>
+        <div class="struct-val" data-slot="card_dettes" data-entity="{{ entity.id }}" data-cat="total">{{ ct.get('dettes') or '&mdash;' }}</div>
+        <div class="struct-val gold" data-slot="card_net" data-entity="{{ entity.id }}" data-cat="total">{{ ct.get('net') or '&mdash;' }}</div>
+      </div>
+    </div>
+  </div>

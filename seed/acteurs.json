@@ -1,0 +1,246 @@
+{
+  "_note": "Seed des acteurs (chantier K). Règle absolue : aucune identité devinée. Un émetteur non lisible en texte reçoit un code explicite 'à confirmer' et une confiance basse, jamais un nom plausible. domiciliation = null quand elle n'est pas établie par une source. est_depositaire_tiers sert à lever l'homonymie NC (D26) : un dépositaire tiers nommé implique un contrat LU.",
+
+  "acteurs": [
+    {
+      "code": "de_pury_pictet",
+      "nom": "de Pury Pictet Turrettini",
+      "role": "gerant",
+      "domiciliation": "BE",
+      "est_depositaire_tiers": false,
+      "alias": [
+        "de Pury Pictet Turrettini (Belgique)",
+        "de Pury Pictet Turrettini",
+        "De Pury Pictet"
+      ],
+      "payload": {
+        "libelle_affichage": "De Pury Pictet",
+        "convention": "Écrire « De Pury Pictet ». Jamais « PPT », jamais le nom complet avec Turrettini.",
+        "source": "relevé Interagyr — pied de page présent sur 100 % des pages"
+      },
+      "provenance": "seed",
+      "confiance": "high"
+    },
+    {
+      "code": "dauphine_am",
+      "nom": "Dauphine AM",
+      "role": "gerant",
+      "domiciliation": "FR",
+      "est_depositaire_tiers": false,
+      "alias": [
+        "Dauphine AM",
+        "Dauphine AM, filiale de Rhétorès Groupe"
+      ],
+      "payload": {
+        "agrement_amf": "GP-17000033",
+        "adresse": "18bis rue d'Anjou, 75008 Paris",
+        "note": "Société de gestion du groupe. Publie aussi un commentaire de marché hebdomadaire, source du bloc Contexte.",
+        "source": "reportings hebdomadaires INTERAGYR"
+      },
+      "provenance": "seed",
+      "confiance": "high"
+    },
+    {
+      "code": "spirica",
+      "nom": "Spirica",
+      "role": "assureur",
+      "domiciliation": "FR",
+      "est_depositaire_tiers": false,
+      "alias": ["SPIRICA", "Spirica"],
+      "payload": {
+        "note": "Émetteur réel des relevés distribués sous la marque UAF Life Patrimoine. Émetteur ≠ distributeur (D24).",
+        "source": "relevés « UAF » Cerise et Pollux — mentions légales SPIRICA"
+      },
+      "provenance": "seed",
+      "confiance": "high"
+    },
+    {
+      "code": "uaf_life_patrimoine",
+      "nom": "UAF Life Patrimoine",
+      "role": "plateforme",
+      "domiciliation": "FR",
+      "est_depositaire_tiers": false,
+      "alias": ["UAF LIFE PATRIMOINE", "UAF Life Patrimoine", "UAF"],
+      "payload": {
+        "note": "Distributeur, PAS l'émetteur du relevé. Les relevés nommés « UAF » sont émis par Spirica.",
+        "emetteurs_associes": ["spirica"]
+      },
+      "provenance": "seed",
+      "confiance": "high"
+    },
+    {
+      "code": "nortia",
+      "nom": "Nortia",
+      "role": "plateforme",
+      "domiciliation": "FR",
+      "est_depositaire_tiers": false,
+      "alias": ["Nortia"],
+      "payload": {
+        "note": "Plateforme grossiste, PAS un assureur. Son nom n'apparaît NULLE PART dans le texte du relevé : l'identité est portée par un logo image. Nommé par un humain, jamais déduit au runtime (D24/N7).",
+        "identifie_par": "logo image, non OCR — le nom de fichier ne fait pas foi",
+        "source": "relevé « Nortia 30 06 26 »"
+      },
+      "provenance": "seed",
+      "confiance": "medium"
+    },
+    {
+      "code": "himalia_emetteur_a_confirmer",
+      "nom": "Émetteur du contrat HIMALIA CAPITALISATION (à confirmer)",
+      "role": "assureur",
+      "domiciliation": null,
+      "est_depositaire_tiers": false,
+      "alias": ["HIMALIA CAPITALISATION", "Himalia Capi"],
+      "payload": {
+        "note": "L'assureur n'est identifiable NI dans le texte NI par une source fiable de ce run. Un nom plausible circule mais n'est pas vérifié : il n'est pas inscrit ici. À faire nommer par le CGP (AskUser), au même titre que K7.",
+        "question_ouverte": "Quel assureur porte la gamme HIMALIA CAPITALISATION ?",
+        "identifie_par": "logo image, non OCR"
+      },
+      "provenance": "seed",
+      "confiance": "low"
+    },
+    {
+      "code": "wealins",
+      "nom": "WEALINS S.A.",
+      "role": "assureur",
+      "domiciliation": "LU",
+      "est_depositaire_tiers": false,
+      "alias": ["WEALINS S.A.", "Wealins", "Wealins Capi France"],
+      "payload": {
+        "rcs": "Luxembourg B 53682",
+        "tva": "LU 166 094 20",
+        "adresse": "12 rue Léon Laval, L-3372 Leudelange",
+        "note": "Assurance-vie luxembourgeoise : le triangle de sécurité impose un dépositaire tiers nommé par fonds dédié (FID). Un contrat peut donc porter PLUSIEURS dépositaires, et ils changent dans le temps (voir successions).",
+        "source": "relevés annuels FC051727 et FC055211"
+      },
+      "provenance": "seed",
+      "confiance": "high"
+    },
+    {
+      "code": "cardif",
+      "nom": "Cardif Assurance Vie",
+      "role": "assureur",
+      "domiciliation": "FR",
+      "est_depositaire_tiers": false,
+      "alias": ["Cardif Assurance Vie", "BNP Paribas Cardif", "Cardif"],
+      "payload": {
+        "note": "Contrat FR : pas de dépositaire tiers, la colonne dépositaire vaut NC par convention réglementaire — « non communicable », pas « non renseigné » (D26).",
+        "reseau_declare": "DIRECT-CGPI",
+        "source": "relevé Cardif Elite Capitalisation Personnes Morales"
+      },
+      "provenance": "seed",
+      "confiance": "high"
+    },
+
+    {
+      "code": "quintet",
+      "nom": "Quintet Private Bank (Europe) S.A.",
+      "role": "depositaire",
+      "domiciliation": "LU",
+      "est_depositaire_tiers": true,
+      "alias": ["Quintet Private Bank (Europe) S.A.", "Quintet Private Bank", "Quintet"],
+      "payload": {"note": "Dépositaire d'un FID Wealins. Successeur de CIC sur la poche FID du contrat FC051727."},
+      "provenance": "seed",
+      "confiance": "high"
+    },
+    {
+      "code": "ca_indosuez",
+      "nom": "CA Indosuez",
+      "role": "depositaire",
+      "domiciliation": null,
+      "est_depositaire_tiers": true,
+      "alias": ["CA Indosuez", "Indosuez", "Crédit Agricole Indosuez"],
+      "payload": {
+        "note": "Dépositaire d'un FID Wealins. Successeur d'Intesa sur la poche FAS du contrat FC051727.",
+        "question_ouverte": "K7 — CA Indosuez et Banque Thaler sont-ils la même entité, ou deux repreneurs distincts de la poche ex-Intesa ? Le salvage ne permet pas de trancher. AskUser au CGP."
+      },
+      "provenance": "seed",
+      "confiance": "medium"
+    },
+    {
+      "code": "banque_thaler",
+      "nom": "Banque Thaler SA",
+      "role": "depositaire",
+      "domiciliation": "CH",
+      "est_depositaire_tiers": true,
+      "alias": ["Banque Thaler SA", "Banque Thaler", "Thaler"],
+      "payload": {
+        "note": "Apparaît comme dépositaire d'un FID du contrat FC051727. Relation avec CA Indosuez non établie — voir K7.",
+        "question_ouverte": "K7 (identique à ca_indosuez)"
+      },
+      "provenance": "seed",
+      "confiance": "medium"
+    },
+    {
+      "code": "intesa_sanpaolo",
+      "nom": "Intesa Sanpaolo",
+      "role": "depositaire",
+      "domiciliation": null,
+      "est_depositaire_tiers": true,
+      "alias": ["Intesa Sanpaolo", "Intesa Sanpaolo Wealth Management", "Intesa"],
+      "payload": {"note": "Prédécesseur sur la poche FAS du contrat Wealins FC051727. Conservé pour réconcilier les relevés antérieurs au changement (K5)."},
+      "provenance": "seed",
+      "confiance": "medium"
+    },
+    {
+      "code": "cic",
+      "nom": "CIC",
+      "role": "depositaire",
+      "domiciliation": "FR",
+      "est_depositaire_tiers": true,
+      "alias": ["CIC"],
+      "payload": {"note": "Prédécesseur sur la poche FID du contrat Wealins FC051727. Conservé pour réconcilier les relevés antérieurs (K5)."},
+      "provenance": "seed",
+      "confiance": "medium"
+    },
+    {
+      "code": "ubs",
+      "nom": "UBS",
+      "role": "depositaire",
+      "domiciliation": null,
+      "est_depositaire_tiers": true,
+      "alias": ["UBS", "UBS Fr", "UBS France"],
+      "payload": {
+        "note": "Figure comme « Banque Dépositaire » du mandat De Pury Pictet, et dans DEPO_COLORS du moteur.",
+        "attention": "La valeur lue « UBS Fr » est possiblement tronquée dans le relevé source — ne pas en déduire une entité juridique précise."
+      },
+      "provenance": "seed",
+      "confiance": "medium"
+    },
+    {
+      "code": "edmond_de_rothschild",
+      "nom": "Edmond de Rothschild",
+      "role": "depositaire",
+      "domiciliation": null,
+      "est_depositaire_tiers": true,
+      "alias": ["Edmond de Rothschild", "EdR"],
+      "payload": {"note": "Présent dans DEPO_COLORS du moteur. Retiré du code au profit de ce référentiel (K4)."},
+      "provenance": "seed",
+      "confiance": "medium"
+    },
+    {
+      "code": "tilvest",
+      "nom": "Tilvest",
+      "role": "depositaire",
+      "domiciliation": null,
+      "est_depositaire_tiers": true,
+      "alias": ["Tilvest"],
+      "payload": {"note": "Présent dans DEPO_COLORS du moteur. Retiré du code au profit de ce référentiel (K4)."},
+      "provenance": "seed",
+      "confiance": "medium"
+    },
+    {
+      "code": "altaroc",
+      "nom": "Altaroc",
+      "role": "gerant",
+      "domiciliation": "FR",
+      "est_depositaire_tiers": false,
+      "alias": ["Altaroc"],
+      "payload": {
+        "note": "Société de gestion de fonds de private equity. Deux fonds chez Gronier, cible 1,8× sur 10 ans, MOIC réels constatés 1,42× et 1,79×.",
+        "rappel_metier": "Le PE représente peu d'actifs à forte importance individuelle : le bloc PE n'a jamais de seuil de pertinence (D32)."
+      },
+      "provenance": "seed",
+      "confiance": "high"
+    }
+  ]
+}

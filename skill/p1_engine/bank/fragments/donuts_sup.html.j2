@@ -1,0 +1,119 @@
+  <!-- Widget 2 — 4 donuts alignés (comme la répartition) : double donut classes + géo + enveloppes + partenaires -->
+  {%- set sup = data.supervision %}
+  {%- set sdon = (sup.donuts if sup else none) %}
+  {%- set ddd = (sup.double_donut if sup else none) %}
+  <div class="alloc-grid-4">
+    <!-- Donut 1 — double donut : classes (€) + arcs Coté / Non coté -->
+    <div class="chart-card-sm">
+      <div class="chart-title-sm">Classes d'actifs</div>
+      {%- if ddd %}
+      <div class="donut-wrap-sm">
+        <canvas id="sup_classes" width="90" height="90" data-slot="donut_chart" data-donut="sup_classes"></canvas>
+        <div class="dc-sm"><div class="dc-sm-val" data-slot="donut_center" data-donut="sup_classes">{{ ddd.center }}</div><div class="dc-sm-lbl">M€</div></div>
+      </div>
+      <div class="dd-arcs"><span><i style="background:#B8975A"></i>Coté {{ ddd.cote_pct }}%</span><span><i style="background:#0D1B2A"></i>Non coté {{ ddd.nc_pct }}%</span></div>
+      <div class="leg-sm leg-sm-eur" data-slot="donut_legend" data-donut="sup_classes">
+        {%- for L in ddd.legend %}
+        <div class="leg-sm-row"><div class="leg-sm-left"><div class="leg-sm-dot" style="background:{{ L.color }}"></div><div class="leg-sm-name">{{ L.name }}</div></div><div class="leg-sm-amt">{{ L.eur }}</div><div class="leg-sm-pct">{{ L.pct }}%</div></div>
+        {%- endfor %}
+      </div>
+      {%- else %}
+      <div style="display:flex;align-items:center;justify-content:center;height:118px;text-align:center;"><div style="font-size:10.5px;color:var(--muted);font-style:italic;">Non applicable</div></div>
+      {%- endif %}
+    </div>
+    <!-- Donuts 2-4 -->
+    {% set donuts = [("sup_geo",data.get("geo_title","Géographie — Actions")),("sup_env","Enveloppes"),("sup_part","Partenaires")] %}
+    {% for cid, title in donuts %}
+    {%- set d = (sdon.get(cid) if sdon else none) %}
+    <div class="chart-card-sm">
+      <div class="chart-title-sm">{{ title }}</div>
+      {%- if d %}
+      <div class="donut-wrap-sm">
+        <canvas id="{{ cid }}" width="90" height="90" data-slot="donut_chart" data-donut="{{ cid }}"></canvas>
+        <div class="dc-sm"><div class="dc-sm-val" data-slot="donut_center" data-donut="{{ cid }}">{{ d.center }}</div><div class="dc-sm-lbl">M€</div></div>
+      </div>
+      <div class="leg-sm leg-sm-eur" data-slot="donut_legend" data-donut="{{ cid }}">
+        {%- for L in d.legend %}
+        <div class="leg-sm-row"><div class="leg-sm-left"><div class="leg-sm-dot" style="background:{{ L.color }}"></div><div class="leg-sm-name">{{ L.name }}</div></div><div class="leg-sm-amt">{{ L.eur }}</div><div class="leg-sm-pct">{{ L.pct }}%</div></div>
+        {%- endfor %}
+      </div>
+      {%- else %}
+      <div style="display:flex;align-items:center;justify-content:center;height:118px;text-align:center;">
+        <div style="font-size:10.5px;color:var(--muted);font-style:italic;line-height:1.5;">Non applicable<br>{% if cid == 'sup_geo' %}{{ data.get("geo_empty","aucune action en direct") }}{% elif cid == 'sup_part' %}données indisponibles{% else %}données indisponibles{% endif %}</div>
+      </div>
+      {%- endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {%- if sdon or ddd %}
+  <script>
+  (function(){
+    if(!window.Chart) return;
+    if(!window.__rfDonutTip){
+      var _tip=document.getElementById('rf-donut-tip');
+      if(!_tip){ _tip=document.createElement('div'); _tip.id='rf-donut-tip';
+        _tip.style.cssText='position:fixed;pointer-events:none;z-index:9999;background:#0D1B2A;color:#fff;'+
+          'font:600 11px/1.35 \'DM Sans\',sans-serif;padding:5px 9px;border-radius:5px;'+
+          'box-shadow:0 3px 10px rgba(13,27,42,.28);opacity:0;transition:opacity .12s;white-space:nowrap;';
+        document.body.appendChild(_tip); }
+      window.__rfDonutTip=function(ctx){
+        var tt=ctx.tooltip;
+        if(!tt||tt.opacity===0){ _tip.style.opacity=0; return; }
+        var dp=tt.dataPoints&&tt.dataPoints[0];
+        if(dp){ _tip.textContent=dp.label+' : '+dp.parsed+'%'; }
+        var rect=ctx.chart.canvas.getBoundingClientRect();
+        var x=rect.left+tt.caretX, y=rect.top+tt.caretY;
+        if(dp&&dp.element&&dp.element.getProps){
+          var pr=dp.element.getProps(['x','y','startAngle','endAngle','outerRadius'],true);
+          var mid=(pr.startAngle+pr.endAngle)/2, r=pr.outerRadius+18;
+          x=rect.left+pr.x+Math.cos(mid)*r; y=rect.top+pr.y+Math.sin(mid)*r;
+        }
+        _tip.style.left=x+'px'; _tip.style.top=y+'px'; _tip.style.transform='translate(-50%,-50%)'; _tip.style.opacity=1;
+      };
+    }
+    function rfsup(id,data,labels,colors){
+      var el=document.getElementById(id); if(!el) return;
+      new Chart(el.getContext('2d'),{type:'doughnut',
+        data:{labels:labels,datasets:[{data:data,backgroundColor:colors,borderWidth:2,borderColor:'#FAF7F2',hoverOffset:4}]},
+        options:{responsive:false,cutout:'65%',layout:{padding:6},
+          plugins:{legend:{display:false},tooltip:{enabled:false,external:function(ctx){ if(window.__rfDonutTip) window.__rfDonutTip(ctx); }}}}});
+    }
+    {% if ddd %}
+    (function(){
+      var el=document.getElementById('sup_classes'); if(!el) return;
+      var tot={{ ddd.inner_data_js }}.reduce(function(a,b){return a+b;},0)||1;
+      // même widget de consultation % que les donuts simples (#rf-donut-tip)
+      function ddTip(ctx){
+        var tip=document.getElementById('rf-donut-tip');
+        if(!tip){ tip=document.createElement('div'); tip.id='rf-donut-tip';
+          tip.style.cssText='position:fixed;pointer-events:none;z-index:9999;background:#0D1B2A;color:#fff;'+
+            'font:600 11px/1.35 \'DM Sans\',sans-serif;padding:5px 9px;border-radius:5px;'+
+            'box-shadow:0 3px 10px rgba(13,27,42,.28);opacity:0;transition:opacity .12s;white-space:nowrap;';
+          document.body.appendChild(tip); }
+        var tt=ctx.tooltip;
+        if(!tt||tt.opacity===0){ tip.style.opacity=0; return; }
+        var dp=tt.dataPoints&&tt.dataPoints[0];
+        if(dp){ var nm=(dp.dataset._labels||[])[dp.dataIndex]||''; tip.textContent=nm+' : '+Math.round((dp.parsed||0)/tot*100)+'%'; }
+        var rect=ctx.chart.canvas.getBoundingClientRect();
+        var x=rect.left+tt.caretX, y=rect.top+tt.caretY;
+        if(dp&&dp.element&&dp.element.getProps){
+          var pr=dp.element.getProps(['x','y','startAngle','endAngle','outerRadius'],true);
+          var mid=(pr.startAngle+pr.endAngle)/2, r=pr.outerRadius+18;
+          x=rect.left+pr.x+Math.cos(mid)*r; y=rect.top+pr.y+Math.sin(mid)*r;
+        }
+        tip.style.left=x+'px'; tip.style.top=y+'px'; tip.style.transform='translate(-50%,-50%)'; tip.style.opacity=1;
+      }
+      new Chart(el.getContext('2d'),{type:'doughnut',
+        data:{datasets:[
+          {label:'Classes',data:{{ ddd.inner_data_js }},backgroundColor:{{ ddd.inner_colors_js }},_labels:{{ ddd.inner_labels_js }},borderWidth:2,borderColor:'#FAF7F2',weight:2.6},
+          {label:'Nature',data:{{ ddd.outer_data_js }},backgroundColor:{{ ddd.outer_colors_js }},_labels:{{ ddd.outer_labels_js }},borderWidth:3,borderColor:'#FAF7F2',weight:0.8}
+        ]},
+        options:{responsive:false,cutout:'38%',layout:{padding:6},
+          plugins:{legend:{display:false},tooltip:{enabled:false,external:ddTip}}}});
+    })();
+    {% endif %}
+    {% for cid, d in (sdon.items() if sdon else []) %}rfsup('{{ cid }}', {{ d.data_js }}, {{ d.labels_js }}, {{ d.colors_js }});
+    {% endfor %}
+  })();
+  </script>
+  {%- endif %}

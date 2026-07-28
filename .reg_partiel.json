@@ -1,0 +1,79 @@
+{
+  "fx_simple.xlsx": {
+    "qc_pass": true,
+    "qc": "9/9",
+    "deterministic": true,
+    "actif_brut": "2 929 000 €",
+    "dettes": "0 €",
+    "actif_net": "2 929 000 €",
+    "secondes": 3.5,
+    "key_ok": true,
+    "ok": true
+  },
+  "fx_minimal.xlsx": {
+    "qc_pass": true,
+    "qc": "9/9",
+    "deterministic": true,
+    "actif_brut": "235 500 €",
+    "dettes": "0 €",
+    "actif_net": "235 500 €",
+    "secondes": 3.0,
+    "key_ok": true,
+    "ok": true
+  },
+  "fx_no_portfolio.xlsx": {
+    "qc_pass": true,
+    "qc": "4/4",
+    "deterministic": true,
+    "actif_brut": "67 000 €",
+    "dettes": "0 €",
+    "actif_net": "67 000 €",
+    "secondes": 3.0,
+    "key_ok": true,
+    "ok": true
+  },
+  "fx_lignes_classes.xlsx": {
+    "qc_pass": true,
+    "qc": "9/9",
+    "deterministic": true,
+    "actif_brut": "152 000 €",
+    "dettes": "0 €",
+    "actif_net": "152 000 €",
+    "secondes": 3.5,
+    "key_ok": true,
+    "ok": true
+  },
+  "fx_noncote.xlsx": {
+    "qc_pass": true,
+    "qc": "9/9",
+    "deterministic": true,
+    "actif_brut": "10 749 000 €",
+    "dettes": "0 €",
+    "actif_net": "10 749 000 €",
+    "secondes": 3.4,
+    "key_ok": true,
+    "ok": true
+  },
+  "fx_limites.xlsx": {
+    "qc_pass": true,
+    "qc": "9/9",
+    "deterministic": true,
+    "actif_brut": "17 130 000 €",
+    "dettes": "−15 000 000 €",
+    "actif_net": "2 130 000 €",
+    "secondes": 3.3,
+    "key_ok": true,
+    "ok": true
+  },
+  "fx_multiholdings.xlsx": {
+    "qc_pass": true,
+    "qc": "9/9",
+    "deterministic": true,
+    "actif_brut": "7 957 000 €",
+    "dettes": "−1 440 000 €",
+    "actif_net": "6 517 000 €",
+    "secondes": 3.0,
+    "key_ok": true,
+    "ok": true
+  }
+}

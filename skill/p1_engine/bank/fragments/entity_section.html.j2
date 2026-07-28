@@ -1,0 +1,30 @@
+  <!-- ════ {{ entity.label }} ({{ entity.type }}) ════ -->
+  {%- set cats = category_order | select("in", entity.categories) | list -%}
+  {%- for cat in cats %}
+  {%- set secrows = data.rows.get(entity.id, {}).get(cat, []) %}
+  <table class="pat"{% if not loop.first %} style="margin-top:4px;"{% endif %}>
+    <thead>
+      {%- if loop.first %}
+      <tr class="rg"><td colspan="{{ colspans[cat] }}"><span class="dot"></span>{{ entity.label }}</td></tr>
+      {%- endif %}
+      {% include "columns/cols_" ~ cat ~ ".html.j2" %}
+    </thead>
+    <tbody>
+      <tr class="rcat"><td colspan="{{ colspans[cat] }}">{{ category_labels[cat] }}</td></tr>
+      {%- if secrows %}
+      {%- for r in secrows %}
+      <tr class="{{ r.tr_class }}">{% for c in r.cells %}<td{% if loop.first and r.td0_style %} style="{{ r.td0_style }}"{% endif %}>{{ c|safe }}</td>{% endfor %}</tr>
+      {%- endfor %}
+      {%- else %}
+      <!-- data-slot:rows entity={{ entity.id }} cat={{ cat }} — lignes remplies en P2 -->
+      {%- endif %}
+      <tr class="rtot">
+        <td{% if colspans[cat] > 2 %} colspan="{{ colspans[cat] - 1 }}"{% endif %}>Sous-total — {{ category_labels[cat] }}</td>
+        <td style="text-align:right;padding-right:12px;" data-slot="subtotal" data-entity="{{ entity.id }}" data-cat="{{ cat }}">{{ data.subtotals.get(entity.id, {}).get(cat) or '&mdash;' }}</td>
+      </tr>
+    </tbody>
+  </table>
+  {%- endfor %}
+  <table class="pat"><tbody>
+    <tr class="rst"><td>Total {{ entity.label }}</td><td style="text-align:right;padding-right:12px;" data-slot="entity_total" data-entity="{{ entity.id }}">{{ data.entity_totals.get(entity.id) or '&mdash;' }}</td></tr>
+  </tbody></table>

@@ -1,0 +1,262 @@
+isin,label,class_code,geo_code,sri,source,confidence
+BE0974293251,Anheuser-Busch InBev,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+CH0012032048,Roche Holding,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+CH0019087102,Pictet (ch) Swiss Equities I Dy C,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+CH0140909257,UBS (CH) Money Market Fund EUR -I-B-,monetaire,,,interagyr_valide,high
+CH0210483332,Cie Financiere Richemont,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+CH1152838327,Enetia Energy Transition Dis (clean),actions,monde,,interagyr_valide,high
+CH1243598427,Sandoz Group SA,actions,europe,,interagyr_valide,high
+DE0005933956,ISHARES CORE EURO STOXX50,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+DE0007030009,Rheinmetall,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+DE0007164600,SAP SE,actions,europe,,interagyr_valide,high
+DE0007236101,Siemens,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+DE0008404005,Allianz,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+DE0008430026,Munchener,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+DE000A0Q4R85,iShares MSCI Brazil UCITS ETF (DE) Acc,actions,emergents,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+DE000A1C5D13,Acatis Value Event Fonds B,alternatifs,,,gronier_categories,medium
+DE000A1EWWW0,adidas,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+DE000LEG1110,LEG Immobilien,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+DK0062498333,Novo Nordisk Cl.b,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+ES0113900J37,Banco Santander,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+ES0144580Y14,Iberdrola,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+FR0000044448,Nexans,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+FR0000045072,Credit Agricole,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+FR0000073272,Safran,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+FR0000120073,Air Liquide,actions,europe,,interagyr_valide,high
+FR0000120271,Totalenergies,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+FR0000120321,L'Oréal,actions,europe,,interagyr_valide,high
+FR0000120578,Sanofi,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+FR0000120628,AXA,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+FR0000121014,LVMH Moët Hennessy Louis Vuitton,actions,europe,,interagyr_valide,high
+FR0000121329,Thales,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+FR0000121667,EssilorLuxottica,actions,europe,,interagyr_valide,high
+FR0000121972,Schneider Electric SE,actions,europe,,interagyr_valide,high
+FR0000124141,Veolia Environnement,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+FR0000125007,Saint-Gobain,actions,europe,,interagyr_valide,high
+FR0000125486,Vinci SA,actions,europe,,interagyr_valide,high
+FR0000130577,Publicis Groupe,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+FR0000131104,BNP Paribas,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+FR0000172041,AXA Aedificandi A Acc,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+FR0000288946,AXA Court Terme AC,monetaire,,,gronier_categories,medium
+FR0000293698,Ecofi Trésorerie C,monetaire,,,gronier_categories,medium
+FR0000295230,Comgest Renaissance Europe C,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+FR0000422842,Pluvalca Allcaps A,actions,,,gronier_categories,medium
+FR0000974149,ODDO BHF Avenir Europe CR-EUR Acc,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+FR0000989899,ODDO BHF Avenir CR-EUR,actions,,,gronier_categories,medium
+FR0007008750,R-co Conviction Credit Euro C EUR,obligations,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+FR0007457890,R-co Thematic Real Estate C EUR,actions,monde,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+FR0010148981,Carmignac Investissement A EUR Acc,actions,,,gronier_categories,medium
+FR0010149302,Carmignac Emergents A EUR Acc,actions,emergents,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+FR0010233726,Generali Trésorerie ISR B,monetaire,,,gronier_categories,medium
+FR0010251108,ODDO BHF Avenir Europe CI-EUR,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+FR0010262436,Lazard Small Caps France A,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+FR0010429068,AMUNDI MSCI Emerging Markets III UCITS ETF EUR Acc,actions,emergents,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+FR0010460493,Tikehau European High,obligations,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+FR0010680538,ODDO BHF US Mid Cap CR-USD,actions,amerique_du_nord,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+FR0010752543,Lazard Credit Fi SRI RVC EUR,obligations,,,gronier_categories,medium
+FR0010952788,Lazard Capital Fi SRI PVC EUR,obligations,,,gronier_categories,medium
+FR0011169341,Sycomore Sélection Responsable R,actions,,,gronier_categories,medium
+FR0011261197,R-co Valor F EUR,actions,monde,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+FR0011268705,GemEquity R,actions,emergents,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+FR0011466093,Quadrige France SmallCaps C,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+FR0011660927,Multi Units France Lyxor MSCI World UCITS ETF Monthly Hedged EUR,actions,monde,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+FR0011857234,AMUNDI MDAX UCITS ETF,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+FR0012435121,Elis,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+FR0012649697,FINALTIS TITANS FCP -I-,actions,,,gronier_categories,medium
+FR0013072097,Quadrige Europe MidCaps C,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+FR0013280286,Biomerieux,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+FR0013280906,QUADRIGE EUROPE MIDCAPS FCP -I-,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+FR0013290947,Comgest Renaissance Europe Z,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+FR0013300670,IDAM Small Euro I,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+FR0013354230,CM-CIC Moneplus FCP -RC- 3DEC (C),monetaire,,,interagyr_valide,high
+FR0013393329,H2O Multibonds FCP EUR SR(C),alternatifs,,,gronier_categories,medium
+FR0013409422,FIP Outre-Mer Inter Invest N°2,private_equity,,,gronier_categories,medium
+FR0013433067,GemChina R,actions,emergents,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+FR0013435716,Agap'Action Unibail Nov 2019,produits_structures,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+FR0013440369,MultiTalents CS,actions,,,gronier_categories,medium
+FR0013507019,Lazard Euro Short Duration High Yield -PVC- (C),obligations,europe,,interagyr_valide+geo_nom_valide_cgp_20260724,high
+FR0013535283,H2O Moderato SP R,alternatifs,,,gronier_categories,medium
+FR0013535598,H2O Multiequities SP R(C),alternatifs,,,gronier_categories,medium
+FR0013535952,H2O Multibonds SP R(C),alternatifs,,,gronier_categories,medium
+FR0014008M99,R-co Thematic Blockchain Global Equity C EUR,actions,monde,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+FR001400BW13,Tailor Credit 2028 FCP -I-,obligations,,,interagyr_valide,high
+FR001400EF78,Auris Rendement Selection 2027 - Parts  R (C),obligations,,,gronier_categories,medium
+FR001400GZU1,FPCI Altaroc Odyssey 2023 - Part A,private_equity,,,gronier_categories,medium
+FR001400KAV4,Carmignac Credit 2029 A EUR Acc,obligations,,,gronier_categories,medium
+FR001400NYY2,Rendement Selection 2030 CS(C),obligations,,,gronier_categories,medium
+FR001400P0S8,LBPAM Short Term -I- (D),monetaire,,,interagyr_valide,high
+FR001400P8N2,FPCI Altaroc Odyssey 2024 - Part A,private_equity,,,gronier_categories,medium
+FR001400SN31,Tempo Quotidien Degressif Credit Agricole Decrement 1.05 EUR Novembre 2024,produits_structures,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+FR001400T5U9,Air Liquide Pf27,private_equity,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+FR4CIBFS7485,EMTN Phoenix Bearish Euribor 12M Décembre 2025,produits_structures,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+FRIP00000J82,Fréquence Privilège Stellantis D1.20 Aout 2024,produits_structures,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+FRIP00001I90,"Tempo Quotidien Degressif BNP 4,60 Juillet 2025",produits_structures,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+FRIP000025B4,Sanofi 3.56 EUR Best Strike - Avril 2026,produits_structures,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+GB0007188757,Rio Tinto,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+GB0009895292,AstraZeneca PLC,actions,europe,,interagyr_valide,high
+GB00B0SWJX34,London Stock Exchange Plc (Lse),actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+GB00B10RZP78,Unilever,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+IE0002EI5AG0,Xtrackers S&P 500 Equal Weight ETF EUR Hedged,actions,amerique_du_nord,,interagyr_valide,high
+IE0005YK6564,HANetf ICAV Sprott Uranium Miners UCITS ETF,actions,monde,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+IE000MLMNYS0,iShares S&P 500 Equal Weight UCITS ETF USD (Acc) USD Acc,actions,amerique_du_nord,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+IE000NFR7C63,iShares MSCI China Tech UCITS ETF USD Acc,actions,emergents,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+IE000S9YS762,Linde PLC,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+IE000YYE6WK5,VAN DEF USD-A-ACC C.,actions,monde,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+IE000Z9PAJK7,Tt International Funds Plc - Tt Em Debt Fund B2 EUR,actions,emergents,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+IE00B02ZFR42,Veritas Asian Fund A EUR,actions,asie_pacifique,,interagyr_valide,high
+IE00B1FZS467,iShares Global Infrastructure UCITS ETF D USD D,actions,monde,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+IE00B3VWM098,iShares MSCI USA Small Cap ESG Enhanced UCITS ETF USD Acc,actions,amerique_du_nord,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+IE00B42NKQ00,Ishs Sp 500 Engy Sect Ucit Etf,actions,amerique_du_nord,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+IE00B4L5Y983,iShares Core MSCI World UCITS ETF USD (Acc),actions,monde,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+IE00B53SZB19,iShares NASDAQ 100 UCITS ETF USD (Acc),actions,amerique_du_nord,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+IE00B6R52143,iShares Agribusiness UCITS ETF USD Acc,actions,monde,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+IE00B8KQN827,Eaton,actions,amerique_du_nord,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+IE00BF16M727,FIRST TRUST GLOBAL NASDAQ CYBER SECURITY -A- ETF,actions,monde,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+IE00BF1B7389,SPDR MSCI World ACWI UCITS ETF EUR Hedged,actions,monde,,interagyr_valide,high
+IE00BHZRQZ17,Franklin FTSE India UCITS ETF Singlclass,actions,emergents,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+IE00BM67HK77,Xtrackers MSCI World Health Care UCITS ETF,actions,monde,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+IE00BM67HM91,Xtrackers MSCI World Energy UCITS ETF,matieres_premieres,monde,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+IE00BMW3QX54,L&G ROBO Global Robotics and Automation UCITS ETF -A-,actions,monde,,interagyr_valide,high
+IE00BQN1K786,iShares Edge MSCI Europe Momentum Factor UCITS ETF EUR,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+IE00BRF15F66,PZENA EMG MKT FOCSED VAL USD,actions,emergents,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+IE00BYNJF397,H2O Fidelio Eur-R-AC,alternatifs,,,gronier_categories,medium
+IE00BYVQ9F29,iShares VII Nasdaq 100 ETF Hedged EUR,actions,amerique_du_nord,,interagyr_valide,high
+IE00BYZ28V50,iShares Global Govt Bond UCITS ETF USD Acc,obligations,monde,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+IT0004176001,Prysmian,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU0068578508,First Eagle Amundi International Fund AU,actions,monde,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU0099161993,CARMIGNAC GRANDE EUROPE A CAP,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU0112497283,Pictet Biotech I USD,actions,monde,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU0119620176,MORGAN STANLEY GLOBAL BRANDS FUND-I- CAP,actions,monde,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU0119620416,MSIF Global Brands Fund A USD,actions,monde,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU0131510165,Independance et Expansion France Small A (C),actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU0155301467,Pictet-japanese Equity Opportunities I Jpy Cap,actions,asie_pacifique,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU0171290074,BGF Sustainable Energy E2 EUR Cap,actions,monde,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU0217390227,JPMorgan Funds America Equity Fund A (Acc) - EUR,actions,amerique_du_nord,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU0231459107,Aberdeen Standard SICAV I Asian Smaller Companies Fund A Acc USD,actions,asie_pacifique,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU0280430405,Pictet Clean Energy I USD,actions,monde,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU0280435388,Pictet Clean Energy P EUR Acc,actions,monde,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU0308864023,MainFirst Top European Ideas Fund A,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU0340554913,Pictet Digital P EUR Acc,actions,monde,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU0386875149,Pictet Global Megatrend Selection I EUR,actions,monde,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU0386882277,Pictet Global Megatrend Selection P EUR Acc,actions,monde,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU0390221256,MainFirst Germany Fund A,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU0415415636,Vontobel Fund - Commodity H (hedged) EUR Acc,actions,,,gronier_categories,medium
+LU0496443887,Pictet TR-Mandarin HP EUR Acc,actions,emergents,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU0552385295,MSIF Global Opportunity Fund A,actions,monde,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU0592589740,PICTET TR SICAV MANDARIN -I- EUR CAP,actions,emergents,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU0594300096,Fidelity Funds China Consumer Fund A Acc EUR,actions,emergents,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU0611489658,Fidelity Funds Japan Value Fund A EUR Hedged,actions,asie_pacifique,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU0690088280,LO Funds Emerging High Conviction USD PA,actions,emergents,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU0705071453,RAM (LUX) Systematic Funds Long/Short European Equities B,alternatifs,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU0708055537,HSBC Global Investment Funds - Frontier Markets ICEUR,actions,emergents,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU0940005217,Robeco Asian Stars Equities F EUR Acc,actions,asie_pacifique,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU0944739340,East Capital New Europe A,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU0992631217,Carmignac Unconstrained Euro Fixed Income -F- (C),obligations,europe,,interagyr_valide+geo_nom_valide_cgp_20260724,high
+LU1100076550,Clartan Valeurs C,actions,,,gronier_categories,medium
+LU1100076808,Clartan Europe C,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU1103303167,Edmond de Rothschild Fund US Value A EUR,actions,amerique_du_nord,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU1112771768,HELIUM SELECTION S CAP,alternatifs,,,gronier_categories,medium
+LU1160356009,Edmond de Rothschild Fund Healthcare A EUR,actions,monde,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU1165637460,IVO Funds Fixed Income EUR-I (cap),obligations,,,gronier_categories,medium
+LU1165644672,IVO Emerg Mrts Corp Debt EUR R Acc,obligations,emergents,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU1173935260,Allianz Best Styles Global Equity RT EUR Acc,actions,monde,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU1233598447,Multi Units Luxembourg Lyxor Fed Funds US Dollar Cash UCITS ETF Acc USD,monetaire,amerique_du_nord,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU1261432659,Fidelity Funds World Fund A Acc EUR,actions,monde,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU1269736838,Candriam Equities L Biotechnology -R- (C),actions,monde,,interagyr_valide,high
+LU1279334053,Pictet Robotics I EUR,actions,monde,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU1302864027,LongRun Equity Fund P A EUR,actions,,,gronier_categories,medium
+LU1302865420,LONGRUN EQUITY FUND SICAV -CI- A EUR CAP,actions,,,gronier_categories,medium
+LU1311575093,Pareto-Nordic Corporate Bond -H- EUR (C),obligations,europe,,interagyr_valide+geo_nom_valide_cgp_20260724,high
+LU1366712351,DNCA Invest Archer Mid-Cap Europe I EUR,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU1379104976,Claresco Foncier Valor P,actions,,,gronier_categories,medium
+LU1435385163,NIF (Lux) I Loomis Sayles U.S. Growth Equity Fund R/A EUR,actions,amerique_du_nord,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU1599120356,Auris Euro Rendement I Acc,obligations,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU1623762843,Carmignac Portfolio Credit A EUR Acc,obligations,,,gronier_categories,medium
+LU1665237704,M&G (Lux) Global Listed Infrastructure Fund A EUR Acc,actions,monde,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU1670710075,M&G (Lux) Global Dividend Fund A EUR Acc,actions,monde,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU1681038243,Amundi Index Solutions Nasdaq-100 UCITS ETF EUR Acc,actions,amerique_du_nord,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU1681038599,Amundi Index Solutions Nasdaq-100 UCITS ETF DAILY HEDGED EUR Acc,actions,amerique_du_nord,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU1681038672,Amundi Index Solutions Russell 2000 UCITS ETF EUR Acc,actions,amerique_du_nord,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU1681044480,Amundi Index Solutions MSCI EM Asia UCITS ETF EUR Acc,actions,emergents,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU1681045370,Amundi Index Solutions MSCI Emerging Markets UCITS ETF EUR Acc,actions,emergents,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU1681047236,Amundi IS-EuroStoxx 50 UCITS ETF DR EUR C,actions,europe,,interagyr_valide,high
+LU1681048804,Amundi Index Solutions S&P 500 UCITS ETF EUR Acc,actions,amerique_du_nord,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU1681049109,Amundi Index Solutions S&P 500 UCITS ETF DAILY HEDGED EUR Acc,actions,amerique_du_nord,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU1684369710,AXA World Funds SICAV Framlington Digital Economy A (Hedged) EUR Acc,actions,monde,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU1725895707,abrdn Emerging Markets Corporate Bond Fund -X2- (C),obligations,emergents,,interagyr_valide,high
+LU1778762911,Spotify Technology,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU1799936197,Pictet TR-Sirius P USD Acc,alternatifs,,,gronier_categories,medium
+LU1799936437,Pictet TR-Sirius HI EUR Acc,alternatifs,,,gronier_categories,medium
+LU1829218749,Amundi Bloomberg Equal-weight Commodity ex-Agriculture UCITS ETF Acc EUR,actions,,,gronier_categories,medium
+LU1829220216,Multi Units Luxembourg Lyxor MSCI All Country World UCITS ETF Acc EUR,actions,monde,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU1829221024,Amundi Nasdaq-100 II UCITS ETF Acc,actions,amerique_du_nord,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU1832174962,Independance Europe Small A (C),actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU1832175001,INDEPENDANCE AM EUROPE SMALL -I(C)- CAP,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU1861137484,Amundi Index Solutions Amundi Index MSCI Europe SRI PAB UCITS ETF DR EUR C,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU1876459303,Axiom European Banks Equity R EUR,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU1876460731,Axiom Obligataire C,obligations,,,gronier_categories,medium
+LU1876461549,Axiom Lux SI Obligataire -J- 3DEC (C),obligations,,,interagyr_valide,high
+LU1900065811,Multi Units Luxembourg Lyxor MSCI Indonesia UCITS ETF Acc EUR,actions,emergents,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU1900068328,Multi Units Luxembourg Lyxor MSCI AC Asia Pacific Ex Japan UCITS ETF Acc EUR,actions,asie_pacifique,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU1902608444,DWS Invest CROCI World TFC,actions,monde,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU1940199711,Lyxor MSCI Europe ESG Leaders (DR) UCITS ETF - Acc,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU1951225553,NIF (Lux) I Thematics Safety Fund R/A EUR,actions,monde,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU2092461800,GAMA Global Short-Dated Opportunities F,obligations,monde,,interagyr_valide+geo_nom_valide_cgp_20260724,high
+LU2206555984,Pictet TR Atlas Titan I EUR,alternatifs,,,gronier_categories,medium
+LU2206556016,Pictet TR Atlas Titan P EUR,alternatifs,,,gronier_categories,medium
+LU2240056106,Lonvia Avenir Mid-Cap Europe Clean Share EUR,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU2261172451,Piquemal Houghton Global Equities R EUR,actions,monde,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU2261172618,Piquemal Houghton Funds Global Equities RC EUR,actions,,,gronier_categories,medium
+LU2309368541,Auris Gravity US Equity Fund R EUR Acc,actions,amerique_du_nord,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU2309368624,Auris Gravity US Equity Fund R EUR Hedged Acc,actions,amerique_du_nord,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU2320789444,Auris Gravity US Equity Fund F EUR H Acc,actions,amerique_du_nord,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU2385154757,WF Enetia Energy Infrastructure Dis (clean),actions,monde,,interagyr_valide,high
+LU2407358576,Decalia Sustainable Society Cap,actions,monde,,interagyr_valide,high
+LU2466448532,ECHIQUIER SPACE BC EUR 3DEC,actions,monde,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU2655993207,Amundi IS-MSCI World UCITS ETF (D),actions,monde,,interagyr_valide,high
+LU2821708414,Altaroc Odyssey 2024 Eltif Part A,private_equity,,,gronier_categories,medium
+LU2821740573,Axiom Emerging Markets Corporate Bonds RC EUR,obligations,emergents,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+LU2821740813,Axiom Lux Aemc Bd Ic Cap,obligations,emergents,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+NL0000235190,Airbus SE,actions,europe,,interagyr_valide,high
+NL0000395903,Wolters Kluwer,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+NL0000852564,Aalberts,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+NL0010273215,ASML Holding,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+NL0011683594,VanEck Morningstar Developed Markets Dividend Leaders UCITS ETF,actions,monde,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+NL0013654783,Prosus,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+NL0014559478,Technip Energies,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+QS0020026108,Le Grand Hotel De Valenciennes,private_equity,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+SE0007100581,Assa Abloy,actions,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+US02079K1079,Alphabet,actions,amerique_du_nord,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+US02079K3059,Alphabet Inc -A-,actions,amerique_du_nord,,interagyr_valide,high
+US0231351067,Amazon.com Inc,actions,amerique_du_nord,,interagyr_valide,high
+US0378331005,Apple Inc,actions,amerique_du_nord,,interagyr_valide,high
+US09290D1019,Blackrock Inc,actions,amerique_du_nord,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+US30303M1027,Meta Platforms Inc -A-,actions,amerique_du_nord,,interagyr_valide,high
+US4642863926,ETF iShares MSCI World,actions,monde,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+US4642873255,ISHARES GLOBAL HEALTHCARE ETF,actions,monde,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+US4642888105,iShares Trust DJ US Medical Devices,actions,amerique_du_nord,,interagyr_valide,high
+US46625H1005,JPMorgan Chase & Co,actions,amerique_du_nord,,interagyr_valide,high
+US5024311095,L3Harris Technologies Inc,actions,amerique_du_nord,,interagyr_valide,high
+US5324571083,Eli Lilly,actions,amerique_du_nord,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+US58733R1023,"Mercadolibre, Inc.",actions,emergents,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+US5949181045,Microsoft Corp,actions,amerique_du_nord,,interagyr_valide,high
+US60744M1062,Mobility Global,actions,amerique_du_nord,,interagyr_valide,high
+US64110L1061,Netflix,actions,amerique_du_nord,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+US67066G1040,NVIDIA,actions,amerique_du_nord,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+US78409V1044,S&P Global Inc,actions,amerique_du_nord,,interagyr_valide,high
+US8740391003,Taiwan Semiconductor Manufacturing ADR,actions,asie_pacifique,,interagyr_valide,high
+US8835561023,Thermo Fisher Scientific,actions,amerique_du_nord,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+US92826C8394,Visa,actions,amerique_du_nord,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+US98978V1035,Zoetis A,actions,amerique_du_nord,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+XS2856234724,Opt In Perf Indice Engie Dividende Forfaitaire 1.20 Points,produits_structures,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+XS2902314181,"BNP Paribas Iss 5,4%24-30 Idx",obligations,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+XS2972237122,Barclays Bank Tv25-0435 Index,produits_structures,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+XS2989598367,Tempo Mensuel Degressif Eni De,produits_structures,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+XS3017908131,O2 Capital 11%25-250327 1,dette_privee,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+XS3028177072,Tempo Mens Degr Eni 0.91 0725,produits_structures,europe,,gronier_categories+geo_nom_valide_cgp_20260724,medium
+FR0011847409,R-co Valor P-CAP,actions,monde,,gronier_T2_run+geo_nom_valide_cgp_20260724,medium
+FR0013367265,R-co Valor Balanced C EUR,alternatifs,monde,,gronier_T2_run+geo_nom_valide_cgp_20260724,medium
+FR001400YPJ8,SELECT APPROCHE GLOB.I FCP 3D,alternatifs,monde,,gronier_T2_run+geo_nom_valide_cgp_20260724,medium
+FR001400LQV8,SELECT APPROCHE GLOBALE,alternatifs,monde,,gronier_T2_run+geo_nom_valide_cgp_20260724,high
+LU2358391998,VARENNE-GLOBAL I EUR-ACC.-,alternatifs,monde,,gronier_T2_run+geo_nom_valide_cgp_20260724,high
+FR0014008NN3,OFI Energy Strategic Metals R,matieres_premieres,monde,,gronier_T2_run+geo_nom_valide_cgp_20260724,medium

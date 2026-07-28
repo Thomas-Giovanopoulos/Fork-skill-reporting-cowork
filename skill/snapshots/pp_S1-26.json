@@ -1,0 +1,15 @@
+{
+  "period_short": "S1-26",
+  "period_long": "1er semestre 2026",
+  "date_reporting": "2026-07-14",
+  "actif_brut": 4824235.899999999,
+  "actif_net": 4824235.899999999,
+  "dettes": 0,
+  "cat_weights": {
+    "liquidites": 0.0,
+    "immobilier": 0.0,
+    "financier_cote": 87.00994451784581,
+    "non_cote": 12.990055482154178
+  },
+  "ps_status": {}
+}

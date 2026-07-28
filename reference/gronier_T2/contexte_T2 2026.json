@@ -1,0 +1,70 @@
+{
+ "periode": "T2 2026",
+ "source": "Produit le 23/07/2026 — indices YTD au 30/06/2026 sourcés presse financière (CNBC, Yahoo Finance, Boursorama/EasyBourse, World Gold Council, exchange-rates.org) ; Brent et EUR/USD écartés faute de source YTD 30/06 fiable. Réutiliser tel quel pour tout reporting T2 2026.",
+ "macro_text": [
+  "Premier semestre 2026 en nette progression pour les marchés actions : les indices américains signent leur <strong>meilleur premier semestre depuis 2021</strong> (S&P 500 <em>+9,6 %</em>, Nasdaq <em>+12,8 %</em>), portés par l'<strong>intelligence artificielle</strong>, premier moteur des résultats, de l'investissement et de la performance boursière.",
+  "Le deuxième trimestre a été particulièrement porteur, avec l'apaisement des craintes sur la soutenabilité du thème IA et la perspective d'une désescalade géopolitique ; la <strong>rotation vers les petites capitalisations</strong> s'est accélérée, le Russell 2000 gagnant près de <em>22 %</em> — son meilleur premier semestre depuis 1991.",
+  "En Europe, le <strong>DJ Euro Stoxx 50</strong> progresse d'environ <em>10 %</em> sur le semestre ; le <strong>CAC 40</strong> reste en retrait relatif (<em>+3,1 %</em> YTD) malgré son meilleur trimestre depuis début 2024 au T2 (<em>+7,5 %</em>), pénalisé en relatif par la composition sectorielle de la cote parisienne.",
+  "Sur les taux, l'environnement reste marqué par des <strong>rendements élevés</strong> et une inflation persistante en toile de fond ; le crédit euro <strong>investment grade</strong> et le <strong>haut rendement</strong> demeurent bien orientés, sans tension notable sur les spreads.",
+  "L'<strong>or</strong> recule d'environ <em>7 %</em> sur le semestre après son record historique de janvier (au-delà de 5 500 $ l'once) et un repli sous 4 000 $ fin juin ; le <strong>Bitcoin</strong> corrige fortement (<em>≈ −29 %</em> au S1, point bas fin juin), illustrant le retour de l'aversion au risque sur les actifs les plus spéculatifs."
+ ],
+ "faits_marquants": [
+  {
+   "tag": "Actions US",
+   "tone": "pos",
+   "text": "Meilleur premier semestre depuis 2021 : S&P 500 <em>+9,6 %</em>, Nasdaq <em>+12,8 %</em>, Dow Jones <em>+8,9 %</em>."
+  },
+  {
+   "tag": "Small caps",
+   "tone": "pos",
+   "text": "Russell 2000 : <em>+22 %</em> au S1, meilleur premier semestre depuis 1991 — élargissement de la hausse au-delà des mégacaps."
+  },
+  {
+   "tag": "IA",
+   "tone": "pos",
+   "text": "L'intelligence artificielle confirmée comme premier moteur de croissance des résultats et de l'investissement productif."
+  },
+  {
+   "tag": "Europe",
+   "tone": "pos",
+   "text": "CAC 40 : meilleur trimestre depuis T1 2024 (<em>+7,5 %</em> au T2), YTD encore modeste à <em>+3,1 %</em>."
+  },
+  {
+   "tag": "Or & crypto",
+   "tone": "neg",
+   "text": "Repli de l'or (<em>−7 %</em> YTD après le record de janvier) et forte correction du Bitcoin (<em>≈ −29 %</em> au S1)."
+  }
+ ],
+ "indices": [
+  {
+   "name": "S&P 500",
+   "var": "",
+   "ytd": 9.6
+  },
+  {
+   "name": "Nasdaq Composite",
+   "var": "",
+   "ytd": 12.8
+  },
+  {
+   "name": "DJ Euro Stoxx 50",
+   "var": "",
+   "ytd": 9.9
+  },
+  {
+   "name": "CAC 40",
+   "var": "",
+   "ytd": 3.1
+  },
+  {
+   "name": "Once d'or (USD / once)",
+   "var": "",
+   "ytd": -7.0
+  },
+  {
+   "name": "Bitcoin",
+   "var": "",
+   "ytd": -29.0
+  }
+ ]
+}

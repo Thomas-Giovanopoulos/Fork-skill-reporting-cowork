@@ -1,0 +1,85 @@
+{
+  "period_short": "S1-26",
+  "period_long": "1er semestre 2026",
+  "macro_text": [
+    "[BROUILLON POC] Le premier semestre 2026 a été porté par les grandes capitalisations technologiques américaines, le Nasdaq et le S&P 500 signant les meilleures performances des indices suivis.",
+    "Les marchés européens progressent plus modestement, l'Euro Stoxx 50 et le CAC 40 restant en retrait des indices américains.",
+    "L'or poursuit sa hausse dans un contexte de demande de valeurs refuges, tandis que le pétrole reflue.",
+    "Le dollar se stabilise face à l'euro ; les cryptoactifs restent volatils.",
+    "(Texte macro à finaliser en P4 — 6 des 8 indices sont des valeurs illustratives, le fetch automatique étant indisponible dans cet environnement.)"
+  ],
+  "faits_marquants": [
+    {
+      "tag": "Marchés actions",
+      "tone": "pos",
+      "text": "[BROUILLON POC] Domination des méga-capitalisations technologiques américaines ; <strong>S&P 500</strong> et <strong>Nasdaq</strong> en tête des indices suivis."
+    },
+    {
+      "tag": "Europe",
+      "tone": "neutral",
+      "text": "Progression plus modeste de l'<strong>Euro Stoxx 50</strong> et du <strong>CAC 40</strong>, en retrait des indices US."
+    },
+    {
+      "tag": "Or",
+      "tone": "pos",
+      "text": "L'<strong>or</strong> poursuit sa hausse, valeur refuge recherchée."
+    },
+    {
+      "tag": "Pétrole",
+      "tone": "neg",
+      "text": "Repli du <strong>Brent</strong> sur le semestre."
+    },
+    {
+      "tag": "À compléter",
+      "tone": "neutral",
+      "text": "Faits marquants réels à saisir en P4 (valeurs partiellement illustratives, fetch indisponible)."
+    }
+  ],
+  "indices": [
+    {
+      "name": "S&P 500",
+      "var": "",
+      "ytd": 9.6
+    },
+    {
+      "name": "Nasdaq Composite",
+      "var": "",
+      "ytd": 12.8
+    },
+    {
+      "name": "DJ Euro Stoxx 50",
+      "var": "",
+      "ytd": 8.0
+    },
+    {
+      "name": "CAC 40",
+      "var": "",
+      "ytd": 5.0
+    },
+    {
+      "name": "Once d'or (USD / once)",
+      "var": "",
+      "ytd": 15.0
+    },
+    {
+      "name": "Pétrole USD Brent",
+      "var": "",
+      "ytd": -6.0
+    },
+    {
+      "name": "EUR / USD",
+      "var": "",
+      "ytd": 3.0
+    },
+    {
+      "name": "Bitcoin",
+      "var": "",
+      "ytd": 20.0
+    }
+  ],
+  "benchmark_blocks": {
+    "MSCI World": 9.0,
+    "Obligations (Agg €)": 2.0,
+    "Monétaire €": 1.4
+  }
+}

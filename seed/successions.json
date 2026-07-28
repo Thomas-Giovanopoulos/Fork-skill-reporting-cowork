@@ -1,0 +1,34 @@
+{
+  "_note": "Successions datées de dépositaires (K5). Sans elles, un relevé antérieur à un changement est irréconciliable : la table qui ne porte que les noms actuels ne sait pas router un relevé 2024. Les deux entrées ci-dessous ont été reconstituées à partir du relevé annuel Wealins FC051727 lors du run Gronier — elles ne figuraient dans aucune source déclarative.",
+
+  "successions": [
+    {
+      "predecesseur_code": "intesa_sanpaolo",
+      "successeur_code": "ca_indosuez",
+      "date_effet": null,
+      "date_cloture": null,
+      "contexte": "Wealins FC051727 — poche FAS",
+      "payload": {
+        "note": "Date d'effet non établie par le relevé : laissée à null plutôt que devinée. Une note intermédiaire du run Gronier mentionnait « Thaler/Indosuez » sans permettre de trancher — voir K7.",
+        "question_ouverte": "K7 — le successeur est-il CA Indosuez, Banque Thaler, ou les deux successivement ?",
+        "reperes_chiffres": "Base au 31/12/2024 retenue à 550 568 € dans la version officielle post-relevés ; versement dédié de 250 000 € le 13/03/2025."
+      },
+      "provenance": "seed",
+      "confiance": "low"
+    },
+    {
+      "predecesseur_code": "cic",
+      "successeur_code": "quintet",
+      "date_effet": null,
+      "date_cloture": "2025-12-30",
+      "contexte": "Wealins FC051727 — poche FID",
+      "payload": {
+        "note": "Clôture au 30/12/2025, précision obtenue seulement après lecture des relevés officiels (elle ne figurait pas dans l'Excel de suivi). Date d'effet du changement non établie : laissée à null.",
+        "reperes_chiffres": "Base au 31/12/2024 retenue à 446 933 € dans la version officielle ; versement dédié de 200 000 € le 07/05/2025.",
+        "ecart_de_source": "L'Excel « Catégories & Perf » portait un versement de 251 627 € qui n'existe dans aucun relevé officiel — donnée erronée de la source Excel, corrigée. Illustration de la hiérarchie de sources : le relevé prime."
+      },
+      "provenance": "seed",
+      "confiance": "medium"
+    }
+  ]
+}

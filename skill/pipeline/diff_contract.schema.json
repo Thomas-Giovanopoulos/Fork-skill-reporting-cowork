@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Contrat de diff — profil skill (aligné validation_app Rhétorès)",
+  "type": "object",
+  "required": ["client_id", "source_document", "status", "changes", "unrecognized_data"],
+  "additionalProperties": false,
+  "properties": {
+    "client_id": { "type": "string" },
+    "source_document": { "type": "string" },
+    "status": { "const": "pending_validation" },
+    "extraction_profile": { "const": "skill_v1", "description": "Profil skill : old_value = valeur de l'Excel de structure (ou null en création), pas d'accès au store." },
+    "changes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["category", "entry_id", "entry_label", "entity_id", "action", "fields", "confidence"],
+        "additionalProperties": false,
+        "properties": {
+          "category": { "enum": ["liquidites", "immobilier", "financier_cote", "non_cote", "dettes", "exotiques", "historique_annuel", "mouvements"] },
+          "entry_id": { "type": ["string", "null"], "description": "id provisoire tmp_* si l'entrée existe déjà dans le lot ; null => création" },
+          "entry_label": { "type": "string" },
+          "entity_id": { "type": ["string", "null"] },
+          "action": { "enum": ["update", "create"] },
+          "fields": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["path", "old_value", "new_value"],
+              "additionalProperties": false,
+              "properties": {
+                "path": { "type": "string", "description": "chemin pointé dans l'entrée forme-store, ex. value_current, attributes.lines, attributes.pockets, capital_called" },
+                "old_value": {},
+                "new_value": {},
+                "source_page": { "type": "integer", "minimum": 1 }
+              }
+            }
+          },
+          "confidence": { "enum": ["high", "medium", "low"] },
+          "notes": { "type": "string" }
+        }
+      }
+    },
+    "unrecognized_data": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["description"],
+        "additionalProperties": false,
+        "properties": {
+          "description": { "type": "string" },
+          "source_page": { "type": "integer" },
+          "raw": {}
+        }
+      }
+    }
+  }
+}

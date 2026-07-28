@@ -1,0 +1,3434 @@
+{
+  "schema_version": "0.1-skill",
+  "acteurs": [
+    {
+      "code": "de_pury_pictet",
+      "nom": "de Pury Pictet Turrettini",
+      "role": "gerant",
+      "domiciliation": "BE",
+      "est_depositaire_tiers": false,
+      "alias": [
+        "de Pury Pictet Turrettini (Belgique)",
+        "de Pury Pictet Turrettini",
+        "De Pury Pictet"
+      ],
+      "payload": {
+        "libelle_affichage": "De Pury Pictet",
+        "convention": "Écrire « De Pury Pictet ». Jamais « PPT », jamais le nom complet avec Turrettini.",
+        "source": "relevé Interagyr — pied de page présent sur 100 % des pages"
+      },
+      "provenance": "seed",
+      "confiance": "high"
+    },
+    {
+      "code": "dauphine_am",
+      "nom": "Dauphine AM",
+      "role": "gerant",
+      "domiciliation": "FR",
+      "est_depositaire_tiers": false,
+      "alias": [
+        "Dauphine AM",
+        "Dauphine AM, filiale de Rhétorès Groupe"
+      ],
+      "payload": {
+        "agrement_amf": "GP-17000033",
+        "adresse": "18bis rue d'Anjou, 75008 Paris",
+        "note": "Société de gestion du groupe. Publie aussi un commentaire de marché hebdomadaire, source du bloc Contexte.",
+        "source": "reportings hebdomadaires INTERAGYR"
+      },
+      "provenance": "seed",
+      "confiance": "high"
+    },
+    {
+      "code": "spirica",
+      "nom": "Spirica",
+      "role": "assureur",
+      "domiciliation": "FR",
+      "est_depositaire_tiers": false,
+      "alias": [
+        "SPIRICA",
+        "Spirica"
+      ],
+      "payload": {
+        "note": "Émetteur réel des relevés distribués sous la marque UAF Life Patrimoine. Émetteur ≠ distributeur (D24).",
+        "source": "relevés « UAF » Cerise et Pollux — mentions légales SPIRICA"
+      },
+      "provenance": "seed",
+      "confiance": "high"
+    },
+    {
+      "code": "uaf_life_patrimoine",
+      "nom": "UAF Life Patrimoine",
+      "role": "plateforme",
+      "domiciliation": "FR",
+      "est_depositaire_tiers": false,
+      "alias": [
+        "UAF LIFE PATRIMOINE",
+        "UAF Life Patrimoine",
+        "UAF"
+      ],
+      "payload": {
+        "note": "Distributeur, PAS l'émetteur du relevé. Les relevés nommés « UAF » sont émis par Spirica.",
+        "emetteurs_associes": [
+          "spirica"
+        ]
+      },
+      "provenance": "seed",
+      "confiance": "high"
+    },
+    {
+      "code": "nortia",
+      "nom": "Nortia",
+      "role": "plateforme",
+      "domiciliation": "FR",
+      "est_depositaire_tiers": false,
+      "alias": [
+        "Nortia"
+      ],
+      "payload": {
+        "note": "Plateforme grossiste, PAS un assureur. Son nom n'apparaît NULLE PART dans le texte du relevé : l'identité est portée par un logo image. Nommé par un humain, jamais déduit au runtime (D24/N7).",
+        "identifie_par": "logo image, non OCR — le nom de fichier ne fait pas foi",
+        "source": "relevé « Nortia 30 06 26 »"
+      },
+      "provenance": "seed",
+      "confiance": "medium"
+    },
+    {
+      "code": "himalia_emetteur_a_confirmer",
+      "nom": "Émetteur du contrat HIMALIA CAPITALISATION (à confirmer)",
+      "role": "assureur",
+      "domiciliation": null,
+      "est_depositaire_tiers": false,
+      "alias": [
+        "HIMALIA CAPITALISATION",
+        "Himalia Capi"
+      ],
+      "payload": {
+        "note": "L'assureur n'est identifiable NI dans le texte NI par une source fiable de ce run. Un nom plausible circule mais n'est pas vérifié : il n'est pas inscrit ici. À faire nommer par le CGP (AskUser), au même titre que K7.",
+        "question_ouverte": "Quel assureur porte la gamme HIMALIA CAPITALISATION ?",
+        "identifie_par": "logo image, non OCR"
+      },
+      "provenance": "seed",
+      "confiance": "low"
+    },
+    {
+      "code": "wealins",
+      "nom": "WEALINS S.A.",
+      "role": "assureur",
+      "domiciliation": "LU",
+      "est_depositaire_tiers": false,
+      "alias": [
+        "WEALINS S.A.",
+        "Wealins",
+        "Wealins Capi France"
+      ],
+      "payload": {
+        "rcs": "Luxembourg B 53682",
+        "tva": "LU 166 094 20",
+        "adresse": "12 rue Léon Laval, L-3372 Leudelange",
+        "note": "Assurance-vie luxembourgeoise : le triangle de sécurité impose un dépositaire tiers nommé par fonds dédié (FID). Un contrat peut donc porter PLUSIEURS dépositaires, et ils changent dans le temps (voir successions).",
+        "source": "relevés annuels FC051727 et FC055211"
+      },
+      "provenance": "seed",
+      "confiance": "high"
+    },
+    {
+      "code": "cardif",
+      "nom": "Cardif Assurance Vie",
+      "role": "assureur",
+      "domiciliation": "FR",
+      "est_depositaire_tiers": false,
+      "alias": [
+        "Cardif Assurance Vie",
+        "BNP Paribas Cardif",
+        "Cardif"
+      ],
+      "payload": {
+        "note": "Contrat FR : pas de dépositaire tiers, la colonne dépositaire vaut NC par convention réglementaire — « non communicable », pas « non renseigné » (D26).",
+        "reseau_declare": "DIRECT-CGPI",
+        "source": "relevé Cardif Elite Capitalisation Personnes Morales"
+      },
+      "provenance": "seed",
+      "confiance": "high"
+    },
+    {
+      "code": "quintet",
+      "nom": "Quintet Private Bank (Europe) S.A.",
+      "role": "depositaire",
+      "domiciliation": "LU",
+      "est_depositaire_tiers": true,
+      "alias": [
+        "Quintet Private Bank (Europe) S.A.",
+        "Quintet Private Bank",
+        "Quintet"
+      ],
+      "payload": {
+        "note": "Dépositaire d'un FID Wealins. Successeur de CIC sur la poche FID du contrat FC051727."
+      },
+      "provenance": "seed",
+      "confiance": "high"
+    },
+    {
+      "code": "ca_indosuez",
+      "nom": "CA Indosuez",
+      "role": "depositaire",
+      "domiciliation": null,
+      "est_depositaire_tiers": true,
+      "alias": [
+        "CA Indosuez",
+        "Indosuez",
+        "Crédit Agricole Indosuez"
+      ],
+      "payload": {
+        "note": "Dépositaire d'un FID Wealins. Successeur d'Intesa sur la poche FAS du contrat FC051727.",
+        "question_ouverte": "K7 — CA Indosuez et Banque Thaler sont-ils la même entité, ou deux repreneurs distincts de la poche ex-Intesa ? Le salvage ne permet pas de trancher. AskUser au CGP."
+      },
+      "provenance": "seed",
+      "confiance": "medium"
+    },
+    {
+      "code": "banque_thaler",
+      "nom": "Banque Thaler SA",
+      "role": "depositaire",
+      "domiciliation": "CH",
+      "est_depositaire_tiers": true,
+      "alias": [
+        "Banque Thaler SA",
+        "Banque Thaler",
+        "Thaler"
+      ],
+      "payload": {
+        "note": "Apparaît comme dépositaire d'un FID du contrat FC051727. Relation avec CA Indosuez non établie — voir K7.",
+        "question_ouverte": "K7 (identique à ca_indosuez)"
+      },
+      "provenance": "seed",
+      "confiance": "medium"
+    },
+    {
+      "code": "intesa_sanpaolo",
+      "nom": "Intesa Sanpaolo",
+      "role": "depositaire",
+      "domiciliation": null,
+      "est_depositaire_tiers": true,
+      "alias": [
+        "Intesa Sanpaolo",
+        "Intesa Sanpaolo Wealth Management",
+        "Intesa"
+      ],
+      "payload": {
+        "note": "Prédécesseur sur la poche FAS du contrat Wealins FC051727. Conservé pour réconcilier les relevés antérieurs au changement (K5)."
+      },
+      "provenance": "seed",
+      "confiance": "medium"
+    },
+    {
+      "code": "cic",
+      "nom": "CIC",
+      "role": "depositaire",
+      "domiciliation": "FR",
+      "est_depositaire_tiers": true,
+      "alias": [
+        "CIC"
+      ],
+      "payload": {
+        "note": "Prédécesseur sur la poche FID du contrat Wealins FC051727. Conservé pour réconcilier les relevés antérieurs (K5)."
+      },
+      "provenance": "seed",
+      "confiance": "medium"
+    },
+    {
+      "code": "ubs",
+      "nom": "UBS",
+      "role": "depositaire",
+      "domiciliation": null,
+      "est_depositaire_tiers": true,
+      "alias": [
+        "UBS",
+        "UBS Fr",
+        "UBS France"
+      ],
+      "payload": {
+        "note": "Figure comme « Banque Dépositaire » du mandat De Pury Pictet, et dans DEPO_COLORS du moteur.",
+        "attention": "La valeur lue « UBS Fr » est possiblement tronquée dans le relevé source — ne pas en déduire une entité juridique précise."
+      },
+      "provenance": "seed",
+      "confiance": "medium"
+    },
+    {
+      "code": "edmond_de_rothschild",
+      "nom": "Edmond de Rothschild",
+      "role": "depositaire",
+      "domiciliation": null,
+      "est_depositaire_tiers": true,
+      "alias": [
+        "Edmond de Rothschild",
+        "EdR"
+      ],
+      "payload": {
+        "note": "Présent dans DEPO_COLORS du moteur. Retiré du code au profit de ce référentiel (K4)."
+      },
+      "provenance": "seed",
+      "confiance": "medium"
+    },
+    {
+      "code": "tilvest",
+      "nom": "Tilvest",
+      "role": "depositaire",
+      "domiciliation": null,
+      "est_depositaire_tiers": true,
+      "alias": [
+        "Tilvest"
+      ],
+      "payload": {
+        "note": "Présent dans DEPO_COLORS du moteur. Retiré du code au profit de ce référentiel (K4)."
+      },
+      "provenance": "seed",
+      "confiance": "medium"
+    },
+    {
+      "code": "altaroc",
+      "nom": "Altaroc",
+      "role": "gerant",
+      "domiciliation": "FR",
+      "est_depositaire_tiers": false,
+      "alias": [
+        "Altaroc"
+      ],
+      "payload": {
+        "note": "Société de gestion de fonds de private equity. Deux fonds chez Gronier, cible 1,8× sur 10 ans, MOIC réels constatés 1,42× et 1,79×.",
+        "rappel_metier": "Le PE représente peu d'actifs à forte importance individuelle : le bloc PE n'a jamais de seuil de pertinence (D32)."
+      },
+      "provenance": "seed",
+      "confiance": "high"
+    }
+  ],
+  "successions": [
+    {
+      "predecesseur_code": "intesa_sanpaolo",
+      "successeur_code": "ca_indosuez",
+      "date_effet": null,
+      "date_cloture": null,
+      "contexte": "Wealins FC051727 — poche FAS",
+      "payload": {
+        "note": "Date d'effet non établie par le relevé : laissée à null plutôt que devinée. Une note intermédiaire du run Gronier mentionnait « Thaler/Indosuez » sans permettre de trancher — voir K7.",
+        "question_ouverte": "K7 — le successeur est-il CA Indosuez, Banque Thaler, ou les deux successivement ?",
+        "reperes_chiffres": "Base au 31/12/2024 retenue à 550 568 € dans la version officielle post-relevés ; versement dédié de 250 000 € le 13/03/2025."
+      },
+      "provenance": "seed",
+      "confiance": "low"
+    },
+    {
+      "predecesseur_code": "cic",
+      "successeur_code": "quintet",
+      "date_effet": null,
+      "date_cloture": "2025-12-30",
+      "contexte": "Wealins FC051727 — poche FID",
+      "payload": {
+        "note": "Clôture au 30/12/2025, précision obtenue seulement après lecture des relevés officiels (elle ne figurait pas dans l'Excel de suivi). Date d'effet du changement non établie : laissée à null.",
+        "reperes_chiffres": "Base au 31/12/2024 retenue à 446 933 € dans la version officielle ; versement dédié de 200 000 € le 07/05/2025.",
+        "ecart_de_source": "L'Excel « Catégories & Perf » portait un versement de 251 627 € qui n'existe dans aucun relevé officiel — donnée erronée de la source Excel, corrigée. Illustration de la hiérarchie de sources : le relevé prime."
+      },
+      "provenance": "seed",
+      "confiance": "medium"
+    }
+  ],
+  "gabarits": [
+    {
+      "emetteur_code": "de_pury_pictet",
+      "gabarit": "evaluation_portefeuille_mandat",
+      "periodicite": "a_la_demande",
+      "template_id_natif": null,
+      "emetteur_lisible": true,
+      "n_pages_indicatif": "9-14",
+      "signature": {
+        "metadata_pdf": {
+          "producer": "Microsoft Reporting Services",
+          "creator": "Microsoft Reporting Services"
+        },
+        "ancres_texte": [
+          "de Pury Pictet Turrettini (Belgique)",
+          "Aperçu du Portefeuille",
+          "Point de Contact",
+          "Matrice allocation actifs et devises",
+          "Détail des Positions - Liquidités",
+          "Liste des transactions",
+          "Dividendes, intérêts et autres paiements",
+          "Adéquation du profil",
+          "En cas de divergence avec l'estimation produite par la banque dépositaire, les indications de cette dernière prévaudront"
+        ],
+        "marqueurs_structure": [
+          "Séquence fixe de 12 titres de section, dans l'ordre",
+          "Pied de page sur chaque page : émetteur + « Situation au JJ/MM/AAAA » + « Page X/N »",
+          "En-têtes des tableaux de positions sur 2 lignes, sous-colonnes Devise/EUR sous RESULTAT et EVALUATION",
+          "Motif « Total : [sous-catégorie] » après chaque groupe d'instruments",
+          "Page de garde en 2 colonnes à libellés fixes (Compte / Devise de référence / Situation au / Etablie au / Banque Dépositaire / Profil / Mode de détention | Gérant / Tél / E-mail)"
+        ],
+        "token_periodicite": null
+      },
+      "extraction_hints": {
+        "pieges": [
+          "DEUX conventions numériques dans le MÊME document : le bloc Résumé est anglo-saxon (1,925,477 / 97.15%), tout le reste est franco-suisse (1 134 708,36 / 25,19%). Un parseur réglé sur un seul séparateur casse sur l'autre bloc. Cette hétérogénéité est stable : elle vient de sous-rapports RDL distincts, c'est donc aussi un marqueur.",
+          "Chaque position est étalée sur 2 lignes physiques : ligne 1 = valeurs, ligne 2 = ISIN + prix d'achat moyen + un second pourcentage sans libellé. Recoupler avant parsing, sinon l'ISIN est perdu.",
+          "Colonne « RESULTAT YTD » : deux pourcentages empilés. Le bon est la 2e ligne (résultat depuis achat), en EUR.",
+          "Fonds monétaires classés à tort « Obligations » → reclasser en monetaire.",
+          "Deux niveaux de totaux : total de section ET sous-totaux « Total : ». Double comptage si on somme les deux.",
+          "Deux sections sont purement graphiques (Evolution des actifs, Exposition actions) : le texte s'arrête après le titre. Ce n'est PAS un échec d'extraction.",
+          "« Rendement benchmark * » affiche un « % » seul sans chiffre pour les mois sans historique.",
+          "Deux dates proches à ne pas confondre : « Situation au » (arrêté) et « Etablie au » (édition).",
+          "La composition du benchmark dépend du profil client : apparence de boilerplate, réalité volatile. À exclure de la signature."
+        ],
+        "ancrage_tableaux": [
+          "Pas de filets de tableau : pdftotext -layout impératif.",
+          "Fusionner les 2 lignes d'en-tête avant tout parsing positionnel."
+        ],
+        "format_numerique": {
+          "milliers": "espace (bloc principal) / virgule (bloc Résumé)",
+          "decimal": "virgule (principal) / point (Résumé)"
+        }
+      },
+      "champs_publies": {
+        "perf_par_ligne": "oui",
+        "forme": "Colonne « RESULTAT YTD », 2e ligne = résultat depuis achat, en EUR.",
+        "horizon": "depuis achat"
+      },
+      "invariant_controle": "Σ sous-totaux « Total : » par catégorie = total de section ; Σ sections = total portefeuille.",
+      "provenance": "seed",
+      "confiance": "high"
+    },
+    {
+      "emetteur_code": "dauphine_am",
+      "gabarit": "reporting_hebdo_mandat",
+      "periodicite": "hebdomadaire",
+      "template_id_natif": null,
+      "emetteur_lisible": true,
+      "n_pages_indicatif": "3-6",
+      "signature": {
+        "metadata_pdf": {
+          "producer": "Microsoft Word",
+          "creator": "Microsoft Word"
+        },
+        "ancres_texte": [
+          "Reporting hebdomadaire",
+          "Composition du portefeuille & mouvements de la semaine",
+          "Détail des positions",
+          "Mouvements de la semaine",
+          "Dauphine AM, filiale de Rhétorès Groupe",
+          "agrément AMF n°GP-17000033",
+          "Des convictions au service de la gestion de vos actifs",
+          "COMMUNICATION À CARACTÈRE NON COMMERCIAL",
+          "NE PEUT ÊTRE TRANSMIS À DES CLIENTS FINAUX"
+        ],
+        "marqueurs_structure": [
+          "En-tête de colonnes exact : ISIN SUPPORT VALEUR +/- VALUE +/- % POIDS",
+          "En-tête courant « Reporting hebdomadaire — Semaine du … au … » à partir de la page 2",
+          "Pied de page « Document à caractère non commercial — non contractuel · Dauphine AM · agrément AMF n°GP-17000033 » + « Page N », absent de la page 1",
+          "Filigrane fragmenté en 9 jetons identiques et ordonnés sur chaque page : U clu / sa s / ex / ge ive / in e / te n / rn t / m / e",
+          "Hiérarchie catégorie > lignes > sous-total > « Total portefeuille »"
+        ],
+        "token_periodicite": "Semaine du"
+      },
+      "extraction_hints": {
+        "pieges": [
+          "Le filigrane diagonal se fragmente en 9 jetons parasites insérés au milieu du contenu en mode -layout. Les filtrer AVANT tout parsing. Ils sont identiques et ordonnés : donc aussi une ancre fiable.",
+          "La colonne « +/- % » est la variation DE LA SEMAINE, pas un YTD. Le YTD n'existe que dans le bloc KPI.",
+          "Noms de SUPPORT repliés sur 2 lignes, valeurs sur la première : désalignement si parsing naïf.",
+          "Sous-totaux de classe sans ISIN ni SUPPORT (4 champs au lieu de 6) : les distinguer par l'absence d'ISIN.",
+          "Ligne LIQUIDITÉS : tiret cadratin « — » pour +/- VALUE et +/- % = non applicable, PAS zéro.",
+          "Signe moins Unicode U+2212, pas le tiret ASCII.",
+          "Le tableau des positions est scindé entre deux pages SANS ré-émission de l'en-tête.",
+          "La valorisation apparaît deux fois (« VALORISATION AU » en garde, « VALORISATION TOTALE » en KPI) : dédupliquer.",
+          "Les libellés de poches KPI varient selon le mandat (ACTIONS vs OBLIGATIONS/MONÉTAIRE) : c'est du volatil, pas un drift.",
+          "Section Mouvements parfois vide : « Aucun mouvement sur la semaine. »",
+          "La section ACTUALITÉS est optionnelle (présente si des valeurs sont commentées) : son absence n'est pas un drift.",
+          "Nom de fichier en Unicode NFD (accent décomposé) : résoudre par glob, ne jamais retaper le chemin."
+        ],
+        "ancrage_tableaux": [
+          "Pas de filets : -layout impératif.",
+          "Fusionner les libellés de support repliés avant association aux valeurs."
+        ],
+        "format_numerique": {
+          "milliers": "espace insécable",
+          "decimal": "virgule",
+          "negatif": "U+2212"
+        }
+      },
+      "champs_publies": {
+        "perf_par_ligne": "oui",
+        "forme": "Colonne « +/- % » du détail des positions.",
+        "horizon": "hebdomadaire — à préciser dans validation_note, ne jamais confondre avec un YTD"
+      },
+      "invariant_controle": "Σ sous-totaux de classes = « Total portefeuille » (vérifié au € près). Le KPI « NOMBRE DE LIGNES » approche le compte des lignes extraites, mais sa convention d'inclusion des liquidités n'est pas garantie.",
+      "provenance": "seed",
+      "confiance": "high"
+    },
+    {
+      "emetteur_code": "spirica",
+      "gabarit": "releve_situation_av",
+      "periodicite": "a_la_demande",
+      "template_id_natif": null,
+      "emetteur_lisible": true,
+      "n_pages_indicatif": ">=2",
+      "signature": {
+        "metadata_pdf": {
+          "creator": "JasperReports Library",
+          "producer": "OpenPDF"
+        },
+        "ancres_texte": [
+          "Objet : Relevé de Situation",
+          "SITUATION AU",
+          "Montant de la valeur atteinte au",
+          "Valeur de rachat*",
+          "Le Relevé de Situation n'engage en rien la responsabilité de SPIRICA.",
+          "Ce document n'a pas de valeur contractuelle.",
+          "Vos interlocuteurs à votre service :",
+          "Le rachat est l'opération par laquelle vous demandez"
+        ],
+        "marqueurs_structure": [
+          "Bandeau titre centré « SITUATION AU [date] » séparant le corps de lettre du tableau",
+          "En-tête de la page 2 = « Contrat n° [numéro] » seul",
+          "Pied de page identique : « Page X / Y » + 3 lignes de disclaimer SPIRICA",
+          "Bloc final en 3 paires libellé:valeur (Votre conseiller / Adresse / Téléphone)"
+        ],
+        "token_periodicite": null
+      },
+      "extraction_hints": {
+        "pieges": [
+          "ATTENTION metadata : JasperReports apparaît AUSSI chez l'émetteur Himalia. La couche 1 ne discrimine pas seule.",
+          "Sans -layout, le flux sépare tous les en-têtes de colonnes de toutes les valeurs : reconstruction impossible sans coordonnées.",
+          "Deux libellés de colonnes contiennent la DATE d'arrêté (« Nombre de parts au 31/12/2022 », « Valeur atteinte au … en euros ») : matcher par motif tolérant, jamais par chaîne exacte.",
+          "Deux dates très éloignées : arrêté et date d'édition du courrier. Un exemplaire observé est une réédition de 2026 pour un arrêté de 2022. Seule « SITUATION AU » fait foi.",
+          "Cellule « Nombre de parts » VIDE pour un fonds euros : normal, pas un décalage de colonne.",
+          "« Montant de la valeur atteinte » et « Valeur de rachat » sont égaux dans les exemplaires vus, mais peuvent diverger (pénalités) : ne pas présumer l'égalité.",
+          "Aucun ISIN : identification des supports par libellé seul, donc référentiel externe nom→ISIN nécessaire.",
+          "La civilité varie et modifie les accords des phrases boilerplate : normaliser avant ancrage.",
+          "Un seul support dans les exemplaires vus (100 %) : le profil doit rester valide de 0 à N lignes et pour d'autres modes de gestion que « Gestion libre »."
+        ],
+        "ancrage_tableaux": [
+          "Extraction par coordonnées (-layout) obligatoire.",
+          "Le sous-titre de mode de gestion précède le tableau."
+        ],
+        "format_numerique": {
+          "milliers": "espace insécable",
+          "decimal": "virgule"
+        }
+      },
+      "champs_publies": {
+        "perf_par_ligne": "oui",
+        "forme": "Format « PRM ».",
+        "horizon": "à confirmer sur un exemplaire multi-support"
+      },
+      "invariant_controle": "Σ colonne % = 100 ; Σ valeurs atteintes des lignes = « Montant de la valeur atteinte ».",
+      "provenance": "seed",
+      "confiance": "high"
+    },
+    {
+      "emetteur_code": "nortia",
+      "gabarit": "releve_portefeuille_cto",
+      "periodicite": "mensuel",
+      "template_id_natif": null,
+      "emetteur_lisible": false,
+      "n_pages_indicatif": "variable",
+      "signature": {
+        "metadata_pdf": {
+          "note": "Polices standard non embarquées (Courier/Helvetica), pas de producteur distinctif."
+        },
+        "ancres_texte": [
+          "RELEVE PORTEFEUILLE AU",
+          "VOTRE COMPTE TITRES",
+          "VALORISATION EN : EUR",
+          "Code et désignation valeur",
+          "Prix moyen d'acquisition (PMA)",
+          "TITRES - EUROPE",
+          "Total du portefeuille",
+          "INFORMATIONS FISCALES SUR VOTRE PORTEFEUILLE DEPUIS le 1er Janvier",
+          "Instrument financier éligible à la règlementation MIF",
+          "Dépôt à l'étranger"
+        ],
+        "marqueurs_structure": [
+          "Marqueur technique « ^{PSTOCK=paper_0} » en toute première ligne de CHAQUE page : invisible à l'écran, très fiable",
+          "En-tête complet répété sur chaque page (titre + date d'édition + pagination + adresse + conseiller + n° de compte)",
+          "En-tête de tableau à 7 colonnes réparti sur 2-3 lignes physiques",
+          "Macro-zones dans l'ordre fixe : TITRES - EUROPE, TITRES - INTERNATIONAL, TITRES - AUTRES, LIQUIDITES",
+          "La dernière page porte toujours « Total du portefeuille » puis le bloc INFORMATIONS FISCALES"
+        ],
+        "token_periodicite": "édité le 7 du mois suivant l'arrêté (indice, à confirmer)"
+      },
+      "extraction_hints": {
+        "pieges": [
+          "Émetteur NON lisible en texte : le mot « Nortia » n'apparaît nulle part, l'identité est portée par un logo image. L'identification passe par la signature, jamais par le nom de fichier (D24/N7).",
+          "Le flag « E » (dépôt à l'étranger) est une colonne fantôme sans position X fixe : en extraction il se décale loin de sa ligne d'origine.",
+          "Les sous-totaux de catégorie n'ont que 3 champs (catégorie / % / montant) contre 7 pour les lignes titres : un parseur à nombre de colonnes fixe casse.",
+          "Les négatifs s'écrivent « - 29 220,00 » avec un ESPACE après le signe : risque de découpage en deux jetons.",
+          "« EUR » n'est accolé qu'à la colonne Cours, implicite ailleurs.",
+          "La précision décimale de Quantité varie selon la nature du titre (0 à 4 décimales) : ce n'est pas un discriminant de colonne.",
+          "La page 2 réaffiche tout l'en-tête mais ne contient QUE « Total du portefeuille » : une nouvelle page n'implique pas de nouvelles lignes.",
+          "Σ des % de sections = 100 seulement EN INCLUANT LIQUIDITES : un parseur qui ignore les libellés hors « TITRES - » sous-estime fortement l'actif.",
+          "Le marqueur ^{PSTOCK} pollue le texte extrait : filtrer avant matching, garder pour la signature."
+        ],
+        "ancrage_tableaux": [
+          "Pas de filets : le regroupement repose sur l'indentation et la présence/absence de « % »."
+        ],
+        "format_numerique": {
+          "milliers": "espace",
+          "decimal": "virgule",
+          "negatif": "signe moins suivi d'un espace"
+        }
+      },
+      "champs_publies": {
+        "perf_par_ligne": "derivable",
+        "forme": "Plus-value en EUROS (colonne « Plus ou moins value latente »), pas en %. Le % se dérive du gain rapporté au PMA.",
+        "horizon": "latent, depuis acquisition"
+      },
+      "invariant_controle": "Σ % des sections, liquidités incluses = 100,00 ; Σ valorisations = « Total du portefeuille ».",
+      "provenance": "seed",
+      "confiance": "medium"
+    },
+    {
+      "emetteur_code": "himalia_emetteur_a_confirmer",
+      "gabarit": "releve_situation_capi",
+      "periodicite": "annuel",
+      "template_id_natif": null,
+      "emetteur_lisible": false,
+      "n_pages_indicatif": "1 page de synthèse + N pages de tableau",
+      "signature": {
+        "metadata_pdf": {
+          "creator": "JasperReports",
+          "producer": "iText 2.1.7 by 1T3XT"
+        },
+        "ancres_texte": [
+          "Relevé de situation au",
+          "Ce document n'est pas assimilable à un état de situation.",
+          "Total versé depuis l'origine",
+          "Total investi depuis l'origine",
+          "Epargne atteinte au",
+          "Répartition de l'investissement",
+          "Plus/moins-values***",
+          "Prix d'Achat Moyen",
+          "Le montant de l'épargne atteinte est obtenu à partir des dernières valeurs connues.",
+          "Point d'attention :"
+        ],
+        "marqueurs_structure": [
+          "Titre de page « Répartition » répété sur chaque page du tableau",
+          "DEUX groupes de colonnes aux libellés HOMONYMES : « Montant(€) » et « %** » apparaissent sous « Répartition de l'investissement » ET sous « Plus/moins-values*** »",
+          "Aucune ligne Total dans le tableau : le total n'existe qu'en bloc d'en-tête page 1",
+          "Bloc de 3 notes (*)(**)(***) suivi de « Point d'attention : »"
+        ],
+        "token_periodicite": "arrêté au 31/12 (indice faible — périodicité à confirmer sur un second exemplaire)"
+      },
+      "extraction_hints": {
+        "pieges": [
+          "Émetteur NON lisible en texte : identité portée par un logo image. À faire nommer par le CGP.",
+          "ATTENTION metadata : JasperReports apparaît AUSSI chez Spirica. La couche 1 ne discrimine pas seule — c'est ici que les ancres texte font tout le travail.",
+          "Colonnes HOMONYMES sous deux groupes parents différents : lire par nom de colonne seul est ambigu, il faut le groupe.",
+          "Sans -layout, le flux réordonne tout par colonne : une valeur isolée atterrit APRÈS les notes de bas de page.",
+          "La colonne %** des plus/moins-values est VIDE quand le Prix d'Achat Moyen vaut 0,00 € : un parseur à nombre de jetons fixe échoue.",
+          "AUCUNE ligne Total dans le tableau : le total doit être RECALCULÉ. Vérifié : Σ des 9 lignes = « Epargne atteinte » au centime.",
+          "La catégorie « Fonds UC » n'est affichée qu'une fois, en tête de la première page du tableau, et n'est PAS répétée : perte de contexte en traitement page par page.",
+          "Noms de supports repliés sur 2 lignes : fusionner avant association aux valeurs.",
+          "Le symbole € est explicite dans les cellules PAM, implicite dans « Montant(€) ».",
+          "Aucun ISIN : référentiel externe nom→ISIN nécessaire.",
+          "Aucune pagination dans le texte : la position ne s'obtient que par pdfinfo.",
+          "Σ %** ≈ 99,99 à cause des arrondis : ne JAMAIS exiger 100,00 strict.",
+          "Prévoir une catégorie « Fonds Euros » en plus de « Fonds UC » : non observée mais plausible."
+        ],
+        "ancrage_tableaux": [
+          "-layout impératif.",
+          "Désambiguïser les colonnes homonymes par leur groupe parent."
+        ],
+        "format_numerique": {
+          "milliers": "espace insécable",
+          "decimal": "virgule"
+        }
+      },
+      "champs_publies": {
+        "perf_par_ligne": "oui",
+        "forme": "Format « PRM ». Plus/moins-values en montant ET en %, sous le second groupe de colonnes.",
+        "horizon": "depuis acquisition (base Prix d'Achat Moyen)"
+      },
+      "invariant_controle": "Σ « Montant(€) » du groupe Répartition = « Epargne atteinte au [date] » du bloc page 1 — vérifié exact. Σ %** ≈ 100 à l'arrondi près, jamais strict.",
+      "provenance": "seed",
+      "confiance": "medium"
+    },
+    {
+      "emetteur_code": "wealins",
+      "gabarit": "releve_annuel_capi_lux",
+      "periodicite": "annuel",
+      "template_id_natif": null,
+      "emetteur_lisible": true,
+      "n_pages_indicatif": "15-26 selon le nombre de FID — HORS matching",
+      "signature": {
+        "metadata_pdf": {
+          "note": "Le marqueur fort est structurel, pas dans les métadonnées : paginations locales multiples."
+        },
+        "ancres_texte": [
+          "Wealins Capi France",
+          "Contrat de capitalisation",
+          "Caractéristiques du contrat",
+          "Information sur l'évolution du contrat",
+          "Arbitrages et/ou changement de banque dépositaire",
+          "Informations relatives aux unités de compte",
+          "Aperçu des fonds",
+          "Profil d'investissement",
+          "Valeur totale du fonds au",
+          "R.C.S.: Luxembourg B 53682",
+          "TVA Intra-com.: LU 166 094 20",
+          "wealins.com"
+        ],
+        "marqueurs_structure": [
+          "Paginations LOCALES multiples et non contiguës : aucune pagination globale n'existe",
+          "Footer légal WEALINS identique au caractère près sur presque toutes les pages",
+          "Bloc structurel répété PAR FID dans l'annexe",
+          "En-tête d'annexe « INFORMATION ANNUELLE : [date] - [contrat] » + « Fonds : [nom] »"
+        ],
+        "token_periodicite": "INFORMATION ANNUELLE"
+      },
+      "segments": {
+        "_note": "Décision O11 : UN profil composite, avec segments déclarés. Un seul appariement (peu coûteux, aucune couche de matching supplémentaire), mais le DRIFT est évalué PAR SEGMENT — donc une évolution de la seule page Loi Pacte ne remet pas en cause tout le profil et produit une proposition de mise_a_jour ciblée. Justification empirique : les frontières sont détectables au caractère près et se sont vérifiées identiques sur deux exemplaires de tailles très différentes (26 p./2 FID et 15 p./1 FID). Et la page Loi Pacte porte un pied de page DIFFÉRENT (autre numéro de fax), preuve qu'elle est produite par un autre générateur — donc de cycles de vie indépendants.",
+        "liste": [
+          {
+            "cle": "adresse",
+            "role": "page d'adresse pour fenêtre d'enveloppe",
+            "frontiere": "première page ; ni pagination ni pied de page légal",
+            "extraire": false
+          },
+          {
+            "cle": "corps_reglementaire",
+            "role": "caractéristiques du contrat, évolution, situations N-1 et N, valeur de rachat, primes, rachats, arbitrages, frais",
+            "frontiere": "pied de page fax-A + pagination locale « n/N » (N petit et constant, ex. 4/4 ou 6/6)",
+            "extraire": true,
+            "note": "Longueur variable selon le nombre de FID (5 pages à 1 FID, 7 pages à 2 FID)."
+          },
+          {
+            "cle": "loi_pacte",
+            "role": "tableau réglementaire de performance brute/nette, frais et rétrocessions",
+            "frontiere": "EXACTEMENT une page, identifiable par un pied de page au numéro de fax DIFFÉRENT et par l'ABSENCE de pagination",
+            "extraire": true,
+            "note": "Segment le plus susceptible d'évoluer seul, la source étant réglementaire. C'est ce qui justifie le drift par segment."
+          },
+          {
+            "cle": "annexe_booklet",
+            "role": "look-through par fonds interne dédié : type d'actifs, rendement trimestriel, frais, détail des lignes OPC, fonds alternatifs, liquidités",
+            "frontiere": "début marqué par l'artefact « <booklet> » ; pages numérotées « Page n / M » où M s'auto-déclare",
+            "extraire": true,
+            "note": "Longueur proportionnelle au nombre de FID et de lignes OPC. Bloc structurel répété par FID."
+          }
+        ]
+      },
+      "extraction_hints": {
+        "pieges": [
+          "Le document est la concaténation de 4 sous-templates : ne JAMAIS segmenter par une pagination globale, elle n'existe pas.",
+          "AMBIGUÏTÉ DATE / PAGINATION : le motif « \\d+/\\d+ » attrape des dates (27/01, 31/12, 13/03) avant la vraie pagination. Ancrer la pagination du corps sur un dénominateur petit et constant (n/N avec N ≤ 12), et l'annexe sur le préfixe littéral « Page ».",
+          "Le mot « Fonds » a TROIS sens : le FID (enveloppe), une catégorie d'actif, et le titre du sous-tableau des lignes OPC. Un grep naïf est inexploitable.",
+          "Deux tableaux « Situation au » quasi identiques (N-1 et N) : capturer la date DU TITRE avec le tableau.",
+          "« Type d'Actifs » apparaît deux fois avec des contenus différents : désambiguïser par le contexte, pas par le titre.",
+          "Le détail « Fonds » s'étale sur plusieurs pages sans sous-total intermédiaire : concaténer avant d'agréger.",
+          "Trois niveaux de totaux par FID : hiérarchiser, sinon double comptage.",
+          "Séparateur de milliers INCOHÉRENT entre le corps (points : 1.014.646,31) et l'annexe (espaces : 545 975,50), dans le même document.",
+          "La colonne « Année » du rendement n'est PAS la somme des trimestres (rendements composés) : ne jamais valider par addition.",
+          "Ligne « Open Cost Order » négative dans les liquidités : c'est un débit en attente, pas un actif.",
+          "Le nom du FID ressemble au nom de la banque dépositaire (« 540709 Banque Thaler SA ») : ne pas confondre identifiant produit et tiers dépositaire.",
+          "L'artefact « <booklet> » apparaît en texte brut : le filtrer du contenu, le GARDER comme frontière de segment.",
+          "Le code agence en tête de courrier peut être pris à tort pour un numéro de contrat."
+        ],
+        "ancrage_tableaux": [
+          "-layout impératif.",
+          "En-têtes empilés sur 2-3 lignes au-dessus de valeurs situées plus bas : désalignement vertical à corriger."
+        ],
+        "format_numerique": {
+          "milliers": "point (corps) / espace (annexe)",
+          "decimal": "virgule",
+          "negatif": "signe moins suivi d'un espace"
+        }
+      },
+      "champs_publies": {
+        "perf_par_ligne": "par_poche",
+        "forme": "Aucune performance par ligne. Rendement publié PAR FID, en trimestres + année. Le tableau Loi Pacte donne une performance brute/nette par fonds, souvent « non disponible ».",
+        "horizon": "trimestriel et annuel, par fonds dédié"
+      },
+      "invariant_controle": "Par FID : Σ (sous-total Fonds + sous-total Fonds alternatifs + sous-total Liquidités) = « Valeur totale du fonds ». Σ des FID = valeur du contrat. Ne jamais contrôler le rendement annuel par addition des trimestres.",
+      "provenance": "seed",
+      "confiance": "high"
+    },
+    {
+      "emetteur_code": "cardif",
+      "gabarit": "situation_contrat_capi_pm",
+      "periodicite": "annuel",
+      "template_id_natif": "TYPE_MODELE=66 · MODELE=Relevé situation front-office",
+      "emetteur_lisible": true,
+      "n_pages_indicatif": "3",
+      "signature": {
+        "metadata_pdf": {
+          "producer": "Apache FOP",
+          "creator": "BdocPDF"
+        },
+        "ancres_texte": [
+          "Cardif Elite Capitalisation Personnes Morales",
+          "Contrat de capitalisation",
+          "Cumul des opérations pour l'année",
+          "Situation du contrat au",
+          "Garanties au terme du contrat",
+          "Valeur du contrat au",
+          "(1) Net de frais de gestion."
+        ],
+        "marqueurs_structure": [
+          "Bloc technique XML embarqué, répété identique en bas de CHAQUE page : <PAPIER> / <TYPE_ENVOI> / <MODELE> / <TYPE_MODELE> / <RESEAU>",
+          "En-tête de colonnes : Support | Code ISIN | Répartition | Nombre d'unités de compte | Valeur de l'unité de compte | Valorisation",
+          "Sous-titre de groupe « Gestion libre » portant le total du groupe sur sa propre ligne",
+          "Ligne « FONDS GENERAL (1) » avec sa note de bas de tableau",
+          "Date d'arrêté doublée : numérique en page 1, en toutes lettres en page 2 — contrôle de cohérence interne gratuit"
+        ],
+        "token_periodicite": "Cumul des opérations pour l'année"
+      },
+      "extraction_hints": {
+        "pieges": [
+          "Ce gabarit expose un ID DE TEMPLATE NATIF (TYPE_MODELE=66) : quand il est présent, il court-circuite le matching en couches. Signature parfaite.",
+          "Mise en page Apache FOP en positionnement absolu : espacements extrêmes en -layout. Préférer une extraction par positions (bbox) au découpage par largeur fixe.",
+          "La ligne « FONDS GENERAL (1) » porte « -- » à la place des valeurs numériques mais garde une Valorisation : cas particulier à isoler.",
+          "Noms de supports repliés sur 2 lignes, ISIN et chiffres sur la première.",
+          "« Gestion libre » porte le total du groupe SUR la ligne du libellé : ce n'est pas une ligne de support.",
+          "En-têtes empilés sur 2 lignes (« Montant brut » / « des versements ») : reconstruire.",
+          "La ligne de total « Valeur du contrat au [date] [montant] » n'a pas de séparateur net : la détecter comme total.",
+          "Le bloc XML technique peut être COUPÉ en fin de ligne physique : un parseur de balises naïf casse. Le filtrer du contenu, le garder pour la signature.",
+          "Artefact d'encodage ponctuel observé sur un caractère accentué : prévoir un remplacement UTF-8.",
+          "Le tableau des Garanties (page 3) reprend les mêmes supports avec un jeu de colonnes RÉDUIT : ne pas le confondre avec le tableau Situation.",
+          "Une variante « Personnes Physiques » du même produit existe : bloc Souscripteur différent, ne pas présumer l'identité des variantes."
+        ],
+        "ancrage_tableaux": [
+          "Extraction par positions recommandée plutôt que par largeur fixe.",
+          "Distinguer les deux tableaux par leur jeu de colonnes, pas par leur nombre."
+        ],
+        "format_numerique": {
+          "milliers": "espace insécable",
+          "decimal": "virgule",
+          "devise": "€ en suffixe"
+        }
+      },
+      "champs_publies": {
+        "perf_par_ligne": "non",
+        "forme": "Aucune performance par ligne, ni en % ni en €. Seule la valorisation est publiée. Le comblement par une source tierce est un choix EXPLICITE et tracé (O12), jamais un silence.",
+        "horizon": null
+      },
+      "invariant_controle": "Σ des valorisations des lignes, FONDS GENERAL inclus = « Valeur du contrat au [date] ». Cohérence de la date numérique (p.1) avec la date en toutes lettres (p.2).",
+      "provenance": "seed",
+      "confiance": "high"
+    }
+  ],
+  "isin": [
+    {
+      "isin": "BE0974293251",
+      "label": "Anheuser-Busch InBev",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "CH0012032048",
+      "label": "Roche Holding",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "CH0019087102",
+      "label": "Pictet (ch) Swiss Equities I Dy C",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "CH0140909257",
+      "label": "UBS (CH) Money Market Fund EUR -I-B-",
+      "class_code": "monetaire",
+      "geo_code": null,
+      "sri": null,
+      "source": "interagyr_valide",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "CH0210483332",
+      "label": "Cie Financiere Richemont",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "CH1152838327",
+      "label": "Enetia Energy Transition Dis (clean)",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "interagyr_valide",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "CH1243598427",
+      "label": "Sandoz Group SA",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "interagyr_valide",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "DE0005933956",
+      "label": "ISHARES CORE EURO STOXX50",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "DE0007030009",
+      "label": "Rheinmetall",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "DE0007164600",
+      "label": "SAP SE",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "interagyr_valide",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "DE0007236101",
+      "label": "Siemens",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "DE0008404005",
+      "label": "Allianz",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "DE0008430026",
+      "label": "Munchener",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "DE000A0Q4R85",
+      "label": "iShares MSCI Brazil UCITS ETF (DE) Acc",
+      "class_code": "actions",
+      "geo_code": "emergents",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "DE000A1C5D13",
+      "label": "Acatis Value Event Fonds B",
+      "class_code": "alternatifs",
+      "geo_code": null,
+      "sri": null,
+      "source": "gronier_categories",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "DE000A1EWWW0",
+      "label": "adidas",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "DE000LEG1110",
+      "label": "LEG Immobilien",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "DK0062498333",
+      "label": "Novo Nordisk Cl.b",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "ES0113900J37",
+      "label": "Banco Santander",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "ES0144580Y14",
+      "label": "Iberdrola",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0000044448",
+      "label": "Nexans",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0000045072",
+      "label": "Credit Agricole",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0000073272",
+      "label": "Safran",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0000120073",
+      "label": "Air Liquide",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "interagyr_valide",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0000120271",
+      "label": "Totalenergies",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0000120321",
+      "label": "L'Oréal",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "interagyr_valide",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0000120578",
+      "label": "Sanofi",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0000120628",
+      "label": "AXA",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0000121014",
+      "label": "LVMH Moët Hennessy Louis Vuitton",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "interagyr_valide",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0000121329",
+      "label": "Thales",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0000121667",
+      "label": "EssilorLuxottica",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "interagyr_valide",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0000121972",
+      "label": "Schneider Electric SE",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "interagyr_valide",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0000124141",
+      "label": "Veolia Environnement",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0000125007",
+      "label": "Saint-Gobain",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "interagyr_valide",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0000125486",
+      "label": "Vinci SA",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "interagyr_valide",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0000130577",
+      "label": "Publicis Groupe",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0000131104",
+      "label": "BNP Paribas",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0000172041",
+      "label": "AXA Aedificandi A Acc",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0000288946",
+      "label": "AXA Court Terme AC",
+      "class_code": "monetaire",
+      "geo_code": null,
+      "sri": null,
+      "source": "gronier_categories",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0000293698",
+      "label": "Ecofi Trésorerie C",
+      "class_code": "monetaire",
+      "geo_code": null,
+      "sri": null,
+      "source": "gronier_categories",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0000295230",
+      "label": "Comgest Renaissance Europe C",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0000422842",
+      "label": "Pluvalca Allcaps A",
+      "class_code": "actions",
+      "geo_code": null,
+      "sri": null,
+      "source": "gronier_categories",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0000974149",
+      "label": "ODDO BHF Avenir Europe CR-EUR Acc",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0000989899",
+      "label": "ODDO BHF Avenir CR-EUR",
+      "class_code": "actions",
+      "geo_code": null,
+      "sri": null,
+      "source": "gronier_categories",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0007008750",
+      "label": "R-co Conviction Credit Euro C EUR",
+      "class_code": "obligations",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0007457890",
+      "label": "R-co Thematic Real Estate C EUR",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0010148981",
+      "label": "Carmignac Investissement A EUR Acc",
+      "class_code": "actions",
+      "geo_code": null,
+      "sri": null,
+      "source": "gronier_categories",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0010149302",
+      "label": "Carmignac Emergents A EUR Acc",
+      "class_code": "actions",
+      "geo_code": "emergents",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0010233726",
+      "label": "Generali Trésorerie ISR B",
+      "class_code": "monetaire",
+      "geo_code": null,
+      "sri": null,
+      "source": "gronier_categories",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0010251108",
+      "label": "ODDO BHF Avenir Europe CI-EUR",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0010262436",
+      "label": "Lazard Small Caps France A",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0010429068",
+      "label": "AMUNDI MSCI Emerging Markets III UCITS ETF EUR Acc",
+      "class_code": "actions",
+      "geo_code": "emergents",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0010460493",
+      "label": "Tikehau European High",
+      "class_code": "obligations",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0010680538",
+      "label": "ODDO BHF US Mid Cap CR-USD",
+      "class_code": "actions",
+      "geo_code": "amerique_du_nord",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0010752543",
+      "label": "Lazard Credit Fi SRI RVC EUR",
+      "class_code": "obligations",
+      "geo_code": null,
+      "sri": null,
+      "source": "gronier_categories",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0010952788",
+      "label": "Lazard Capital Fi SRI PVC EUR",
+      "class_code": "obligations",
+      "geo_code": null,
+      "sri": null,
+      "source": "gronier_categories",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0011169341",
+      "label": "Sycomore Sélection Responsable R",
+      "class_code": "actions",
+      "geo_code": null,
+      "sri": null,
+      "source": "gronier_categories",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0011261197",
+      "label": "R-co Valor F EUR",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0011268705",
+      "label": "GemEquity R",
+      "class_code": "actions",
+      "geo_code": "emergents",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0011466093",
+      "label": "Quadrige France SmallCaps C",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0011660927",
+      "label": "Multi Units France Lyxor MSCI World UCITS ETF Monthly Hedged EUR",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0011857234",
+      "label": "AMUNDI MDAX UCITS ETF",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0012435121",
+      "label": "Elis",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0012649697",
+      "label": "FINALTIS TITANS FCP -I-",
+      "class_code": "actions",
+      "geo_code": null,
+      "sri": null,
+      "source": "gronier_categories",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0013072097",
+      "label": "Quadrige Europe MidCaps C",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0013280286",
+      "label": "Biomerieux",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0013280906",
+      "label": "QUADRIGE EUROPE MIDCAPS FCP -I-",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0013290947",
+      "label": "Comgest Renaissance Europe Z",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0013300670",
+      "label": "IDAM Small Euro I",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0013354230",
+      "label": "CM-CIC Moneplus FCP -RC- 3DEC (C)",
+      "class_code": "monetaire",
+      "geo_code": null,
+      "sri": null,
+      "source": "interagyr_valide",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0013393329",
+      "label": "H2O Multibonds FCP EUR SR(C)",
+      "class_code": "alternatifs",
+      "geo_code": null,
+      "sri": null,
+      "source": "gronier_categories",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0013409422",
+      "label": "FIP Outre-Mer Inter Invest N°2",
+      "class_code": "private_equity",
+      "geo_code": null,
+      "sri": null,
+      "source": "gronier_categories",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0013433067",
+      "label": "GemChina R",
+      "class_code": "actions",
+      "geo_code": "emergents",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0013435716",
+      "label": "Agap'Action Unibail Nov 2019",
+      "class_code": "produits_structures",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0013440369",
+      "label": "MultiTalents CS",
+      "class_code": "actions",
+      "geo_code": null,
+      "sri": null,
+      "source": "gronier_categories",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0013507019",
+      "label": "Lazard Euro Short Duration High Yield -PVC- (C)",
+      "class_code": "obligations",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "interagyr_valide+geo_nom_valide_cgp_20260724",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0013535283",
+      "label": "H2O Moderato SP R",
+      "class_code": "alternatifs",
+      "geo_code": null,
+      "sri": null,
+      "source": "gronier_categories",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0013535598",
+      "label": "H2O Multiequities SP R(C)",
+      "class_code": "alternatifs",
+      "geo_code": null,
+      "sri": null,
+      "source": "gronier_categories",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0013535952",
+      "label": "H2O Multibonds SP R(C)",
+      "class_code": "alternatifs",
+      "geo_code": null,
+      "sri": null,
+      "source": "gronier_categories",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0014008M99",
+      "label": "R-co Thematic Blockchain Global Equity C EUR",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR001400BW13",
+      "label": "Tailor Credit 2028 FCP -I-",
+      "class_code": "obligations",
+      "geo_code": null,
+      "sri": null,
+      "source": "interagyr_valide",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR001400EF78",
+      "label": "Auris Rendement Selection 2027 - Parts  R (C)",
+      "class_code": "obligations",
+      "geo_code": null,
+      "sri": null,
+      "source": "gronier_categories",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR001400GZU1",
+      "label": "FPCI Altaroc Odyssey 2023 - Part A",
+      "class_code": "private_equity",
+      "geo_code": null,
+      "sri": null,
+      "source": "gronier_categories",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR001400KAV4",
+      "label": "Carmignac Credit 2029 A EUR Acc",
+      "class_code": "obligations",
+      "geo_code": null,
+      "sri": null,
+      "source": "gronier_categories",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR001400NYY2",
+      "label": "Rendement Selection 2030 CS(C)",
+      "class_code": "obligations",
+      "geo_code": null,
+      "sri": null,
+      "source": "gronier_categories",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR001400P0S8",
+      "label": "LBPAM Short Term -I- (D)",
+      "class_code": "monetaire",
+      "geo_code": null,
+      "sri": null,
+      "source": "interagyr_valide",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR001400P8N2",
+      "label": "FPCI Altaroc Odyssey 2024 - Part A",
+      "class_code": "private_equity",
+      "geo_code": null,
+      "sri": null,
+      "source": "gronier_categories",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR001400SN31",
+      "label": "Tempo Quotidien Degressif Credit Agricole Decrement 1.05 EUR Novembre 2024",
+      "class_code": "produits_structures",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR001400T5U9",
+      "label": "Air Liquide Pf27",
+      "class_code": "private_equity",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR4CIBFS7485",
+      "label": "EMTN Phoenix Bearish Euribor 12M Décembre 2025",
+      "class_code": "produits_structures",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FRIP00000J82",
+      "label": "Fréquence Privilège Stellantis D1.20 Aout 2024",
+      "class_code": "produits_structures",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FRIP00001I90",
+      "label": "Tempo Quotidien Degressif BNP 4,60 Juillet 2025",
+      "class_code": "produits_structures",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FRIP000025B4",
+      "label": "Sanofi 3.56 EUR Best Strike - Avril 2026",
+      "class_code": "produits_structures",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "GB0007188757",
+      "label": "Rio Tinto",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "GB0009895292",
+      "label": "AstraZeneca PLC",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "interagyr_valide",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "GB00B0SWJX34",
+      "label": "London Stock Exchange Plc (Lse)",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "GB00B10RZP78",
+      "label": "Unilever",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "IE0002EI5AG0",
+      "label": "Xtrackers S&P 500 Equal Weight ETF EUR Hedged",
+      "class_code": "actions",
+      "geo_code": "amerique_du_nord",
+      "sri": null,
+      "source": "interagyr_valide",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "IE0005YK6564",
+      "label": "HANetf ICAV Sprott Uranium Miners UCITS ETF",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "IE000MLMNYS0",
+      "label": "iShares S&P 500 Equal Weight UCITS ETF USD (Acc) USD Acc",
+      "class_code": "actions",
+      "geo_code": "amerique_du_nord",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "IE000NFR7C63",
+      "label": "iShares MSCI China Tech UCITS ETF USD Acc",
+      "class_code": "actions",
+      "geo_code": "emergents",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "IE000S9YS762",
+      "label": "Linde PLC",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "IE000YYE6WK5",
+      "label": "VAN DEF USD-A-ACC C.",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "IE000Z9PAJK7",
+      "label": "Tt International Funds Plc - Tt Em Debt Fund B2 EUR",
+      "class_code": "actions",
+      "geo_code": "emergents",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "IE00B02ZFR42",
+      "label": "Veritas Asian Fund A EUR",
+      "class_code": "actions",
+      "geo_code": "asie_pacifique",
+      "sri": null,
+      "source": "interagyr_valide",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "IE00B1FZS467",
+      "label": "iShares Global Infrastructure UCITS ETF D USD D",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "IE00B3VWM098",
+      "label": "iShares MSCI USA Small Cap ESG Enhanced UCITS ETF USD Acc",
+      "class_code": "actions",
+      "geo_code": "amerique_du_nord",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "IE00B42NKQ00",
+      "label": "Ishs Sp 500 Engy Sect Ucit Etf",
+      "class_code": "actions",
+      "geo_code": "amerique_du_nord",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "IE00B4L5Y983",
+      "label": "iShares Core MSCI World UCITS ETF USD (Acc)",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "IE00B53SZB19",
+      "label": "iShares NASDAQ 100 UCITS ETF USD (Acc)",
+      "class_code": "actions",
+      "geo_code": "amerique_du_nord",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "IE00B6R52143",
+      "label": "iShares Agribusiness UCITS ETF USD Acc",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "IE00B8KQN827",
+      "label": "Eaton",
+      "class_code": "actions",
+      "geo_code": "amerique_du_nord",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "IE00BF16M727",
+      "label": "FIRST TRUST GLOBAL NASDAQ CYBER SECURITY -A- ETF",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "IE00BF1B7389",
+      "label": "SPDR MSCI World ACWI UCITS ETF EUR Hedged",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "interagyr_valide",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "IE00BHZRQZ17",
+      "label": "Franklin FTSE India UCITS ETF Singlclass",
+      "class_code": "actions",
+      "geo_code": "emergents",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "IE00BM67HK77",
+      "label": "Xtrackers MSCI World Health Care UCITS ETF",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "IE00BM67HM91",
+      "label": "Xtrackers MSCI World Energy UCITS ETF",
+      "class_code": "matieres_premieres",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "IE00BMW3QX54",
+      "label": "L&G ROBO Global Robotics and Automation UCITS ETF -A-",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "interagyr_valide",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "IE00BQN1K786",
+      "label": "iShares Edge MSCI Europe Momentum Factor UCITS ETF EUR",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "IE00BRF15F66",
+      "label": "PZENA EMG MKT FOCSED VAL USD",
+      "class_code": "actions",
+      "geo_code": "emergents",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "IE00BYNJF397",
+      "label": "H2O Fidelio Eur-R-AC",
+      "class_code": "alternatifs",
+      "geo_code": null,
+      "sri": null,
+      "source": "gronier_categories",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "IE00BYVQ9F29",
+      "label": "iShares VII Nasdaq 100 ETF Hedged EUR",
+      "class_code": "actions",
+      "geo_code": "amerique_du_nord",
+      "sri": null,
+      "source": "interagyr_valide",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "IE00BYZ28V50",
+      "label": "iShares Global Govt Bond UCITS ETF USD Acc",
+      "class_code": "obligations",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "IT0004176001",
+      "label": "Prysmian",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU0068578508",
+      "label": "First Eagle Amundi International Fund AU",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU0099161993",
+      "label": "CARMIGNAC GRANDE EUROPE A CAP",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU0112497283",
+      "label": "Pictet Biotech I USD",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU0119620176",
+      "label": "MORGAN STANLEY GLOBAL BRANDS FUND-I- CAP",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU0119620416",
+      "label": "MSIF Global Brands Fund A USD",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU0131510165",
+      "label": "Independance et Expansion France Small A (C)",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU0155301467",
+      "label": "Pictet-japanese Equity Opportunities I Jpy Cap",
+      "class_code": "actions",
+      "geo_code": "asie_pacifique",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU0171290074",
+      "label": "BGF Sustainable Energy E2 EUR Cap",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU0217390227",
+      "label": "JPMorgan Funds America Equity Fund A (Acc) - EUR",
+      "class_code": "actions",
+      "geo_code": "amerique_du_nord",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU0231459107",
+      "label": "Aberdeen Standard SICAV I Asian Smaller Companies Fund A Acc USD",
+      "class_code": "actions",
+      "geo_code": "asie_pacifique",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU0280430405",
+      "label": "Pictet Clean Energy I USD",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU0280435388",
+      "label": "Pictet Clean Energy P EUR Acc",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU0308864023",
+      "label": "MainFirst Top European Ideas Fund A",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU0340554913",
+      "label": "Pictet Digital P EUR Acc",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU0386875149",
+      "label": "Pictet Global Megatrend Selection I EUR",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU0386882277",
+      "label": "Pictet Global Megatrend Selection P EUR Acc",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU0390221256",
+      "label": "MainFirst Germany Fund A",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU0415415636",
+      "label": "Vontobel Fund - Commodity H (hedged) EUR Acc",
+      "class_code": "actions",
+      "geo_code": null,
+      "sri": null,
+      "source": "gronier_categories",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU0496443887",
+      "label": "Pictet TR-Mandarin HP EUR Acc",
+      "class_code": "actions",
+      "geo_code": "emergents",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU0552385295",
+      "label": "MSIF Global Opportunity Fund A",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU0592589740",
+      "label": "PICTET TR SICAV MANDARIN -I- EUR CAP",
+      "class_code": "actions",
+      "geo_code": "emergents",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU0594300096",
+      "label": "Fidelity Funds China Consumer Fund A Acc EUR",
+      "class_code": "actions",
+      "geo_code": "emergents",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU0611489658",
+      "label": "Fidelity Funds Japan Value Fund A EUR Hedged",
+      "class_code": "actions",
+      "geo_code": "asie_pacifique",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU0690088280",
+      "label": "LO Funds Emerging High Conviction USD PA",
+      "class_code": "actions",
+      "geo_code": "emergents",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU0705071453",
+      "label": "RAM (LUX) Systematic Funds Long/Short European Equities B",
+      "class_code": "alternatifs",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU0708055537",
+      "label": "HSBC Global Investment Funds - Frontier Markets ICEUR",
+      "class_code": "actions",
+      "geo_code": "emergents",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU0940005217",
+      "label": "Robeco Asian Stars Equities F EUR Acc",
+      "class_code": "actions",
+      "geo_code": "asie_pacifique",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU0944739340",
+      "label": "East Capital New Europe A",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU0992631217",
+      "label": "Carmignac Unconstrained Euro Fixed Income -F- (C)",
+      "class_code": "obligations",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "interagyr_valide+geo_nom_valide_cgp_20260724",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1100076550",
+      "label": "Clartan Valeurs C",
+      "class_code": "actions",
+      "geo_code": null,
+      "sri": null,
+      "source": "gronier_categories",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1100076808",
+      "label": "Clartan Europe C",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1103303167",
+      "label": "Edmond de Rothschild Fund US Value A EUR",
+      "class_code": "actions",
+      "geo_code": "amerique_du_nord",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1112771768",
+      "label": "HELIUM SELECTION S CAP",
+      "class_code": "alternatifs",
+      "geo_code": null,
+      "sri": null,
+      "source": "gronier_categories",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1160356009",
+      "label": "Edmond de Rothschild Fund Healthcare A EUR",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1165637460",
+      "label": "IVO Funds Fixed Income EUR-I (cap)",
+      "class_code": "obligations",
+      "geo_code": null,
+      "sri": null,
+      "source": "gronier_categories",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1165644672",
+      "label": "IVO Emerg Mrts Corp Debt EUR R Acc",
+      "class_code": "obligations",
+      "geo_code": "emergents",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1173935260",
+      "label": "Allianz Best Styles Global Equity RT EUR Acc",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1233598447",
+      "label": "Multi Units Luxembourg Lyxor Fed Funds US Dollar Cash UCITS ETF Acc USD",
+      "class_code": "monetaire",
+      "geo_code": "amerique_du_nord",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1261432659",
+      "label": "Fidelity Funds World Fund A Acc EUR",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1269736838",
+      "label": "Candriam Equities L Biotechnology -R- (C)",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "interagyr_valide",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1279334053",
+      "label": "Pictet Robotics I EUR",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1302864027",
+      "label": "LongRun Equity Fund P A EUR",
+      "class_code": "actions",
+      "geo_code": null,
+      "sri": null,
+      "source": "gronier_categories",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1302865420",
+      "label": "LONGRUN EQUITY FUND SICAV -CI- A EUR CAP",
+      "class_code": "actions",
+      "geo_code": null,
+      "sri": null,
+      "source": "gronier_categories",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1311575093",
+      "label": "Pareto-Nordic Corporate Bond -H- EUR (C)",
+      "class_code": "obligations",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "interagyr_valide+geo_nom_valide_cgp_20260724",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1366712351",
+      "label": "DNCA Invest Archer Mid-Cap Europe I EUR",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1379104976",
+      "label": "Claresco Foncier Valor P",
+      "class_code": "actions",
+      "geo_code": null,
+      "sri": null,
+      "source": "gronier_categories",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1435385163",
+      "label": "NIF (Lux) I Loomis Sayles U.S. Growth Equity Fund R/A EUR",
+      "class_code": "actions",
+      "geo_code": "amerique_du_nord",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1599120356",
+      "label": "Auris Euro Rendement I Acc",
+      "class_code": "obligations",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1623762843",
+      "label": "Carmignac Portfolio Credit A EUR Acc",
+      "class_code": "obligations",
+      "geo_code": null,
+      "sri": null,
+      "source": "gronier_categories",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1665237704",
+      "label": "M&G (Lux) Global Listed Infrastructure Fund A EUR Acc",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1670710075",
+      "label": "M&G (Lux) Global Dividend Fund A EUR Acc",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1681038243",
+      "label": "Amundi Index Solutions Nasdaq-100 UCITS ETF EUR Acc",
+      "class_code": "actions",
+      "geo_code": "amerique_du_nord",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1681038599",
+      "label": "Amundi Index Solutions Nasdaq-100 UCITS ETF DAILY HEDGED EUR Acc",
+      "class_code": "actions",
+      "geo_code": "amerique_du_nord",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1681038672",
+      "label": "Amundi Index Solutions Russell 2000 UCITS ETF EUR Acc",
+      "class_code": "actions",
+      "geo_code": "amerique_du_nord",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1681044480",
+      "label": "Amundi Index Solutions MSCI EM Asia UCITS ETF EUR Acc",
+      "class_code": "actions",
+      "geo_code": "emergents",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1681045370",
+      "label": "Amundi Index Solutions MSCI Emerging Markets UCITS ETF EUR Acc",
+      "class_code": "actions",
+      "geo_code": "emergents",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1681047236",
+      "label": "Amundi IS-EuroStoxx 50 UCITS ETF DR EUR C",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "interagyr_valide",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1681048804",
+      "label": "Amundi Index Solutions S&P 500 UCITS ETF EUR Acc",
+      "class_code": "actions",
+      "geo_code": "amerique_du_nord",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1681049109",
+      "label": "Amundi Index Solutions S&P 500 UCITS ETF DAILY HEDGED EUR Acc",
+      "class_code": "actions",
+      "geo_code": "amerique_du_nord",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1684369710",
+      "label": "AXA World Funds SICAV Framlington Digital Economy A (Hedged) EUR Acc",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1725895707",
+      "label": "abrdn Emerging Markets Corporate Bond Fund -X2- (C)",
+      "class_code": "obligations",
+      "geo_code": "emergents",
+      "sri": null,
+      "source": "interagyr_valide",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1778762911",
+      "label": "Spotify Technology",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1799936197",
+      "label": "Pictet TR-Sirius P USD Acc",
+      "class_code": "alternatifs",
+      "geo_code": null,
+      "sri": null,
+      "source": "gronier_categories",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1799936437",
+      "label": "Pictet TR-Sirius HI EUR Acc",
+      "class_code": "alternatifs",
+      "geo_code": null,
+      "sri": null,
+      "source": "gronier_categories",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1829218749",
+      "label": "Amundi Bloomberg Equal-weight Commodity ex-Agriculture UCITS ETF Acc EUR",
+      "class_code": "actions",
+      "geo_code": null,
+      "sri": null,
+      "source": "gronier_categories",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1829220216",
+      "label": "Multi Units Luxembourg Lyxor MSCI All Country World UCITS ETF Acc EUR",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1829221024",
+      "label": "Amundi Nasdaq-100 II UCITS ETF Acc",
+      "class_code": "actions",
+      "geo_code": "amerique_du_nord",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1832174962",
+      "label": "Independance Europe Small A (C)",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1832175001",
+      "label": "INDEPENDANCE AM EUROPE SMALL -I(C)- CAP",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1861137484",
+      "label": "Amundi Index Solutions Amundi Index MSCI Europe SRI PAB UCITS ETF DR EUR C",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1876459303",
+      "label": "Axiom European Banks Equity R EUR",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1876460731",
+      "label": "Axiom Obligataire C",
+      "class_code": "obligations",
+      "geo_code": null,
+      "sri": null,
+      "source": "gronier_categories",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1876461549",
+      "label": "Axiom Lux SI Obligataire -J- 3DEC (C)",
+      "class_code": "obligations",
+      "geo_code": null,
+      "sri": null,
+      "source": "interagyr_valide",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1900065811",
+      "label": "Multi Units Luxembourg Lyxor MSCI Indonesia UCITS ETF Acc EUR",
+      "class_code": "actions",
+      "geo_code": "emergents",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1900068328",
+      "label": "Multi Units Luxembourg Lyxor MSCI AC Asia Pacific Ex Japan UCITS ETF Acc EUR",
+      "class_code": "actions",
+      "geo_code": "asie_pacifique",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1902608444",
+      "label": "DWS Invest CROCI World TFC",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1940199711",
+      "label": "Lyxor MSCI Europe ESG Leaders (DR) UCITS ETF - Acc",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU1951225553",
+      "label": "NIF (Lux) I Thematics Safety Fund R/A EUR",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU2092461800",
+      "label": "GAMA Global Short-Dated Opportunities F",
+      "class_code": "obligations",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "interagyr_valide+geo_nom_valide_cgp_20260724",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU2206555984",
+      "label": "Pictet TR Atlas Titan I EUR",
+      "class_code": "alternatifs",
+      "geo_code": null,
+      "sri": null,
+      "source": "gronier_categories",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU2206556016",
+      "label": "Pictet TR Atlas Titan P EUR",
+      "class_code": "alternatifs",
+      "geo_code": null,
+      "sri": null,
+      "source": "gronier_categories",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU2240056106",
+      "label": "Lonvia Avenir Mid-Cap Europe Clean Share EUR",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU2261172451",
+      "label": "Piquemal Houghton Global Equities R EUR",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU2261172618",
+      "label": "Piquemal Houghton Funds Global Equities RC EUR",
+      "class_code": "actions",
+      "geo_code": null,
+      "sri": null,
+      "source": "gronier_categories",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU2309368541",
+      "label": "Auris Gravity US Equity Fund R EUR Acc",
+      "class_code": "actions",
+      "geo_code": "amerique_du_nord",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU2309368624",
+      "label": "Auris Gravity US Equity Fund R EUR Hedged Acc",
+      "class_code": "actions",
+      "geo_code": "amerique_du_nord",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU2320789444",
+      "label": "Auris Gravity US Equity Fund F EUR H Acc",
+      "class_code": "actions",
+      "geo_code": "amerique_du_nord",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU2385154757",
+      "label": "WF Enetia Energy Infrastructure Dis (clean)",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "interagyr_valide",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU2407358576",
+      "label": "Decalia Sustainable Society Cap",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "interagyr_valide",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU2466448532",
+      "label": "ECHIQUIER SPACE BC EUR 3DEC",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU2655993207",
+      "label": "Amundi IS-MSCI World UCITS ETF (D)",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "interagyr_valide",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU2821708414",
+      "label": "Altaroc Odyssey 2024 Eltif Part A",
+      "class_code": "private_equity",
+      "geo_code": null,
+      "sri": null,
+      "source": "gronier_categories",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU2821740573",
+      "label": "Axiom Emerging Markets Corporate Bonds RC EUR",
+      "class_code": "obligations",
+      "geo_code": "emergents",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU2821740813",
+      "label": "Axiom Lux Aemc Bd Ic Cap",
+      "class_code": "obligations",
+      "geo_code": "emergents",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "NL0000235190",
+      "label": "Airbus SE",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "interagyr_valide",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "NL0000395903",
+      "label": "Wolters Kluwer",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "NL0000852564",
+      "label": "Aalberts",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "NL0010273215",
+      "label": "ASML Holding",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "NL0011683594",
+      "label": "VanEck Morningstar Developed Markets Dividend Leaders UCITS ETF",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "NL0013654783",
+      "label": "Prosus",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "NL0014559478",
+      "label": "Technip Energies",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "QS0020026108",
+      "label": "Le Grand Hotel De Valenciennes",
+      "class_code": "private_equity",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "SE0007100581",
+      "label": "Assa Abloy",
+      "class_code": "actions",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "US02079K1079",
+      "label": "Alphabet",
+      "class_code": "actions",
+      "geo_code": "amerique_du_nord",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "US02079K3059",
+      "label": "Alphabet Inc -A-",
+      "class_code": "actions",
+      "geo_code": "amerique_du_nord",
+      "sri": null,
+      "source": "interagyr_valide",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "US0231351067",
+      "label": "Amazon.com Inc",
+      "class_code": "actions",
+      "geo_code": "amerique_du_nord",
+      "sri": null,
+      "source": "interagyr_valide",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "US0378331005",
+      "label": "Apple Inc",
+      "class_code": "actions",
+      "geo_code": "amerique_du_nord",
+      "sri": null,
+      "source": "interagyr_valide",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "US09290D1019",
+      "label": "Blackrock Inc",
+      "class_code": "actions",
+      "geo_code": "amerique_du_nord",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "US30303M1027",
+      "label": "Meta Platforms Inc -A-",
+      "class_code": "actions",
+      "geo_code": "amerique_du_nord",
+      "sri": null,
+      "source": "interagyr_valide",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "US4642863926",
+      "label": "ETF iShares MSCI World",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "US4642873255",
+      "label": "ISHARES GLOBAL HEALTHCARE ETF",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "US4642888105",
+      "label": "iShares Trust DJ US Medical Devices",
+      "class_code": "actions",
+      "geo_code": "amerique_du_nord",
+      "sri": null,
+      "source": "interagyr_valide",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "US46625H1005",
+      "label": "JPMorgan Chase & Co",
+      "class_code": "actions",
+      "geo_code": "amerique_du_nord",
+      "sri": null,
+      "source": "interagyr_valide",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "US5024311095",
+      "label": "L3Harris Technologies Inc",
+      "class_code": "actions",
+      "geo_code": "amerique_du_nord",
+      "sri": null,
+      "source": "interagyr_valide",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "US5324571083",
+      "label": "Eli Lilly",
+      "class_code": "actions",
+      "geo_code": "amerique_du_nord",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "US58733R1023",
+      "label": "Mercadolibre, Inc.",
+      "class_code": "actions",
+      "geo_code": "emergents",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "US5949181045",
+      "label": "Microsoft Corp",
+      "class_code": "actions",
+      "geo_code": "amerique_du_nord",
+      "sri": null,
+      "source": "interagyr_valide",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "US60744M1062",
+      "label": "Mobility Global",
+      "class_code": "actions",
+      "geo_code": "amerique_du_nord",
+      "sri": null,
+      "source": "interagyr_valide",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "US64110L1061",
+      "label": "Netflix",
+      "class_code": "actions",
+      "geo_code": "amerique_du_nord",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "US67066G1040",
+      "label": "NVIDIA",
+      "class_code": "actions",
+      "geo_code": "amerique_du_nord",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "US78409V1044",
+      "label": "S&P Global Inc",
+      "class_code": "actions",
+      "geo_code": "amerique_du_nord",
+      "sri": null,
+      "source": "interagyr_valide",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "US8740391003",
+      "label": "Taiwan Semiconductor Manufacturing ADR",
+      "class_code": "actions",
+      "geo_code": "asie_pacifique",
+      "sri": null,
+      "source": "interagyr_valide",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "US8835561023",
+      "label": "Thermo Fisher Scientific",
+      "class_code": "actions",
+      "geo_code": "amerique_du_nord",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "US92826C8394",
+      "label": "Visa",
+      "class_code": "actions",
+      "geo_code": "amerique_du_nord",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "US98978V1035",
+      "label": "Zoetis A",
+      "class_code": "actions",
+      "geo_code": "amerique_du_nord",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "XS2856234724",
+      "label": "Opt In Perf Indice Engie Dividende Forfaitaire 1.20 Points",
+      "class_code": "produits_structures",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "XS2902314181",
+      "label": "BNP Paribas Iss 5,4%24-30 Idx",
+      "class_code": "obligations",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "XS2972237122",
+      "label": "Barclays Bank Tv25-0435 Index",
+      "class_code": "produits_structures",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "XS2989598367",
+      "label": "Tempo Mensuel Degressif Eni De",
+      "class_code": "produits_structures",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "XS3017908131",
+      "label": "O2 Capital 11%25-250327 1",
+      "class_code": "dette_privee",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "XS3028177072",
+      "label": "Tempo Mens Degr Eni 0.91 0725",
+      "class_code": "produits_structures",
+      "geo_code": "europe",
+      "sri": null,
+      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0011847409",
+      "label": "R-co Valor P-CAP",
+      "class_code": "actions",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_T2_run+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0013367265",
+      "label": "R-co Valor Balanced C EUR",
+      "class_code": "alternatifs",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_T2_run+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR001400YPJ8",
+      "label": "SELECT APPROCHE GLOB.I FCP 3D",
+      "class_code": "alternatifs",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_T2_run+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR001400LQV8",
+      "label": "SELECT APPROCHE GLOBALE",
+      "class_code": "alternatifs",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_T2_run+geo_nom_valide_cgp_20260724",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "LU2358391998",
+      "label": "VARENNE-GLOBAL I EUR-ACC.-",
+      "class_code": "alternatifs",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_T2_run+geo_nom_valide_cgp_20260724",
+      "confiance": "high",
+      "provenance": "seed"
+    },
+    {
+      "isin": "FR0014008NN3",
+      "label": "OFI Energy Strategic Metals R",
+      "class_code": "matieres_premieres",
+      "geo_code": "monde",
+      "sri": null,
+      "source": "gronier_T2_run+geo_nom_valide_cgp_20260724",
+      "confiance": "medium",
+      "provenance": "seed"
+    }
+  ],
+  "compte": {
+    "acteurs": 17,
+    "successions": 2,
+    "gabarits": 7,
+    "isin": 261
+  }
+}

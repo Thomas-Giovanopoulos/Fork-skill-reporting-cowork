@@ -1,0 +1,80 @@
+{
+ "periode": "S29 2026",
+ "source": "Bloc 00 du reporting Interagyr S29 2026 (validé) — copié verbatim pour tous les reportings de la période",
+ "macro_text": [
+  "Aux <strong>États-Unis</strong>, l'économie fait preuve de résilience (chômage stable à <em>4,3 %</em>) tandis que l'inflation reflue : le taux annuel est tombé à <em>3,5 %</em> en juin, sa première baisse en cinq mois. La <strong>Réserve fédérale</strong> devrait maintenir ses taux à court terme, et la thématique de l'<strong>intelligence artificielle</strong> continue de concentrer les flux, portée par des résultats d'entreprises solides.",
+  "En <strong>Europe</strong>, la dynamique reste plus fragile : le <strong>PMI composite</strong> est tombé à <em>47,5</em>, au plus bas depuis trois ans, ravivant le risque de <strong>stagflation</strong>. La <strong>BCE</strong> privilégie une dernière hausse de <em>25 pb</em>, plus probablement en septembre. Les indices européens progressent plus modestement (<em>Euro Stoxx 50 +8,4 %</em>, <em>CAC 40 +2,7 %</em> YTD).",
+  "Le <strong>rebond des semi-conducteurs</strong> se confirme : <strong>TSMC</strong> voit son chiffre d'affaires bondir de <em>36 %</em> au deuxième trimestre et <strong>ASML</strong> dépasse nettement les attentes en relevant ses objectifs 2026. Les grandes banques américaines (<strong>JPMorgan</strong>, Goldman Sachs, Citigroup) publient de solides résultats, portées par le trading et les fusions-acquisitions.",
+  "Sur les actifs réels, le <strong>pétrole</strong> reste ferme (<em>Brent +39,2 %</em> YTD) sous l'effet des tensions dans le <strong>détroit d'Ormuz</strong>, tandis que l'<strong>or</strong> reflue légèrement (<em>−6,2 %</em> YTD). L'<em>EUR/USD</em> s'établit autour de <em>1,14</em> (<em>−2,8 %</em> YTD) et le <strong>Bitcoin</strong> corrige fortement (<em>−33,1 %</em> YTD).",
+  "En <strong>Chine</strong>, la croissance ralentit à <em>+4,3 %</em> au T2 (après +5,0 % au T1), soutenue par des exportations record (<em>+27 %</em> en juin) mais une demande domestique hésitante. À surveiller le trimestre prochain : la trajectoire de l'<strong>inflation des services</strong> et le calendrier de détente monétaire, dans un marché toujours concentré sur les valeurs technologiques."
+ ],
+ "faits_marquants": [
+  {
+   "tag": "Inflation US",
+   "tone": "pos",
+   "text": "Le taux d'inflation annuel américain recule à <strong>3,5 %</strong> en juin, première baisse en cinq mois ; la <strong>Fed</strong> devrait rester en pause à court terme."
+  },
+  {
+   "tag": "Semi-conducteurs",
+   "tone": "pos",
+   "text": "<strong>TSMC</strong> voit son chiffre d'affaires bondir de <strong>36 %</strong> au T2 et <strong>ASML</strong> dépasse les attentes en relevant nettement ses objectifs 2026."
+  },
+  {
+   "tag": "Banques US",
+   "tone": "pos",
+   "text": "<strong>JPMorgan</strong>, Goldman Sachs et Citigroup publient de solides résultats au T2, portés par le trading et les fusions-acquisitions."
+  },
+  {
+   "tag": "Zone Euro",
+   "tone": "",
+   "text": "La <strong>BCE</strong> privilégie une dernière hausse de 25 pb (plutôt en septembre) ; le PMI composite au plus bas depuis trois ans ravive le risque de stagflation."
+  },
+  {
+   "tag": "Énergie & géopolitique",
+   "tone": "neg",
+   "text": "Les tensions dans le <strong>détroit d'Ormuz</strong> maintiennent une prime de risque : le WTI repasse au-dessus de 80 $ et le <strong>Brent</strong> affiche +39 % YTD."
+  }
+ ],
+ "indices": [
+  {
+   "name": "S&P 500",
+   "var": "",
+   "ytd": 10.2
+  },
+  {
+   "name": "Nasdaq 100",
+   "var": "",
+   "ytd": 17.17
+  },
+  {
+   "name": "DJ Euro Stoxx 50",
+   "var": "",
+   "ytd": 8.44
+  },
+  {
+   "name": "CAC 40",
+   "var": "",
+   "ytd": 2.67
+  },
+  {
+   "name": "Once d'or (USD / once)",
+   "var": "",
+   "ytd": -6.17
+  },
+  {
+   "name": "Pétrole USD Brent",
+   "var": "",
+   "ytd": 39.24
+  },
+  {
+   "name": "EUR / USD",
+   "var": "",
+   "ytd": -2.78
+  },
+  {
+   "name": "Bitcoin",
+   "var": "",
+   "ytd": -33.1
+  }
+ ]
+}

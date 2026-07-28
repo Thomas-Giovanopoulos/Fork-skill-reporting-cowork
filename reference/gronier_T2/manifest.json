@@ -1,0 +1,61 @@
+{
+  "manifest_version": "1.0",
+  "reporting": {
+    "client_label": "Gronier",
+    "subtitle": "Family office - Reporting",
+    "period_long": "Reporting au 30 juin 2026",
+    "period_short": "T2 2026",
+    "date_reporting": "2026-06-30",
+    "date_display": "30 juin 2026",
+    "version": "v1",
+    "profile": "Équilibré",
+    "show_benchmark": false,
+    "mode": "presentee",
+    "show_ps_corrige": false
+  },
+  "blocs_enabled": {
+    "hero": true,
+    "contexte": true,
+    "supervision": true,
+    "performance": true,
+    "performance_nc": true,
+    "repartition": false,
+    "exhaustif": false,
+    "footer": true
+  },
+  "entities": [
+    {
+      "id": "tmp_ent_001",
+      "label": "Nicolas G.",
+      "type": "pp",
+      "categories": [
+        "financier_cote"
+      ]
+    },
+    {
+      "id": "tmp_ent_002",
+      "label": "HANAMI INVESTISSEMENTS SAS",
+      "type": "holding",
+      "categories": [
+        "financier_cote",
+        "non_cote"
+      ]
+    },
+    {
+      "id": "tmp_ent_003",
+      "label": "SAS SHIDA",
+      "type": "holding",
+      "categories": [
+        "non_cote"
+      ]
+    },
+    {
+      "id": "tmp_ent_004",
+      "label": "SAS MATSU",
+      "type": "holding",
+      "categories": [
+        "non_cote"
+      ]
+    }
+  ]
+}

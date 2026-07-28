@@ -1,0 +1,45 @@
+{% if blocs_enabled.footer %}
+<div class="footer">
+  <div><strong>Rhétorès Finance</strong> — Gestion de Patrimoine · Patrimoine consolidé au {{ reporting.date_reporting | frdate }}</div>
+  <div>Document confidentiel · {{ entities | map(attribute='label') | join(' · ') }}</div>
+</div>
+{% endif %}
+</div></div><!-- /rpt-canvas /rpt-scale-outer -->
+<script>
+(function(){
+  var MINW=1200, MAXW=1600, o=document.querySelector('.rpt-scale-outer'), c=document.querySelector('.rpt-canvas');
+  if(!o||!c) return;
+  function native(){ c.style.width=''; c.style.transform='none'; o.style.height=''; }  // repli sûr : rendu natif (jamais scale 0)
+  function fit(){
+    var vw=o.clientWidth||document.documentElement.clientWidth||window.innerWidth||0;
+    if(!vw){ native(); return; }                 // mesure indisponible (onglet caché, layout pas prêt) -> pas de scale(0)
+    var W=Math.min(MAXW, Math.max(MINW, vw));
+    var s=vw/W;
+    var MAXS=1.15; // plafond du zoom global : au-delà, tout (donuts inclus, taille fixe) grossit de façon disproportionnée
+    if(s>MAXS) s=MAXS;
+    if(!isFinite(s) || s<=0){ native(); return; }
+    c.style.width=W+'px';
+    c.style.transform='scale('+s+')';
+    var h=c.offsetHeight*s;
+    o.style.height=(h>0 ? h : c.offsetHeight)+'px';
+    if(window.Chart&&Chart.getChart){
+      c.querySelectorAll('canvas').forEach(function(cv){ var ch=Chart.getChart(cv); if(ch) ch.resize(); });
+    }
+  }
+  window.addEventListener('resize', fit);
+  window.addEventListener('load', fit);
+  window.addEventListener('pageshow', fit);                 // retour cache navigation (bfcache)
+  document.addEventListener('DOMContentLoaded', fit);
+  document.addEventListener('visibilitychange', function(){ if(!document.hidden) fit(); });  // onglet redevenu visible
+  if(window.ResizeObserver){ try{ var _ro=new ResizeObserver(fit); _ro.observe(o); _ro.observe(c); }catch(e){} }  // auto-répare largeur ET recalcule la hauteur au déroulé d'accordéon
+  setTimeout(fit,100); setTimeout(fit,400); setTimeout(fit,1200);
+  // Filet de sécurité : certaines bascules d'affichage (ex. Mac → vidéoprojecteur en mode "dupliquer")
+  // changent la résolution/DPI partagée sans déclencher de resize/ResizeObserver exploitable par Chrome,
+  // ce qui peut figer le scale sur une valeur fausse (mise en page qui explose visuellement). fit() étant
+  // idempotent et peu coûteux, on revérifie périodiquement plutôt que de dépendre uniquement des événements.
+  setInterval(function(){ if(!document.hidden) fit(); }, 800);
+  fit();
+})();
+</script>
+</body>
+</html>

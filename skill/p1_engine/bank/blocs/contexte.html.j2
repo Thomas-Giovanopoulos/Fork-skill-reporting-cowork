@@ -1,0 +1,62 @@
+<!-- ═══ BLOC {{ bloc_num.contexte }} — CONTEXTE DE MARCHÉ ═══ -->
+<div class="macro-block">
+  <div class="sec-hd">
+    <span class="sec-num">{{ bloc_num.contexte }}</span>
+    <h2 class="sec-title">Contexte de marché — {{ reporting.period_long }}</h2>
+    <div class="sec-rule"></div>
+  </div>
+  {%- set ctx = data.contexte %}
+
+  <!-- Widget 1 — Texte macro narratif (5 §, issu du store de période) -->
+  <div class="macro-text" data-slot="macro_text">
+    {%- if ctx and ctx.macro_text %}
+    {%- for p in ctx.macro_text %}
+    <p>{{ p | safe }}</p>
+    {%- endfor %}
+    {%- else %}
+    <p style="color:var(--muted);font-style:italic;">Texte macroéconomique — 5 paragraphes (store de période, P4).</p>
+    {%- endif %}
+  </div>
+
+  <div class="macro-cards">
+    <!-- Widget 2 — Faits marquants (5 puces, store de période) -->
+    <div class="facts-card">
+      <div class="facts-title">{{ reporting.period_short }} - Faits marquants</div>
+      {%- if ctx and ctx.faits %}
+      {%- for f in ctx.faits %}
+      <div class="fact-item">
+        <div class="fact-dot"></div>
+        <div class="fact-body">
+          <div class="fact-tag{% if f.tone == 'pos' %} fact-tag-pos{% elif f.tone == 'neg' %} fact-tag-neg{% endif %}">{{ f.tag }}</div>
+          <div class="fact-text">{{ f.text | safe }}</div>
+        </div>
+      </div>
+      {%- endfor %}
+      {%- else %}
+      {%- for i in range(5) %}
+      <div class="fact-item"><div class="fact-dot"></div><div class="fact-body"><div class="fact-tag" data-slot="fact_tag">&mdash;</div><div class="fact-text" data-slot="fact_text">&mdash;</div></div></div>
+      {%- endfor %}
+      {%- endif %}
+    </div>
+
+    <!-- Widget 3 — Performance des indices (panorama technique : variation + % YTD, SANS portefeuille) -->
+    <div class="bench-card">
+      <div class="bench-title">{{ reporting.period_short }} - Performance des indices</div>
+      {%- if ctx and ctx.indices %}
+      {%- for r in ctx.indices %}
+      <div class="bench-row">
+        <div class="bench-name">{{ r.name }}</div>
+        <div class="bench-val">{{ r.var }}</div>
+        <div style="text-align:right"><span class="{{ r.cls }}">{{ r.perf }}</span></div>
+        <div class="bench-bar-wrap"><div class="{{ r.bar_cls }}" style="width:{{ r.width }}%"></div></div>
+      </div>
+      {%- endfor %}
+      {%- else %}
+      {%- set indices = ["S&P 500","Nasdaq Composite","DJ Euro Stoxx 50","CAC 40","Once d'or (USD / once)","Pétrole USD Brent","EUR / USD","Bitcoin"] %}
+      {%- for name in indices %}
+      <div class="bench-row"><div class="bench-name">{{ name }}</div><div class="bench-val" data-slot="index_var">&mdash;</div><div style="text-align:right"><span class="perf-neu" data-slot="index_perf">&mdash;</span></div></div>
+      {%- endfor %}
+      {%- endif %}
+    </div>
+  </div>
+</div>

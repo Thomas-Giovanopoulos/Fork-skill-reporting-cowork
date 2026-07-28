@@ -1,0 +1,38 @@
+# Serveur MCP des référentiels du skill (D37) — dépendances.
+#
+# Pins alignés sur mcp-o2s-server/pyproject.toml : les deux serveurs partagent
+# rhetores_authz et le même registre utilisateurs, ils doivent voir les mêmes
+# versions de starlette/mcp/pyjwt sous peine de comportements d'auth divergents.
+
+mcp[cli]>=1.0
+starlette>=0.40
+uvicorn>=0.30
+PyJWT[crypto]>=2.8
+python-dotenv>=1.0
+
+# psycopg v3 — même pin que fo-data-store/validation_app et mcp-o2s-server.
+# Sert DEUX bases distinctes ici : les référentiels (import différé dans
+# tools/referentiels.py) et, si DATABASE_URL est défini, le registre
+# utilisateurs via PgAuthzStore.
+psycopg[binary]>=3.1
+
+# ─────────────────────────────────────────────────────────────────────────────
+# rhetores_authz — validation du token (fix S11) et registre utilisateurs.
+#
+# NON DUPLIQUÉ À DESSEIN : deux implémentations de validation de token
+# divergeraient, et ce serveur resterait vulnérable au prochain correctif du
+# paquet partagé. Cf. l'en-tête de jwt_auth.py.
+#
+# Le paquet n'a pas encore de dépôt git propre : c'est un module du monorepo,
+# installé en editable par chemin. Le chemin ci-dessous suppose l'arborescence :
+#
+#     Rhétorès_Finance/
+#     ├── rhetores_authz/
+#     ├── mcp-o2s-server/          (utilise ../rhetores_authz)
+#     └── FORK-Cowork/infra/mcp_referentiels/   (ce dossier → ../../../)
+#
+# À VÉRIFIER AVANT LE PREMIER `pip install -r` : si ce dossier est déplacé (et
+# il le sera, ce serveur ayant vocation à devenir son propre dépôt), corriger
+# cette ligne — ou, plus propre, installer rhetores_authz dans le venv une fois
+# pour toutes et commenter la ligne.
+-e ../../../rhetores_authz

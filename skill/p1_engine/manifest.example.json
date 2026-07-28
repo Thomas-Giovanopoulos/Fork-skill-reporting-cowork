@@ -1,0 +1,53 @@
+{
+  "manifest_version": "1.0",
+  "reporting": {
+    "client_label": "Hervé G.",
+    "subtitle": "Family office - Reporting",
+    "period_long": "4M 2026",
+    "period_short": "4M-26",
+    "date_reporting": "2026-04-30",
+    "date_display": "30 avril 2026",
+    "version": "v15"
+  },
+  "blocs_enabled": {
+    "hero": true,
+    "contexte": true,
+    "performance": true,
+    "performance_nc": true,
+    "repartition": true,
+    "exhaustif": true,
+    "footer": true
+  },
+  "entities": [
+    {
+      "id": "pp_hg",
+      "label": "Hervé G.",
+      "type": "pp",
+      "categories": [
+        "liquidites",
+        "immobilier",
+        "financier_cote",
+        "dettes"
+      ]
+    },
+    {
+      "id": "sas_ax",
+      "label": "SAS AX",
+      "type": "holding",
+      "categories": [
+        "liquidites",
+        "financier_cote",
+        "non_cote"
+      ]
+    },
+    {
+      "id": "sas_lg",
+      "label": "SAS LG",
+      "type": "holding",
+      "categories": [
+        "liquidites",
+        "immobilier"
+      ]
+    }
+  ]
+}

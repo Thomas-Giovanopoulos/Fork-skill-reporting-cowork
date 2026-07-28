@@ -1,0 +1,187 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rhetores.com/schemas/reporting-fo/manifest-1.0.json",
+  "title": "Manifeste de structure — Reporting Family Office Rhétorès (P1)",
+  "description": "Contrat d'entrée de la phase P1 (Structure). Décrit UNIQUEMENT ce qui fait varier la structure d'un client à l'autre : identité, période, entités et catégories présentes par entité. Tout le reste (ordre des blocs, jeux de colonnes, 12 classes, 8 indices, 6 lignes de card) est figé dans la banque de modules.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "manifest_version",
+    "reporting",
+    "blocs_enabled",
+    "entities"
+  ],
+  "properties": {
+    "manifest_version": {
+      "type": "string",
+      "const": "1.0"
+    },
+    "reporting": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "client_label",
+        "period_long",
+        "period_short",
+        "date_reporting",
+        "date_display",
+        "version"
+      ],
+      "properties": {
+        "client_label": {
+          "type": "string",
+          "description": "Nom de la PP (Hero + footer), format 'Prénom + Initiale.'."
+        },
+        "subtitle": {
+          "type": "string",
+          "default": "Family office - Reporting"
+        },
+        "period_long": {
+          "type": "string",
+          "description": "Ex : 'T1 2026', '4M 2026'."
+        },
+        "period_short": {
+          "type": "string",
+          "description": "Ex : 'T1-26'. Titres des cards du Contexte."
+        },
+        "date_reporting": {
+          "type": "string",
+          "format": "date",
+          "description": "Clôture ISO AAAA-MM-JJ."
+        },
+        "date_display": {
+          "type": "string",
+          "description": "Clôture affichée, ex : '30 avril 2026'."
+        },
+        "version": {
+          "type": "string",
+          "description": "Ex : 'v15'."
+        },
+        "mode": {
+          "type": "string",
+          "enum": ["presentee", "envoyee"],
+          "default": "presentee",
+          "description": "Fork de reporting. 'presentee' = version dynamique présentée en rendez-vous (blocs + animation Hero). 'envoyee' = version simplifiée à envoyer (WIP : statique, sans animation)."
+        },
+        "show_ps_corrige": {
+          "type": "boolean",
+          "default": false,
+          "description": "Version présentée : affiche sur le graphe coté une courbe (rouge) valorisant les produits structurés à leur valeur proratisée. Défaut false ; ignorée s'il n'y a aucun PS."
+        },
+        "show_benchmark": {
+          "type": "boolean",
+          "default": false,
+          "description": "Version présentée : affiche la courbe « équivalent benchmark » du profil sur le graphe coté. Défaut false (masqué) ; le code de calcul reste en place."
+        },
+        "profile": {
+          "type": "string",
+          "enum": [
+            "Prudent",
+            "Équilibré",
+            "Dynamique"
+          ],
+          "description": "Profil de risque du client (pilote le benchmark du bloc Performance)."
+        }
+      }
+    },
+    "blocs_enabled": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Active/désactive chaque bloc par son NOM SÉMANTIQUE. Ordre canonique figé, HUIT blocs : hero -> contexte -> supervision -> performance -> performance_nc -> repartition -> exhaustif -> footer. La source de vérité est BLOCK_ORDER dans p1_engine/assemble.py. Le NUMÉRO affiché (00, 01...) est calculé automatiquement selon la position des blocs numérotés activés.",
+      "required": [
+        "hero",
+        "contexte",
+        "supervision",
+        "performance",
+        "repartition",
+        "exhaustif",
+        "footer"
+      ],
+      "properties": {
+        "hero": {
+          "type": "boolean",
+          "default": true
+        },
+        "contexte": {
+          "type": "boolean",
+          "default": true
+        },
+        "supervision": {
+          "type": "boolean",
+          "default": true,
+          "description": "Bloc « Patrimoine sous supervision » (version présentée) — s'intercale entre 00 Contexte et l'étude de performance : bandeau KPI + donuts d'allocation (géographie, enveloppes, partenaires) avec montants €."
+        },
+        "performance": {
+          "type": "boolean",
+          "default": true
+        },
+        "repartition": {
+          "type": "boolean",
+          "default": true
+        },
+        "exhaustif": {
+          "type": "boolean",
+          "default": true
+        },
+        "footer": {
+          "type": "boolean",
+          "default": true
+        },
+        "performance_nc": {
+          "type": "boolean",
+          "default": false,
+          "description": "Étude de la performance du non coté (Private Equity) — barres trimestrielles à partir de T4 2025. Conditionnel : activé seulement si le client détient du non coté."
+        }
+      }
+    },
+    "entities": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Liste ORDONNÉE des entités. Exactement une 'pp', en première position. Les holdings suivent dans l'ordre déclaré.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "label",
+          "type",
+          "categories"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$",
+            "description": "Identifiant technique stable (snake_case)."
+          },
+          "label": {
+            "type": "string",
+            "description": "Nom d'affichage. Repris dans 'Total [label]'."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "pp",
+              "holding"
+            ]
+          },
+          "categories": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "description": "Catégories présentes pour cette entité (pilote les sections du Bloc Exhaustif). Ordre ignoré : l'assembleur impose l'ordre canonique.",
+            "items": {
+              "type": "string",
+              "enum": [
+                "liquidites",
+                "immobilier",
+                "financier_cote",
+                "non_cote",
+                "dettes"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

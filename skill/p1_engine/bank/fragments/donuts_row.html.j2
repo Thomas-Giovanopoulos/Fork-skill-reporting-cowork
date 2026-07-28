@@ -1,0 +1,60 @@
+  <!-- Widget 2 — 4 donuts d'allocation (ordre fixe ; parts calculées en P2) -->
+  <div class="alloc-grid-4">
+    {% set donuts = [("donut_classes","Classes d'actifs"),("donut_geo",data.get("geo_title","Géographie — Actions")),("donut_depositaires","Dépositaires"),("donut_enveloppes","Enveloppes")] %}
+    {% for cid, title in donuts %}
+    {%- set d = data.donuts.get(cid) %}
+    <div class="chart-card-sm">
+      <div class="chart-title-sm">{{ title }}</div>
+      {%- if d %}
+      <div class="donut-wrap-sm">
+        <canvas id="{{ cid }}" width="90" height="90" data-slot="donut_chart" data-donut="{{ cid }}"></canvas>
+        <div class="dc-sm"><div class="dc-sm-val" data-slot="donut_center" data-donut="{{ cid }}">{{ d.center }}</div><div class="dc-sm-lbl">M€</div></div>
+      </div>
+      <div class="leg-sm" data-slot="donut_legend" data-donut="{{ cid }}">
+        {%- for L in d.legend %}
+        <div class="leg-sm-row"><div class="leg-sm-left"><div class="leg-sm-dot" style="background:{{ L.color }}"></div><div class="leg-sm-name">{{ L.name }}</div></div><div class="leg-sm-pct">{{ L.pct }}%</div></div>
+        {%- endfor %}
+      </div>
+      {%- else %}
+      <div style="display:flex;align-items:center;justify-content:center;height:118px;text-align:center;">
+        <div style="font-size:10.5px;color:var(--muted);font-style:italic;line-height:1.5;">Non applicable<br>{% if cid == 'donut_geo' %}{{ data.get("geo_empty","aucune action en direct") }}{% else %}données indisponibles{% endif %}</div>
+      </div>
+      {%- endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {%- if data.donuts %}
+  <script>
+  (function(){
+    var tip=document.getElementById('rf-donut-tip');
+    if(!tip){ tip=document.createElement('div'); tip.id='rf-donut-tip';
+      tip.style.cssText='position:fixed;pointer-events:none;z-index:9999;background:#0D1B2A;color:#fff;'+
+        'font:600 11px/1.35 \'DM Sans\',sans-serif;padding:5px 9px;border-radius:5px;'+
+        'box-shadow:0 3px 10px rgba(13,27,42,.28);opacity:0;transition:opacity .12s;white-space:nowrap;';
+      document.body.appendChild(tip); }
+    window.__rfDonutTip=function(ctx){
+      var tt=ctx.tooltip;
+      if(!tt||tt.opacity===0){ tip.style.opacity=0; return; }
+      var dp=tt.dataPoints&&tt.dataPoints[0];
+      if(dp){ tip.textContent=dp.label+' : '+dp.parsed+'%'; }
+      var rect=ctx.chart.canvas.getBoundingClientRect();
+      var x=rect.left+tt.caretX, y=rect.top+tt.caretY;
+      if(dp&&dp.element&&dp.element.getProps){
+        var pr=dp.element.getProps(['x','y','startAngle','endAngle','outerRadius'],true);
+        var mid=(pr.startAngle+pr.endAngle)/2, r=pr.outerRadius+18;
+        x=rect.left+pr.x+Math.cos(mid)*r; y=rect.top+pr.y+Math.sin(mid)*r;
+      }
+      tip.style.left=x+'px'; tip.style.top=y+'px'; tip.style.transform='translate(-50%,-50%)'; tip.style.opacity=1;
+    };
+  })();
+  function donut(id,data,labels,colors,cutout){
+    const el=document.getElementById(id); if(!el) return;
+    new Chart(el.getContext('2d'),{type:'doughnut',
+      data:{labels,datasets:[{data,backgroundColor:colors,borderWidth:2,borderColor:'#FAF7F2',hoverOffset:4}]},
+      options:{responsive:false,cutout:cutout||'65%',layout:{padding:6},
+        plugins:{legend:{display:false},tooltip:{enabled:false,external:window.__rfDonutTip}}}});
+  }
+  {% for cid, d in data.donuts.items() %}donut('{{ cid }}', {{ d.data_js }}, {{ d.labels_js }}, {{ d.colors_js }}, '65%');
+  {% endfor %}
+  </script>
+  {%- endif %}

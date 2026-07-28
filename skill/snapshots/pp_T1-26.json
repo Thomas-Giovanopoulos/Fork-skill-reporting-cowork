@@ -1,0 +1,15 @@
+{
+  "period_short": "T1-26",
+  "period_long": "T1 2026",
+  "date_reporting": "2026-04-23",
+  "actif_brut": 4617163.119999999,
+  "actif_net": 4617163.119999999,
+  "dettes": 0,
+  "cat_weights": {
+    "liquidites": 11.193799018302826,
+    "immobilier": 0.0,
+    "financier_cote": 57.95088023660727,
+    "non_cote": 30.855320745089905
+  },
+  "ps_status": {}
+}

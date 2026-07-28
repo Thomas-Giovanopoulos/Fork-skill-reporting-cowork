@@ -1,0 +1,37 @@
+<!-- ═══ BLOC {{ bloc_num.repartition }} — RÉPARTITION PATRIMONIALE ═══ -->
+<div class="sec">
+  <div class="sec-hd">
+    <span class="sec-num">{{ bloc_num.repartition }}</span>
+    <h2 class="sec-title">Répartition patrimoniale au {{ reporting.date_display }}</h2>
+    <div class="sec-rule"></div>
+  </div>
+  {%- if data.compare_n1 %}
+  {%- set cn = data.compare_n1 %}
+  <div style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:6px 0 10px;">Évolution depuis {{ cn.prev_period }}</div>
+  <div class="kpi-cards" style="grid-template-columns:repeat({{ 1 + (cn.cats|length if cn.cats else 1) }},1fr);gap:10px;margin-bottom:24px;">
+    <div class="card card-gold" style="padding:12px 16px;">
+      <div class="card-lbl">Actif net</div>
+      <div class="card-val {{ cn.net_cls }}" style="font-size:21px;">{{ cn.net_pct }}</div>
+      <div class="card-sub">{{ cn.net_eur }}</div>
+    </div>
+    {%- if cn.cats %}
+    {%- for c in cn.cats %}
+    <div class="card" style="padding:12px 16px;">
+      <div class="card-lbl">{{ c.label }}</div>
+      <div class="card-val {{ c.cls }}" style="font-size:21px;">{{ c.arrow }} {{ c.delta }}</div>
+    </div>
+    {%- endfor %}
+    {%- else %}
+    <div class="card" style="padding:12px 16px;"><div class="card-lbl">Allocation</div><div class="card-val" style="font-size:18px;color:var(--muted);">stable</div></div>
+    {%- endif %}
+  </div>
+  {%- endif %}
+{% include "fragments/synth_global.html.j2" %}
+{% include "fragments/donuts_row.html.j2" %}
+  <!-- Widget 3 — Cards par entité -->
+  <div class="struct-grid">
+{% for entity in entities %}
+{% include "fragments/struct_card.html.j2" %}
+{% endfor %}
+  </div>
+</div>

@@ -1,0 +1,1141 @@
+{
+ "schema_version": "2.0-skill",
+ "client": {
+  "id": "tmp_c_001",
+  "label": "Gronier",
+  "entities": [
+   {
+    "id": "tmp_ent_001",
+    "label": "Nicolas G.",
+    "type": "pp",
+    "order": 1
+   },
+   {
+    "id": "tmp_ent_002",
+    "label": "HANAMI INVESTISSEMENTS SAS",
+    "type": "holding",
+    "order": 2
+   },
+   {
+    "id": "tmp_ent_003",
+    "label": "SAS SHIDA",
+    "type": "holding",
+    "order": 3
+   },
+   {
+    "id": "tmp_ent_004",
+    "label": "SAS MATSU",
+    "type": "holding",
+    "order": 4
+   }
+  ]
+ },
+ "reporting": {
+  "period_short": "T2 2026",
+  "period_long": "Reporting au 30 juin 2026",
+  "date_reporting": "2026-06-30",
+  "date_display": "30 juin 2026",
+  "profile": "Équilibré",
+  "version": "v1"
+ },
+ "_provisional_ids": true,
+ "financier_cote": [
+  {
+   "entity_id": "tmp_ent_001",
+   "label": "Assurance-vie — UAF Life Patrimoine (Pollux)",
+   "envelope_type": "AV",
+   "manager": "Rhétorès",
+   "value_current": 80435.07,
+   "capital_invested": 70000,
+   "invest_date": "2022-12-14",
+   "value_jan1": 81018.39006657315,
+   "management_mode": "Conseillée",
+   "risk_profile": "Équilibré",
+   "source_document": "Catégories et Perf HANAMI_T2 2026.xlsx",
+   "validated_by": "thomas.giovanopoulos@rhetores.com",
+   "attributes": {
+    "lines": [
+     {
+      "label": "SELECT APPROCHE GLOBALE",
+      "isin": "FR001400LQV8",
+      "value": 24923.67,
+      "class": "alternatifs",
+      "perf_pct": 4.39,
+      "geography": "monde"
+     },
+     {
+      "label": "Piquemal Houghton Global Equities R EUR",
+      "isin": "LU2261172451",
+      "value": 15404.54,
+      "class": "actions",
+      "perf_pct": -7.5,
+      "geography": "monde"
+     },
+     {
+      "label": "M&G (Lux) Global Dividend Fund A EUR Acc",
+      "isin": "LU1670710075",
+      "value": 9503.33,
+      "class": "actions",
+      "perf_pct": 40.6,
+      "geography": "monde"
+     },
+     {
+      "label": "IVO Emerging Markets Corporate Debt EUR-R",
+      "isin": "LU1165644672",
+      "value": 8672.22,
+      "class": "obligations",
+      "perf_pct": 28.31,
+      "geography": "emergents"
+     },
+     {
+      "label": "Pictet TR-Mandarin HP EUR Acc",
+      "isin": "LU0496443887",
+      "value": 5294.22,
+      "class": "actions",
+      "perf_pct": 11.26,
+      "geography": "emergents"
+     },
+     {
+      "label": "Pictet TR Atlas Titan P EUR",
+      "isin": "LU2206556016",
+      "value": 4967.31,
+      "class": "alternatifs",
+      "perf_pct": 4.39
+     },
+     {
+      "label": "Pictet TR-Sirius P USD Acc",
+      "isin": "LU1799936197",
+      "value": 4947.04,
+      "class": "alternatifs",
+      "perf_pct": 3.97
+     },
+     {
+      "label": "Clartan Europe C",
+      "isin": "LU1100076808",
+      "value": 4575.41,
+      "class": "actions",
+      "perf_pct": 13.69,
+      "geography": "europe"
+     },
+     {
+      "label": "LO Funds All Roads EUR PA",
+      "isin": "LU0718509606",
+      "value": 2044.44,
+      "class": "alternatifs",
+      "perf_pct": 20.99
+     },
+     {
+      "label": "Fonds Euro Nouvelle Génération",
+      "value": 102.89,
+      "class": "alternatifs"
+     }
+    ]
+   },
+   "id": "tmp_fc_001"
+  },
+  {
+   "entity_id": "tmp_ent_001",
+   "label": "Assurance-vie — UAF Life Patrimoine (Cerise)",
+   "envelope_type": "AV",
+   "manager": "Rhétorès",
+   "value_current": 79505.18,
+   "capital_invested": 70000,
+   "invest_date": "2022-12-14",
+   "value_jan1": 80533.16511477315,
+   "management_mode": "Conseillée",
+   "risk_profile": "Équilibré",
+   "source_document": "Catégories et Perf HANAMI_T2 2026.xlsx",
+   "validated_by": "thomas.giovanopoulos@rhetores.com",
+   "attributes": {
+    "lines": [
+     {
+      "label": "SELECT APPROCHE GLOBALE",
+      "isin": "FR001400LQV8",
+      "value": 24904.16,
+      "class": "alternatifs",
+      "perf_pct": 3.81,
+      "geography": "monde"
+     },
+     {
+      "label": "Piquemal Houghton Global Equities R EUR",
+      "isin": "LU2261172451",
+      "value": 15452.88,
+      "class": "actions",
+      "perf_pct": -7.85,
+      "geography": "monde"
+     },
+     {
+      "label": "M&G (Lux) Global Dividend Fund A EUR Acc",
+      "isin": "LU1670710075",
+      "value": 9503.33,
+      "class": "actions",
+      "perf_pct": 40.6,
+      "geography": "monde"
+     },
+     {
+      "label": "IVO Emerging Markets Corporate Debt EUR-R",
+      "isin": "LU1165644672",
+      "value": 8672.22,
+      "class": "obligations",
+      "perf_pct": 28.31,
+      "geography": "emergents"
+     },
+     {
+      "label": "Pictet TR-Mandarin HP EUR Acc",
+      "isin": "LU0496443887",
+      "value": 5281.55,
+      "class": "actions",
+      "perf_pct": 10.24,
+      "geography": "emergents"
+     },
+     {
+      "label": "Pictet TR-Sirius P USD Acc",
+      "isin": "LU1799936197",
+      "value": 4970.5,
+      "class": "alternatifs",
+      "perf_pct": 3.75
+     },
+     {
+      "label": "Pictet TR Atlas Titan P EUR",
+      "isin": "LU2206556016",
+      "value": 4967.86,
+      "class": "alternatifs",
+      "perf_pct": 3.69
+     },
+     {
+      "label": "Comgest Renaissance Europe C",
+      "isin": "FR0000295230",
+      "value": 3605.35,
+      "class": "actions",
+      "perf_pct": -10.42,
+      "geography": "europe"
+     },
+     {
+      "label": "LO Funds All Roads EUR PA",
+      "isin": "LU0718509606",
+      "value": 2044.44,
+      "class": "alternatifs",
+      "perf_pct": 20.99
+     },
+     {
+      "label": "Fonds Euro Nouvelle Génération",
+      "value": 102.89,
+      "class": "alternatifs"
+     }
+    ]
+   },
+   "id": "tmp_fc_002"
+  },
+  {
+   "entity_id": "tmp_ent_002",
+   "label": "Capitalisation — Generali Patrimoine (HIMALIA)",
+   "envelope_type": "Capi",
+   "manager": "Rhétorès",
+   "value_current": 257171.07,
+   "capital_invested": 200000,
+   "invest_date": "2022-02-25",
+   "value_jan1": 242173.110167558,
+   "management_mode": "Conseillée",
+   "risk_profile": "Équilibré",
+   "source_document": "Catégories et Perf HANAMI_T2 2026.xlsx",
+   "validated_by": "thomas.giovanopoulos@rhetores.com",
+   "attributes": {
+    "lines": [
+     {
+      "label": "Amundi Bloomberg Equal-weight Commodity ex-Agriculture UCITS ETF Acc EUR",
+      "isin": "LU1829218749",
+      "value": 59240.76,
+      "class": "actions",
+      "perf_pct": 38.84
+     },
+     {
+      "label": "Pictet TR-Sirius P USD Acc",
+      "isin": "LU1799936197",
+      "value": 39884.07,
+      "class": "alternatifs",
+      "perf_pct": 2.84
+     },
+     {
+      "label": "SELECT APPROCHE GLOBALE",
+      "isin": "FR001400LQV8",
+      "value": 39640.14,
+      "class": "alternatifs",
+      "perf_pct": 2.22,
+      "geography": "monde"
+     },
+     {
+      "label": "Axiom Emerging Markets Corporate Bonds RC EUR",
+      "isin": "LU2821740573",
+      "value": 22154.87,
+      "class": "obligations",
+      "perf_pct": 1.47,
+      "geography": "emergents"
+     },
+     {
+      "label": "Carmignac Emergents A EUR Acc",
+      "isin": "FR0010149302",
+      "value": 13798.52,
+      "class": "actions",
+      "perf_pct": 26.4,
+      "geography": "emergents"
+     },
+     {
+      "label": "Edmond de Rothschild SICAV EdR SICAV Global Resilience A-EUR",
+      "isin": "FR001400RZ04",
+      "value": 10891.25,
+      "class": "actions",
+      "perf_pct": -0.23,
+      "geography": "monde"
+     },
+     {
+      "label": "OFI Energy Strategic Metals R",
+      "isin": "FR0014008NN3",
+      "value": 9679.61,
+      "class": "matieres_premieres",
+      "perf_pct": -12.42,
+      "geography": "monde"
+     },
+     {
+      "label": "Piquemal Houghton Global Equities R EUR",
+      "isin": "LU2261172451",
+      "value": 8993.11,
+      "class": "actions",
+      "perf_pct": 34.04,
+      "geography": "monde"
+     },
+     {
+      "label": "GemEquity R",
+      "isin": "FR0011268705",
+      "value": 8358.94,
+      "class": "actions",
+      "perf_pct": 58.78,
+      "geography": "emergents"
+     },
+     {
+      "label": "Auris Gravity US Equity Fund R EUR Hedged Acc",
+      "isin": "LU2309368624",
+      "value": 8333.75,
+      "class": "actions",
+      "perf_pct": 17.27,
+      "geography": "amerique_du_nord"
+     },
+     {
+      "label": "Carmignac Portfolio Credit A EUR Acc",
+      "isin": "LU1623762843",
+      "value": 7829.91,
+      "class": "obligations",
+      "perf_pct": 25.65
+     },
+     {
+      "label": "Clartan Valeurs C",
+      "isin": "LU1100076550",
+      "value": 6906.21,
+      "class": "actions",
+      "perf_pct": 31.18
+     },
+     {
+      "label": "R-co Valor F EUR",
+      "isin": "FR0011261197",
+      "value": 6765.68,
+      "class": "actions",
+      "perf_pct": 7.01,
+      "geography": "monde"
+     },
+     {
+      "label": "IVO Emerging Markets Corporate Debt EUR-R",
+      "isin": "LU1165644672",
+      "value": 6505.05,
+      "class": "obligations",
+      "perf_pct": 32.34,
+      "geography": "emergents"
+     },
+     {
+      "label": "R-co Valor Balanced C EUR",
+      "isin": "FR0013367265",
+      "value": 4308.59,
+      "class": "alternatifs",
+      "perf_pct": 19.75,
+      "geography": "monde"
+     },
+     {
+      "label": "Lazard Credit Fi SRI RVC EUR",
+      "isin": "FR0010752543",
+      "value": 3880.61,
+      "class": "obligations",
+      "perf_pct": 24.66
+     }
+    ]
+   },
+   "id": "tmp_fc_003"
+  },
+  {
+   "entity_id": "tmp_ent_002",
+   "label": "Capitalisation — Cardif (Elite PM)",
+   "envelope_type": "Capi",
+   "manager": "Rhétorès",
+   "value_current": 350015.41,
+   "capital_invested": 300000,
+   "invest_date": "2024-10-23",
+   "value_jan1": 322038.3264268628,
+   "management_mode": "Conseillée",
+   "risk_profile": "Équilibré",
+   "source_document": "Catégories et Perf HANAMI_T2 2026.xlsx",
+   "validated_by": "thomas.giovanopoulos@rhetores.com",
+   "attributes": {
+    "lines": [
+     {
+      "label": "Fonds général Quotidien",
+      "value": 87998.69,
+      "class": "alternatifs"
+     },
+     {
+      "label": "IVO Emerging Markets Corporate Debt EUR-R",
+      "isin": "LU1165644672",
+      "value": 44377.16,
+      "class": "obligations",
+      "perf_pct": 5.94,
+      "geography": "emergents"
+     },
+     {
+      "label": "SELECT APPROCHE GLOBALE",
+      "isin": "FR001400LQV8",
+      "value": 32216.73,
+      "class": "alternatifs",
+      "perf_pct": 1.89,
+      "geography": "monde"
+     },
+     {
+      "label": "Piquemal Houghton Global Equities R EUR",
+      "isin": "LU2261172451",
+      "value": 28868.68,
+      "class": "actions",
+      "perf_pct": -8.7,
+      "geography": "monde"
+     },
+     {
+      "label": "Fidelity Funds Japan Value Fund A EUR Hedged",
+      "isin": "LU0611489658",
+      "value": 27379.87,
+      "class": "actions",
+      "perf_pct": 19.76,
+      "geography": "asie_pacifique"
+     },
+     {
+      "label": "Aberdeen Standard SICAV I Asian Smaller Companies Fund A Acc USD",
+      "isin": "LU0231459107",
+      "value": 24678.99,
+      "class": "actions",
+      "perf_pct": 25.29,
+      "geography": "asie_pacifique"
+     },
+     {
+      "label": "ECHIQUIER SPACE BC EUR 3DEC",
+      "isin": "LU2466448532",
+      "value": 24678.29,
+      "class": "actions",
+      "perf_pct": 11.21,
+      "geography": "monde"
+     },
+     {
+      "label": "Lyxor MSCI Europe ESG Leaders (DR) UCITS ETF - Acc",
+      "isin": "LU1940199711",
+      "value": 24666.9,
+      "class": "actions",
+      "perf_pct": 25.22,
+      "geography": "europe"
+     },
+     {
+      "label": "Axiom Obligataire C",
+      "isin": "LU1876460731",
+      "value": 21298.55,
+      "class": "obligations",
+      "perf_pct": 8.12
+     },
+     {
+      "label": "Multi Units Luxembourg Lyxor MSCI AC Asia Pacific Ex Japan UCITS ETF Acc EUR",
+      "isin": "LU1900068328",
+      "value": 11945.17,
+      "class": "actions",
+      "perf_pct": 33.67,
+      "geography": "asie_pacifique"
+     },
+     {
+      "label": "East Capital New Europe A",
+      "isin": "LU0944739340",
+      "value": 11253.48,
+      "class": "actions",
+      "perf_pct": 25.94,
+      "geography": "europe"
+     },
+     {
+      "label": "LO Funds Emerging High Conviction USD PA",
+      "isin": "LU0690088280",
+      "value": 10652.9,
+      "class": "actions",
+      "perf_pct": 43.16,
+      "geography": "emergents"
+     }
+    ]
+   },
+   "id": "tmp_fc_004"
+  },
+  {
+   "entity_id": "tmp_ent_002",
+   "label": "CTO — Nortia Invest",
+   "envelope_type": "CTO",
+   "manager": "Rhétorès",
+   "value_current": 1134399.24,
+   "capital_invested": 1035000,
+   "invest_date": "2020-11-20",
+   "value_jan1": 1250556.3820500001,
+   "management_mode": "Conseillée",
+   "risk_profile": "Équilibré",
+   "source_document": "Catégories et Perf HANAMI_T2 2026.xlsx",
+   "validated_by": "thomas.giovanopoulos@rhetores.com",
+   "attributes": {
+    "lines": [
+     {
+      "label": "O2 Capital 11%25-250327 1",
+      "isin": "XS3017908131",
+      "value": 300000.0,
+      "class": "dette_privee",
+      "perf_pct": -0.97,
+      "geography": "europe"
+     },
+     {
+      "label": "EMTN Phoenix Bearish Euribor 12M Décembre 2025",
+      "isin": "FR4CIBFS7485",
+      "value": 120465.0,
+      "class": "produits_structures",
+      "perf_pct": -19.69,
+      "geography": "europe"
+     },
+     {
+      "label": "RAM (LUX) Systematic Funds Long/Short European Equities B",
+      "isin": "LU0705071453",
+      "value": 54908.51,
+      "class": "alternatifs",
+      "perf_pct": 9.5,
+      "geography": "europe"
+     },
+     {
+      "label": "GemChina R",
+      "isin": "FR0013433067",
+      "value": 46979.75,
+      "class": "actions",
+      "perf_pct": -5.83,
+      "geography": "emergents"
+     },
+     {
+      "label": "Sanofi 3.56 EUR Best Strike - Avril 2026",
+      "isin": "FRIP000025B4",
+      "value": 30000.0,
+      "class": "produits_structures",
+      "perf_pct": 0.0,
+      "geography": "europe"
+     },
+     {
+      "label": "R-co Thematic Blockchain Global Equity C EUR",
+      "isin": "FR0014008M99",
+      "value": 28277.18,
+      "class": "actions",
+      "perf_pct": -5.58,
+      "geography": "monde"
+     },
+     {
+      "label": "Axiom European Banks Equity R EUR",
+      "isin": "LU1876459303",
+      "value": 22089.59,
+      "class": "actions",
+      "perf_pct": 64.86,
+      "geography": "europe"
+     },
+     {
+      "label": "Tempo Quotidien Degressif BNP 4,60 Juillet 2025",
+      "isin": "FRIP00001I90",
+      "value": 20000.0,
+      "class": "produits_structures",
+      "perf_pct": -0.41,
+      "geography": "europe"
+     },
+     {
+      "label": "Vontobel Fund - Commodity H (hedged) EUR Acc",
+      "isin": "LU0415415636",
+      "value": 16264.63,
+      "class": "actions",
+      "perf_pct": 9.46
+     },
+     {
+      "label": "Liquidités",
+      "value": 495414.58,
+      "class": "monetaire"
+     }
+    ]
+   },
+   "custodian": "CA Titres",
+   "id": "tmp_fc_005"
+  },
+  {
+   "entity_id": "tmp_ent_002",
+   "label": "Capitalisation — Wealins FC051727",
+   "envelope_type": "Capi",
+   "manager": "Rhétorès",
+   "value_current": 1044231.0,
+   "capital_invested": 951627,
+   "invest_date": "2024-11-05",
+   "value_jan1": 1014645,
+   "management_mode": "Conseillée",
+   "risk_profile": "Équilibré",
+   "source_document": "Catégories et Perf HANAMI_T2 2026.xlsx",
+   "validated_by": "thomas.giovanopoulos@rhetores.com",
+   "attributes": {
+    "lines": [
+     {
+      "label": "ISHS DIV COM USD-AC",
+      "isin": "IE00BDFL4P12",
+      "value": 7371.69,
+      "class": "matieres_premieres",
+      "pocket": "1719249CA Indosuez Switzerland S.A."
+     },
+     {
+      "label": "Pictet-japanese Equity Opportunities I Jpy Cap",
+      "isin": "LU0155301467",
+      "value": 8275.74,
+      "class": "actions",
+      "pocket": "1719249CA Indosuez Switzerland S.A.",
+      "geography": "asie_pacifique"
+     },
+     {
+      "label": "PICTET TR SICAV MANDARIN -I- EUR CAP",
+      "isin": "LU0592589740",
+      "value": 23532.19,
+      "class": "actions",
+      "pocket": "1719249CA Indosuez Switzerland S.A.",
+      "geography": "emergents"
+     },
+     {
+      "label": "Pictet TR Atlas Titan I EUR",
+      "isin": "LU2206555984",
+      "value": 15774.88,
+      "class": "alternatifs",
+      "pocket": "1719249CA Indosuez Switzerland S.A."
+     },
+     {
+      "label": "Pictet Clean Energy P EUR Acc",
+      "isin": "LU0280435388",
+      "value": 19920.98,
+      "class": "actions",
+      "pocket": "1719249CA Indosuez Switzerland S.A.",
+      "geography": "monde"
+     },
+     {
+      "label": "Pictet Robotics I EUR",
+      "isin": "LU1279334053",
+      "value": 18966.83,
+      "class": "actions",
+      "pocket": "1719249CA Indosuez Switzerland S.A.",
+      "geography": "monde"
+     },
+     {
+      "label": "Piquemal Houghton Funds Global Equities RC EUR",
+      "isin": "LU2261172618",
+      "value": 11930.43,
+      "class": "actions",
+      "pocket": "1719249CA Indosuez Switzerland S.A."
+     },
+     {
+      "label": "Pictet TR-Sirius HI EUR Acc",
+      "isin": "LU1799936437",
+      "value": 15898.8,
+      "class": "alternatifs",
+      "pocket": "1719249CA Indosuez Switzerland S.A."
+     },
+     {
+      "label": "PZENA EMG MKT FOCSED VAL USD",
+      "isin": "IE00BRF15F66",
+      "value": 35930.53,
+      "class": "actions",
+      "pocket": "1719249CA Indosuez Switzerland S.A.",
+      "geography": "emergents"
+     },
+     {
+      "label": "Pictet (ch) Swiss Equities I Dy C",
+      "isin": "CH0019087102",
+      "value": 9645.45,
+      "class": "actions",
+      "pocket": "1719249CA Indosuez Switzerland S.A.",
+      "geography": "europe"
+     },
+     {
+      "label": "THALER PRIVATE FUNDS CA SICAV-RAIF-",
+      "isin": "LL0000000948",
+      "value": 37605.76,
+      "class": "alternatifs",
+      "pocket": "1719249CA Indosuez Switzerland S.A."
+     },
+     {
+      "label": "UBS (CH) MM USD PREM",
+      "isin": "CH0140909331",
+      "value": 95958.89,
+      "class": "monetaire",
+      "pocket": "1719249CA Indosuez Switzerland S.A."
+     },
+     {
+      "label": "CC CHF",
+      "value": 93.22,
+      "class": "monetaire",
+      "pocket": "1719249CA Indosuez Switzerland S.A."
+     },
+     {
+      "label": "CC EUR",
+      "value": 260754.72,
+      "class": "monetaire",
+      "pocket": "1719249CA Indosuez Switzerland S.A."
+     },
+     {
+      "label": "Open Cost Order",
+      "value": -1404.05,
+      "class": "monetaire",
+      "pocket": "1719249CA Indosuez Switzerland S.A."
+     },
+     {
+      "label": "CC USD",
+      "value": -39.64,
+      "class": "monetaire",
+      "pocket": "1719249CA Indosuez Switzerland S.A."
+     },
+     {
+      "label": "Amundi Index Solutions MSCI EM Asia UCITS ETF EUR Acc",
+      "isin": "LU1681044480",
+      "value": 61242.03,
+      "class": "actions",
+      "pocket": "K00149YU Quintet Private Bank (Europe) S.A.",
+      "geography": "emergents"
+     },
+     {
+      "label": "Axiom Lux Aemc Bd Ic Cap",
+      "isin": "LU2821740813",
+      "value": 51593.6,
+      "class": "obligations",
+      "pocket": "K00149YU Quintet Private Bank (Europe) S.A.",
+      "geography": "emergents"
+     },
+     {
+      "label": "HSBC Global Investment Funds - Frontier Markets ICEUR",
+      "isin": "LU0708055537",
+      "value": 15173.9,
+      "class": "actions",
+      "pocket": "K00149YU Quintet Private Bank (Europe) S.A.",
+      "geography": "emergents"
+     },
+     {
+      "label": "ISHS DIV COM USD-AC",
+      "isin": "IE00BDFL4P12",
+      "value": 36151.39,
+      "class": "matieres_premieres",
+      "pocket": "K00149YU Quintet Private Bank (Europe) S.A."
+     },
+     {
+      "label": "Piquemal Houghton Funds Global Equities RC EUR",
+      "isin": "LU2261172618",
+      "value": 52634.4,
+      "class": "actions",
+      "pocket": "K00149YU Quintet Private Bank (Europe) S.A."
+     },
+     {
+      "label": "R-co Valor P-CAP",
+      "isin": "FR0011847409",
+      "value": 13810.98,
+      "class": "actions",
+      "pocket": "K00149YU Quintet Private Bank (Europe) S.A.",
+      "geography": "monde"
+     },
+     {
+      "label": "RAM LUX S.FDS E.M.EQ.U P EUR 3D",
+      "isin": "LU0935266196",
+      "value": 11861.6,
+      "class": "actions",
+      "geography": "emergents",
+      "pocket": "K00149YU Quintet Private Bank (Europe) S.A."
+     },
+     {
+      "label": "Robeco Asian Stars Equities F EUR Acc",
+      "isin": "LU0940005217",
+      "value": 19002.24,
+      "class": "actions",
+      "pocket": "K00149YU Quintet Private Bank (Europe) S.A.",
+      "geography": "asie_pacifique"
+     },
+     {
+      "label": "VARENNE-GLOBAL I EUR-ACC.-",
+      "isin": "LU2358391998",
+      "value": 18198.65,
+      "class": "alternatifs",
+      "pocket": "K00149YU Quintet Private Bank (Europe) S.A.",
+      "geography": "monde"
+     },
+     {
+      "label": "SELECT APPROCHE GLOB. I FCP 3D",
+      "isin": "FR001400YPJ8",
+      "value": 37923.93,
+      "class": "alternatifs",
+      "pocket": "K00149YU Quintet Private Bank (Europe) S.A.",
+      "geography": "monde"
+     },
+     {
+      "label": "CC EUR",
+      "value": 164409.63,
+      "class": "monetaire",
+      "pocket": "K00149YU Quintet Private Bank (Europe) S.A."
+     },
+     {
+      "label": "Open Cost Order",
+      "value": -1205.01,
+      "class": "monetaire",
+      "pocket": "K00149YU Quintet Private Bank (Europe) S.A."
+     },
+     {
+      "label": "Liquidités — écart de valorisation (date VL relevé vs Catégories & Perf)",
+      "value": 3217.24,
+      "class": "monetaire",
+      "pocket": "1719249CA Indosuez Switzerland S.A."
+     }
+    ],
+    "pockets": [
+     {
+      "label": "1719249CA Indosuez Switzerland S.A.",
+      "value": 563433.66,
+      "manager": "CA Indosuez (Switzerland) S.A."
+     },
+     {
+      "label": "K00149YU Quintet Private Bank (Europe) S.A.",
+      "value": 480797.34,
+      "manager": "Quintet Private Bank (Europe) S.A."
+     }
+    ]
+   },
+   "custodian": "Indosuez / Quintet",
+   "id": "tmp_fc_006",
+   "validation_note": "Capital externe : FID 250 000 (11/2024) + 200 000 (2025) + FAS Thaler 250 000 (05/2025) + 251 627 (2025). Clôture FID 468 018 (21/11/2025) recyclée en FAS Quintet (413 227) — flux interne."
+  },
+  {
+   "entity_id": "tmp_ent_002",
+   "label": "Capitalisation — Wealins FC055211",
+   "envelope_type": "Capi",
+   "manager": "Rhétorès",
+   "value_current": 1043009.0,
+   "capital_invested": 1000000,
+   "invest_date": "2024-11-11",
+   "value_jan1": 1036568.55,
+   "management_mode": "Conseillée",
+   "risk_profile": "Équilibré",
+   "source_document": "Catégories et Perf HANAMI_T2 2026.xlsx",
+   "validated_by": "thomas.giovanopoulos@rhetores.com",
+   "attributes": {
+    "lines": [
+     {
+      "label": "HANETF SPROTT GL.URANIUM MINING ETF",
+      "isin": "IE0005YK6564",
+      "value": 26329.9,
+      "class": "actions",
+      "pocket": "FAS Quintet K00149Q5",
+      "geography": "monde"
+     },
+     {
+      "label": "ISHARES IV MSCI CHINA TECH UCITS - ACCUM USD CAP",
+      "isin": "IE000NFR7C63",
+      "value": 156462.55,
+      "class": "actions",
+      "pocket": "FAS Quintet K00149Q5",
+      "geography": "emergents"
+     },
+     {
+      "label": "ISHARES MSCI BRAZIL ETF ACC USD",
+      "isin": "DE000A0Q4R85",
+      "value": 14894.71,
+      "class": "actions",
+      "pocket": "FAS Quintet K00149Q5",
+      "geography": "emergents"
+     },
+     {
+      "label": "LYXOR MSCI INDONESIA ETF",
+      "isin": "LU1900065811",
+      "value": 27076.64,
+      "class": "actions",
+      "pocket": "FAS Quintet K00149Q5",
+      "geography": "emergents"
+     },
+     {
+      "label": "PIQUEMAL HOUGHTON FUNDS SICAV",
+      "isin": "LU2261172618",
+      "value": 112286.72,
+      "class": "actions",
+      "pocket": "FAS Quintet K00149Q5"
+     },
+     {
+      "label": "VANECK DEFENSE ETF A USD ACC",
+      "isin": "IE000YYE6WK5",
+      "value": 10016.0,
+      "class": "actions",
+      "pocket": "FAS Quintet K00149Q5",
+      "geography": "monde"
+     },
+     {
+      "label": "XTRACKERS MSCI WORLD HEALTHCARE INDEX UCITS 1C C",
+      "isin": "IE00BM67HK77",
+      "value": 18020.85,
+      "class": "actions",
+      "pocket": "FAS Quintet K00149Q5",
+      "geography": "monde"
+     },
+     {
+      "label": "CARLYLE PVT MKT EUR I DIS",
+      "isin": "LU2912501652",
+      "value": 495481.63,
+      "class": "alternatifs",
+      "pocket": "FAS Quintet K00149Q5"
+     },
+     {
+      "label": "SELECT APPROCHE GLOB.I FCP 3D",
+      "isin": "FR001400YPJ8",
+      "value": 125281.48,
+      "class": "alternatifs",
+      "pocket": "FAS Quintet K00149Q5",
+      "geography": "monde"
+     },
+     {
+      "label": "CC EUR",
+      "value": 58357.25,
+      "class": "monetaire",
+      "pocket": "FAS Quintet K00149Q5"
+     },
+     {
+      "label": "Open Cost Order",
+      "value": -2741.05,
+      "class": "monetaire",
+      "pocket": "FAS Quintet K00149Q5"
+     },
+     {
+      "label": "Liquidités — écart de valorisation (frais + date VL vs Catégories & Perf)",
+      "value": 1542.32,
+      "class": "monetaire",
+      "pocket": "FAS Quintet K00149Q5"
+     }
+    ],
+    "pockets": [
+     {
+      "label": "FAS Quintet K00149Q5",
+      "value": 1043009.0,
+      "manager": "Quintet Private Bank (Europe) S.A."
+     }
+    ]
+   },
+   "custodian": "Quintet",
+   "id": "tmp_fc_007"
+  }
+ ],
+ "non_cote": [
+  {
+   "entity_id": "tmp_ent_002",
+   "label": "OCA MGM1 (Hôtel de Metz)",
+   "manager": "Tylia Invest",
+   "classe_rhetores": "Dette privée",
+   "capital_committed": 100000,
+   "capital_called": 100000,
+   "value_current": 100000,
+   "value_date": "2026-06-30",
+   "source_document": "Excel_structure_Gronier.xlsx / Catégories et Perf T2 2026",
+   "validated_by": "thomas.giovanopoulos@rhetores.com",
+   "attributes": {
+    "segment": "Direct",
+    "strategy": "Dette privée hôtelière (OC)",
+    "instrument_type": "titre"
+   },
+   "validation_note": "Date d'investissement 2025-03-21",
+   "id": "tmp_nc_001"
+  },
+  {
+   "entity_id": "tmp_ent_002",
+   "label": "SOMNOO — S Invest Hotels 4",
+   "manager": "Tylia Invest",
+   "classe_rhetores": "Dette privée",
+   "capital_committed": 300000,
+   "capital_called": 300000,
+   "value_current": 300000,
+   "value_date": "2026-06-30",
+   "source_document": "Excel_structure_Gronier.xlsx / Catégories et Perf T2 2026",
+   "validated_by": "thomas.giovanopoulos@rhetores.com",
+   "attributes": {
+    "segment": "Direct",
+    "strategy": "Dette privée hôtelière",
+    "instrument_type": "titre"
+   },
+   "validation_note": "Date d'investissement 2025-07-30",
+   "id": "tmp_nc_002"
+  },
+  {
+   "entity_id": "tmp_ent_002",
+   "label": "FPCI Altaroc Odyssey 2023",
+   "manager": "Altaroc",
+   "classe_rhetores": "Private Equity",
+   "capital_committed": 50000,
+   "capital_called": 50000,
+   "value_current": 70854,
+   "value_date": "2026-06-30",
+   "source_document": "Excel_structure_Gronier.xlsx / Catégories et Perf T2 2026",
+   "validated_by": "thomas.giovanopoulos@rhetores.com",
+   "attributes": {
+    "segment": "Fonds de fonds",
+    "strategy": "LBO",
+    "moic_target": 1.8,
+    "duration_target": 10,
+    "instrument_type": "fonds"
+   },
+   "id": "tmp_nc_003"
+  },
+  {
+   "entity_id": "tmp_ent_002",
+   "label": "FPCI Altaroc Odyssey 2024",
+   "manager": "Altaroc",
+   "classe_rhetores": "Private Equity",
+   "capital_committed": 20000,
+   "capital_called": 20000,
+   "value_current": 35864.92,
+   "value_date": "2026-06-30",
+   "source_document": "Excel_structure_Gronier.xlsx / Catégories et Perf T2 2026",
+   "validated_by": "thomas.giovanopoulos@rhetores.com",
+   "attributes": {
+    "segment": "Fonds de fonds",
+    "strategy": "LBO",
+    "moic_target": 1.8,
+    "duration_target": 10,
+    "instrument_type": "fonds"
+   },
+   "id": "tmp_nc_004"
+  },
+  {
+   "entity_id": "tmp_ent_002",
+   "label": "Société Hôtelière Nice Acropolis",
+   "manager": "SOMNOO",
+   "classe_rhetores": "Private Equity",
+   "capital_committed": 29952,
+   "capital_called": 29952,
+   "value_current": 29952,
+   "value_date": "2026-06-30",
+   "source_document": "Excel_structure_Gronier.xlsx / Catégories et Perf T2 2026",
+   "validated_by": "thomas.giovanopoulos@rhetores.com",
+   "attributes": {
+    "segment": "Co-Investissement",
+    "strategy": "PE hôtelier — actions non cotées",
+    "instrument_type": "titre"
+   },
+   "id": "tmp_nc_005"
+  },
+  {
+   "entity_id": "tmp_ent_002",
+   "label": "Société Hôtelière Aimargues Nîmes Ouest",
+   "manager": "SOMNOO",
+   "classe_rhetores": "Private Equity",
+   "capital_committed": 30000,
+   "capital_called": 30000,
+   "value_current": 30000,
+   "value_date": "2026-06-30",
+   "source_document": "Excel_structure_Gronier.xlsx / Catégories et Perf T2 2026",
+   "validated_by": "thomas.giovanopoulos@rhetores.com",
+   "attributes": {
+    "segment": "Co-Investissement",
+    "strategy": "PE hôtelier — actions non cotées",
+    "instrument_type": "titre"
+   },
+   "id": "tmp_nc_006"
+  },
+  {
+   "entity_id": "tmp_ent_003",
+   "label": "SOMNOO — S Invest Hotels 4",
+   "manager": "Tylia Invest",
+   "classe_rhetores": "Dette privée",
+   "capital_committed": 30000,
+   "capital_called": 30000,
+   "value_current": 30000,
+   "value_date": "2026-06-30",
+   "source_document": "Excel_structure_Gronier.xlsx / Catégories et Perf T2 2026",
+   "validated_by": "thomas.giovanopoulos@rhetores.com",
+   "attributes": {
+    "segment": "Direct",
+    "strategy": "Dette privée hôtelière",
+    "instrument_type": "titre"
+   },
+   "validation_note": "Date d'investissement 2025-07-30",
+   "id": "tmp_nc_007"
+  },
+  {
+   "entity_id": "tmp_ent_004",
+   "label": "SOMNOO — S Invest Hotels 4",
+   "manager": "Tylia Invest",
+   "classe_rhetores": "Dette privée",
+   "capital_committed": 30000,
+   "capital_called": 30000,
+   "value_current": 30000,
+   "value_date": "2026-06-30",
+   "source_document": "Excel_structure_Gronier.xlsx / Catégories et Perf T2 2026",
+   "validated_by": "thomas.giovanopoulos@rhetores.com",
+   "attributes": {
+    "segment": "Direct",
+    "strategy": "Dette privée hôtelière",
+    "instrument_type": "titre"
+   },
+   "validation_note": "Date d'investissement 2025-07-30",
+   "id": "tmp_nc_008"
+  }
+ ],
+ "mouvements": [
+  {
+   "entity_id": "tmp_ent_002",
+   "label": "Rachat partiel — CTO Nortia Invest",
+   "entry_ref": "tmp_fc_005",
+   "type": "retrait",
+   "amount": 100000,
+   "date": "2026-03-31",
+   "source_document": "Catégories et Perf HANAMI_T2 2026.xlsx (colonne Rachats 2026)",
+   "validated_by": "thomas.giovanopoulos@rhetores.com",
+   "validation_note": "date conventionnelle fin T1 — rachat intervenu au S1 2026, date exacte non publiée",
+   "id": "tmp_mv_001"
+  },
+  {
+   "id": "tmp_mv_002",
+   "entity_id": "tmp_ent_002",
+   "label": "Versement — FC051727 ouverture FAS Thaler",
+   "entry_ref": "tmp_fc_006",
+   "type": "versement",
+   "amount": 250000,
+   "date": "2025-05-07",
+   "source_document": "Catégories et Perf HANAMI_T2 2026.xlsx",
+   "validated_by": "thomas.giovanopoulos@rhetores.com",
+   "validation_note": "07/05/2025"
+  },
+  {
+   "id": "tmp_mv_003",
+   "entity_id": "tmp_ent_002",
+   "label": "Versement — FC051727 FAS Thaler 2025",
+   "entry_ref": "tmp_fc_006",
+   "type": "versement",
+   "amount": 251627,
+   "date": "2025-07-01",
+   "source_document": "Catégories et Perf HANAMI_T2 2026.xlsx",
+   "validated_by": "thomas.giovanopoulos@rhetores.com",
+   "validation_note": "convention 01/07/2025"
+  },
+  {
+   "id": "tmp_mv_004",
+   "entity_id": "tmp_ent_002",
+   "label": "Versement — FC051727 FID Auris 2025",
+   "entry_ref": "tmp_fc_006",
+   "type": "versement",
+   "amount": 200000,
+   "date": "2025-07-01",
+   "source_document": "Catégories et Perf HANAMI_T2 2026.xlsx",
+   "validated_by": "thomas.giovanopoulos@rhetores.com",
+   "validation_note": "convention 01/07/2025"
+  }
+ ]
+}

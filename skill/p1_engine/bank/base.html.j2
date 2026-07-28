@@ -1,0 +1,11 @@
+{% include "partials/head.html.j2" %}
+{% if blocs_enabled.hero %}{% include "blocs/hero.html.j2" %}{% endif %}
+<div class="page">
+{% if blocs_enabled.contexte %}{% include "blocs/contexte.html.j2" %}{% endif %}
+{% if blocs_enabled.supervision %}{% include "blocs/supervision.html.j2" %}{% endif %}
+{% if blocs_enabled.performance %}{% include "blocs/performance.html.j2" %}{% endif %}
+{% if blocs_enabled.performance_nc %}{% include "blocs/performance_nc.html.j2" %}{% endif %}
+{% if blocs_enabled.repartition %}{% include "blocs/repartition.html.j2" %}{% endif %}
+{% if blocs_enabled.exhaustif %}{% include "blocs/exhaustif.html.j2" %}{% endif %}
+</div>
+{% include "partials/foot.html.j2" %}

@@ -1,0 +1,14 @@
+{
+  "period_short": "T2-26",
+  "period_long": "T2 2026",
+  "date_reporting": "2026-06-30",
+  "actif_brut": 556300.0,
+  "actif_net": 476300.0,
+  "dettes": 80000.0,
+  "cat_weights": {
+    "liquidites": 8.17904008628438,
+    "immobilier": 57.52291928815387,
+    "financier_cote": 34.29804062556175,
+    "non_cote": 0.0
+  }
+}

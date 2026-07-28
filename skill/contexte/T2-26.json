@@ -1,0 +1,86 @@
+{
+  "period_short": "T2-26",
+  "period_long": "T2 2026",
+  "_note": "Contexte de marché de la période — produit UNE FOIS, réutilisé pour tous les clients du trimestre. Texte rédactionnel à valider par Tristan. Mise en forme : <strong> = terme clé (navy), <em> = chiffre/donnée (doré).",
+  "macro_text": [
+    "Le deuxième trimestre 2026 aura été dominé par une question centrale : la <strong>soutenabilité du rebond des marchés actions</strong> face à des valorisations technologiques de plus en plus tendues. Après le trou d'air du premier trimestre, les indices ont non seulement effacé leurs pertes mais inscrit de <strong>nouveaux plus hauts historiques</strong>, le <em>S&P 500</em> progressant de <em>+9,8 %</em> depuis le début d'année et le <em>Nasdaq</em> de <em>+12,4 %</em>, portés par la résilience des bénéfices et le thème persistant de l'intelligence artificielle.",
+    "Sur le plan monétaire, la <strong>divergence des cycles</strong> s'est confirmée. La <strong>Réserve fédérale</strong> a maintenu ses taux inchangés, jugeant l'inflation des services encore trop ferme autour de <em>3 %</em>, tandis que la <strong>BCE</strong> a poursuivi sa normalisation graduelle. Ce décalage a d'abord soutenu le dollar avant un reflux en fin de trimestre, l'<em>EUR/USD</em> revenant autour de <em>1,17</em> (<em>+3,1 %</em> YTD).",
+    "Le régime de marché est redevenu nettement <strong>risk-on</strong>, avec une rotation favorable aux <strong>cycliques</strong> et aux grandes capitalisations de croissance. L'Europe a suivi à un rythme plus mesuré — <em>Euro Stoxx 50 +8,1 %</em>, <em>CAC 40 +5,2 %</em> — dans un contexte de reprise industrielle encore fragile, tandis que la pentification modérée des courbes de taux a traduit le retour de l'appétit pour le risque.",
+    "Du côté des actifs réels, l'<strong>or</strong> a prolongé son rôle de valeur refuge avec une progression marquée (<em>+14,0 %</em>), soutenu par les achats des banques centrales, et le <strong>pétrole</strong> est resté ferme (<em>Brent +20,5 %</em>) sous l'effet des tensions géopolitiques. À l'inverse, les <strong>cryptoactifs</strong> ont corrigé (<em>Bitcoin −8,0 %</em>), dans un mouvement de prise de bénéfices après un début d'année euphorique.",
+    "Le <strong>thème à surveiller</strong> au trimestre prochain reste double : la trajectoire de l'<strong>inflation des services</strong>, qui conditionne le calendrier de détente de la Fed, et la <strong>concentration du marché</strong> autour d'une poignée de valeurs technologiques, dont la moindre déception sur les résultats pourrait suffire à raviver la volatilité."
+  ],
+  "faits_marquants": [
+    {
+      "tag": "Marchés actions",
+      "tone": "pos",
+      "text": "Nouveaux records pour le <strong>S&P 500</strong> et le <strong>Nasdaq</strong>, portés par des résultats technologiques solides et la thématique IA ; le rebond du T1 est intégralement effacé."
+    },
+    {
+      "tag": "Banques centrales",
+      "tone": "neu",
+      "text": "La <strong>Fed</strong> maintient ses taux face à une inflation des services persistante (~3 %), tandis que la <strong>BCE</strong> poursuit sa normalisation : la divergence de cycle s'accentue."
+    },
+    {
+      "tag": "Or & refuges",
+      "tone": "pos",
+      "text": "L'<strong>or</strong> prolonge sa hausse (<strong>+14 % YTD</strong>), soutenu par les achats des banques centrales, et conserve son statut de couverture géopolitique."
+    },
+    {
+      "tag": "Géopolitique",
+      "tone": "neg",
+      "text": "Les tensions au <strong>Moyen-Orient</strong> maintiennent une prime de risque sur le pétrole, le <strong>Brent</strong> restant ferme au-dessus de ses niveaux de début d'année."
+    },
+    {
+      "tag": "Crypto",
+      "tone": "neg",
+      "text": "Correction du <strong>Bitcoin</strong> (<strong>−8 % YTD</strong>) après un début d'année euphorique, dans un mouvement de prise de bénéfices et de rotation vers les actifs traditionnels."
+    }
+  ],
+  "indices": [
+    {
+      "name": "S&P 500",
+      "var": "+642 pts",
+      "ytd": 9.8
+    },
+    {
+      "name": "Nasdaq Composite",
+      "var": "+2 740 pts",
+      "ytd": 12.4
+    },
+    {
+      "name": "DJ Euro Stoxx 50",
+      "var": "+441 pts",
+      "ytd": 8.1
+    },
+    {
+      "name": "CAC 40",
+      "var": "+402 pts",
+      "ytd": 5.2
+    },
+    {
+      "name": "Once d'or (USD / once)",
+      "var": "+560 $",
+      "ytd": 14.0
+    },
+    {
+      "name": "Pétrole USD Brent",
+      "var": "+13 $",
+      "ytd": 20.5
+    },
+    {
+      "name": "EUR / USD",
+      "var": "+0,036",
+      "ytd": 3.1
+    },
+    {
+      "name": "Bitcoin",
+      "var": "−5 400 $",
+      "ytd": -8.0
+    }
+  ],
+  "benchmark_blocks": {
+    "MSCI World": 9.5,
+    "Obligations (Agg €)": 2.1,
+    "Monétaire €": 1.4
+  }
+}

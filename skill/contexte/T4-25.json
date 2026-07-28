@@ -1,0 +1,86 @@
+{
+  "period_short": "T4-25",
+  "period_long": "Année 2025",
+  "_note": "Contexte ANNUEL 2025 — produit une fois, réutilisé pour tous les clients. ÉCHANTILLON à valider par Tristan. Indices à rafraîchir via: python3 p1_engine/fetch_indices.py contexte/T4-25.json --year 2025 (poste connecté).",
+  "macro_text": [
+    "L'année 2025 aura été marquée par une <strong>normalisation progressive de l'environnement monétaire</strong> après le cycle de resserrement le plus brutal en quarante ans. La désinflation s'est confirmée des deux côtés de l'Atlantique, ouvrant la voie aux premières <strong>baisses de taux</strong> et soutenant un net redressement des actifs risqués sur l'ensemble de l'exercice.",
+    "Du côté des <strong>banques centrales</strong>, la BCE a entamé son assouplissement plus tôt et plus franchement que la Réserve fédérale, prudente face à une <em>inflation des services</em> encore collante autour de <em>3 %</em>. Cette divergence de calendrier a pesé sur le dollar, l'<em>EUR/USD</em> se réappréciant sur l'année.",
+    "Les <strong>marchés actions</strong> ont signé une année solide, portés par la résilience des bénéfices et la poursuite du thème de l'<strong>intelligence artificielle</strong>. Les indices américains ont mené la hausse, l'Europe progressant plus modestement dans un contexte de reprise industrielle hésitante.",
+    "Sur les actifs réels, l'<strong>or</strong> a brillé (valeur refuge et achats des banques centrales), tandis que le <strong>pétrole</strong> a reflué sur fond d'offre abondante. Les <strong>cryptoactifs</strong> ont retrouvé de la vigueur après une année 2024 déjà porteuse.",
+    "Le <strong>fil rouge pour 2026</strong> reste la trajectoire de l'inflation des services et le rythme des baisses de taux : un atterrissage en douceur soutiendrait les valorisations, tandis qu'une inflation persistante pourrait raviver la volatilité après deux années de forte hausse."
+  ],
+  "faits_marquants": [
+    {
+      "tag": "Banques centrales",
+      "tone": "pos",
+      "text": "Premières <strong>baisses de taux</strong> de la BCE puis de la Fed : amorce d'un cycle d'assouplissement après la désinflation."
+    },
+    {
+      "tag": "Marchés actions",
+      "tone": "pos",
+      "text": "Année solide pour les actions, <strong>nouveaux records</strong> aux États-Unis portés par les résultats et l'IA."
+    },
+    {
+      "tag": "Or & refuges",
+      "tone": "pos",
+      "text": "L'<strong>or</strong> poursuit son ascension, soutenu par les achats des banques centrales et la demande de couverture."
+    },
+    {
+      "tag": "Pétrole",
+      "tone": "neu",
+      "text": "Le <strong>Brent</strong> reflue sur l'année, pénalisé par une offre abondante malgré les tensions géopolitiques."
+    },
+    {
+      "tag": "Crypto",
+      "tone": "pos",
+      "text": "Rebond marqué du <strong>Bitcoin</strong> sur l'exercice, dans un contexte d'appétit retrouvé pour le risque."
+    }
+  ],
+  "indices": [
+    {
+      "name": "S&P 500",
+      "var": "+820 pts",
+      "ytd": 12.5
+    },
+    {
+      "name": "Nasdaq Composite",
+      "var": "+3 350 pts",
+      "ytd": 16.2
+    },
+    {
+      "name": "DJ Euro Stoxx 50",
+      "var": "+490 pts",
+      "ytd": 9.4
+    },
+    {
+      "name": "CAC 40",
+      "var": "+360 pts",
+      "ytd": 4.8
+    },
+    {
+      "name": "Once d'or (USD / once)",
+      "var": "+700 $",
+      "ytd": 18.0
+    },
+    {
+      "name": "Pétrole USD Brent",
+      "var": "−5 $",
+      "ytd": -6.5
+    },
+    {
+      "name": "EUR / USD",
+      "var": "+0,025",
+      "ytd": 2.2
+    },
+    {
+      "name": "Bitcoin",
+      "var": "+18 000 $",
+      "ytd": 21.0
+    }
+  ],
+  "benchmark_blocks": {
+    "MSCI World": 14.0,
+    "Obligations (Agg €)": 3.5,
+    "Monétaire €": 3.2
+  }
+}

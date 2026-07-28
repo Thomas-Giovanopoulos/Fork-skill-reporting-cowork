@@ -1,0 +1,15 @@
+{
+  "period_short": "S29 2026",
+  "period_long": "Reporting au 16 juillet 2026",
+  "date_reporting": "2026-07-16",
+  "actif_brut": 4725545.0,
+  "actif_net": 4725545.0,
+  "dettes": 0,
+  "cat_weights": {
+    "liquidites": 0.0,
+    "immobilier": 0.0,
+    "financier_cote": 94.92122072692143,
+    "non_cote": 5.078779273078555
+  },
+  "ps_status": {}
+}

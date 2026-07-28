@@ -1,0 +1,11 @@
+<!-- ═══ BLOC {{ bloc_num.exhaustif }} — TABLEAU PATRIMONIAL EXHAUSTIF ═══ -->
+<div class="sec">
+  <div class="sec-hd">
+    <span class="sec-num">{{ bloc_num.exhaustif }}</span>
+    <h2 class="sec-title">Tableau patrimonial exhaustif</h2>
+    <div class="sec-rule"></div>
+  </div>
+{% for entity in entities %}
+{% include "fragments/entity_section.html.j2" %}
+{% endfor %}
+</div>

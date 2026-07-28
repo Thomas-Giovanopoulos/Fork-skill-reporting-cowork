@@ -1,0 +1,98 @@
+<!-- ═══ BLOC {{ bloc_num.performance_nc }} — ÉTUDE DE LA PERFORMANCE — NON COTÉ ═══ -->
+<div class="sec">
+  <div class="sec-hd">
+    <span class="sec-num">{{ bloc_num.performance_nc }}</span>
+    <h2 class="sec-title">Étude de la performance — Non coté (Private Equity)</h2>
+    <div class="sec-rule"></div>
+  </div>
+  {%- set pnc = data.perf_nc %}
+  {%- set nc_start = pnc.bars.start_label if pnc else 'T4-25' %}
+  {%- set K = pnc.kpis if pnc else none %}
+
+
+  <!-- Widget 1 — Bandeau KPI (début · MOIC · TVPI · valeur fin base TVPI) ; valeurs = vue active -->
+  <div class="kpi-cards">
+    <div class="card"><div class="card-lbl">Valeur début de période</div><div class="card-val" data-pnc="k-start">{{ K.start_value if K else '&mdash;' }}</div><div class="card-sub">au {{ nc_start }}</div></div>
+    <div class="card {{ K.moic_card if K else 'card-pos' }}" data-pnc="c-moic"><div class="card-lbl">Performance MOIC</div><div class="card-val {{ K.moic_cls if K else 'c-pos' }}" data-pnc="moic-mult">{{ K.moic_mult if K else '&mdash;' }}</div><div class="card-sub" data-pnc="moic-sub">{{ K.moic_eur if K else '&mdash;' }} · {{ K.moic_pct if K else '&mdash;' }}</div></div>
+    <div class="card {{ K.tvpi_card if K else 'card-pos' }}" data-pnc="c-tvpi"><div class="card-lbl">Performance TVPI</div><div class="card-val {{ K.tvpi_cls if K else 'c-pos' }}" data-pnc="tvpi-mult">{{ K.tvpi_mult if K else '&mdash;' }}</div><div class="card-sub" data-pnc="tvpi-sub">{{ K.tvpi_eur if K else '&mdash;' }} · {{ K.tvpi_pct if K else '&mdash;' }}</div></div>
+    <div class="card card-gold"><div class="card-lbl">Valeur du non coté</div><div class="card-val" data-pnc="k-value">{{ K.value if K else '&mdash;' }}</div><div class="card-sub">au {{ reporting.date_display }} · base TVPI</div></div>
+  </div>
+
+  <!-- Widget 4 — Détail par contrat (accordéon ligne à ligne) -->
+  {%- if pnc and pnc.detail %}
+  <div class="cote-exh exh-card">
+    <div class="cote-exh-hd">Fonds de private equity — détail par véhicule</div>
+    <table class="synth-table cote-acc-tbl nc-acc-tbl">
+      <thead><tr>
+        <th style="text-align:left;width:26%">Fonds / Véhicule</th>
+        <th>Date d'inv.</th><th>Cap. engagé</th><th>Cap. appelé</th><th>Non appelé réel</th><th>Non appelé estimé</th><th>MOIC</th><th>Cible (MOIC/TRI)</th><th style="padding-right:12px">Valeur (dern. constat.)</th>
+      </tr></thead>
+      <tbody>
+        {%- for blk in pnc.detail %}
+        {%- if blk.entity %}<tr class="acc-ent-row"><td colspan="9">{{ blk.entity }}</td></tr>{%- endif %}
+        {%- for d in blk.rows %}
+        <tr class="acc-head{% if d.flux and reporting.mode != 'presentee' %} acc-clickable{% endif %}">
+          <td><span class="acc-chev{% if not (d.flux and reporting.mode != 'presentee') %} acc-chev-off{% endif %}">{% if d.flux and reporting.mode != 'presentee' %}&#9656;{% endif %}</span><span class="acc-name"><span class="cname">{{ d.name }}</span>{% if d.sub %}<span class="cdet">{{ d.sub }}</span>{% endif %}</span></td>
+          <td>{{ d.date_inv }}</td><td>{{ d.eng }}</td><td>{{ d.called }}</td><td>{{ d.na_reel }}</td><td>{{ d.na_est }}</td><td>{{ d.moic }}</td><td>{{ d.cible }}</td><td style="padding-right:12px;font-weight:600">{{ d.vl }}</td>
+        </tr>
+        {%- if d.flux and reporting.mode != 'presentee' %}
+        <tr class="acc-detail" hidden><td colspan="9">
+          <div class="nc-acc-stats"><span>TVPI&nbsp;<strong>{{ d.stats.tvpi }}</strong></span><span>DPI&nbsp;<strong>{{ d.stats.dpi }}</strong></span><span>RVPI&nbsp;<strong>{{ d.stats.rvpi }}</strong></span><span>TRI&nbsp;<strong>{{ d.stats.tri }}</strong></span></div>
+          <table class="acc-lines"><thead><tr><th style="text-align:left;width:34%">Date</th><th>Type</th><th>Montant</th><th style="padding-right:8px">Reste à appeler</th></tr></thead><tbody>
+            {%- for fx in d.flux %}
+            <tr{% if fx.prevu %} class="pnc-prevu"{% endif %}><td style="text-align:left">{{ fx.date }}</td><td>{{ fx.type }}</td><td>{{ fx.montant }}</td><td style="padding-right:8px">{{ fx.reste }}</td></tr>
+            {%- endfor %}
+          </tbody></table>
+          {%- if d.next %}<div class="pnc-next">{{ d.next | safe }}</div>{%- endif %}
+        </td></tr>
+        {%- endif %}
+        {%- endfor %}
+        {%- endfor %}
+        {%- if pnc.detail_total %}
+        {%- set t = pnc.detail_total %}
+        <tr class="total-row"><td>TOTAL</td><td></td><td>{{ t.eng }}</td><td>{{ t.called }}</td><td>{{ t.na_reel }}</td><td>{{ t.na_est }}</td><td>{{ t.moic }}</td><td></td><td style="padding-right:12px" class="c-gold">{{ t.vl }}</td></tr>
+        {%- endif %}
+      </tbody>
+    </table>
+    {%- if pnc.detail_titres %}
+    <div class="cote-exh-hd" style="margin-top:22px;">Titres non cotés — détention directe ou via support</div>
+    <table class="synth-table cote-acc-tbl">
+      <thead><tr>
+        <th style="text-align:left;width:32%">Titre / Support</th>
+        <th>Date d'inv.</th><th>Nominal investi</th><th>Cible (TRI)</th><th style="padding-right:12px">Valeur (dern. constat.)</th>
+      </tr></thead>
+      <tbody>
+        {%- for blk in pnc.detail_titres %}
+        {%- if blk.entity %}<tr class="acc-ent-row"><td colspan="5">{{ blk.entity }}</td></tr>{%- endif %}
+        {%- for d in blk.rows %}
+        <tr class="acc-head">
+          <td><span class="acc-chev acc-chev-off"></span><span class="acc-name"><span class="cname">{{ d.name }}</span>{% if d.sub %}<span class="cdet">{{ d.sub }}</span>{% endif %}</span></td>
+          <td>{{ d.date_inv }}</td><td>{{ d.nominal }}</td><td>{{ d.cible }}</td><td style="padding-right:12px;font-weight:600">{{ d.vl }}</td>
+        </tr>
+        {%- endfor %}
+        {%- endfor %}
+        {%- if pnc.titres_total %}
+        <tr class="total-row"><td>TOTAL</td><td></td><td>{{ pnc.titres_total.nominal }}</td><td></td><td style="padding-right:12px" class="c-gold">{{ pnc.titres_total.vl }}</td></tr>
+        {%- endif %}
+      </tbody>
+    </table>
+    {%- endif %}
+    <div class="pnc-gloss">Montants en {{ pnc.detail_unit }}. <strong>Fonds</strong> : véhicules à engagement/appels (multiples MOIC/TVPI agrégés sur ce seul périmètre) · <strong>Titres</strong> : détentions directes ou via support, suivies au nominal avec TRI cible · <strong>MOIC</strong> : valorisation actuelle rapportée au capital appelé (multiple latent, hors distributions) · <strong>TVPI</strong> : (distributions + valeur résiduelle) / capital appelé · <strong>DPI</strong> : part du capital appelé déjà restituée · <strong>TRI</strong> : taux de rendement interne annualisé fourni par le gérant. Cliquez une ligne pour dérouler l'échéancier de flux ; les lignes en italique sont prévisionnelles.</div>
+  </div>
+  {%- endif %}
+
+  {%- if pnc %}
+  <script>
+  (function(){
+    document.querySelectorAll('.nc-acc-tbl .acc-head.acc-clickable').forEach(function(h){
+      if(h.dataset.accBound) return; h.dataset.accBound="1";
+      h.addEventListener('click',function(){
+        var d=h.nextElementSibling;
+        if(!d||!d.classList.contains('acc-detail')) return;
+        var open=!d.hidden; d.hidden=open; h.classList.toggle('acc-open',!open);
+      });
+    });
+  })();
+  </script>
+  {%- endif %}
+</div>
