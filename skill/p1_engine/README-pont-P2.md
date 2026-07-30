@@ -19,10 +19,10 @@ ne dit pas « Camille D. »). Le fichier source doit donc comporter un onglet **
 
 | id | label | type (pp/holding) | onglet (suffixe) |
 |----|-------|-------------------|------------------|
-| pp_hg | Hervé G. | pp | PP |
-| sas_ax | SAS AX | holding | SAS AX |
+| client_exemple | Client Exemple | pp | PP |
+| sas_exemple | SAS Exemple | holding | SAS Exemple |
 
-Les onglets catégorie sont nommés `[Catégorie] — [suffixe]` (ex. `Fin coté — SAS AX`).
+Les onglets catégorie sont nommés `[Catégorie] — [suffixe]` (ex. `Fin coté — SAS Exemple`).
 
 ## Principe : structure figée, données injectées
 

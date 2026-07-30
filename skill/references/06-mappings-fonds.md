@@ -1,6 +1,6 @@
-# Mappings de fonds validés — Spécifique client Hervé G.
+# Mappings de fonds validés — Spécifique client « Client Exemple »
 
-> Tables de fonds identifiés et classifiés pour chaque poche du client Hervé G.
+> Tables de fonds identifiés et classifiés pour chaque poche du client « Client Exemple ».
 > Ce fichier est **spécifique-client** : à dupliquer / adapter pour chaque nouveau client.
 > Référencé depuis le SKILL.md.
 
@@ -17,7 +17,7 @@ ajouter les fonds dans ce fichier pour ne plus avoir à les reclasser à la proc
 
 ---
 
-## Poche PPT De Pury — Wealins Hervé G. (compte UBS 5159306)
+## Poche PPT De Pury — Wealins Client Exemple (compte UBS 0000001)
 
 | ISIN | Libellé | Classe Rhétorès | Géographie | Source de la classification |
 |---|---|---|---|---|
@@ -42,7 +42,7 @@ ajouter les fonds dans ce fichier pour ne plus avoir à les reclasser à la proc
 
 ---
 
-## Poche FAS Rhétorès — Wealins Hervé G. (compte UBS 5159308)
+## Poche FAS Rhétorès — Wealins Client Exemple (compte UBS 0000002)
 
 | ISIN | Libellé | Classe UBS | Classe Rhétorès | Note |
 |---|---|---|---|---|
@@ -69,16 +69,16 @@ Pour chaque nouvelle poche scannée ligne par ligne, ajouter ici une section :
 | ... | ... | ... | ... | ... |
 ```
 
-Poches à scanner pour compléter le mapping Hervé G. :
-- FID Dauphine AM Hervé G. (UBS 5159312)
-- FID UBS Hervé G. (UBS 5159534)
-- FID Indosuez Hervé G. (Cardif Lux 1)
-- FAS EdR + FID EdR Hervé G. (Cardif Lux 2)
-- FID Dauphine AM SAS AX (UBS 5159538)
-- FID De Pury Pictet SAS AX (UBS 5159542)
-- FAS Rhétorès SAS AX (UBS 5159540)
-- CTO EdR SAS AX
-- CTO Tilvest SAS AX
+Poches à scanner pour compléter le mapping de « Client Exemple » :
+- FID Dauphine AM Client Exemple (UBS 0000003)
+- FID UBS Client Exemple (UBS 0000004)
+- FID Indosuez Client Exemple (Cardif Lux 1)
+- FAS EdR + FID EdR Client Exemple (Cardif Lux 2)
+- FID Dauphine AM SAS Exemple (UBS 0000005)
+- FID De Pury Pictet SAS Exemple (UBS 0000006)
+- FAS Rhétorès SAS Exemple (UBS 0000007)
+- CTO EdR SAS Exemple
+- CTO Tilvest SAS Exemple
 
 ---
 

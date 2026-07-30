@@ -2,9 +2,15 @@
 store_builder.py
 =================
 
-Construit le dict client "forme-store" (schema_version "2.0-skill") destine
+Construit le dict client "forme-store" (schema_version "2.1-skill") destine
 au datahub Postgres de Rhetores Finance, conformement a
 `store_client.schema.json`.
+
+2.1-skill est le FORMAT CONVERGE de D48 (cf. docs/confrontation_stores_2026-07-29.md) :
+assureur/intermediaire sur financier_cote (MQ1), pocket.id requis (C7/D16), categories
+liquidites/immobilier/dettes typees (MQ6), courbe_performance et historique typé (MQ7),
+arbitrages (MQ8), flux non cote dans l'enum mouvements (MQ3), tri_pct (MQ4),
+nantissement (ex-pledged), provenance D49. Les stores 2.0-skill ne valident plus.
 
 Discipline ABSENCE != NULL
 ---------------------------
@@ -163,7 +169,7 @@ def new_client(label: str, entities: Iterable[dict], reporting: dict) -> dict:
         )
 
     client_dict = {
-        "schema_version": "2.0-skill",
+        "schema_version": "2.1-skill",
         "client": _clean(
             {
                 "id": "tmp_c_001",

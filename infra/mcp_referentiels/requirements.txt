@@ -1,3 +1,16 @@
+# ╔════════════════════════════════════════════════════════════════════════════╗
+# ║ REMPLACÉ le 2026-07-29 par pyproject.toml + uv.lock (écart R8 du registre).║
+# ║ Ce fichier n'est plus la source d'installation : utiliser `uv sync`.       ║
+# ║ Conservé pour deux raisons — la note sur le chemin relatif de              ║
+# ║ rhetores_authz (bas de fichier) reste l'explication du choix, et il        ║
+# ║ documente l'état d'origine du fork.                                        ║
+# ║                                                                            ║
+# ║ Motif de la bascule : les `>=` ci-dessous ne garantissaient RIEN. Le       ║
+# ║ premier `uv lock` a résolu mcp 2.0.0, qui a SUPPRIMÉ mcp.server.fastmcp —  ║
+# ║ server.py ne s'importait plus. D'où `mcp[cli]>=1.27.2,<2` dans le          ║
+# ║ pyproject. Un lock rend l'alignement vérifiable ; un commentaire non.      ║
+# ╚════════════════════════════════════════════════════════════════════════════╝
+
 # Serveur MCP des référentiels du skill (D37) — dépendances.
 #
 # Pins alignés sur mcp-o2s-server/pyproject.toml : les deux serveurs partagent

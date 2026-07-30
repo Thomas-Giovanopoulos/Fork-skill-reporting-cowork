@@ -74,11 +74,14 @@ FALLBACK = ["#14324F","#B8975A","#3E6188","#6E93B5","#D8C6A0","#4F7D64","#C0824F
 NCOTE_CLASS = {"PE":"Private Equity","Private Equity":"Private Equity","Actions non cotées":"Actions non cotées","Actions non cotées en direct":"Actions non cotées","Titres non cotés":"Actions non cotées","Dette privée":"Dette privée","Immo non coté":"Immo non coté","Immobilier non coté":"Immo non coté","Infrastructures":"Infrastructures"}
 
 def envelope(nature, depo):
+    # Reconnaît les formes COURTES ('cto') et LONGUES ('Compte Titres') : depuis que la nature
+    # verbatim du client fait foi (30/07), 'Compte Titres' arrivait ici, ne matchait rien et
+    # tombait dans le repli Assurance-vie — le donut Enveloppes mentait en silence.
     nat=(nature or "").lower(); fr = (str(depo).strip().upper()=="NC")
     if nat=="pea": return "PEA"
     if nat in ("nominatif","nominatif pur","np"): return "Nominatif pur"
-    if nat=="cto": return "Compte Titres"
-    if nat=="capi": return "Capitalisation FR" if fr else "Capitalisation LU"
+    if nat in ("cto","compte titres","compte-titres","compte titres ordinaire"): return "Compte Titres"
+    if nat=="capi" or nat.startswith("capitalisation"): return "Capitalisation FR" if fr else "Capitalisation LU"
     return "Assurance-vie FR" if fr else "Assurance-vie LU"
 
 def _norm(x):
@@ -466,7 +469,14 @@ def main():
     ctx_path = sys.argv[4] if len(sys.argv) > 4 else None
     manifest = A.load_json(manp)
     A.validate(manifest, A.load_json(A.ROOT/"manifest.schema.json"))
-    wb = openpyxl.load_workbook(xlsx, data_only=True)
+    # L2 — la substitution du lecteur de forme-store tient en UN point : un .json est un
+    # store client (2.1-skill), présenté sous l'interface classeur par la façade ; tout le
+    # reste du moteur ne connaît que cette interface et ne change pas (D20).
+    if str(xlsx).lower().endswith(".json"):
+        from lecteur_store import ClasseurStore
+        wb = ClasseurStore.depuis_fichier(xlsx)
+    else:
+        wb = openpyxl.load_workbook(xlsx, data_only=True)
     try:
         import lint as _lint
         _iss=_lint.lint(xlsx); _ne=sum(1 for x in _iss if x[0]=="ERREUR")
@@ -1132,6 +1142,11 @@ def main():
         return out
     _dispo=[]; _mp=[]; _dispo_tot=0.0; _mp_tot=0.0   # demandes client : disponibilités par contrat + détail matières premières
     _entlbl={_e["id"]: _e["label"] for _e in manifest["entities"]}
+    # QC n°10 (traversée) — compte les lignes classées effectivement JOINTES à un contrat.
+    # Motif (30/07, premier run réel) : une clé de jointure cassée a fait disparaître 53 lignes du
+    # rendu SANS qu'aucun contrôle n'échoue. Le cœur du reporting ne doit pas pouvoir se perdre
+    # en silence entre la source et l'HTML.
+    _trav_jointes=set()
     for (_eid,_nat,_ass,_int), _grp in _contracts.items():
         _label = f"{NATURE.get(_nat.lower(), _nat)} \u00b7 {_ass}"
         _dfl=[]
@@ -1140,6 +1155,7 @@ def main():
         _cm=_cmetrics(_grp, dated_flows=_dfl); _val=sum(num(g(r,12)) or 0 for r in _grp)
         _ckset={_norm(_label.replace(" \u00b7 "," — ")), _norm(_label)}
         _clines=[L for L in _lignes_raw.get(_eid,[]) if L["ck"] in _ckset]
+        for L in _clines: _trav_jointes.add(id(L))
         from collections import OrderedDict as _ODp
         _pgroups=_ODp()
         for r in _grp:
@@ -1694,6 +1710,13 @@ def main():
     if ce is not None: _chk(abs(ce-net_total)<=max(1.0,0.01*abs(net_total)), "courbe (dernier point) ≈ actif net", f"{ce:.0f} vs {net_total:.0f}")
     for cid,dn in data["donuts"].items():
         ssum=sum(L["pct"] for L in dn["legend"]); _chk(98<=ssum<=102, f"donut {cid} ≈ 100%", f"{ssum}%")
+    # QC n°10 — TRAVERSÉE : toute ligne classée lue à la source doit être jointe à un contrat
+    # du rendu. Une ligne perdue = une clé de jointure cassée (nature, banque) : échec bruyant,
+    # jamais un reporting amputé qui s'imprime (constat du 30/07 : 53 lignes perdues, QC 7/7).
+    _trav_lues=sum(len(_rows) for _rows in _lignes_raw.values())
+    if _trav_lues:
+        _chk(len(_trav_jointes)==_trav_lues, "traversée : lignes classées jointes au rendu",
+             f"{len(_trav_jointes)}/{_trav_lues} — si écart, clé de jointure (nature — banque) cassée")
     n_ko=sum(1 for ok,_,_ in qc if not ok)
     print(f"── Contrôles comptables : {len(qc)-n_ko}/{len(qc)} OK ──")
     for ok,lbl,det in qc:

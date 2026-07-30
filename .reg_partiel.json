@@ -6,7 +6,7 @@
     "actif_brut": "2 929 000 €",
     "dettes": "0 €",
     "actif_net": "2 929 000 €",
-    "secondes": 3.5,
+    "secondes": 5.5,
     "key_ok": true,
     "ok": true
   },
@@ -17,7 +17,7 @@
     "actif_brut": "235 500 €",
     "dettes": "0 €",
     "actif_net": "235 500 €",
-    "secondes": 3.0,
+    "secondes": 7.1,
     "key_ok": true,
     "ok": true
   },
@@ -28,7 +28,7 @@
     "actif_brut": "67 000 €",
     "dettes": "0 €",
     "actif_net": "67 000 €",
-    "secondes": 3.0,
+    "secondes": 7.2,
     "key_ok": true,
     "ok": true
   },
@@ -39,7 +39,7 @@
     "actif_brut": "152 000 €",
     "dettes": "0 €",
     "actif_net": "152 000 €",
-    "secondes": 3.5,
+    "secondes": 9.7,
     "key_ok": true,
     "ok": true
   },
@@ -50,7 +50,7 @@
     "actif_brut": "10 749 000 €",
     "dettes": "0 €",
     "actif_net": "10 749 000 €",
-    "secondes": 3.4,
+    "secondes": 8.1,
     "key_ok": true,
     "ok": true
   },
@@ -61,7 +61,7 @@
     "actif_brut": "17 130 000 €",
     "dettes": "−15 000 000 €",
     "actif_net": "2 130 000 €",
-    "secondes": 3.3,
+    "secondes": 6.8,
     "key_ok": true,
     "ok": true
   },
@@ -72,7 +72,7 @@
     "actif_brut": "7 957 000 €",
     "dettes": "−1 440 000 €",
     "actif_net": "6 517 000 €",
-    "secondes": 3.0,
+    "secondes": 6.4,
     "key_ok": true,
     "ok": true
   }

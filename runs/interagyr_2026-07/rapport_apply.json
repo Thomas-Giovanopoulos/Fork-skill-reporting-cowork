@@ -1,0 +1,17 @@
+{
+  "appliques": [
+    "Interagyr.pdf:changes[0] (Compte Titres — UBS (De Pury Pictet)): 3 champ(s) mis à jour sur tmp_fc_001",
+    "Releve╠ü - INTERAGYR E 4 - ETF.pdf:changes[0] (Compte Titres — UBS (Dauphine AM — Équilibré)): 3 champ(s) mis à jour sur tmp_fc_002",
+    "Releve╠ü - INTERAGYR Tresorerie 2.pdf:changes[0] (Compte Titres — UBS (Dauphine AM — Prudent)): 3 champ(s) mis à jour sur tmp_fc_003",
+    "Releve╠ü - INTERAGYR Offensif 6.pdf:changes[0] (Compte Titres — UBS (Dauphine AM — Offensif)): 3 champ(s) mis à jour sur tmp_fc_004"
+  ],
+  "conflits": [],
+  "avertissements": [],
+  "acteurs_non_resolus": [
+    "UBS (Dauphine AM — Offensif)",
+    "UBS (Dauphine AM — Prudent)",
+    "UBS (Dauphine AM — Équilibré)",
+    "UBS (De Pury Pictet)"
+  ],
+  "erreurs": []
+}

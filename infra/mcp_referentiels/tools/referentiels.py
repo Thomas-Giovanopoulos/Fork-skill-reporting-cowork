@@ -187,12 +187,25 @@ _SPECS: dict[str, dict[str, Any]] = {
         ),
         "jsonb": ("payload",),
     },
+    # D42 (2026-07-29) — la clé de conflit suit la contrainte d'unicité de la base :
+    # `periodicite` en sort, `valide_depuis` y entre. Deux conséquences à ne pas défaire.
+    #
+    # `periodicite` n'est plus REQUISE : elle n'est pas lisible dans le document chez trois
+    # émetteurs sur quatre (offre commerciale chez Spirica, fenêtre YTD chez Cardif, rien du
+    # tout chez Himalia). L'exiger obligerait l'appelant à inventer une valeur.
+    #
+    # `valide_depuis` n'est pas requise non plus, mais pour une autre raison : la base lui donne
+    # le défaut '0001-01-01' (« depuis toujours »). Elle ne doit JAMAIS être NULL — deux NULL
+    # étant distincts dans une contrainte d'unicité, l'ON CONFLICT ci-dessous ne matcherait
+    # jamais et chaque adjudication acceptée insérerait un doublon en silence. Cf.
+    # `infra/migration_001_d42_fenetre_validite.sql`.
     "gabarit": {
         "table": "gabarits",
-        "conflict": ("emetteur_code", "gabarit", "periodicite"),
-        "requis": ("emetteur_code", "gabarit", "periodicite", "signature"),
+        "conflict": ("emetteur_code", "gabarit", "valide_depuis"),
+        "requis": ("emetteur_code", "gabarit", "signature"),
         "colonnes": (
-            "emetteur_code", "gabarit", "periodicite", "template_id_natif",
+            "emetteur_code", "gabarit", "valide_depuis", "valide_jusqu_a",
+            "periodicite", "template_id_natif",
             "signature", "n_pages_indicatif", "extraction_hints",
             "champs_publies", "invariant_controle", "emetteur_lisible",
         ),
@@ -266,6 +279,50 @@ def _jsonable(row: dict | None) -> dict | None:
     return out
 
 
+# Champs de pure traçabilité, retirés du BUNDLE (jamais de la base). Le skill ne les lit pas :
+# il consomme des référentiels, il n'audite pas leur cycle de vie. Mesuré le 2026-07-29 sur le
+# premier bundle réel (17 acteurs + 2 successions + 9 gabarits + 261 ISIN) : 185 ko, 4 936
+# lignes, dont 1 732 de métadonnées — assez pour dépasser la limite d'un résultat d'outil MCP.
+#
+# `provenance` et `confiance` sont CONSERVÉS : ce sont des enums courts, et la confiance est une
+# information métier que le skill peut légitimement pondérer (B9). `id` reste aussi, il sert de
+# référence stable dans une proposition de mise à jour.
+_CHAMPS_AUDIT = ("created_at", "updated_at", "version", "validated_by")
+
+SECTIONS = ("acteurs", "successions", "gabarits", "isin")
+
+# ---------------------------------------------------------------------------
+# Contrat d'outil et détection du retrait silencieux d'arguments
+# ---------------------------------------------------------------------------
+# Le problème, constaté DEUX fois le 2026-07-29 : le client MCP met le schéma des outils en
+# cache. Quand le serveur gagne un paramètre, un client au schéma périmé **retire l'argument de
+# l'appel sans un mot**. La première fois, `ref_bundle(sections=…)` a rendu tout le bundle en
+# ignorant le filtre. La seconde, plus grave, `ref_propose` a enregistré une proposition dont les
+# trois champs de provenance étaient à `null` — donc une provenance qui **paraissait vide par
+# choix de l'appelant** alors qu'elle avait été perdue en transport. Un arbitre n'avait aucun
+# moyen de le savoir.
+#
+# LA FAUSSE BONNE IDÉE, écartée : faire déclarer sa version au client. Un appelant parfaitement à
+# jour qui omettrait ce champ serait alors accusé d'être en retard — on échangerait un faux
+# négatif silencieux contre un faux positif bruyant, et personne ne fait confiance à un contrôle
+# qui accuse à tort.
+#
+# CE QU'ON PEUT SAVOIR AVEC CERTITUDE : non pas ce que le client EST, mais ce que le serveur A
+# REÇU. Le signal est donc **descriptif, jamais accusatoire** — deux mécanismes :
+#
+#   1. Le serveur annonce SON contrat (`CONTRAT_OUTIL`). L'appelant compare à ce qu'il attendait.
+#   2. Chaque écriture **renvoie ce qu'elle a reçu** pour les champs qui comptent. Un argument
+#      retiré en route se voit immédiatement dans la réponse, sans rien supposer de personne.
+#
+# Aucun faux positif possible : la réponse énonce des faits. Et cela couvre TOUT argument perdu,
+# pas seulement ceux qu'on avait anticipés.
+CONTRAT_OUTIL = "2026-07-29.d44"
+
+
+def _alleger(lignes: list[dict]) -> list[dict]:
+    return [{k: v for k, v in l.items() if k not in _CHAMPS_AUDIT} for l in lignes]
+
+
 # ---------------------------------------------------------------------------
 # Enregistrement des tools
 # ---------------------------------------------------------------------------
@@ -274,43 +331,104 @@ def register(mcp: FastMCP) -> None:
 
     @mcp.tool()
     @logged
-    async def ref_bundle() -> dict:
-        """Retourne l'intégralité des référentiels canoniques du skill.
+    async def ref_bundle(sections: list[str] | None = None) -> dict:
+        """Retourne les référentiels canoniques du skill.
 
-        Appelé une fois au début d'un run de reporting. Les référentiels sont
-        petits et lus en entier : pas de pagination, pas de requête par ligne.
-        C'est ce qui remplace la copie vendorée dans le paquet du skill (D36) —
-        un gabarit validé est donc visible au run suivant de N'IMPORTE QUEL
-        CGP, sans réinstallation.
+        Appelé au début d'un run de reporting. C'est ce qui remplace la copie vendorée
+        dans le paquet du skill (D36) — un gabarit validé est donc visible au run suivant
+        de N'IMPORTE QUEL CGP, sans réinstallation.
+
+        ``sections`` : sous-ensemble de 'acteurs' | 'successions' | 'gabarits' | 'isin'.
+        Par défaut, tout est retourné.
+
+        Pourquoi ce paramètre existe, alors que la version initiale affirmait « les
+        référentiels sont petits et lus en entier : pas de pagination » — cette phrase
+        était vraie sur une base vide, elle a cessé de l'être au premier chargement réel.
+        Mesuré le 2026-07-29 : 185 ko et 4 936 lignes, **au-delà de ce qu'un résultat
+        d'outil MCP peut porter**. Les 261 ISIN en font près de 70 % à eux seuls, alors
+        que la plupart des besoins d'un run ne portent que sur les gabarits ou les
+        acteurs. Demander une section, c'est donc l'usage normal ; tout demander reste
+        possible et le restera, mais ne passera pas toujours.
+
+        Le compte porte TOUJOURS sur les quatre tables, même si une seule est demandée :
+        sans quoi un appel partiel pourrait se lire comme une base à moitié vide.
         """
         _require_identified()
+        if sections is None:
+            demandees = set(SECTIONS)
+        else:
+            inconnues = [s for s in sections if s not in SECTIONS]
+            if inconnues:
+                raise ValueError(
+                    f"Section(s) inconnue(s) : {inconnues} (attendu : {list(SECTIONS)})")
+            demandees = set(sections)
+
+        vide: list[dict] = []
+        acteurs = successions = gabarits = isins = vide
         with _tx("ref_app") as cur:
             cur.execute("SELECT valeur FROM ref_meta WHERE cle = 'schema_version'")
             row = cur.fetchone()
             schema_version = row["valeur"] if row else None
 
-            cur.execute("SELECT * FROM acteurs ORDER BY code")
-            acteurs = [_jsonable(r) for r in cur.fetchall()]
+            # Les comptes sont lus séparément du contenu : un appel partiel doit quand même
+            # dire la vérité sur l'état de la base.
             cur.execute(
-                "SELECT * FROM acteur_successions ORDER BY predecesseur_code, date_effet NULLS LAST"
-            )
-            successions = [_jsonable(r) for r in cur.fetchall()]
-            cur.execute("SELECT * FROM gabarits ORDER BY emetteur_code, gabarit, periodicite")
-            gabarits = [_jsonable(r) for r in cur.fetchall()]
-            cur.execute("SELECT * FROM isin ORDER BY isin")
-            isins = [_jsonable(r) for r in cur.fetchall()]
+                "SELECT (SELECT count(*) FROM acteurs) AS acteurs,"
+                "       (SELECT count(*) FROM acteur_successions) AS successions,"
+                "       (SELECT count(*) FROM gabarits) AS gabarits,"
+                "       (SELECT count(*) FROM isin) AS isin")
+            compte = dict(cur.fetchone())
 
-        return {
+            if "acteurs" in demandees:
+                cur.execute("SELECT * FROM acteurs ORDER BY code")
+                acteurs = _alleger([_jsonable(r) for r in cur.fetchall()])
+            if "successions" in demandees:
+                cur.execute("SELECT * FROM acteur_successions "
+                            "ORDER BY predecesseur_code, date_effet NULLS LAST")
+                successions = _alleger([_jsonable(r) for r in cur.fetchall()])
+            if "gabarits" in demandees:
+                # Tri par la clé réelle (D42) : la périodicité n'en fait plus partie, et
+                # `valide_depuis` place les versions d'un gabarit dans l'ordre chronologique.
+                cur.execute("SELECT * FROM gabarits "
+                            "ORDER BY emetteur_code, gabarit, valide_depuis")
+                gabarits = _alleger([_jsonable(r) for r in cur.fetchall()])
+            if "isin" in demandees:
+                cur.execute("SELECT * FROM isin ORDER BY isin")
+                isins = _alleger([_jsonable(r) for r in cur.fetchall()])
+
+        resultat = {
             "schema_version": schema_version,
+            "contrat_outil": CONTRAT_OUTIL,
+            "sections_recues": sections,          # ce que l'appel portait vraiment
+            "sections_retournees": sorted(demandees),
             "acteurs": acteurs,
             "successions": successions,
             "gabarits": gabarits,
             "isin": isins,
-            "compte": {
-                "acteurs": len(acteurs), "successions": len(successions),
-                "gabarits": len(gabarits), "isin": len(isins),
-            },
+            "compte": compte,
+            "_note": (
+                "Les champs de pure traçabilité (created_at, updated_at, version, "
+                "validated_by) sont retirés du bundle — ils restent en base. `compte` porte "
+                "sur les quatre tables, y compris celles non demandées."
+                if sections is None else
+                f"Sections demandées : {sorted(demandees)}. Les autres tableaux sont vides par "
+                f"choix de l'appelant, PAS parce que la base l'est — voir `compte`."
+            ),
         }
+        if sections is None:
+            # Même ambiguïté que pour la provenance de `ref_propose`, et même traitement : on
+            # énonce les deux lectures sans en choisir une. Ici l'enjeu est concret — le bundle
+            # complet dépasse la taille qu'un résultat d'outil peut porter, donc un `sections`
+            # retiré en route se manifeste par un échec de transport, pas par un mauvais résultat.
+            resultat["avertissement_sections"] = (
+                "Aucune section demandée : tout est retourné. Deux lectures possibles, et le "
+                "serveur ne peut pas les distinguer : soit l'appel n'en demandait pas, soit "
+                "l'argument `sections` a été RETIRÉ en route par un schéma d'outil en cache. Si "
+                f"vous l'avez bien passé, votre client ne connaît pas le contrat {CONTRAT_OUTIL} : "
+                "rafraîchissez la liste des outils (relancer Cowork). Attention, le bundle "
+                "complet dépasse souvent la taille qu'un résultat d'outil peut porter."
+            )
+        return resultat
 
     @mcp.tool()
     @logged
@@ -320,7 +438,9 @@ def register(mcp: FastMCP) -> None:
         cle: dict,
         proposition: dict,
         motif: str | None = None,
-        source_document: str | None = None,
+        source_empreinte: str | None = None,
+        source_gabarit: str | None = None,
+        source_arrete: str | None = None,
         run_id: str | None = None,
     ) -> dict:
         """Dépose une proposition dans la file d'adjudication.
@@ -334,24 +454,68 @@ def register(mcp: FastMCP) -> None:
                    | 'mise_a_jour'
         Les trois premières sont les natures de N6 : elles n'appellent pas le
         même arbitrage, d'où leur distinction explicite.
+
+        **La provenance ne porte plus de nom de fichier (D44).** Elle se décrit par trois
+        champs : ``source_empreinte`` (sha256 du CONTENU du document), ``source_gabarit``
+        (le gabarit apparié) et ``source_arrete`` (la date d'arrêté). Motif : ce store est
+        rendu **en entier à chaque CGP** par ``ref_bundle``, or un nom de fichier porte le
+        client en clair (« Relevé Himalia Capi HANAMI.pdf ») — ce serait une divulgation
+        entre confrères. Le remplacement est aussi **plus utile** à l'arbitre : l'empreinte
+        du contenu reconnaît deux propositions issues du même document, ce qu'un nom de
+        fichier ne garantit jamais.
         """
         email = _require_identified()
         if cible not in _SPECS:
             raise ValueError(f"Cible inconnue : {cible!r} (attendu : {sorted(_SPECS)})")
 
+        # Refus explicite plutôt qu'écriture silencieuse dans une colonne disparue : un vieux
+        # client qui passerait encore `source_document` doit l'apprendre, pas voir sa provenance
+        # avalée. C'est la leçon du paramètre `sections` retiré en silence par un schéma en cache.
+        if source_empreinte is not None and len(source_empreinte) not in (0, 64):
+            raise ValueError(
+                f"source_empreinte doit être un sha256 hexadécimal (64 caractères), "
+                f"reçu {len(source_empreinte)} caractères. Ne PAS y mettre un nom de fichier : "
+                f"le store est lu par tous les CGP (D44)."
+            )
+
         with _tx("ref_app") as cur:
             cur.execute(
                 "INSERT INTO adjudications "
-                "(cible, nature, cle, proposition, motif, source_document, run_id, propose_par) "
-                "VALUES (%s, %s, %s, %s, %s, %s, %s, %s) RETURNING id, propose_le, statut",
+                "(cible, nature, cle, proposition, motif, "
+                " source_empreinte, source_gabarit, source_arrete, run_id, propose_par) "
+                "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s) "
+                "RETURNING id, propose_le, statut",
                 (cible, nature, json.dumps(cle, ensure_ascii=False),
                  json.dumps(proposition, ensure_ascii=False),
-                 motif, source_document, run_id, email),
+                 motif, source_empreinte, source_gabarit, source_arrete, run_id, email),
             )
             row = cur.fetchone()
 
-        return {"adjudication_id": str(row["id"]), "statut": row["statut"],
-                "propose_le": str(row["propose_le"]), "propose_par": email}
+        # La provenance REÇUE est renvoyée telle quelle. C'est le garde-fou contre le retrait
+        # silencieux d'argument par un schéma en cache : si l'appelant a passé une empreinte et
+        # lit `null` ici, il sait immédiatement qu'elle a été perdue en route — sans que le
+        # serveur ait à deviner quoi que ce soit de son client.
+        provenance_recue = {"source_empreinte": source_empreinte,
+                            "source_gabarit": source_gabarit,
+                            "source_arrete": source_arrete}
+        reponse = {"adjudication_id": str(row["id"]), "statut": row["statut"],
+                   "propose_le": str(row["propose_le"]), "propose_par": email,
+                   "contrat_outil": CONTRAT_OUTIL,
+                   "provenance_recue": provenance_recue}
+
+        if not any(provenance_recue.values()):
+            # Un constat, pas une accusation : on ne peut pas distinguer « l'appelant n'avait pas
+            # de provenance » de « le client a retiré les arguments ». On énonce donc les deux
+            # lectures possibles et on laisse l'appelant trancher — lui sait ce qu'il a envoyé.
+            reponse["avertissement_provenance"] = (
+                "Aucune provenance enregistrée. Deux lectures possibles, et le serveur ne peut pas "
+                "les distinguer : soit l'appel n'en portait pas, soit les arguments "
+                "`source_empreinte` / `source_gabarit` / `source_arrete` ont été RETIRÉS en route "
+                "par un schéma d'outil en cache. Si vous les avez bien passés, votre client ne "
+                f"connaît pas encore le contrat {CONTRAT_OUTIL} : rafraîchissez la liste des "
+                "outils (relancer Cowork) et rejouez la proposition."
+            )
+        return reponse
 
     @mcp.tool()
     @logged

@@ -1,0 +1,146 @@
+{
+  "schema_version": "2.1-skill",
+  "client": {
+    "id": "tmp_c_001",
+    "label": "Camille D.",
+    "entities": [
+      {
+        "id": "camille_d",
+        "label": "Camille D.",
+        "type": "pp",
+        "order": 0
+      }
+    ]
+  },
+  "reporting": {
+    "period_short": "T2-26",
+    "period_long": "T2 2026",
+    "date_reporting": "2026-06-30",
+    "date_display": "30 juin 2026",
+    "version": "v1",
+    "profile": "Équilibré"
+  },
+  "_provisional_ids": true,
+  "financier_cote": [
+    {
+      "id": "tmp_fc_001",
+      "entity_id": "camille_d",
+      "label": "AV — Generali",
+      "nature": "AV",
+      "assureur": "Generali",
+      "intermediaire": "Direct",
+      "envelope_type": "av_fr",
+      "manager": "Generali",
+      "custodian": "NC",
+      "management_mode": "Déléguée",
+      "risk_profile": "Équilibré",
+      "invest_date": "Janv. 2022",
+      "nantissement": false,
+      "source": "excel",
+      "attributes": {
+        "pockets": [
+          {
+            "id": "pck_001",
+            "label": "AV — Generali",
+            "type": "Mono",
+            "profile": "Équilibré",
+            "manager": "Generali",
+            "custodian": "NC",
+            "value": 164300.0,
+            "capital_invested": 150000.0,
+            "value_jan1": 158000.0,
+            "invest_date": "Janv. 2022",
+            "classe_rhetores": "actions",
+            "geography": "International / Monde"
+          }
+        ]
+      },
+      "value_current": 164300.0,
+      "capital_invested": 150000.0,
+      "value_jan1": 158000.0
+    }
+  ],
+  "liquidites": [
+    {
+      "id": "liq_001",
+      "entity_id": "camille_d",
+      "label": "Compte courant",
+      "custodian": "BNP Paribas",
+      "balance": 48250.0,
+      "source": "excel"
+    },
+    {
+      "id": "liq_002",
+      "entity_id": "camille_d",
+      "label": "Livret A",
+      "custodian": "BNP Paribas",
+      "balance": 22950.0,
+      "source": "excel"
+    }
+  ],
+  "immobilier": [],
+  "dettes": [],
+  "non_cote": [],
+  "valuations": [
+    {
+      "position_id": "pck_001",
+      "date": "2026-01-01",
+      "value": 158000.0
+    },
+    {
+      "position_id": "pck_001",
+      "date": "2026-06-30",
+      "value": 164300.0
+    }
+  ],
+  "courbe_performance": [
+    {
+      "date": "2026-01-01",
+      "cote": 158000.0
+    },
+    {
+      "date": "2026-01-15",
+      "cote": 158573.0
+    },
+    {
+      "date": "2026-02-01",
+      "cote": 159145.0
+    },
+    {
+      "date": "2026-02-15",
+      "cote": 159718.0
+    },
+    {
+      "date": "2026-03-01",
+      "cote": 160291.0
+    },
+    {
+      "date": "2026-03-15",
+      "cote": 160864.0
+    },
+    {
+      "date": "2026-04-01",
+      "cote": 161436.0
+    },
+    {
+      "date": "2026-04-15",
+      "cote": 162009.0
+    },
+    {
+      "date": "2026-05-01",
+      "cote": 162582.0
+    },
+    {
+      "date": "2026-05-15",
+      "cote": 163155.0
+    },
+    {
+      "date": "2026-06-01",
+      "cote": 163727.0
+    },
+    {
+      "date": "2026-06-15",
+      "cote": 164300.0
+    }
+  ]
+}

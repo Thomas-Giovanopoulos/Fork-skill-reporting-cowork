@@ -50,7 +50,7 @@ et `references/09-formalisme.md`), les 4 KPIs du Hero sont :
   Sous-total Non coté, Sous-total Dettes — par entité
 
 ### Zone 5 — Bloc 03 (Totaux par entité)
-- Total Hervé G., Total SAS AX, Total SAS LG, etc.
+- Total Client Exemple, Total SAS Exemple, Total SAS Exemple 2, etc.
 - Total consolidé en bas du tableau (ligne navy)
 
 ---
@@ -82,5 +82,5 @@ global → impact sur les donuts d'allocation et de géographie.
 **Changement de classification d'un fonds** : impact uniquement sur les donuts d'allocation
 (et géographie si applicable), pas sur les totaux. Mais il faut absolument re-générer les donuts.
 
-**Reclassification entité** (ex: déplacer un actif d'Hervé G. vers SAS AX) : impact sur les
+**Reclassification entité** (ex: déplacer un actif de Client Exemple vers SAS Exemple) : impact sur les
 totaux entité, mais le total consolidé reste inchangé.

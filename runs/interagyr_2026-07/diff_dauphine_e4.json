@@ -1,0 +1,59 @@
+{
+  "client_id": "tmp_c_001",
+  "source_document": "Releve╠ü - INTERAGYR E 4 - ETF.pdf",
+  "status": "pending_validation",
+  "extraction_profile": "skill_v1",
+  "changes": [
+    {
+      "category": "financier_cote",
+      "entry_id": "tmp_fc_002",
+      "entry_label": "Compte Titres — UBS (Dauphine AM — Équilibré)",
+      "entity_id": "interagyr",
+      "action": "update",
+      "confidence": "high",
+      "notes": "Reporting hebdomadaire Dauphine AM (gabarit reporting_hebdo_mandat), mandat « INTERAGYR E 4 - ETF », semaine du 13/07/2026 au 16/07/2026, valorisation au 16/07/2026. La colonne perf_pct est la variation HEBDOMADAIRE (+/- % de la semaine), PAS un YTD — le YTD du bloc KPI vaut 0,1 %. Invariant contrôlé : Σ sous-totaux de classes (336 120 + 603 089 + 352 084 + 210 769) = Total portefeuille 1 502 062 € au € près — OK. Écart d'arrondi de 1 € entre la somme des lignes OBLIGATIONS (603 090) et leur sous-total publié (603 089) : absorbé sur la ligne LIQUIDITÉS (210 769 → 210 768) pour que Σ lignes = 1 502 062. Ligne LIQUIDITÉS : tiret cadratin sur +/- VALUE et +/- % = non applicable, perf_pct omise. KPI NOMBRE DE LIGNES = 11, cohérent avec 11 lignes extraites (10 positions + liquidités). Rattachement : le relevé s'intitule « E 4 - ETF » et non « Équilibré », mais la correspondance avec tmp_fc_002 est corroborée par la valorisation (1 502 062 € vs ancre 1 501 734 €, écart +0,02 %) et par une allocation cohérente avec un profil équilibré (22 % actions / 40 % obligations / 23 % monétaire / 14 % liquidités) ; « E » interprété comme Équilibré. Filigrane fragmenté (9 jetons) filtré ; signes moins U+2212 normalisés ; noms de supports repliés sur 2 lignes fusionnés ; tableau scindé pages 2-3 sans ré-émission d'en-tête ; valorisation dédupliquée (page de garde vs KPI). Aucun mouvement sur la semaine. SRI non publié dans le relevé ni renseigné au référentiel ISIN : omis.",
+      "fields": [
+        {
+          "path": "value_current",
+          "old_value": 1501734,
+          "new_value": 1502062,
+          "source_page": 2
+        },
+        {
+          "path": "attributes.lines",
+          "old_value": null,
+          "new_value": [
+            {"label": "AMUNDI IS-MSCI WORLD UCITS ETF (D)", "value": 153100, "class": "actions", "isin": "LU2655993207", "perf_pct": 2.5, "geography": "monde", "pocket": "pck_002"},
+            {"label": "AMUNDI IS-EUROSTOXX50-UETF DR EUR C", "value": 74761, "class": "actions", "isin": "LU1681047236", "perf_pct": -1.2, "geography": "europe", "pocket": "pck_002"},
+            {"label": "XTRACKERS-S&P 500 EQ.W.UETF-2C-HDG-", "value": 37410, "class": "actions", "isin": "IE0002EI5AG0", "perf_pct": -1.4, "geography": "amerique_du_nord", "pocket": "pck_002"},
+            {"label": "CANDRIAM EQ.L-BIOTECH-R-(C)", "value": 35988, "class": "actions", "isin": "LU1269736838", "perf_pct": 16.2, "geography": "monde", "pocket": "pck_002"},
+            {"label": "L&G ROBO GL.ROBOT.AND AUTOM.-A-UETF", "value": 34861, "class": "actions", "isin": "IE00BMW3QX54", "perf_pct": -5.0, "geography": "monde", "pocket": "pck_002"},
+            {"label": "PARETO-NORDIC CORPORATE BD-H EUR(C)", "value": 150327, "class": "obligations", "isin": "LU1311575093", "perf_pct": 0.5, "geography": "europe", "pocket": "pck_002"},
+            {"label": "LAZARD EURO SH.FD.HIGH YIELD-PVC-(C", "value": 150198, "class": "obligations", "isin": "FR0013507019", "perf_pct": 0.1, "geography": "europe", "pocket": "pck_002"},
+            {"label": "CARMIGNAC UNC.EURO FIXED INC-F-(C)", "value": 135832, "class": "obligations", "isin": "LU0992631217", "perf_pct": -0.1, "geography": "europe", "pocket": "pck_002"},
+            {"label": "TAILOR CREDIT 2028 FCP -I-", "value": 90950, "class": "obligations", "isin": "FR001400BW13", "perf_pct": 0.8, "pocket": "pck_002"},
+            {"label": "ABRDN EMER.MRKTS CORP.BD.FD-X2-(C)", "value": 75783, "class": "obligations", "isin": "LU1725895707", "perf_pct": 0.8, "geography": "emergents", "pocket": "pck_002"},
+            {"label": "CM-CIC MONEPLUS FCP -RC- 3DEC(C)", "value": 352084, "class": "monetaire", "isin": "FR0013354230", "perf_pct": 0.3, "pocket": "pck_002"},
+            {"label": "LIQUIDITÉS", "value": 210768, "class": "monetaire", "pocket": "pck_002"}
+          ],
+          "source_page": 2
+        },
+        {
+          "path": "attributes.pockets",
+          "old_value": null,
+          "new_value": [
+            {
+              "id": "pck_002",
+              "label": "Compte Titres — UBS (Dauphine AM — Équilibré)",
+              "value": 1502062,
+              "capital_invested": 1500000,
+              "invest_date": "2026-05-02"
+            }
+          ],
+          "source_page": 2
+        }
+      ]
+    }
+  ],
+  "unrecognized_data": []
+}

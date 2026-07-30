@@ -1,7 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://rhetores-finance.example/schemas/store_client.schema.json",
-  "title": "Rhetores Store Client (forme-store)",
+  "title": "Rhetores Store Client (forme-store) — format convergé D48",
+  "description": "Version 2.1-skill : le format convergé de la confrontation du 2026-07-29 (docs/confrontation_stores_2026-07-29.md). Chaque écart avec 2.0-skill est arbitré là-bas et inscrit au REGISTRE_ECARTS.md. Les stores 2.0-skill ne valident plus : c'est voulu (échec bruyant, L5), la migration est mécanique.",
   "type": "object",
   "required": [
     "schema_version",
@@ -11,7 +12,7 @@
   "additionalProperties": false,
   "properties": {
     "schema_version": {
-      "const": "2.0-skill"
+      "const": "2.1-skill"
     },
     "client": {
       "$ref": "#/$defs/client"
@@ -31,13 +32,13 @@
     "liquidites": {
       "type": "array",
       "items": {
-        "$ref": "#/$defs/genericEntry"
+        "$ref": "#/$defs/liqEntry"
       }
     },
     "immobilier": {
       "type": "array",
       "items": {
-        "$ref": "#/$defs/genericEntry"
+        "$ref": "#/$defs/immoEntry"
       }
     },
     "financier_cote": {
@@ -55,7 +56,7 @@
     "dettes": {
       "type": "array",
       "items": {
-        "$ref": "#/$defs/genericEntry"
+        "$ref": "#/$defs/detteEntry"
       }
     },
     "exotiques": {
@@ -67,7 +68,53 @@
     "historique_annuel": {
       "type": "array",
       "items": {
-        "$ref": "#/$defs/genericEntry"
+        "$ref": "#/$defs/histoEntry"
+      }
+    },
+    "courbe_performance": {
+      "type": "array",
+      "description": "MQ7 (volet agrégats) — courbe agrégée par date, forme rapatriée de validation_app (onglet Valorisations, 3 colonnes). `cote` et `nc` en euros.",
+      "items": {
+        "type": "object",
+        "required": [
+          "date",
+          "cote"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "cote": {
+            "type": "number"
+          },
+          "nc": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "arbitrages": {
+      "type": "array",
+      "description": "MQ8 — faits marquants de gestion, onglet Arbitrages (2 colonnes). Le filtre « ligne ignorée si libellé vide » est reproduit par le lecteur, pas toléré ici : label est requis et non vide.",
+      "items": {
+        "type": "object",
+        "required": [
+          "date",
+          "label"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
       }
     },
     "mouvements": {
@@ -110,7 +157,8 @@
             "properties": {
               "id": {
                 "type": "string",
-                "pattern": "^(tmp_|C-)"
+                "minLength": 1,
+                "description": "Identifiant d'entité tel que déclaré par le CGP dans l'Excel de structure (« pp », « sas_x »…). Le motif tmp_/C- ne s'applique qu'au client : imposer un préfixe machine ici casserait la correspondance avec le manifeste, qui reprend ces mêmes ids (constat du 30/07, étape ③)."
               },
               "label": {
                 "type": "string",
@@ -133,6 +181,7 @@
     },
     "reporting": {
       "type": "object",
+      "description": "MQ9 tranché (spec §7.8) : AUCUN commutateur de rendu ici — mode, show_benchmark, blocs_enabled vivent au manifeste. Le store répond « peut-on ? », pas « veut-on ? ».",
       "required": [
         "period_short",
         "period_long",
@@ -166,6 +215,7 @@
     },
     "valuation": {
       "type": "object",
+      "description": "Point de valorisation par position. `position_id` vise un id d'entrée OU un id de poche (C7/D16 : la poche a désormais un id, c'est la pratique du datastore).",
       "required": [
         "position_id",
         "date",
@@ -191,8 +241,12 @@
         }
       }
     },
+    "provenanceFields": {
+      "$comment": "D49 — provenance d'extraction, documentée ici une fois. Ces quatre champs sont déclarés sur chaque type d'entrée : source_document (nom de fichier — légitime dans le store CLIENT, contrairement au store partagé D44), source_empreinte (sha256 du document), source_gabarit (code du gabarit qui a produit l'entrée, version choisie par la fenêtre D42 via source_arrete), source_arrete (date d'arrêté du document). Le self-healing lit ce quadruplet pour ne pas redéclencher d'étude sur une archive."
+    },
     "genericEntry": {
       "type": "object",
+      "description": "Ne sert plus qu'à `exotiques` (catégories hors périmètre : acceptées, transitent, ignorées au rendu). liquidites/immobilier/dettes ont leur type dédié depuis 2.1-skill (MQ6).",
       "required": [
         "id",
         "entity_id",
@@ -216,6 +270,17 @@
         "source_document": {
           "type": "string"
         },
+        "source_empreinte": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "source_gabarit": {
+          "type": "string"
+        },
+        "source_arrete": {
+          "type": "string",
+          "format": "date"
+        },
         "validated_by": {
           "type": "string"
         },
@@ -224,13 +289,253 @@
         }
       }
     },
-    "financierCoteEntry": {
+    "liqEntry": {
       "type": "object",
-      "description": "Un contrat financier coté. `attributes.pockets` est REQUIS et non vide (A5) : le tableau de rendu a une ligne par poche, donc un contrat sans poche réelle en déclare une qui le décrit lui-même. Cet invariant supprime le second chemin de code du lecteur, et rend le compte de poches exact par construction.",
+      "description": "MQ6 — liquidités typées. Colonnes canoniques Liq(3) : 0 intitulé (label) · 1 banque (custodian) · 2 solde (balance). Forme rapatriée de validation_app telle quelle.",
+      "required": [
+        "id",
+        "entity_id",
+        "label"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "entity_id": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "custodian": {
+          "type": "string"
+        },
+        "balance": {
+          "type": "number",
+          "description": "OPTIONNEL — un solde non renseigné est ABSENT, jamais 0 : le moteur affiche « — » pour une cellule vide et « 0 € » pour un zéro (constat fx_limites, 30/07). Le `or 0.0` de validation_app était un défaut silencieux."
+        },
+        "source": {
+          "type": "string"
+        },
+        "source_document": {
+          "type": "string"
+        },
+        "source_empreinte": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "source_gabarit": {
+          "type": "string"
+        },
+        "source_arrete": {
+          "type": "string",
+          "format": "date"
+        },
+        "validated_by": {
+          "type": "string"
+        },
+        "validation_note": {
+          "type": "string"
+        }
+      }
+    },
+    "immoEntry": {
+      "type": "object",
+      "description": "MQ6 — immobilier typé. Colonnes canoniques Immo(8). `ownership` est un TEXTE (propriété ou démembrement, colonne 2) : le `ownership_pct: 100` codé en dur de validation_app était une perte silencieuse, corrigée ici.",
       "required": [
         "id",
         "entity_id",
         "label",
+        "value_current"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "entity_id": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "function": {
+          "type": "string",
+          "description": "RP / RS / usage / rendement — colonne 1"
+        },
+        "ownership": {
+          "type": "string",
+          "description": "propriété ou démembrement — colonne 2, texte affiché tel quel"
+        },
+        "mortgage": {
+          "type": "boolean",
+          "description": "hypothèque — colonne 3"
+        },
+        "value_acquisition": {
+          "type": "number"
+        },
+        "value_current": {
+          "type": "number"
+        },
+        "attributes": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "date_acquisition": {
+              "type": "string"
+            },
+            "loyer_annuel": {
+              "type": "number",
+              "description": "colonne 4 — affiché en texte brut par le moteur, sans formatage €"
+            }
+          }
+        },
+        "source": {
+          "type": "string"
+        },
+        "source_document": {
+          "type": "string"
+        },
+        "source_empreinte": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "source_gabarit": {
+          "type": "string"
+        },
+        "source_arrete": {
+          "type": "string",
+          "format": "date"
+        },
+        "validated_by": {
+          "type": "string"
+        },
+        "validation_note": {
+          "type": "string"
+        }
+      }
+    },
+    "detteEntry": {
+      "type": "object",
+      "description": "MQ6 — dettes typées. Colonnes canoniques Dettes(11). `date_souscription` (col 3) et `montant_initial` (col 4) sont portés ici alors que le parseur validation_app les perdait. `capital_remaining` (col 9) et `adossement` (col 10) entrent dans les contrôles comptables.",
+      "required": [
+        "id",
+        "entity_id",
+        "label",
+        "capital_remaining"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "entity_id": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "bank": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "description": "in fine / amortissable — colonne 2, portée mais sans consommateur au rendu (spec §3)"
+        },
+        "date_souscription": {
+          "type": "string",
+          "description": "ISO quand connue, verbatim classeur sinon — affichée telle quelle, comme maturity"
+        },
+        "montant_initial": {
+          "type": "number"
+        },
+        "rate": {
+          "type": "number",
+          "description": "taux NUMÉRIQUE quand il existe — absent pour un taux à formule"
+        },
+        "taux": {
+          "type": "string",
+          "description": "le taux TEL QUE LE CLASSEUR L'ÉCRIT (« SOFR+0,9% », « 1,45 % ») — colonne 5, affichée verbatim par le moteur. Un taux à formule n'a pas de représentation numérique : sans ce champ, il devenait « — » au rendu (constat fx_limites, 30/07)."
+        },
+        "maturity": {
+          "type": "string"
+        },
+        "frequency": {
+          "type": "string"
+        },
+        "guarantee": {
+          "type": "string"
+        },
+        "capital_remaining": {
+          "type": "number"
+        },
+        "adossement": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "source_document": {
+          "type": "string"
+        },
+        "source_empreinte": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "source_gabarit": {
+          "type": "string"
+        },
+        "source_arrete": {
+          "type": "string",
+          "format": "date"
+        },
+        "validated_by": {
+          "type": "string"
+        },
+        "validation_note": {
+          "type": "string"
+        }
+      }
+    },
+    "histoEntry": {
+      "type": "object",
+      "description": "MQ7 (volet historique) — SANS entity_id : c'est un agrégat patrimonial, pas un fait d'entité. Rendements en FRACTION (6,34 % → 0.0634, convention validation_app) ; le lecteur formate en % pour le moteur.",
+      "required": [
+        "year"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "year": {
+          "type": "integer"
+        },
+        "rendement": {
+          "type": "number",
+          "description": "perf coté de l'année, en fraction"
+        },
+        "rendement_nc": {
+          "type": "number",
+          "description": "perf non coté de l'année, en fraction"
+        },
+        "commentaire": {
+          "type": "string"
+        }
+      }
+    },
+    "financierCoteEntry": {
+      "type": "object",
+      "description": "Un contrat financier coté. MQ1 : `assureur` (requis) et `intermediaire` portent la sémantique que `label` fusionnait irréversiblement — `assureur` vaut le code du référentiel acteurs quand il résout, le verbatim sinon (circuit K3). `attributes.pockets` est REQUIS et non vide (A5). `envelope_type` porte un code normé (av_lu/av_fr/capi_lu/capi_fr/cto/direct…) ; la table code → libellé moteur vit dans le lecteur (A2).",
+      "required": [
+        "id",
+        "entity_id",
+        "label",
+        "assureur",
         "envelope_type",
         "manager",
         "value_current",
@@ -248,11 +553,31 @@
           "type": "string",
           "minLength": 1
         },
+        "assureur": {
+          "type": "string",
+          "minLength": 1,
+          "description": "MQ1 — assureur/banque (colonne 1). Code acteur si résolu, verbatim sinon. Clé de regroupement du moteur et du donut participants."
+        },
+        "intermediaire": {
+          "type": "string",
+          "description": "MQ1 — colonne 2. Troisième terme de la clé de regroupement (spec §7.10) : deux contrats du même assureur via des intermédiaires différents ne fusionnent pas."
+        },
         "source": {
           "type": "string"
         },
         "source_document": {
           "type": "string"
+        },
+        "source_empreinte": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "source_gabarit": {
+          "type": "string"
+        },
+        "source_arrete": {
+          "type": "string",
+          "format": "date"
         },
         "validated_by": {
           "type": "string"
@@ -262,6 +587,10 @@
         },
         "envelope_type": {
           "type": "string"
+        },
+        "nature": {
+          "type": "string",
+          "description": "La nature VERBATIM du contrat telle que le CGP/le classeur l'écrit (« Compte Titres », « AV », « Capi »…). Posée le 30/07 après le bug de jointure du premier run réel : « Compte Titres » → code cto → réaffiché « CTO » ne rejoignait plus les clés des lignes/mouvements — 53 lignes perdues en silence. Le code d'enveloppe reste la donnée normée ; la nature est le mot du client, et c'est LE MOT qui fait les clés de jointure du rendu. Le lecteur la préfère au code quand elle existe."
         },
         "manager": {
           "type": "string"
@@ -277,7 +606,7 @@
         },
         "invest_date": {
           "type": "string",
-          "format": "date"
+          "description": "ISO quand la date est connue, VERBATIM classeur sinon (« Févr. 2024 ») — le moteur affiche tel quel, un format:date refuserait ce que le rendu exige (constat du 30/07 sur les fixtures)"
         },
         "capital_invested": {
           "type": "number"
@@ -291,8 +620,9 @@
         "value_projected": {
           "type": "number"
         },
-        "pledged": {
-          "type": "boolean"
+        "nantissement": {
+          "type": "boolean",
+          "description": "ex-`pledged` — renommé au format convergé (concept métier, règle de nommage 0-bis)"
         },
         "attributes": {
           "type": "object",
@@ -353,7 +683,8 @@
           "maximum": 7
         },
         "pocket": {
-          "type": "string"
+          "type": "string",
+          "description": "vise pocket.id (C7/D16) — plus jamais le libellé, qui diverge entre artefacts pour la même poche (spec §7.7)"
         },
         "perf_pct": {
           "type": "number",
@@ -363,20 +694,24 @@
     },
     "pocket": {
       "type": "object",
-      "description": "Une poche d'un contrat financier coté. INVARIANT (A5) : un contrat en a TOUJOURS au moins une. Un contrat sans poche réelle porte une poche unique décrivant le contrat lui-même — label = label du contrat. Le lecteur de forme-store n'a donc qu'un seul chemin de code, et le nombre de poches est trivialement exact. Une poche porte le MÊME jeu d'attributs qu'un contrat, parce que c'est elle, et non le contrat, qui correspond à une ligne du tableau de rendu.",
+      "description": "Une poche d'un contrat financier coté. INVARIANT (A5) : un contrat en a TOUJOURS au moins une ; la poche 0 décrit le contrat lui-même quand il n'y a pas de poche réelle. `id` est REQUIS (C7/D16, rapatrié de validation_app où il sert déjà de position_id aux valuations) : c'est lui que visent lines[].pocket et valuations[].position_id, le libellé cesse d'être une clé. `classe_rhetores`/`geography`/`sri` optionnels couvrent MQ2 : le repli du moteur pour un contrat sans lignes classées lit la poche 0.",
       "required": [
+        "id",
         "label",
         "value"
       ],
       "additionalProperties": false,
       "properties": {
+        "id": {
+          "type": "string"
+        },
         "label": {
           "type": "string",
           "minLength": 1
         },
         "type": {
           "type": "string",
-          "description": "Type de poche : FID, FAS, FE, Mono… Colonne 3 du gabarit de transition. DISTINCT de profile (colonne 7) : l'un dit la forme juridique de la poche, l'autre son orientation de risque. Les confondre décale deux colonnes sans rien casser visiblement."
+          "description": "Type de poche : FID, FAS, FE, Mono… Colonne 3 du gabarit de transition. DISTINCT de profile (colonne 7)."
         },
         "profile": {
           "type": "string",
@@ -392,25 +727,45 @@
           "type": "number"
         },
         "capital_invested": {
-          "type": "number"
+          "type": "number",
+          "description": "colonne 10 (« Nominal investi ») — le `nominal` de validation_app est la même colonne, renommée"
         },
         "value_jan1": {
           "type": "number",
-          "description": "Valeur au 01/01 de la poche. Sans elle, la perf YTD par poche n'est pas calculable — c'était le manque le plus concret de A5."
+          "description": "Valeur au 01/01 de la poche. Sans elle, la perf YTD par poche n'est pas calculable (A5)."
         },
         "invest_date": {
           "type": "string",
-          "format": "date"
+          "description": "ISO quand connue, verbatim classeur sinon — même règle qu'au niveau contrat"
         },
-        "pledged": {
-          "type": "boolean"
+        "nantissement": {
+          "type": "boolean",
+          "description": "ex-`pledged` — renommé au format convergé"
+        },
+        "classe_rhetores": {
+          "type": "string",
+          "description": "MQ2 — classe dominante (colonne 13), par poche : dans le classeur, une ligne = une poche"
+        },
+        "geography": {
+          "type": "string",
+          "description": "MQ2 — colonne 14"
+        },
+        "sri": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 7,
+          "description": "MQ2 — colonne 15"
         }
       }
     },
     "ps": {
       "type": "object",
+      "description": "Produit structuré. MQ5 : `isin` est la clé de jointure de la série `cours` (onglet Cours PS) et du snapshot ps_status. `cours` vit ici, dans l'entrée, plutôt qu'au sommet : un PS = une entrée, sa série lui appartient (à confirmer à l'usage en étape ③).",
       "additionalProperties": false,
       "properties": {
+        "isin": {
+          "type": "string"
+        },
         "coupon": {
           "type": "number"
         },
@@ -429,11 +784,33 @@
         },
         "underlying_level": {
           "type": "number"
+        },
+        "cours": {
+          "type": "array",
+          "description": "MQ5 — série de l'onglet Cours PS : niveau en % de l'initial, par date",
+          "items": {
+            "type": "object",
+            "required": [
+              "date",
+              "niveau_pct"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "date": {
+                "type": "string",
+                "format": "date"
+              },
+              "niveau_pct": {
+                "type": "number"
+              }
+            }
+          }
         }
       }
     },
     "nonCoteEntry": {
       "type": "object",
+      "description": "MQ4 : `tri_pct` — communiqué par le GP, jamais calculé ; perte prouvée sur le run de référence (spec §7.8), et le parseur validation_app ne le lit pas non plus (colonne 11 hors de sa lecture). MQ10 : `invest_date` déclaré — il se réfugiait dans le texte de validation_note.",
       "required": [
         "id",
         "entity_id",
@@ -460,6 +837,17 @@
         "source_document": {
           "type": "string"
         },
+        "source_empreinte": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "source_gabarit": {
+          "type": "string"
+        },
+        "source_arrete": {
+          "type": "string",
+          "format": "date"
+        },
         "validated_by": {
           "type": "string"
         },
@@ -485,6 +873,15 @@
           "type": "string",
           "format": "date"
         },
+        "tri_pct": {
+          "type": "number",
+          "description": "MQ4 — TRI communiqué par le GP (colonne 11), jamais calculé"
+        },
+        "invest_date": {
+          "type": "string",
+          "format": "date",
+          "description": "MQ10 — date d'investissement, champ déclaré (plus jamais dans validation_note)"
+        },
         "attributes": {
           "type": "object",
           "additionalProperties": false,
@@ -502,7 +899,8 @@
               ]
             },
             "moic_target": {
-              "type": "number"
+              "type": "number",
+              "description": "NOMBRE au store (A3) — le classeur porte du texte (« 1,8x »), c'est le lecteur qui formate"
             },
             "moic_realise": {
               "type": "number"
@@ -510,12 +908,20 @@
             "duration_target": {
               "type": "number"
             },
+            "uncalled_reel": {
+              "type": "number",
+              "description": "colonne 6 — perdue par le parseur validation_app, portée ici"
+            },
+            "uncalled_estime": {
+              "type": "number",
+              "description": "colonne 7"
+            },
             "instrument_type": {
               "enum": [
                 "fonds",
                 "titre"
               ],
-              "description": "Fonds = véhicule à engagement/appels (PE) ; Titre = détention directe ou via support (OCA, obligations, actions non cotées). Pilote le rendu en deux sous-sections et le périmètre des multiples MOIC/TVPI (fonds seuls)."
+              "description": "Fonds = véhicule à engagement/appels (PE) ; Titre = détention directe ou via support. Pilote le rendu en deux sous-sections et le périmètre des multiples (fonds seuls)."
             }
           }
         }
@@ -523,6 +929,7 @@
     },
     "mouvementEntry": {
       "type": "object",
+      "description": "MQ3 : l'enum s'ouvre aux flux non coté (appel, distribution, et leurs prévisionnels) — c'est le logement de NC Flux, entry_ref visant l'entrée non_cote. A4 figé : amount ≥ 0, le sens vient du type.",
       "required": [
         "id",
         "entry_ref",
@@ -546,14 +953,36 @@
           "enum": [
             "versement",
             "retrait",
-            "frais"
+            "frais",
+            "appel",
+            "distribution",
+            "appel_prevu",
+            "distribution_prevue"
           ]
         },
         "amount": {
-          "type": "number"
+          "type": "number",
+          "minimum": 0
         },
         "comment": {
           "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "source_document": {
+          "type": "string"
+        },
+        "source_empreinte": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "source_gabarit": {
+          "type": "string"
+        },
+        "source_arrete": {
+          "type": "string",
+          "format": "date"
         }
       }
     }

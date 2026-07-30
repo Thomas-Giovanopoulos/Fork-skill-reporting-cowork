@@ -15,7 +15,7 @@
       "payload": {
         "libelle_affichage": "De Pury Pictet",
         "convention": "Écrire « De Pury Pictet ». Jamais « PPT », jamais le nom complet avec Turrettini.",
-        "source": "relevé Interagyr — pied de page présent sur 100 % des pages"
+        "source": "relevé d'évaluation de portefeuille sous mandat — pied de page présent sur 100 % des pages"
       },
       "provenance": "seed",
       "confiance": "high"
@@ -34,7 +34,7 @@
         "agrement_amf": "GP-17000033",
         "adresse": "18bis rue d'Anjou, 75008 Paris",
         "note": "Société de gestion du groupe. Publie aussi un commentaire de marché hebdomadaire, source du bloc Contexte.",
-        "source": "reportings hebdomadaires INTERAGYR"
+        "source": "reportings hebdomadaires de gestion sous mandat (3 au corpus)"
       },
       "provenance": "seed",
       "confiance": "high"
@@ -51,7 +51,7 @@
       ],
       "payload": {
         "note": "Émetteur réel des relevés distribués sous la marque UAF Life Patrimoine. Émetteur ≠ distributeur (D24).",
-        "source": "relevés « UAF » Cerise et Pollux — mentions légales SPIRICA"
+        "source": "deux relevés « UAF » du corpus, même gabarit — mentions légales SPIRICA"
       },
       "provenance": "seed",
       "confiance": "high"
@@ -127,7 +127,7 @@
         "tva": "LU 166 094 20",
         "adresse": "12 rue Léon Laval, L-3372 Leudelange",
         "note": "Assurance-vie luxembourgeoise : le triangle de sécurité impose un dépositaire tiers nommé par fonds dédié (FID). Un contrat peut donc porter PLUSIEURS dépositaires, et ils changent dans le temps (voir successions).",
-        "source": "relevés annuels FC051727 et FC055211"
+        "source": "deux relevés annuels du même émetteur"
       },
       "provenance": "seed",
       "confiance": "high"
@@ -163,7 +163,7 @@
         "Quintet"
       ],
       "payload": {
-        "note": "Dépositaire d'un FID Wealins. Successeur de CIC sur la poche FID du contrat FC051727."
+        "note": "Dépositaire d'un FID Wealins. Successeur de CIC sur la poche FID d'un contrat Wealins observé au corpus."
       },
       "provenance": "seed",
       "confiance": "high"
@@ -180,7 +180,7 @@
         "Crédit Agricole Indosuez"
       ],
       "payload": {
-        "note": "Dépositaire d'un FID Wealins. Successeur d'Intesa sur la poche FAS du contrat FC051727.",
+        "note": "Dépositaire d'un FID Wealins. Successeur d'Intesa sur la poche FAS d'un contrat Wealins observé au corpus.",
         "question_ouverte": "K7 — CA Indosuez et Banque Thaler sont-ils la même entité, ou deux repreneurs distincts de la poche ex-Intesa ? Le salvage ne permet pas de trancher. AskUser au CGP."
       },
       "provenance": "seed",
@@ -198,7 +198,7 @@
         "Thaler"
       ],
       "payload": {
-        "note": "Apparaît comme dépositaire d'un FID du contrat FC051727. Relation avec CA Indosuez non établie — voir K7.",
+        "note": "Apparaît comme dépositaire d'un FID d'un contrat Wealins observé au corpus. Relation avec CA Indosuez non établie — voir K7.",
         "question_ouverte": "K7 (identique à ca_indosuez)"
       },
       "provenance": "seed",
@@ -216,7 +216,7 @@
         "Intesa"
       ],
       "payload": {
-        "note": "Prédécesseur sur la poche FAS du contrat Wealins FC051727. Conservé pour réconcilier les relevés antérieurs au changement (K5)."
+        "note": "Prédécesseur sur la poche FAS d'un contrat Wealins. Conservé pour réconcilier les relevés antérieurs au changement (K5)."
       },
       "provenance": "seed",
       "confiance": "medium"
@@ -231,7 +231,7 @@
         "CIC"
       ],
       "payload": {
-        "note": "Prédécesseur sur la poche FID du contrat Wealins FC051727. Conservé pour réconcilier les relevés antérieurs (K5)."
+        "note": "Prédécesseur sur la poche FID d'un contrat Wealins. Conservé pour réconcilier les relevés antérieurs (K5)."
       },
       "provenance": "seed",
       "confiance": "medium"
@@ -295,7 +295,7 @@
         "Altaroc"
       ],
       "payload": {
-        "note": "Société de gestion de fonds de private equity. Deux fonds chez Gronier, cible 1,8× sur 10 ans, MOIC réels constatés 1,42× et 1,79×.",
+        "note": "Société de gestion de fonds de private equity. Deux fonds observés chez un client, cible 1,8× sur 10 ans, MOIC réels constatés 1,42× et 1,79×.",
         "rappel_metier": "Le PE représente peu d'actifs à forte importance individuelle : le bloc PE n'a jamais de seuil de pertinence (D32)."
       },
       "provenance": "seed",
@@ -308,188 +308,289 @@
       "successeur_code": "ca_indosuez",
       "date_effet": null,
       "date_cloture": null,
-      "contexte": "Wealins FC051727 — poche FAS",
+      "contexte": "reprise de la poche FAS ex-Intesa chez un assureur luxembourgeois",
       "payload": {
-        "note": "Date d'effet non établie par le relevé : laissée à null plutôt que devinée. Une note intermédiaire du run Gronier mentionnait « Thaler/Indosuez » sans permettre de trancher — voir K7.",
+        "note": "Date d'effet non établie par le relevé : laissée à null plutôt que devinée. Une note intermédiaire d'un run réel mentionnait « Thaler/Indosuez » sans permettre de trancher — voir K7.",
         "question_ouverte": "K7 — le successeur est-il CA Indosuez, Banque Thaler, ou les deux successivement ?",
         "reperes_chiffres": "Base au 31/12/2024 retenue à 550 568 € dans la version officielle post-relevés ; versement dédié de 250 000 € le 13/03/2025."
       },
       "provenance": "seed",
-      "confiance": "low"
+      "confiance": "low",
+      "_note_d44": "Contexte réécrit le 2026-07-29 (D44). Il portait le numéro d'un contrat client réel et l'identifiant de sa poche — valeur volontairement NON recopiée ici : documenter une fuite en la répétant la laisse ouverte. `ref_bundle` rend ce store EN ENTIER à chaque CGP, c'était donc une divulgation entre confrères. Une succession est un fait de marché ; le contrat où on l'a observée appartient au dossier de run du client. Valeur d'origine : dossier de run, jamais ici."
     },
     {
       "predecesseur_code": "cic",
       "successeur_code": "quintet",
       "date_effet": null,
       "date_cloture": "2025-12-30",
-      "contexte": "Wealins FC051727 — poche FID",
+      "contexte": "reprise de la poche FID ex-CIC chez un assureur luxembourgeois",
       "payload": {
         "note": "Clôture au 30/12/2025, précision obtenue seulement après lecture des relevés officiels (elle ne figurait pas dans l'Excel de suivi). Date d'effet du changement non établie : laissée à null.",
         "reperes_chiffres": "Base au 31/12/2024 retenue à 446 933 € dans la version officielle ; versement dédié de 200 000 € le 07/05/2025.",
         "ecart_de_source": "L'Excel « Catégories & Perf » portait un versement de 251 627 € qui n'existe dans aucun relevé officiel — donnée erronée de la source Excel, corrigée. Illustration de la hiérarchie de sources : le relevé prime."
       },
       "provenance": "seed",
-      "confiance": "medium"
+      "confiance": "medium",
+      "_note_d44": "Contexte réécrit le 2026-07-29 (D44). Il portait le numéro d'un contrat client réel et l'identifiant de sa poche — valeur volontairement NON recopiée ici : documenter une fuite en la répétant la laisse ouverte. `ref_bundle` rend ce store EN ENTIER à chaque CGP, c'était donc une divulgation entre confrères. Une succession est un fait de marché ; le contrat où on l'a observée appartient au dossier de run du client. Valeur d'origine : dossier de run, jamais ici."
     }
   ],
   "gabarits": [
     {
-      "emetteur_code": "de_pury_pictet",
-      "gabarit": "evaluation_portefeuille_mandat",
+      "emetteur_code": "cardif",
+      "gabarit": "situation_contrat_capi_pm",
+      "valide_depuis": "2024-01-01",
+      "valide_jusqu_a": "2025-12-31",
       "periodicite": "a_la_demande",
-      "template_id_natif": null,
-      "emetteur_lisible": true,
-      "n_pages_indicatif": "9-14",
-      "signature": {
-        "metadata_pdf": {
-          "producer": "Microsoft Reporting Services",
-          "creator": "Microsoft Reporting Services"
-        },
-        "ancres_texte": [
-          "de Pury Pictet Turrettini (Belgique)",
-          "Aperçu du Portefeuille",
-          "Point de Contact",
-          "Matrice allocation actifs et devises",
-          "Détail des Positions - Liquidités",
-          "Liste des transactions",
-          "Dividendes, intérêts et autres paiements",
-          "Adéquation du profil",
-          "En cas de divergence avec l'estimation produite par la banque dépositaire, les indications de cette dernière prévaudront"
+      "couche1": {
+        "producer_contient": [
+          "Apache FOP"
         ],
-        "marqueurs_structure": [
-          "Séquence fixe de 12 titres de section, dans l'ordre",
-          "Pied de page sur chaque page : émetteur + « Situation au JJ/MM/AAAA » + « Page X/N »",
-          "En-têtes des tableaux de positions sur 2 lignes, sous-colonnes Devise/EUR sous RESULTAT et EVALUATION",
-          "Motif « Total : [sous-catégorie] » après chaque groupe d'instruments",
-          "Page de garde en 2 colonnes à libellés fixes (Compte / Devise de référence / Situation au / Etablie au / Banque Dépositaire / Profil / Mode de détention | Gérant / Tél / E-mail)"
+        "creator_contient": [
+          "BdocPDF"
         ],
-        "token_periodicite": null
+        "polices": []
       },
-      "extraction_hints": {
-        "pieges": [
-          "DEUX conventions numériques dans le MÊME document : le bloc Résumé est anglo-saxon (1,925,477 / 97.15%), tout le reste est franco-suisse (1 134 708,36 / 25,19%). Un parseur réglé sur un seul séparateur casse sur l'autre bloc. Cette hétérogénéité est stable : elle vient de sous-rapports RDL distincts, c'est donc aussi un marqueur.",
-          "Chaque position est étalée sur 2 lignes physiques : ligne 1 = valeurs, ligne 2 = ISIN + prix d'achat moyen + un second pourcentage sans libellé. Recoupler avant parsing, sinon l'ISIN est perdu.",
-          "Colonne « RESULTAT YTD » : deux pourcentages empilés. Le bon est la 2e ligne (résultat depuis achat), en EUR.",
-          "Fonds monétaires classés à tort « Obligations » → reclasser en monetaire.",
-          "Deux niveaux de totaux : total de section ET sous-totaux « Total : ». Double comptage si on somme les deux.",
-          "Deux sections sont purement graphiques (Evolution des actifs, Exposition actions) : le texte s'arrête après le titre. Ce n'est PAS un échec d'extraction.",
-          "« Rendement benchmark * » affiche un « % » seul sans chiffre pour les mois sans historique.",
-          "Deux dates proches à ne pas confondre : « Situation au » (arrêté) et « Etablie au » (édition).",
-          "La composition du benchmark dépend du profil client : apparence de boilerplate, réalité volatile. À exclure de la signature."
+      "signature": {
+        "sections_requises": [
+          "Cardif Elite Capitalisation Personnes Morales",
+          "Situation du contrat",
+          "Votre correspondant",
+          "Synthèse des opérations",
+          "Valeur de rachat en euros au",
+          "cours connu",
+          "Gestion libre",
+          "Nous vous communiquons la valorisation provisoire de votre contrat"
         ],
-        "ancrage_tableaux": [
-          "Pas de filets de tableau : pdftotext -layout impératif.",
-          "Fusionner les 2 lignes d'en-tête avant tout parsing positionnel."
+        "sections_optionnelles": [
+          "FONDS GENERAL",
+          "Date d’effet du contrat",
+          "Fait à Paris, le",
+          "Direction des Opérations",
+          "QUI SEULS FONT FOI",
+          "Relevé situation front-office",
+          {
+            "regex": "<TYPE_MODELE>\\s*66\\s*</TYPE_MODELE>"
+          }
         ],
-        "format_numerique": {
-          "milliers": "espace (bloc principal) / virgule (bloc Résumé)",
-          "decimal": "virgule (principal) / point (Résumé)"
+        "discriminants": [
+          {
+            "regex": "\\d\\s+euros\\b",
+            "sensible_casse": false
+          }
+        ],
+        "_token_periodicite_refute": {
+          "token_observe": "Synthèse des opérations de l'année",
+          "raison": "Retiré de la SIGNATURE par D42 : la périodicité n'est pas lisible dans le document chez trois émetteurs sur quatre, et les tokens candidats sont des FAUX AMIS — « trimestriels » désigne une offre commerciale chez Spirica, « pour l'année » une fenêtre de cumul YTD chez Cardif (inchangée sur des arrêtés au 30/03 et au 30/06), « 8 années » la durée du contrat chez Himalia. Le token est conservé ici en DOCUMENTATION, jamais consommé : il n'entre ni dans la clé (emetteur_code, gabarit, valide_depuis), ni dans le pré-filtre, ni dans le score du matcher. La périodicité reste renseignée mais informative, fournie par le contexte du run. Cf. infra/migration_001_d42_fenetre_validite.sql, motif (a).",
+          "precision": "Relevé sur l'ORIGINAL v1 (« SYNTHÈSE DES OPÉRATIONS DE L'ANNÉE 2024 ») : c'est la fenêtre de cumul YTD, pas la périodicité de l'exemplaire. Le v1 n'existe qu'à un exemplaire, aucune comparaison inter-arrêtés n'est possible ici — c'est le v2 qui a fourni la réfutation."
         }
       },
-      "champs_publies": {
-        "perf_par_ligne": "oui",
-        "forme": "Colonne « RESULTAT YTD », 2e ligne = résultat depuis achat, en EUR.",
-        "horizon": "depuis achat"
-      },
-      "invariant_controle": "Σ sous-totaux « Total : » par catégorie = total de section ; Σ sections = total portefeuille.",
-      "provenance": "seed",
-      "confiance": "high"
-    },
-    {
-      "emetteur_code": "dauphine_am",
-      "gabarit": "reporting_hebdo_mandat",
-      "periodicite": "hebdomadaire",
-      "template_id_natif": null,
-      "emetteur_lisible": true,
-      "n_pages_indicatif": "3-6",
-      "signature": {
-        "metadata_pdf": {
-          "producer": "Microsoft Word",
-          "creator": "Microsoft Word"
-        },
-        "ancres_texte": [
-          "Reporting hebdomadaire",
-          "Composition du portefeuille & mouvements de la semaine",
-          "Détail des positions",
-          "Mouvements de la semaine",
-          "Dauphine AM, filiale de Rhétorès Groupe",
-          "agrément AMF n°GP-17000033",
-          "Des convictions au service de la gestion de vos actifs",
-          "COMMUNICATION À CARACTÈRE NON COMMERCIAL",
-          "NE PEUT ÊTRE TRANSMIS À DES CLIENTS FINAUX"
-        ],
-        "marqueurs_structure": [
-          "En-tête de colonnes exact : ISIN SUPPORT VALEUR +/- VALUE +/- % POIDS",
-          "En-tête courant « Reporting hebdomadaire — Semaine du … au … » à partir de la page 2",
-          "Pied de page « Document à caractère non commercial — non contractuel · Dauphine AM · agrément AMF n°GP-17000033 » + « Page N », absent de la page 1",
-          "Filigrane fragmenté en 9 jetons identiques et ordonnés sur chaque page : U clu / sa s / ex / ge ive / in e / te n / rn t / m / e",
-          "Hiérarchie catégorie > lignes > sous-total > « Total portefeuille »"
-        ],
-        "token_periodicite": "Semaine du"
-      },
       "extraction_hints": {
         "pieges": [
-          "Le filigrane diagonal se fragmente en 9 jetons parasites insérés au milieu du contenu en mode -layout. Les filtrer AVANT tout parsing. Ils sont identiques et ordonnés : donc aussi une ancre fiable.",
-          "La colonne « +/- % » est la variation DE LA SEMAINE, pas un YTD. Le YTD n'existe que dans le bloc KPI.",
-          "Noms de SUPPORT repliés sur 2 lignes, valeurs sur la première : désalignement si parsing naïf.",
-          "Sous-totaux de classe sans ISIN ni SUPPORT (4 champs au lieu de 6) : les distinguer par l'absence d'ISIN.",
-          "Ligne LIQUIDITÉS : tiret cadratin « — » pour +/- VALUE et +/- % = non applicable, PAS zéro.",
-          "Signe moins Unicode U+2212, pas le tiret ASCII.",
-          "Le tableau des positions est scindé entre deux pages SANS ré-émission de l'en-tête.",
-          "La valorisation apparaît deux fois (« VALORISATION AU » en garde, « VALORISATION TOTALE » en KPI) : dédupliquer.",
-          "Les libellés de poches KPI varient selon le mandat (ACTIONS vs OBLIGATIONS/MONÉTAIRE) : c'est du volatil, pas un drift.",
-          "Section Mouvements parfois vide : « Aucun mouvement sur la semaine. »",
-          "La section ACTUALITÉS est optionnelle (présente si des valeurs sont commentées) : son absence n'est pas un drift.",
-          "Nom de fichier en Unicode NFD (accent décomposé) : résoudre par glob, ne jamais retaper le chemin."
+          "TYPE_MODELE=66 / MODELE=Relevé situation front-office est INVARIANT de part et d'autre de la refonte v1→v2 (cardif.md (c)) : c'est un identifiant de FAMILLE de document, pas de gabarit. Il ne court-circuite JAMAIS le matching en couches — il ne fait que le cadrer. Le lire avec pypdf, jamais avec pdftotext (perte de caractères dans le bloc XML).",
+          "Mise en page Apache FOP en positionnement absolu : espacements extrêmes en -layout. Préférer une extraction par positions (bbox) au découpage par largeur fixe.",
+          "La ligne « FONDS GENERAL (1) » porte « -- » à la place des valeurs numériques mais garde une Valorisation : cas particulier à isoler.",
+          "Noms de supports repliés sur 2 lignes, ISIN et chiffres sur la première.",
+          "« Gestion libre » porte le total du groupe SUR la ligne du libellé : ce n'est pas une ligne de support.",
+          "En-têtes empilés sur 2 lignes (« Montant brut » / « des versements ») : reconstruire.",
+          "La ligne de total « Valeur du contrat au [date] [montant] » n'a pas de séparateur net : la détecter comme total.",
+          "Le bloc XML technique peut être COUPÉ en fin de ligne physique : un parseur de balises naïf casse. Le filtrer du contenu, le garder pour la signature.",
+          "Artefact d'encodage ponctuel observé sur un caractère accentué : prévoir un remplacement UTF-8.",
+          "Le tableau des Garanties (page 3) reprend les mêmes supports avec un jeu de colonnes RÉDUIT : ne pas le confondre avec le tableau Situation.",
+          "Une variante « Personnes Physiques » du même produit existe : bloc Souscripteur différent, ne pas présumer l'identité des variantes."
         ],
         "ancrage_tableaux": [
-          "Pas de filets : -layout impératif.",
-          "Fusionner les libellés de support repliés avant association aux valeurs."
+          "Extraction par positions recommandée plutôt que par largeur fixe.",
+          "Distinguer les deux tableaux par leur jeu de colonnes, pas par leur nombre."
         ],
         "format_numerique": {
           "milliers": "espace insécable",
           "decimal": "virgule",
-          "negatif": "U+2212"
+          "devise": "€ en suffixe"
+        },
+        "pieges_v1": [
+          "En v1 le nom de support est COUPÉ EN DEUX par la ligne de données : ISIN et chiffres tombent sur la 2e ligne physique, pas la 1re. Un recollage qui suppose « données sur la première ligne » casse (cardif.md (g) 3).",
+          "En-tête du tableau supports v1 étalé sur 5 lignes entrelacées, l'ordre de sortie ne suit ni les colonnes ni les lignes : reconstruction par bbox obligatoire (cardif.md (g) 5).",
+          "Aucune footnote, aucun appel de note (1) sur la ligne FONDS GENERAL en v1 (cardif.md (g) 11).",
+          "Date d'arrêté numérique SEULEMENT en v1 : le contrôle croisé numérique / en-toutes-lettres n'existe qu'en v2 (cardif.md (g) 12).",
+          "Aucune pagination imprimée en v1 (cardif.md (g) 13).",
+          "Invariant vérifié EXACT au centime en v1 (Σ 11 lignes = 502 246,58) ; en v2 l'écart est de 1 centime → tolérance ±0,05 (cardif.md (g) 17)."
+        ]
+      },
+      "champs_publies": {
+        "perf_par_ligne": "non",
+        "forme": "Aucune performance par ligne, ni en % ni en €. Seule la valorisation est publiée. Le comblement par une source tierce est un choix EXPLICITE et tracé (O12), jamais un silence.",
+        "horizon": null
+      },
+      "invariant_controle": "Σ des valorisations des lignes, FONDS GENERAL inclus = « Valeur de rachat en euros au [date] » — vérifié EXACT au centime sur le v1 (502 246,58). Le sous-total « Gestion libre » égale le total tant qu'il est le seul groupe.",
+      "template_id_natif": "TYPE_MODELE=66 · MODELE=Relevé situation front-office",
+      "emetteur_lisible": true,
+      "n_pages_indicatif": "2",
+      "provenance": "seed",
+      "confiance": "medium",
+      "_source": "docs/etude_corpus_2026-07-29/cardif.md §(b) couches 1-3, §(d) verdict dérive, §(e) sections, §(g) pièges — ancres relevées sur l'ORIGINAL du corpus (relevé Cardif Elite Capitalisation, arrêté 12/2024, généré 28/01/2025) et vérifiées par pdftotext -layout. Reprises du seed/gabarits.json : extraction_hints (piège n°1 corrigé), champs_publies, template_id_natif, emetteur_lisible. couche1 STRICTEMENT IDENTIQUE aux deux profils Cardif : Producer et Creator ne bougent pas d'un pouce à travers la refonte (cardif.md (b) couche 1). `polices` est laissée VIDE à dessein : Times→Helvetica sépare les deux GABARITS, jamais l'émetteur — l'y mettre reviendrait à faire décider le pré-filtre, ce que le matcher interdit (en-tête, écarts 1 et 2).",
+      "_note_ancres": "Le v1 n'existe qu'à UN exemplaire au corpus (borne basse 2024-01-01 = convention, cf. table de vérité). Les cinq ancres v1-spécifiques (« Votre correspondant », « Synthèse des opérations », « Valeur de rachat en euros au », « cours connu », discriminant « [chiffre] euros ») sont vérifiées ABSENTES des trois documents v2 ; c'est ce qui fait rejeter le v1 sur l'arrêté 2025-12-31, où les deux fenêtres se recouvrent."
+    },
+    {
+      "emetteur_code": "cardif",
+      "gabarit": "situation_contrat_capi_pm",
+      "valide_depuis": "2025-12-31",
+      "valide_jusqu_a": null,
+      "periodicite": "a_la_demande",
+      "couche1": {
+        "producer_contient": [
+          "Apache FOP"
+        ],
+        "creator_contient": [
+          "BdocPDF"
+        ],
+        "polices": []
+      },
+      "signature": {
+        "sections_requises": [
+          "Cardif Elite Capitalisation Personnes Morales",
+          "Contrat de capitalisation",
+          "Informations relatives au contrat",
+          "Références",
+          "Souscripteur",
+          "Cumul des opérations",
+          "Situation du contrat au",
+          "Répartition",
+          "Valeur du contrat au",
+          "Gestion libre",
+          "Nous vous communiquons la valorisation provisoire de votre contrat"
+        ],
+        "sections_optionnelles": [
+          "Garanties au terme du contrat",
+          "FONDS GENERAL",
+          "(1) Net de frais de gestion.",
+          "Votre Conseil en Gestion de Patrimoine",
+          "Cardif Assurance Vie",
+          "Relevé situation front-office",
+          {
+            "regex": "^\\s*\\d+/\\d+\\s*$"
+          },
+          {
+            "regex": "<TYPE_MODELE>\\s*66\\s*</TYPE_MODELE>"
+          }
+        ],
+        "discriminants": [
+          {
+            "regex": "\\d\\s*€",
+            "sensible_casse": false
+          }
+        ],
+        "_token_periodicite_refute": {
+          "token_observe": "Cumul des opérations pour l'année",
+          "raison": "Retiré de la SIGNATURE par D42 : la périodicité n'est pas lisible dans le document chez trois émetteurs sur quatre, et les tokens candidats sont des FAUX AMIS — « trimestriels » désigne une offre commerciale chez Spirica, « pour l'année » une fenêtre de cumul YTD chez Cardif (inchangée sur des arrêtés au 30/03 et au 30/06), « 8 années » la durée du contrat chez Himalia. Le token est conservé ici en DOCUMENTATION, jamais consommé : il n'entre ni dans la clé (emetteur_code, gabarit, valide_depuis), ni dans le pré-filtre, ni dans le score du matcher. La périodicité reste renseignée mais informative, fournie par le contexte du run. Cf. infra/migration_001_d42_fenetre_validite.sql, motif (a).",
+          "precision": "Token du seed v0, RÉFUTÉ : identique sur les arrêtés au 31/12, au 30/03 et au 30/06 — il borne un cumul YTD et ne dit rien de la périodicité d'émission (« a_la_demande »)."
+        },
+        "_marqueurs_structure_observes": [
+          "Bloc technique XML embarqué, répété identique en bas de CHAQUE page : <PAPIER> / <TYPE_ENVOI> / <MODELE> / <TYPE_MODELE> / <RESEAU>",
+          "En-tête de colonnes : Support | Code ISIN | Répartition | Nombre d'unités de compte | Valeur de l'unité de compte | Valorisation",
+          "Sous-titre de groupe « Gestion libre » portant le total du groupe sur sa propre ligne",
+          "Ligne « FONDS GENERAL (1) » avec sa note de bas de tableau",
+          "Date d'arrêté doublée : numérique en page 1, en toutes lettres en page 2 — contrôle de cohérence interne gratuit"
+        ]
+      },
+      "extraction_hints": {
+        "pieges": [
+          "TYPE_MODELE=66 / MODELE=Relevé situation front-office est INVARIANT de part et d'autre de la refonte v1→v2 (cardif.md (c)) : c'est un identifiant de FAMILLE de document, pas de gabarit. Il ne court-circuite JAMAIS le matching en couches — il ne fait que le cadrer. Le lire avec pypdf, jamais avec pdftotext (perte de caractères dans le bloc XML).",
+          "Mise en page Apache FOP en positionnement absolu : espacements extrêmes en -layout. Préférer une extraction par positions (bbox) au découpage par largeur fixe.",
+          "La ligne « FONDS GENERAL (1) » porte « -- » à la place des valeurs numériques mais garde une Valorisation : cas particulier à isoler.",
+          "Noms de supports repliés sur 2 lignes, ISIN et chiffres sur la première.",
+          "« Gestion libre » porte le total du groupe SUR la ligne du libellé : ce n'est pas une ligne de support.",
+          "En-têtes empilés sur 2 lignes (« Montant brut » / « des versements ») : reconstruire.",
+          "La ligne de total « Valeur du contrat au [date] [montant] » n'a pas de séparateur net : la détecter comme total.",
+          "Le bloc XML technique peut être COUPÉ en fin de ligne physique : un parseur de balises naïf casse. Le filtrer du contenu, le garder pour la signature.",
+          "Artefact d'encodage ponctuel observé sur un caractère accentué : prévoir un remplacement UTF-8.",
+          "Le tableau des Garanties (page 3) reprend les mêmes supports avec un jeu de colonnes RÉDUIT : ne pas le confondre avec le tableau Situation.",
+          "Une variante « Personnes Physiques » du même produit existe : bloc Souscripteur différent, ne pas présumer l'identité des variantes."
+        ],
+        "ancrage_tableaux": [
+          "Extraction par positions recommandée plutôt que par largeur fixe.",
+          "Distinguer les deux tableaux par leur jeu de colonnes, pas par leur nombre."
+        ],
+        "format_numerique": {
+          "milliers": "espace insécable",
+          "decimal": "virgule",
+          "devise": "€ en suffixe"
         }
       },
       "champs_publies": {
-        "perf_par_ligne": "oui",
-        "forme": "Colonne « +/- % » du détail des positions.",
-        "horizon": "hebdomadaire — à préciser dans validation_note, ne jamais confondre avec un YTD"
+        "perf_par_ligne": "non",
+        "forme": "Aucune performance par ligne, ni en % ni en €. Seule la valorisation est publiée. Le comblement par une source tierce est un choix EXPLICITE et tracé (O12), jamais un silence.",
+        "horizon": null
       },
-      "invariant_controle": "Σ sous-totaux de classes = « Total portefeuille » (vérifié au € près). Le KPI « NOMBRE DE LIGNES » approche le compte des lignes extraites, mais sa convention d'inclusion des liquidités n'est pas garantie.",
+      "invariant_controle": "Σ des valorisations des lignes, FONDS GENERAL inclus = « Valeur du contrat au [date] ». Cohérence de la date numérique (p.1) avec la date en toutes lettres (p.2).",
+      "template_id_natif": "TYPE_MODELE=66 · MODELE=Relevé situation front-office",
+      "emetteur_lisible": true,
+      "n_pages_indicatif": "3",
       "provenance": "seed",
-      "confiance": "high"
+      "confiance": "high",
+      "_source": "docs/etude_corpus_2026-07-29/cardif.md §(b) couches 1-3, §(d) 1-7, §(e) « Découpage proposé pour le profil Cardif-v2 » — ancres relevées sur l'ORIGINAL du corpus (relevé Cardif Elite Capitalisation, arrêté 12/2025, généré 23/01/2026) et confirmées sur les rééditions 2026.03 / 2026.06 (3/3) par pdftotext -layout. Reprises du seed/gabarits.json : extraction_hints (piège n°1 corrigé), champs_publies, invariant_controle, template_id_natif, emetteur_lisible. couche1 STRICTEMENT IDENTIQUE aux deux profils Cardif : Producer et Creator ne bougent pas d'un pouce à travers la refonte (cardif.md (b) couche 1). `polices` est laissée VIDE à dessein : Times→Helvetica sépare les deux GABARITS, jamais l'émetteur — l'y mettre reviendrait à faire décider le pré-filtre, ce que le matcher interdit (en-tête, écarts 1 et 2).",
+      "_note_ancres": "« Garanties au terme du contrat » est présente sur les 3 documents v2 mais reste en OPTIONNELLE : cardif.md §(h) 2 ne tranche pas entre section de version et bloc conditionnel à la garantie plancher. La pagination est déclarée sous la forme tolérante ^\\d+/\\d+$ et non « n/3 » : « n/3 » encoderait le nombre de pages, exclu du matching (A.3). « FONDS GENERAL » est optionnelle (poche fonds euro conditionnelle)."
     },
     {
       "emetteur_code": "spirica",
       "gabarit": "releve_situation_av",
+      "valide_depuis": "0001-01-01",
+      "valide_jusqu_a": null,
       "periodicite": "a_la_demande",
-      "template_id_natif": null,
-      "emetteur_lisible": true,
-      "n_pages_indicatif": ">=2",
+      "couche1": {
+        "producer_contient": [
+          "OpenPDF"
+        ],
+        "creator_contient": [
+          "JasperReports Library"
+        ],
+        "polices": [
+          "Times-Roman",
+          "Times-Bold",
+          "Helvetica"
+        ]
+      },
       "signature": {
-        "metadata_pdf": {
-          "creator": "JasperReports Library",
-          "producer": "OpenPDF"
-        },
-        "ancres_texte": [
+        "sections_requises": [
           "Objet : Relevé de Situation",
+          "Votre numéro de contrat :",
+          "Cadre fiscal : Assurance Vie",
+          "LYON, le",
+          "Nous avons le plaisir de vous remettre votre Relevé de Situation arrêté au",
+          "l'ensemble des opérations intervenues sur votre contrat depuis",
           "SITUATION AU",
+          "Gestion libre",
           "Montant de la valeur atteinte au",
           "Valeur de rachat*",
-          "Le Relevé de Situation n'engage en rien la responsabilité de SPIRICA.",
-          "Ce document n'a pas de valeur contractuelle.",
+          "Le rachat est l'opération par laquelle vous demandez",
           "Vos interlocuteurs à votre service :",
-          "Le rachat est l'opération par laquelle vous demandez"
+          "Directrice Générale de Spirica",
+          "Le Relevé de Situation n'engage en rien la responsabilité de SPIRICA.",
+          "Ce document n'a pas de valeur contractuelle."
         ],
-        "marqueurs_structure": [
+        "sections_optionnelles": [
+          "PRIX DE REVIENT MOYEN AU",
+          "DÉTAIL DES OPÉRATIONS",
+          "* Le PRM représente le prix d'achat moyen d'un support, frais de gestion déduits.",
+          "Nous vous rappelons que les relevés de situation trimestriels pourront être mis à votre disposition",
+          "Votre contrat Version Absolue 2"
+        ],
+        "discriminants": [
+          {
+            "regex": "^\\s*SITUATION AU \\d",
+            "sensible_casse": true
+          }
+        ],
+        "_token_periodicite_refute": {
+          "token_observe": null,
+          "raison": "Retiré de la SIGNATURE par D42 : la périodicité n'est pas lisible dans le document chez trois émetteurs sur quatre, et les tokens candidats sont des FAUX AMIS — « trimestriels » désigne une offre commerciale chez Spirica, « pour l'année » une fenêtre de cumul YTD chez Cardif (inchangée sur des arrêtés au 30/03 et au 30/06), « 8 années » la durée du contrat chez Himalia. Le token est conservé ici en DOCUMENTATION, jamais consommé : il n'entre ni dans la clé (emetteur_code, gabarit, valide_depuis), ni dans le pré-filtre, ni dans le score du matcher. La périodicité reste renseignée mais informative, fournie par le contexte du run. Cf. infra/migration_001_d42_fenetre_validite.sql, motif (a).",
+          "precision": "Aucun token dans le document. Le seul candidat, « les relevés de situation trimestriels pourront être mis à votre disposition », décrit une OFFRE COMMERCIALE ; il est en section optionnelle et reste sans rapport avec la périodicité de l'exemplaire."
+        },
+        "_marqueurs_structure_observes": [
           "Bandeau titre centré « SITUATION AU [date] » séparant le corps de lettre du tableau",
           "En-tête de la page 2 = « Contrat n° [numéro] » seul",
           "Pied de page identique : « Page X / Y » + 3 lignes de disclaimer SPIRICA",
           "Bloc final en 3 paires libellé:valeur (Votre conseiller / Adresse / Téléphone)"
-        ],
-        "token_periodicite": null
+        ]
       },
       "extraction_hints": {
         "pieges": [
@@ -518,102 +619,86 @@
         "horizon": "à confirmer sur un exemplaire multi-support"
       },
       "invariant_controle": "Σ colonne % = 100 ; Σ valeurs atteintes des lignes = « Montant de la valeur atteinte ».",
-      "provenance": "seed",
-      "confiance": "high"
-    },
-    {
-      "emetteur_code": "nortia",
-      "gabarit": "releve_portefeuille_cto",
-      "periodicite": "mensuel",
       "template_id_natif": null,
-      "emetteur_lisible": false,
-      "n_pages_indicatif": "variable",
-      "signature": {
-        "metadata_pdf": {
-          "note": "Polices standard non embarquées (Courier/Helvetica), pas de producteur distinctif."
-        },
-        "ancres_texte": [
-          "RELEVE PORTEFEUILLE AU",
-          "VOTRE COMPTE TITRES",
-          "VALORISATION EN : EUR",
-          "Code et désignation valeur",
-          "Prix moyen d'acquisition (PMA)",
-          "TITRES - EUROPE",
-          "Total du portefeuille",
-          "INFORMATIONS FISCALES SUR VOTRE PORTEFEUILLE DEPUIS le 1er Janvier",
-          "Instrument financier éligible à la règlementation MIF",
-          "Dépôt à l'étranger"
-        ],
-        "marqueurs_structure": [
-          "Marqueur technique « ^{PSTOCK=paper_0} » en toute première ligne de CHAQUE page : invisible à l'écran, très fiable",
-          "En-tête complet répété sur chaque page (titre + date d'édition + pagination + adresse + conseiller + n° de compte)",
-          "En-tête de tableau à 7 colonnes réparti sur 2-3 lignes physiques",
-          "Macro-zones dans l'ordre fixe : TITRES - EUROPE, TITRES - INTERNATIONAL, TITRES - AUTRES, LIQUIDITES",
-          "La dernière page porte toujours « Total du portefeuille » puis le bloc INFORMATIONS FISCALES"
-        ],
-        "token_periodicite": "édité le 7 du mois suivant l'arrêté (indice, à confirmer)"
-      },
-      "extraction_hints": {
-        "pieges": [
-          "Émetteur NON lisible en texte : le mot « Nortia » n'apparaît nulle part, l'identité est portée par un logo image. L'identification passe par la signature, jamais par le nom de fichier (D24/N7).",
-          "Le flag « E » (dépôt à l'étranger) est une colonne fantôme sans position X fixe : en extraction il se décale loin de sa ligne d'origine.",
-          "Les sous-totaux de catégorie n'ont que 3 champs (catégorie / % / montant) contre 7 pour les lignes titres : un parseur à nombre de colonnes fixe casse.",
-          "Les négatifs s'écrivent « - 29 220,00 » avec un ESPACE après le signe : risque de découpage en deux jetons.",
-          "« EUR » n'est accolé qu'à la colonne Cours, implicite ailleurs.",
-          "La précision décimale de Quantité varie selon la nature du titre (0 à 4 décimales) : ce n'est pas un discriminant de colonne.",
-          "La page 2 réaffiche tout l'en-tête mais ne contient QUE « Total du portefeuille » : une nouvelle page n'implique pas de nouvelles lignes.",
-          "Σ des % de sections = 100 seulement EN INCLUANT LIQUIDITES : un parseur qui ignore les libellés hors « TITRES - » sous-estime fortement l'actif.",
-          "Le marqueur ^{PSTOCK} pollue le texte extrait : filtrer avant matching, garder pour la signature."
-        ],
-        "ancrage_tableaux": [
-          "Pas de filets : le regroupement repose sur l'indentation et la présence/absence de « % »."
-        ],
-        "format_numerique": {
-          "milliers": "espace",
-          "decimal": "virgule",
-          "negatif": "signe moins suivi d'un espace"
-        }
-      },
-      "champs_publies": {
-        "perf_par_ligne": "derivable",
-        "forme": "Plus-value en EUROS (colonne « Plus ou moins value latente »), pas en %. Le % se dérive du gain rapporté au PMA.",
-        "horizon": "latent, depuis acquisition"
-      },
-      "invariant_controle": "Σ % des sections, liquidités incluses = 100,00 ; Σ valorisations = « Total du portefeuille ».",
+      "emetteur_lisible": true,
+      "n_pages_indicatif": ">=2",
       "provenance": "seed",
-      "confiance": "medium"
+      "confiance": "high",
+      "_source": "docs/etude_corpus_2026-07-29/ — étude de la dérive Spirica (dist. UAF Life Patrimoine) §(b) couche 2 (les 9 ancres de B.3 + les ancres supplémentaires stables), §(c) « noyau requis + blocs optionnels », §(d) tableau des stables. Vérifié 12/12 par pdftotext -layout sur les 6 arrêtés × 2 contrats du corpus. Reprises du seed : extraction_hints, champs_publies, invariant_controle, emetteur_lisible.",
+      "_note_ancres": "PRM (absent 2/12) et DÉTAIL DES OPÉRATIONS (absent 8/12) sont des blocs PILOTÉS PAR LA DONNÉE, donc optionnels : les exiger créerait trois profils versionnés là où il n'y a qu'un gabarit (§c). La phrase d'introduction est ancrée sur son PRÉFIXE stable « …intervenues sur votre contrat depuis », sa fin variant (« son origine » / « le dernier État de Situation »). Certitude presume_reedition : les 12 documents sont des rééditions du 24/07/2026, la couche 1 n'est donc PAS datée de l'arrêté et aucune fenêtre de validité n'est affirmable."
     },
     {
       "emetteur_code": "himalia_emetteur_a_confirmer",
       "gabarit": "releve_situation_capi",
-      "periodicite": "annuel",
-      "template_id_natif": null,
-      "emetteur_lisible": false,
-      "n_pages_indicatif": "1 page de synthèse + N pages de tableau",
+      "valide_depuis": "0001-01-01",
+      "valide_jusqu_a": null,
+      "periodicite": "a_la_demande",
+      "couche1": {
+        "producer_contient": [
+          "iText 2.1.7 by 1T3XT"
+        ],
+        "creator_contient": [
+          "JasperReports (report name)"
+        ],
+        "polices": [
+          "Helvetica",
+          "Helvetica-Bold"
+        ]
+      },
       "signature": {
-        "metadata_pdf": {
-          "creator": "JasperReports",
-          "producer": "iText 2.1.7 by 1T3XT"
-        },
-        "ancres_texte": [
+        "sections_requises": [
           "Relevé de situation au",
           "Ce document n'est pas assimilable à un état de situation.",
+          "Souscripteur",
+          "Nom du produit",
+          "HIMALIA CAPITALISATION",
+          "N° du contrat",
+          "Durée de contrat",
+          "Date d'effet fiscale",
+          "Option Fiscale",
+          "Profil de gestion",
+          "Option de prévoyance",
           "Total versé depuis l'origine",
           "Total investi depuis l'origine",
+          "Total racheté depuis l'origine",
           "Epargne atteinte au",
           "Répartition de l'investissement",
           "Plus/moins-values***",
+          "Support(s)",
+          "Date de valeur",
+          "Valeur de part(€)",
+          "Montant(€)",
+          "%**",
           "Prix d'Achat Moyen",
+          {
+            "regex": "^\\s*Fonds UC\\s*$"
+          },
           "Le montant de l'épargne atteinte est obtenu à partir des dernières valeurs connues.",
-          "Point d'attention :"
+          "Point d'attention :",
+          "Cette information est donnée à titre indicatif et n'a aucune valeur contractuelle."
         ],
-        "marqueurs_structure": [
+        "sections_optionnelles": [
+          {
+            "regex": "^\\s*Fonds Euro\\s*$"
+          }
+        ],
+        "discriminants": [
+          {
+            "regex": "Relevé de situation au \\d{2}/\\d{2}/\\d{4}",
+            "sensible_casse": false
+          }
+        ],
+        "_token_periodicite_refute": {
+          "token_observe": "arrêté au 31/12 (indice faible — périodicité à confirmer sur un second exemplaire)",
+          "raison": "Retiré de la SIGNATURE par D42 : la périodicité n'est pas lisible dans le document chez trois émetteurs sur quatre, et les tokens candidats sont des FAUX AMIS — « trimestriels » désigne une offre commerciale chez Spirica, « pour l'année » une fenêtre de cumul YTD chez Cardif (inchangée sur des arrêtés au 30/03 et au 30/06), « 8 années » la durée du contrat chez Himalia. Le token est conservé ici en DOCUMENTATION, jamais consommé : il n'entre ni dans la clé (emetteur_code, gabarit, valide_depuis), ni dans le pré-filtre, ni dans le score du matcher. La périodicité reste renseignée mais informative, fournie par le contexte du run. Cf. infra/migration_001_d42_fenetre_validite.sql, motif (a).",
+          "precision": "Le seed v0 n'avait qu'un indice de DATE, pas un token. Réfuté : le seul nombre d'années du document (« Durée de contrat », 8 années) est la durée du contrat. Aucune périodicité lisible."
+        },
+        "_marqueurs_structure_observes": [
           "Titre de page « Répartition » répété sur chaque page du tableau",
           "DEUX groupes de colonnes aux libellés HOMONYMES : « Montant(€) » et « %** » apparaissent sous « Répartition de l'investissement » ET sous « Plus/moins-values*** »",
           "Aucune ligne Total dans le tableau : le total n'existe qu'en bloc d'en-tête page 1",
           "Bloc de 3 notes (*)(**)(***) suivi de « Point d'attention : »"
-        ],
-        "token_periodicite": "arrêté au 31/12 (indice faible — périodicité à confirmer sur un second exemplaire)"
+        ]
       },
       "extraction_hints": {
         "pieges": [
@@ -646,41 +731,119 @@
         "horizon": "depuis acquisition (base Prix d'Achat Moyen)"
       },
       "invariant_controle": "Σ « Montant(€) » du groupe Répartition = « Epargne atteinte au [date] » du bloc page 1 — vérifié exact. Σ %** ≈ 100 à l'arrondi près, jamais strict.",
+      "template_id_natif": null,
+      "emetteur_lisible": false,
+      "n_pages_indicatif": "1 page de synthèse + N pages de tableau",
       "provenance": "seed",
-      "confiance": "medium"
+      "confiance": "medium",
+      "_source": "docs/etude_corpus_2026-07-29/himalia.md §(b) couche 2 (30 ancres sur 30 survivent entre les deux originaux à 13 mois d'écart), §(e) « Requis — présent dans les 5 documents, sans exception ». Vérifié 5/5 par pdftotext -layout. Reprises du seed : extraction_hints, champs_publies, invariant_controle, emetteur_lisible (false : émetteur absent du document, texte comme image).",
+      "_note_ancres": "PAS de fenêtre de validité, et c'est un RÉSULTAT : couche 1 identique, 30/30 ancres, géométrie au centième de point entre 01/2025 et 03/2026 (§c). « Fonds Euro » est optionnelle — présente 2/5 seulement. ATTENTION : l'ancre est déclarée en REGEX ancrée sur la ligne (^\\s*Fonds Euro\\s*$) et non en sous-chaîne, parce que la note de bas de page « ( ex fonds euros) » présente dans les 5 documents fait matcher « Fonds Euro » à tort 5/5 — piège de sous-chaîne que j'ai constaté en vérifiant, non documenté dans l'étude."
     },
     {
       "emetteur_code": "wealins",
       "gabarit": "releve_annuel_capi_lux",
+      "valide_depuis": "0001-01-01",
+      "valide_jusqu_a": null,
       "periodicite": "annuel",
-      "template_id_natif": null,
-      "emetteur_lisible": true,
-      "n_pages_indicatif": "15-26 selon le nombre de FID — HORS matching",
+      "couche1": {
+        "producer_contient": [],
+        "creator_contient": [],
+        "polices": [
+          "Museo300TT",
+          "Museo700TT",
+          "Museo900TT",
+          "ArialMT"
+        ]
+      },
       "signature": {
-        "metadata_pdf": {
-          "note": "Le marqueur fort est structurel, pas dans les métadonnées : paginations locales multiples."
-        },
-        "ancres_texte": [
+        "sections_requises": [
           "Wealins Capi France",
           "Contrat de capitalisation",
           "Caractéristiques du contrat",
-          "Information sur l'évolution du contrat",
-          "Arbitrages et/ou changement de banque dépositaire",
-          "Informations relatives aux unités de compte",
-          "Aperçu des fonds",
           "Profil d'investissement",
           "Valeur totale du fonds au",
           "R.C.S.: Luxembourg B 53682",
           "TVA Intra-com.: LU 166 094 20",
-          "wealins.com"
+          "12, rue Léon Laval",
+          "wealins.com",
+          "Client & Partner Services",
+          "cps@wealins.com",
+          "Chief Operating Officer",
+          "Leudelange, le",
+          "<booklet>",
+          "LEU.326",
+          {
+            "regex": "Information sur l['’]évolution du contrat"
+          },
+          "Valeur de rachat au",
+          "Information sur les services et opérations",
+          "Frais de gestion administrative",
+          "Informations relatives aux unités de compte",
+          "Frais annuels supportés",
+          "Autres informations",
+          "Opérations de rachat",
+          "Transformation du contrat",
+          "Loi Pacte",
+          "Informations relatives à la performance",
+          "aux frais prélevés et aux rétrocessions de"
         ],
-        "marqueurs_structure": [
+        "sections_optionnelles": [
+          "Aperçu des fonds",
+          "Arbitrages et/ou changement de banque dépositaire",
+          {
+            "regex": "Montant des primes depuis la date d['’]effet"
+          },
+          "Ces primes ont été allouées comme suit",
+          {
+            "regex": "Type d['’]Actifs"
+          },
+          {
+            "regex": "Rendement 20\\d\\d"
+          }
+        ],
+        "discriminants": [
+          {
+            "regex": "^\\s*INFORMATION\\s+ANNUELLE\\s*:",
+            "sensible_casse": true
+          }
+        ],
+        "_token_periodicite_refute": {
+          "token_observe": "INFORMATION ANNUELLE",
+          "raison": "Retiré de la SIGNATURE par D42 : la périodicité n'est pas lisible dans le document chez trois émetteurs sur quatre, et les tokens candidats sont des FAUX AMIS — « trimestriels » désigne une offre commerciale chez Spirica, « pour l'année » une fenêtre de cumul YTD chez Cardif (inchangée sur des arrêtés au 30/03 et au 30/06), « 8 années » la durée du contrat chez Himalia. Le token est conservé ici en DOCUMENTATION, jamais consommé : il n'entre ni dans la clé (emetteur_code, gabarit, valide_depuis), ni dans le pré-filtre, ni dans le score du matcher. La périodicité reste renseignée mais informative, fournie par le contexte du run. Cf. infra/migration_001_d42_fenetre_validite.sql, motif (a).",
+          "precision": "Token RÉEL — Wealins est le seul des quatre émetteurs à inscrire la périodicité, dans son en-tête d'annexe. Il n'est pas perdu : il est promu DISCRIMINANT DE GABARIT sous la forme regex ancrée ^\\s*INFORMATION\\s+ANNUELLE\\s*: (la forme ^INFORMATION stricte ne matche rien, pdftotext -layout indente l'en-tête). Il discrimine le gabarit, jamais la clé de périodicité."
+        },
+        "_marqueurs_structure_observes": [
           "Paginations LOCALES multiples et non contiguës : aucune pagination globale n'existe",
           "Footer légal WEALINS identique au caractère près sur presque toutes les pages",
           "Bloc structurel répété PAR FID dans l'annexe",
           "En-tête d'annexe « INFORMATION ANNUELLE : [date] - [contrat] » + « Fonds : [nom] »"
+        ]
+      },
+      "extraction_hints": {
+        "pieges": [
+          "Le document est la concaténation de 4 sous-templates : ne JAMAIS segmenter par une pagination globale, elle n'existe pas.",
+          "AMBIGUÏTÉ DATE / PAGINATION : le motif « \\d+/\\d+ » attrape des dates (27/01, 31/12, 13/03) avant la vraie pagination. Ancrer la pagination du corps sur un dénominateur petit et constant (n/N avec N ≤ 12), et l'annexe sur le préfixe littéral « Page ».",
+          "Le mot « Fonds » a TROIS sens : le FID (enveloppe), une catégorie d'actif, et le titre du sous-tableau des lignes OPC. Un grep naïf est inexploitable.",
+          "Deux tableaux « Situation au » quasi identiques (N-1 et N) : capturer la date DU TITRE avec le tableau.",
+          "« Type d'Actifs » apparaît deux fois avec des contenus différents : désambiguïser par le contexte, pas par le titre.",
+          "Le détail « Fonds » s'étale sur plusieurs pages sans sous-total intermédiaire : concaténer avant d'agréger.",
+          "Trois niveaux de totaux par FID : hiérarchiser, sinon double comptage.",
+          "Séparateur de milliers INCOHÉRENT entre le corps (points : 1.014.646,31) et l'annexe (espaces : 545 975,50), dans le même document.",
+          "La colonne « Année » du rendement n'est PAS la somme des trimestres (rendements composés) : ne jamais valider par addition.",
+          "Ligne « Open Cost Order » négative dans les liquidités : c'est un débit en attente, pas un actif.",
+          "Le nom du FID ressemble au nom de la banque dépositaire (« 540709 Banque Thaler SA ») : ne pas confondre identifiant produit et tiers dépositaire.",
+          "L'artefact « <booklet> » apparaît en texte brut : le filtrer du contenu, le GARDER comme frontière de segment.",
+          "Le code agence en tête de courrier peut être pris à tort pour un numéro de contrat."
         ],
-        "token_periodicite": "INFORMATION ANNUELLE"
+        "ancrage_tableaux": [
+          "-layout impératif.",
+          "En-têtes empilés sur 2-3 lignes au-dessus de valeurs situées plus bas : désalignement vertical à corriger."
+        ],
+        "format_numerique": {
+          "milliers": "point (corps) / espace (annexe)",
+          "decimal": "virgule",
+          "negatif": "signe moins suivi d'un espace"
+        }
       },
       "segments": {
         "_note": "Décision O11 : UN profil composite, avec segments déclarés. Un seul appariement (peu coûteux, aucune couche de matching supplémentaire), mais le DRIFT est évalué PAR SEGMENT — donc une évolution de la seule page Loi Pacte ne remet pas en cause tout le profil et produit une proposition de mise_a_jour ciblée. Justification empirique : les frontières sont détectables au caractère près et se sont vérifiées identiques sur deux exemplaires de tailles très différentes (26 p./2 FID et 15 p./1 FID). Et la page Loi Pacte porte un pied de page DIFFÉRENT (autre numéro de fax), preuve qu'elle est produite par un autre générateur — donc de cycles de vie indépendants.",
@@ -714,6 +877,78 @@
           }
         ]
       },
+      "champs_publies": {
+        "perf_par_ligne": "par_poche",
+        "forme": "Aucune performance par ligne. Rendement publié PAR FID, en trimestres + année. Le tableau Loi Pacte donne une performance brute/nette par fonds, souvent « non disponible ».",
+        "horizon": "trimestriel et annuel, par fonds dédié"
+      },
+      "invariant_controle": "Par FID : Σ (sous-total Fonds + sous-total Fonds alternatifs + sous-total Liquidités) = « Valeur totale du fonds ». Σ des FID = valeur du contrat. Ne jamais contrôler le rendement annuel par addition des trimestres.",
+      "template_id_natif": null,
+      "emetteur_lisible": true,
+      "n_pages_indicatif": "15-26 selon le nombre de FID — HORS matching",
+      "provenance": "seed",
+      "confiance": "high",
+      "_source": "docs/etude_corpus_2026-07-29/wealins.md §(b) matrice gabarit × document (16 ancres émetteur + ancres séparant les familles), §(c) « la clé, formulée précisément », §(f) dérive. Vérifié 3/3 sur les documents G1 (a17, a55, i55) et 0/4 sur G2 par pdftotext -layout. Reprises du seed : extraction_hints, champs_publies, invariant_controle, emetteur_lisible. Ni Producer ni Creator dans le PDF (seuls /Author=Lifeware et /CreationDate) : les deux listes sont vides. Les polices retenues sont celles de la CHARTE (Museo) et du moteur booklet (ArialMT), identiques aux deux gabarits — donc niveau émetteur. La version PDF (1.4 annuels / 1.6 trimestriels) sépare bien les deux familles mais est EXCLUE à dessein : wealins.md §(a) la qualifie de sous-produit de la bibliothèque d'assemblage, alignable du jour au lendemain.",
+      "_note_ancres": "Discriminant en DÉBUT DE LIGNE, casse significative. Le piège quantifié de §(e) impose la forme regex : le mot « trimestre » compte 10 occurrences dans a17 (annuel) contre 3 dans q17 (trimestriel), une sous-chaîne conclurait donc à l'inverse. ÉCART ASSUMÉ avec le libellé de la mission : `^INFORMATION` strict ne matche RIEN sur le texte réel — pdftotext -layout indente l'en-tête d'annexe. La forme retenue est `^\\s*INFORMATION`, vérifiée 3/3 contre 0/4. « Aperçu des fonds » (3/7, dès 2 FID) et « Arbitrages et/ou changement de banque dépositaire » (1/7) sont optionnelles — le seed v0 les listait au même rang que les autres, ce qui faisait échouer a55 et i55. Le titre de la page Loi Pacte est ancré par FRAGMENTS stables (« Informations relatives à la performance » + « aux frais prélevés et aux rétrocessions de ») car « à la performance nette de frais » y a été inséré entre 01/2025 et 01/2026 (§f). Nombre de pages hors matching : 11 → 26 pour le même gabarit."
+    },
+    {
+      "emetteur_code": "wealins",
+      "gabarit": "situation_trimestrielle_capi_lux",
+      "valide_depuis": "0001-01-01",
+      "valide_jusqu_a": null,
+      "periodicite": "trimestriel",
+      "couche1": {
+        "producer_contient": [],
+        "creator_contient": [],
+        "polices": [
+          "Museo300TT",
+          "Museo700TT",
+          "Museo900TT",
+          "ArialMT"
+        ]
+      },
+      "signature": {
+        "sections_requises": [
+          "Wealins Capi France",
+          "Contrat de capitalisation",
+          "Caractéristiques du contrat",
+          "Profil d'investissement",
+          "Valeur totale du fonds au",
+          "R.C.S.: Luxembourg B 53682",
+          "TVA Intra-com.: LU 166 094 20",
+          "12, rue Léon Laval",
+          "wealins.com",
+          "Client & Partner Services",
+          "cps@wealins.com",
+          "Chief Operating Officer",
+          "Leudelange, le",
+          "<booklet>",
+          "LEU.326",
+          "Situation de contrat",
+          "Date de la situation",
+          "La situation du contrat à la date mentionnée",
+          "Frais prélevés au titre du",
+          "Annexe:",
+          "Situation du contrat"
+        ],
+        "sections_optionnelles": [
+          "Aperçu des fonds",
+          {
+            "regex": "Type d['’]Actifs"
+          }
+        ],
+        "discriminants": [
+          {
+            "regex": "^\\s*INFORMATION\\s+TRIMESTRIELLE\\s*:",
+            "sensible_casse": true
+          }
+        ],
+        "_token_periodicite_refute": {
+          "token_observe": "INFORMATION TRIMESTRIELLE",
+          "raison": "Retiré de la SIGNATURE par D42 : la périodicité n'est pas lisible dans le document chez trois émetteurs sur quatre, et les tokens candidats sont des FAUX AMIS — « trimestriels » désigne une offre commerciale chez Spirica, « pour l'année » une fenêtre de cumul YTD chez Cardif (inchangée sur des arrêtés au 30/03 et au 30/06), « 8 années » la durée du contrat chez Himalia. Le token est conservé ici en DOCUMENTATION, jamais consommé : il n'entre ni dans la clé (emetteur_code, gabarit, valide_depuis), ni dans le pré-filtre, ni dans le score du matcher. La périodicité reste renseignée mais informative, fournie par le contexte du run. Cf. infra/migration_001_d42_fenetre_validite.sql, motif (a).",
+          "precision": "Même statut que chez le gabarit annuel : token réel, promu discriminant de gabarit (^\\s*INFORMATION\\s+TRIMESTRIELLE\\s*:), jamais clé de périodicité. Le piège quantifié : le mot « trimestre » compte 10 occurrences dans un document ANNUEL contre 3 dans un trimestriel — une recherche en sous-chaîne conclurait exactement à l'inverse."
+        }
+      },
       "extraction_hints": {
         "pieges": [
           "Le document est la concaténation de 4 sous-templates : ne JAMAIS segmenter par une pagination globale, elle n'existe pas.",
@@ -746,71 +981,277 @@
         "horizon": "trimestriel et annuel, par fonds dédié"
       },
       "invariant_controle": "Par FID : Σ (sous-total Fonds + sous-total Fonds alternatifs + sous-total Liquidités) = « Valeur totale du fonds ». Σ des FID = valeur du contrat. Ne jamais contrôler le rendement annuel par addition des trimestres.",
+      "template_id_natif": null,
+      "emetteur_lisible": true,
+      "n_pages_indicatif": "10-19 selon le nombre de FID — HORS matching",
       "provenance": "seed",
-      "confiance": "high"
+      "confiance": "high",
+      "_source": "docs/etude_corpus_2026-07-29/wealins.md §(b) « ancres qui séparent les familles » (colonnes q17, q55, j17, j55), §(c) G2 = 3 blocs sans page Loi Pacte, §(d) frontières mesurées. PROFIL ABSENT DU SEED — créé ici ; extraction_hints / champs_publies / invariant_controle / emetteur_lisible repris du profil wealins du seed, qui décrit le même émetteur et la même architecture composite. Ni Producer ni Creator dans le PDF (seuls /Author=Lifeware et /CreationDate) : les deux listes sont vides. Les polices retenues sont celles de la CHARTE (Museo) et du moteur booklet (ArialMT), identiques aux deux gabarits — donc niveau émetteur. La version PDF (1.4 annuels / 1.6 trimestriels) sépare bien les deux familles mais est EXCLUE à dessein : wealins.md §(a) la qualifie de sous-produit de la bibliothèque d'assemblage, alignable du jour au lendemain.",
+      "_note_ancres": "Second gabarit Wealins révélé par le corpus (le seed n'en déclarait qu'un). Il ne se distingue de G1 ni par l'émetteur, ni par les métadonnées, ni par le nom de fichier (faux 2 fois sur 4 : un fichier nommé « référence de contrat + date d'arrêté » est un trimestriel, tandis qu'un fichier nommé « Information annuelle » est un annuel composite complet) — seulement par le discriminant d'en-tête d'annexe et par ses ancres de corps propres, vérifiées 4/4 sur G2 et 0/3 sur G1. « Aperçu des fonds » optionnelle (2/4, dès 2 FID). Le corps de G2 est figé à 2 pages, mais le nombre de pages total va de 10 à 19 : hors matching."
     },
     {
-      "emetteur_code": "cardif",
-      "gabarit": "situation_contrat_capi_pm",
-      "periodicite": "annuel",
-      "template_id_natif": "TYPE_MODELE=66 · MODELE=Relevé situation front-office",
-      "emetteur_lisible": true,
-      "n_pages_indicatif": "3",
+      "emetteur_code": "de_pury_pictet",
+      "gabarit": "evaluation_portefeuille_mandat",
+      "valide_depuis": "0001-01-01",
+      "valide_jusqu_a": null,
+      "periodicite": "a_la_demande",
+      "couche1": {
+        "producer_contient": [
+          "Microsoft Reporting Services"
+        ],
+        "creator_contient": [
+          "Microsoft Reporting Services"
+        ],
+        "polices": []
+      },
       "signature": {
-        "metadata_pdf": {
-          "producer": "Apache FOP",
-          "creator": "BdocPDF"
+        "sections_requises": [
+          "de Pury Pictet Turrettini (Belgique)",
+          "Evaluation du Portefeuille",
+          "Point de Contact",
+          "Banque Dépositaire",
+          "Mode de détention",
+          "Aperçu du Portefeuille",
+          "Matrice allocation actifs et devises",
+          "Performance historique en EUR",
+          "Détail des Positions - Liquidités",
+          "Liste des transactions",
+          "Dividendes, intérêts et autres paiements",
+          "Adéquation du profil",
+          {
+            "regex": "En cas de divergence avec l['’]estimation produite par la banque dépositaire"
+          }
+        ],
+        "sections_optionnelles": [
+          "Détail des Positions - Obligations",
+          "Détail des Positions - Actions",
+          "DISCLAIMER"
+        ],
+        "discriminants": [],
+        "_token_periodicite_refute": {
+          "token_observe": null,
+          "raison": "Retiré de la SIGNATURE par D42 : la périodicité n'est pas lisible dans le document chez trois émetteurs sur quatre, et les tokens candidats sont des FAUX AMIS — « trimestriels » désigne une offre commerciale chez Spirica, « pour l'année » une fenêtre de cumul YTD chez Cardif (inchangée sur des arrêtés au 30/03 et au 30/06), « 8 années » la durée du contrat chez Himalia. Le token est conservé ici en DOCUMENTATION, jamais consommé : il n'entre ni dans la clé (emetteur_code, gabarit, valide_depuis), ni dans le pré-filtre, ni dans le score du matcher. La périodicité reste renseignée mais informative, fournie par le contexte du run. Cf. infra/migration_001_d42_fenetre_validite.sql, motif (a).",
+          "precision": "Aucun token dans le seed v0 ni dans le document : le rapport porte « Situation au » (arrêté) et « Etablie au » (édition), deux dates, aucune périodicité."
         },
-        "ancres_texte": [
-          "Cardif Elite Capitalisation Personnes Morales",
-          "Contrat de capitalisation",
-          "Cumul des opérations pour l'année",
-          "Situation du contrat au",
-          "Garanties au terme du contrat",
-          "Valeur du contrat au",
-          "(1) Net de frais de gestion."
-        ],
-        "marqueurs_structure": [
-          "Bloc technique XML embarqué, répété identique en bas de CHAQUE page : <PAPIER> / <TYPE_ENVOI> / <MODELE> / <TYPE_MODELE> / <RESEAU>",
-          "En-tête de colonnes : Support | Code ISIN | Répartition | Nombre d'unités de compte | Valeur de l'unité de compte | Valorisation",
-          "Sous-titre de groupe « Gestion libre » portant le total du groupe sur sa propre ligne",
-          "Ligne « FONDS GENERAL (1) » avec sa note de bas de tableau",
-          "Date d'arrêté doublée : numérique en page 1, en toutes lettres en page 2 — contrôle de cohérence interne gratuit"
-        ],
-        "token_periodicite": "Cumul des opérations pour l'année"
+        "_marqueurs_structure_observes": [
+          "Séquence fixe de 12 titres de section, dans l'ordre",
+          "Pied de page sur chaque page : émetteur + « Situation au JJ/MM/AAAA » + « Page X/N »",
+          "En-têtes des tableaux de positions sur 2 lignes, sous-colonnes Devise/EUR sous RESULTAT et EVALUATION",
+          "Motif « Total : [sous-catégorie] » après chaque groupe d'instruments",
+          "Page de garde en 2 colonnes à libellés fixes (Compte / Devise de référence / Situation au / Etablie au / Banque Dépositaire / Profil / Mode de détention | Gérant / Tél / E-mail)"
+        ]
       },
       "extraction_hints": {
         "pieges": [
-          "Ce gabarit expose un ID DE TEMPLATE NATIF (TYPE_MODELE=66) : quand il est présent, il court-circuite le matching en couches. Signature parfaite.",
-          "Mise en page Apache FOP en positionnement absolu : espacements extrêmes en -layout. Préférer une extraction par positions (bbox) au découpage par largeur fixe.",
-          "La ligne « FONDS GENERAL (1) » porte « -- » à la place des valeurs numériques mais garde une Valorisation : cas particulier à isoler.",
-          "Noms de supports repliés sur 2 lignes, ISIN et chiffres sur la première.",
-          "« Gestion libre » porte le total du groupe SUR la ligne du libellé : ce n'est pas une ligne de support.",
-          "En-têtes empilés sur 2 lignes (« Montant brut » / « des versements ») : reconstruire.",
-          "La ligne de total « Valeur du contrat au [date] [montant] » n'a pas de séparateur net : la détecter comme total.",
-          "Le bloc XML technique peut être COUPÉ en fin de ligne physique : un parseur de balises naïf casse. Le filtrer du contenu, le garder pour la signature.",
-          "Artefact d'encodage ponctuel observé sur un caractère accentué : prévoir un remplacement UTF-8.",
-          "Le tableau des Garanties (page 3) reprend les mêmes supports avec un jeu de colonnes RÉDUIT : ne pas le confondre avec le tableau Situation.",
-          "Une variante « Personnes Physiques » du même produit existe : bloc Souscripteur différent, ne pas présumer l'identité des variantes."
+          "DEUX conventions numériques dans le MÊME document : le bloc Résumé est anglo-saxon (1,925,477 / 97.15%), tout le reste est franco-suisse (1 134 708,36 / 25,19%). Un parseur réglé sur un seul séparateur casse sur l'autre bloc. Cette hétérogénéité est stable : elle vient de sous-rapports RDL distincts, c'est donc aussi un marqueur.",
+          "Chaque position est étalée sur 2 lignes physiques : ligne 1 = valeurs, ligne 2 = ISIN + prix d'achat moyen + un second pourcentage sans libellé. Recoupler avant parsing, sinon l'ISIN est perdu.",
+          "Colonne « RESULTAT YTD » : deux pourcentages empilés. Le bon est la 2e ligne (résultat depuis achat), en EUR.",
+          "Fonds monétaires classés à tort « Obligations » → reclasser en monetaire.",
+          "Deux niveaux de totaux : total de section ET sous-totaux « Total : ». Double comptage si on somme les deux.",
+          "Deux sections sont purement graphiques (Evolution des actifs, Exposition actions) : le texte s'arrête après le titre. Ce n'est PAS un échec d'extraction.",
+          "« Rendement benchmark * » affiche un « % » seul sans chiffre pour les mois sans historique.",
+          "Deux dates proches à ne pas confondre : « Situation au » (arrêté) et « Etablie au » (édition).",
+          "La composition du benchmark dépend du profil client : apparence de boilerplate, réalité volatile. À exclure de la signature."
         ],
         "ancrage_tableaux": [
-          "Extraction par positions recommandée plutôt que par largeur fixe.",
-          "Distinguer les deux tableaux par leur jeu de colonnes, pas par leur nombre."
+          "Pas de filets de tableau : pdftotext -layout impératif.",
+          "Fusionner les 2 lignes d'en-tête avant tout parsing positionnel."
+        ],
+        "format_numerique": {
+          "milliers": "espace (bloc principal) / virgule (bloc Résumé)",
+          "decimal": "virgule (principal) / point (Résumé)"
+        }
+      },
+      "champs_publies": {
+        "perf_par_ligne": "oui",
+        "forme": "Colonne « RESULTAT YTD », 2e ligne = résultat depuis achat, en EUR.",
+        "horizon": "depuis achat"
+      },
+      "invariant_controle": "Σ sous-totaux « Total : » par catégorie = total de section ; Σ sections = total portefeuille.",
+      "template_id_natif": null,
+      "emetteur_lisible": true,
+      "n_pages_indicatif": "9-14",
+      "provenance": "seed",
+      "confiance": "high",
+      "_source": "docs/etude_signature_gabarits_2026-07-27.md §B.1 (ancres_texte + marqueurs_structure + sections_ordonnees). Profil NON réexaminé par le corpus étendu (table de vérité : « établi par l'étude d'origine §B.1 »). J'ai néanmoins revérifié les ancres sur l'unique évaluation de portefeuille sous mandat du corpus : 12/13 passent verbatim ; la 13e est corrigée en regex (voir _note_ancres). Reprises du seed : extraction_hints, champs_publies, invariant_controle, emetteur_lisible.",
+      "_note_ancres": "UN SEUL document au corpus : toute ancre est ici « 1/1 », ce qui n'établit aucune stabilité temporelle. Correction apportée à §B.1 : la clause « En cas de divergence avec l'estimation produite par la banque dépositaire… » ne matche PAS en sous-chaîne — le document porte l'apostrophe typographique U+2019, d'où la forme regex ['|’]. Les deux sections de positions Obligations / Actions sont passées en optionnelles : un mandat sans obligations n'aurait pas la section, et le corpus ne contient aucun réplicat pour le vérifier."
+    },
+    {
+      "emetteur_code": "dauphine_am",
+      "gabarit": "reporting_hebdo_mandat",
+      "valide_depuis": "0001-01-01",
+      "valide_jusqu_a": null,
+      "periodicite": "hebdomadaire",
+      "couche1": {
+        "producer_contient": [
+          "Word pour Microsoft",
+          "Microsoft Word"
+        ],
+        "creator_contient": [
+          "Word pour Microsoft",
+          "Microsoft Word"
+        ],
+        "polices": []
+      },
+      "signature": {
+        "sections_requises": [
+          "Reporting hebdomadaire",
+          "Composition du portefeuille & mouvements de la semaine",
+          "Semaine du",
+          "VALORISATION AU",
+          "VALORISATION TOTALE",
+          "PERFORMANCE YTD",
+          "NOMBRE DE LIGNES",
+          "Détail des positions",
+          "Total portefeuille",
+          "Mouvements de la semaine",
+          "Dauphine AM, filiale de Rhétorès Groupe",
+          "agrément AMF n°GP-17000033",
+          "Des convictions au service de la gestion de vos actifs",
+          "COMMUNICATION À CARACTÈRE NON COMMERCIAL",
+          "NE PEUT ÊTRE TRANSMIS À DES CLIENTS FINAUX",
+          "Document à caractère non commercial"
+        ],
+        "sections_optionnelles": [
+          "Une allocation diversifiée, fidèle à l'orientation du mandat.",
+          "L'actualité sur les valeurs détenues",
+          "Aucun mouvement sur la semaine."
+        ],
+        "discriminants": [],
+        "_token_periodicite_refute": {
+          "token_observe": "Semaine du",
+          "raison": "Retiré de la SIGNATURE par D42 : la périodicité n'est pas lisible dans le document chez trois émetteurs sur quatre, et les tokens candidats sont des FAUX AMIS — « trimestriels » désigne une offre commerciale chez Spirica, « pour l'année » une fenêtre de cumul YTD chez Cardif (inchangée sur des arrêtés au 30/03 et au 30/06), « 8 années » la durée du contrat chez Himalia. Le token est conservé ici en DOCUMENTATION, jamais consommé : il n'entre ni dans la clé (emetteur_code, gabarit, valide_depuis), ni dans le pré-filtre, ni dans le score du matcher. La périodicité reste renseignée mais informative, fournie par le contexte du run. Cf. infra/migration_001_d42_fenetre_validite.sql, motif (a).",
+          "precision": "Token du seed v0. Il borne la période couverte et figure en section REQUISE, où il travaille comme ancre de gabarit ; il n'est pas promu en clé, la périodicité venant du contexte du run."
+        },
+        "_marqueurs_structure_observes": [
+          "En-tête de colonnes exact : ISIN SUPPORT VALEUR +/- VALUE +/- % POIDS",
+          "En-tête courant « Reporting hebdomadaire — Semaine du … au … » à partir de la page 2",
+          "Pied de page « Document à caractère non commercial — non contractuel · Dauphine AM · agrément AMF n°GP-17000033 » + « Page N », absent de la page 1",
+          "Filigrane fragmenté en 9 jetons identiques et ordonnés sur chaque page : U clu / sa s / ex / ge ive / in e / te n / rn t / m / e",
+          "Hiérarchie catégorie > lignes > sous-total > « Total portefeuille »"
+        ]
+      },
+      "extraction_hints": {
+        "pieges": [
+          "Le filigrane diagonal se fragmente en 9 jetons parasites insérés au milieu du contenu en mode -layout. Les filtrer AVANT tout parsing. Ils sont identiques et ordonnés : donc aussi une ancre fiable.",
+          "La colonne « +/- % » est la variation DE LA SEMAINE, pas un YTD. Le YTD n'existe que dans le bloc KPI.",
+          "Noms de SUPPORT repliés sur 2 lignes, valeurs sur la première : désalignement si parsing naïf.",
+          "Sous-totaux de classe sans ISIN ni SUPPORT (4 champs au lieu de 6) : les distinguer par l'absence d'ISIN.",
+          "Ligne LIQUIDITÉS : tiret cadratin « — » pour +/- VALUE et +/- % = non applicable, PAS zéro.",
+          "Signe moins Unicode U+2212, pas le tiret ASCII.",
+          "Le tableau des positions est scindé entre deux pages SANS ré-émission de l'en-tête.",
+          "La valorisation apparaît deux fois (« VALORISATION AU » en garde, « VALORISATION TOTALE » en KPI) : dédupliquer.",
+          "Les libellés de poches KPI varient selon le mandat (ACTIONS vs OBLIGATIONS/MONÉTAIRE) : c'est du volatil, pas un drift.",
+          "Section Mouvements parfois vide : « Aucun mouvement sur la semaine. »",
+          "La section ACTUALITÉS est optionnelle (présente si des valeurs sont commentées) : son absence n'est pas un drift.",
+          "Nom de fichier en Unicode NFD (accent décomposé) : résoudre par glob, ne jamais retaper le chemin."
+        ],
+        "ancrage_tableaux": [
+          "Pas de filets : -layout impératif.",
+          "Fusionner les libellés de support repliés avant association aux valeurs."
         ],
         "format_numerique": {
           "milliers": "espace insécable",
           "decimal": "virgule",
-          "devise": "€ en suffixe"
+          "negatif": "U+2212"
         }
       },
       "champs_publies": {
-        "perf_par_ligne": "non",
-        "forme": "Aucune performance par ligne, ni en % ni en €. Seule la valorisation est publiée. Le comblement par une source tierce est un choix EXPLICITE et tracé (O12), jamais un silence.",
-        "horizon": null
+        "perf_par_ligne": "oui",
+        "forme": "Colonne « +/- % » du détail des positions.",
+        "horizon": "hebdomadaire — à préciser dans validation_note, ne jamais confondre avec un YTD"
       },
-      "invariant_controle": "Σ des valorisations des lignes, FONDS GENERAL inclus = « Valeur du contrat au [date] ». Cohérence de la date numérique (p.1) avec la date en toutes lettres (p.2).",
+      "invariant_controle": "Σ sous-totaux de classes = « Total portefeuille » (vérifié au € près). Le KPI « NOMBRE DE LIGNES » approche le compte des lignes extraites, mais sa convention d'inclusion des liquidités n'est pas garantie.",
+      "template_id_natif": null,
+      "emetteur_lisible": true,
+      "n_pages_indicatif": "3-6",
       "provenance": "seed",
-      "confiance": "high"
+      "confiance": "high",
+      "_source": "docs/etude_signature_gabarits_2026-07-27.md §B.2 (consolidé des 3 réplicats E 4 - ETF / Offensif 6 / Trésorerie 2). Profil non réexaminé par le corpus étendu ; ancres revérifiées ici 3/3 par pdftotext -layout sur les trois fichiers de 15.7.26/. Reprises du seed : extraction_hints, champs_publies, invariant_controle, emetteur_lisible.",
+      "_note_ancres": "« L'actualité sur les valeurs détenues » (1/3) et « Aucun mouvement sur la semaine. » (1/3) sont les deux sections conditionnelles annoncées par §B.2 — vérifiées conditionnelles, donc optionnelles. « Une allocation diversifiée, fidèle à l'orientation du mandat. » est présente 3/3 mais le seed l'avait retirée de la liste ; je la laisse en optionnelle plutôt que de la promouvoir sur trois documents d'un même millésime. Le nombre de pages (3, 4, 6) est hors matching."
+    },
+    {
+      "emetteur_code": "nortia",
+      "gabarit": "releve_portefeuille_cto",
+      "valide_depuis": "0001-01-01",
+      "valide_jusqu_a": null,
+      "periodicite": "a_la_demande",
+      "couche1": {},
+      "signature": {
+        "sections_requises": [
+          {
+            "regex": "\\^\\{PSTOCK"
+          },
+          "RELEVE PORTEFEUILLE AU",
+          "Votre conseiller :",
+          "VOTRE COMPTE TITRES",
+          "VALORISATION EN : EUR",
+          "Code et désignation valeur",
+          "Prix moyen",
+          "(PMA)",
+          "TITRES - EUROPE",
+          "TITRES - INTERNATIONAL",
+          "LIQUIDITES",
+          "Total du portefeuille",
+          "INFORMATIONS FISCALES SUR VOTRE PORTEFEUILLE DEPUIS le 1er Janvier",
+          "Instrument financier éligible à la règlementation MIF",
+          "PMA : La validité de cette information est sous votre responsabilité",
+          "Bien à vous,"
+        ],
+        "sections_optionnelles": [
+          "TITRES - AUTRES",
+          {
+            "regex": "D[ée]p[ôo]t . l['’][ée]tranger"
+          }
+        ],
+        "discriminants": [],
+        "_token_periodicite_refute": {
+          "token_observe": "édité le 7 du mois suivant l'arrêté (indice, à confirmer)",
+          "raison": "Retiré de la SIGNATURE par D42 : la périodicité n'est pas lisible dans le document chez trois émetteurs sur quatre, et les tokens candidats sont des FAUX AMIS — « trimestriels » désigne une offre commerciale chez Spirica, « pour l'année » une fenêtre de cumul YTD chez Cardif (inchangée sur des arrêtés au 30/03 et au 30/06), « 8 années » la durée du contrat chez Himalia. Le token est conservé ici en DOCUMENTATION, jamais consommé : il n'entre ni dans la clé (emetteur_code, gabarit, valide_depuis), ni dans le pré-filtre, ni dans le score du matcher. La périodicité reste renseignée mais informative, fournie par le contexte du run. Cf. infra/migration_001_d42_fenetre_validite.sql, motif (a).",
+          "precision": "Ce n'était pas un token mais une conjecture sur le calendrier d'édition, portée par le seul document de l'étude d'origine. Rien de lisible dans le texte. Profil « a_etablir » par ailleurs."
+        },
+        "_marqueurs_structure_observes": [
+          "Marqueur technique « ^{PSTOCK=paper_0} » en toute première ligne de CHAQUE page : invisible à l'écran, très fiable",
+          "En-tête complet répété sur chaque page (titre + date d'édition + pagination + adresse + conseiller + n° de compte)",
+          "En-tête de tableau à 7 colonnes réparti sur 2-3 lignes physiques",
+          "Macro-zones dans l'ordre fixe : TITRES - EUROPE, TITRES - INTERNATIONAL, TITRES - AUTRES, LIQUIDITES",
+          "La dernière page porte toujours « Total du portefeuille » puis le bloc INFORMATIONS FISCALES"
+        ]
+      },
+      "extraction_hints": {
+        "pieges": [
+          "Émetteur NON lisible en texte : le mot « Nortia » n'apparaît nulle part, l'identité est portée par un logo image. L'identification passe par la signature, jamais par le nom de fichier (D24/N7).",
+          "Le flag « E » (dépôt à l'étranger) est une colonne fantôme sans position X fixe : en extraction il se décale loin de sa ligne d'origine.",
+          "Les sous-totaux de catégorie n'ont que 3 champs (catégorie / % / montant) contre 7 pour les lignes titres : un parseur à nombre de colonnes fixe casse.",
+          "Les négatifs s'écrivent « - 29 220,00 » avec un ESPACE après le signe : risque de découpage en deux jetons.",
+          "« EUR » n'est accolé qu'à la colonne Cours, implicite ailleurs.",
+          "La précision décimale de Quantité varie selon la nature du titre (0 à 4 décimales) : ce n'est pas un discriminant de colonne.",
+          "La page 2 réaffiche tout l'en-tête mais ne contient QUE « Total du portefeuille » : une nouvelle page n'implique pas de nouvelles lignes.",
+          "Σ des % de sections = 100 seulement EN INCLUANT LIQUIDITES : un parseur qui ignore les libellés hors « TITRES - » sous-estime fortement l'actif.",
+          "Le marqueur ^{PSTOCK} pollue le texte extrait : filtrer avant matching, garder pour la signature."
+        ],
+        "ancrage_tableaux": [
+          "Pas de filets : le regroupement repose sur l'indentation et la présence/absence de « % »."
+        ],
+        "format_numerique": {
+          "milliers": "espace",
+          "decimal": "virgule",
+          "negatif": "signe moins suivi d'un espace"
+        }
+      },
+      "champs_publies": {
+        "perf_par_ligne": "derivable",
+        "forme": "Plus-value en EUROS (colonne « Plus ou moins value latente »), pas en %. Le % se dérive du gain rapporté au PMA.",
+        "horizon": "latent, depuis acquisition"
+      },
+      "invariant_controle": "Σ % des sections, liquidités incluses = 100,00 ; Σ valorisations = « Total du portefeuille ».",
+      "template_id_natif": null,
+      "emetteur_lisible": false,
+      "n_pages_indicatif": "variable",
+      "provenance": "seed",
+      "confiance": "medium",
+      "_source": "docs/etude_signature_gabarits_2026-07-27.md §B.4 (ancres_texte + marqueurs_structure + sections_ordonnees), repris sans prétendre l'avoir établi : la table de vérité classe les 5 documents Nortia en certitude=\"a_etablir\" (aucune métadonnée PDF, distinction original / réédition non vérifiable par pdfinfo, série temporelle non analysée). Reprises du seed : extraction_hints, champs_publies, invariant_controle, emetteur_lisible (false : le mot « Nortia » n'apparaît nulle part, l'identité est portée par un logo image).",
+      "_note_ancres": "couche1 VOLONTAIREMENT VIDE (`{}`) : les 5 documents n'ont aucune métadonnée PDF exploitable, tout indice de couche 1 ferait écarter le profil par le pré-filtre. Le matcher garde candidat tout profil sans couche 1 — c'est exactement ce cas. Deux ancres de §B.4 sont CORRIGÉES parce qu'elles ne matchent pas le texte réel : « Prix moyen d'acquisition (PMA) » est un en-tête coupé sur TROIS lignes physiques entrelacées avec les autres colonnes (« Prix moyen » / « d'acquisition » / « (PMA) »), scindée ici en « Prix moyen » + « (PMA) » ; « E Dépôt à l'étranger » / « Dépôt à l'étranger » ne matche pas en sous-chaîne (apostrophe typographique U+2019 et « E » séparé), passée en regex ET en optionnelle car c'est une légende de colonne fantôme. « TITRES - AUTRES » est optionnelle : présente 3/5 seulement. Ces deux corrections sont mes propres vérifications, non des résultats de §B.4."
     }
   ],
   "isin": [
@@ -820,7 +1261,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -830,7 +1271,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -840,7 +1281,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -850,7 +1291,7 @@
       "class_code": "monetaire",
       "geo_code": null,
       "sri": null,
-      "source": "interagyr_valide",
+      "source": "reporting_mandat_valide",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -860,7 +1301,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -870,7 +1311,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "interagyr_valide",
+      "source": "reporting_mandat_valide",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -880,7 +1321,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "interagyr_valide",
+      "source": "reporting_mandat_valide",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -890,7 +1331,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -900,7 +1341,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -910,7 +1351,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "interagyr_valide",
+      "source": "reporting_mandat_valide",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -920,7 +1361,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -930,7 +1371,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -940,7 +1381,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -950,7 +1391,7 @@
       "class_code": "actions",
       "geo_code": "emergents",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -960,7 +1401,7 @@
       "class_code": "alternatifs",
       "geo_code": null,
       "sri": null,
-      "source": "gronier_categories",
+      "source": "excel_categories_run_reel",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -970,7 +1411,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -980,7 +1421,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -990,7 +1431,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1000,7 +1441,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1010,7 +1451,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1020,7 +1461,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1030,7 +1471,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1040,7 +1481,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1050,7 +1491,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "interagyr_valide",
+      "source": "reporting_mandat_valide",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -1060,7 +1501,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1070,7 +1511,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "interagyr_valide",
+      "source": "reporting_mandat_valide",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -1080,7 +1521,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1090,7 +1531,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1100,7 +1541,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "interagyr_valide",
+      "source": "reporting_mandat_valide",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -1110,7 +1551,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1120,7 +1561,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "interagyr_valide",
+      "source": "reporting_mandat_valide",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -1130,7 +1571,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "interagyr_valide",
+      "source": "reporting_mandat_valide",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -1140,7 +1581,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1150,7 +1591,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "interagyr_valide",
+      "source": "reporting_mandat_valide",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -1160,7 +1601,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "interagyr_valide",
+      "source": "reporting_mandat_valide",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -1170,7 +1611,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1180,7 +1621,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1190,7 +1631,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1200,7 +1641,7 @@
       "class_code": "monetaire",
       "geo_code": null,
       "sri": null,
-      "source": "gronier_categories",
+      "source": "excel_categories_run_reel",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1210,7 +1651,7 @@
       "class_code": "monetaire",
       "geo_code": null,
       "sri": null,
-      "source": "gronier_categories",
+      "source": "excel_categories_run_reel",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1220,7 +1661,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1230,7 +1671,7 @@
       "class_code": "actions",
       "geo_code": null,
       "sri": null,
-      "source": "gronier_categories",
+      "source": "excel_categories_run_reel",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1240,7 +1681,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1250,7 +1691,7 @@
       "class_code": "actions",
       "geo_code": null,
       "sri": null,
-      "source": "gronier_categories",
+      "source": "excel_categories_run_reel",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1260,7 +1701,7 @@
       "class_code": "obligations",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1270,7 +1711,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1280,7 +1721,7 @@
       "class_code": "actions",
       "geo_code": null,
       "sri": null,
-      "source": "gronier_categories",
+      "source": "excel_categories_run_reel",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1290,7 +1731,7 @@
       "class_code": "actions",
       "geo_code": "emergents",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1300,7 +1741,7 @@
       "class_code": "monetaire",
       "geo_code": null,
       "sri": null,
-      "source": "gronier_categories",
+      "source": "excel_categories_run_reel",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1310,7 +1751,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1320,7 +1761,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1330,7 +1771,7 @@
       "class_code": "actions",
       "geo_code": "emergents",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1340,7 +1781,7 @@
       "class_code": "obligations",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1350,7 +1791,7 @@
       "class_code": "actions",
       "geo_code": "amerique_du_nord",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1360,7 +1801,7 @@
       "class_code": "obligations",
       "geo_code": null,
       "sri": null,
-      "source": "gronier_categories",
+      "source": "excel_categories_run_reel",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1370,7 +1811,7 @@
       "class_code": "obligations",
       "geo_code": null,
       "sri": null,
-      "source": "gronier_categories",
+      "source": "excel_categories_run_reel",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1380,7 +1821,7 @@
       "class_code": "actions",
       "geo_code": null,
       "sri": null,
-      "source": "gronier_categories",
+      "source": "excel_categories_run_reel",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1390,7 +1831,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1400,7 +1841,7 @@
       "class_code": "actions",
       "geo_code": "emergents",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1410,7 +1851,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1420,7 +1861,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1430,7 +1871,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1440,7 +1881,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1450,7 +1891,7 @@
       "class_code": "actions",
       "geo_code": null,
       "sri": null,
-      "source": "gronier_categories",
+      "source": "excel_categories_run_reel",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1460,7 +1901,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1470,7 +1911,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1480,7 +1921,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1490,7 +1931,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1500,7 +1941,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1510,7 +1951,7 @@
       "class_code": "monetaire",
       "geo_code": null,
       "sri": null,
-      "source": "interagyr_valide",
+      "source": "reporting_mandat_valide",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -1520,7 +1961,7 @@
       "class_code": "alternatifs",
       "geo_code": null,
       "sri": null,
-      "source": "gronier_categories",
+      "source": "excel_categories_run_reel",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1530,7 +1971,7 @@
       "class_code": "private_equity",
       "geo_code": null,
       "sri": null,
-      "source": "gronier_categories",
+      "source": "excel_categories_run_reel",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1540,7 +1981,7 @@
       "class_code": "actions",
       "geo_code": "emergents",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1550,7 +1991,7 @@
       "class_code": "produits_structures",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1560,7 +2001,7 @@
       "class_code": "actions",
       "geo_code": null,
       "sri": null,
-      "source": "gronier_categories",
+      "source": "excel_categories_run_reel",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1570,7 +2011,7 @@
       "class_code": "obligations",
       "geo_code": "europe",
       "sri": null,
-      "source": "interagyr_valide+geo_nom_valide_cgp_20260724",
+      "source": "reporting_mandat_valide+geo_nom_valide_cgp_20260724",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -1580,7 +2021,7 @@
       "class_code": "alternatifs",
       "geo_code": null,
       "sri": null,
-      "source": "gronier_categories",
+      "source": "excel_categories_run_reel",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1590,7 +2031,7 @@
       "class_code": "alternatifs",
       "geo_code": null,
       "sri": null,
-      "source": "gronier_categories",
+      "source": "excel_categories_run_reel",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1600,7 +2041,7 @@
       "class_code": "alternatifs",
       "geo_code": null,
       "sri": null,
-      "source": "gronier_categories",
+      "source": "excel_categories_run_reel",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1610,7 +2051,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1620,7 +2061,7 @@
       "class_code": "obligations",
       "geo_code": null,
       "sri": null,
-      "source": "interagyr_valide",
+      "source": "reporting_mandat_valide",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -1630,7 +2071,7 @@
       "class_code": "obligations",
       "geo_code": null,
       "sri": null,
-      "source": "gronier_categories",
+      "source": "excel_categories_run_reel",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1640,7 +2081,7 @@
       "class_code": "private_equity",
       "geo_code": null,
       "sri": null,
-      "source": "gronier_categories",
+      "source": "excel_categories_run_reel",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1650,7 +2091,7 @@
       "class_code": "obligations",
       "geo_code": null,
       "sri": null,
-      "source": "gronier_categories",
+      "source": "excel_categories_run_reel",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1660,7 +2101,7 @@
       "class_code": "obligations",
       "geo_code": null,
       "sri": null,
-      "source": "gronier_categories",
+      "source": "excel_categories_run_reel",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1670,7 +2111,7 @@
       "class_code": "monetaire",
       "geo_code": null,
       "sri": null,
-      "source": "interagyr_valide",
+      "source": "reporting_mandat_valide",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -1680,7 +2121,7 @@
       "class_code": "private_equity",
       "geo_code": null,
       "sri": null,
-      "source": "gronier_categories",
+      "source": "excel_categories_run_reel",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1690,7 +2131,7 @@
       "class_code": "produits_structures",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1700,7 +2141,7 @@
       "class_code": "private_equity",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1710,7 +2151,7 @@
       "class_code": "produits_structures",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1720,7 +2161,7 @@
       "class_code": "produits_structures",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1730,7 +2171,7 @@
       "class_code": "produits_structures",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1740,7 +2181,7 @@
       "class_code": "produits_structures",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1750,7 +2191,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1760,7 +2201,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "interagyr_valide",
+      "source": "reporting_mandat_valide",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -1770,7 +2211,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1780,7 +2221,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1790,7 +2231,7 @@
       "class_code": "actions",
       "geo_code": "amerique_du_nord",
       "sri": null,
-      "source": "interagyr_valide",
+      "source": "reporting_mandat_valide",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -1800,7 +2241,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1810,7 +2251,7 @@
       "class_code": "actions",
       "geo_code": "amerique_du_nord",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1820,7 +2261,7 @@
       "class_code": "actions",
       "geo_code": "emergents",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1830,7 +2271,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1840,7 +2281,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1850,7 +2291,7 @@
       "class_code": "actions",
       "geo_code": "emergents",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1860,7 +2301,7 @@
       "class_code": "actions",
       "geo_code": "asie_pacifique",
       "sri": null,
-      "source": "interagyr_valide",
+      "source": "reporting_mandat_valide",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -1870,7 +2311,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1880,7 +2321,7 @@
       "class_code": "actions",
       "geo_code": "amerique_du_nord",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1890,7 +2331,7 @@
       "class_code": "actions",
       "geo_code": "amerique_du_nord",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1900,7 +2341,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1910,7 +2351,7 @@
       "class_code": "actions",
       "geo_code": "amerique_du_nord",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1920,7 +2361,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1930,7 +2371,7 @@
       "class_code": "actions",
       "geo_code": "amerique_du_nord",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1940,7 +2381,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1950,7 +2391,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "interagyr_valide",
+      "source": "reporting_mandat_valide",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -1960,7 +2401,7 @@
       "class_code": "actions",
       "geo_code": "emergents",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1970,7 +2411,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1980,7 +2421,7 @@
       "class_code": "matieres_premieres",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -1990,7 +2431,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "interagyr_valide",
+      "source": "reporting_mandat_valide",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -2000,7 +2441,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2010,7 +2451,7 @@
       "class_code": "actions",
       "geo_code": "emergents",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2020,7 +2461,7 @@
       "class_code": "alternatifs",
       "geo_code": null,
       "sri": null,
-      "source": "gronier_categories",
+      "source": "excel_categories_run_reel",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2030,7 +2471,7 @@
       "class_code": "actions",
       "geo_code": "amerique_du_nord",
       "sri": null,
-      "source": "interagyr_valide",
+      "source": "reporting_mandat_valide",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -2040,7 +2481,7 @@
       "class_code": "obligations",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2050,7 +2491,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2060,7 +2501,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2070,7 +2511,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2080,7 +2521,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2090,7 +2531,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2100,7 +2541,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2110,7 +2551,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2120,7 +2561,7 @@
       "class_code": "actions",
       "geo_code": "asie_pacifique",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2130,7 +2571,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2140,7 +2581,7 @@
       "class_code": "actions",
       "geo_code": "amerique_du_nord",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2150,7 +2591,7 @@
       "class_code": "actions",
       "geo_code": "asie_pacifique",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2160,7 +2601,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2170,7 +2611,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2180,7 +2621,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2190,7 +2631,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2200,7 +2641,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2210,7 +2651,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2220,7 +2661,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2230,7 +2671,7 @@
       "class_code": "actions",
       "geo_code": null,
       "sri": null,
-      "source": "gronier_categories",
+      "source": "excel_categories_run_reel",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2240,7 +2681,7 @@
       "class_code": "actions",
       "geo_code": "emergents",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2250,7 +2691,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2260,7 +2701,7 @@
       "class_code": "actions",
       "geo_code": "emergents",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2270,7 +2711,7 @@
       "class_code": "actions",
       "geo_code": "emergents",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2280,7 +2721,7 @@
       "class_code": "actions",
       "geo_code": "asie_pacifique",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2290,7 +2731,7 @@
       "class_code": "actions",
       "geo_code": "emergents",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2300,7 +2741,7 @@
       "class_code": "alternatifs",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2310,7 +2751,7 @@
       "class_code": "actions",
       "geo_code": "emergents",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2320,7 +2761,7 @@
       "class_code": "actions",
       "geo_code": "asie_pacifique",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2330,7 +2771,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2340,7 +2781,7 @@
       "class_code": "obligations",
       "geo_code": "europe",
       "sri": null,
-      "source": "interagyr_valide+geo_nom_valide_cgp_20260724",
+      "source": "reporting_mandat_valide+geo_nom_valide_cgp_20260724",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -2350,7 +2791,7 @@
       "class_code": "actions",
       "geo_code": null,
       "sri": null,
-      "source": "gronier_categories",
+      "source": "excel_categories_run_reel",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2360,7 +2801,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2370,7 +2811,7 @@
       "class_code": "actions",
       "geo_code": "amerique_du_nord",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2380,7 +2821,7 @@
       "class_code": "alternatifs",
       "geo_code": null,
       "sri": null,
-      "source": "gronier_categories",
+      "source": "excel_categories_run_reel",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2390,7 +2831,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2400,7 +2841,7 @@
       "class_code": "obligations",
       "geo_code": null,
       "sri": null,
-      "source": "gronier_categories",
+      "source": "excel_categories_run_reel",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2410,7 +2851,7 @@
       "class_code": "obligations",
       "geo_code": "emergents",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2420,7 +2861,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2430,7 +2871,7 @@
       "class_code": "monetaire",
       "geo_code": "amerique_du_nord",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2440,7 +2881,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2450,7 +2891,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "interagyr_valide",
+      "source": "reporting_mandat_valide",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -2460,7 +2901,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2470,7 +2911,7 @@
       "class_code": "actions",
       "geo_code": null,
       "sri": null,
-      "source": "gronier_categories",
+      "source": "excel_categories_run_reel",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2480,7 +2921,7 @@
       "class_code": "actions",
       "geo_code": null,
       "sri": null,
-      "source": "gronier_categories",
+      "source": "excel_categories_run_reel",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2490,7 +2931,7 @@
       "class_code": "obligations",
       "geo_code": "europe",
       "sri": null,
-      "source": "interagyr_valide+geo_nom_valide_cgp_20260724",
+      "source": "reporting_mandat_valide+geo_nom_valide_cgp_20260724",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -2500,7 +2941,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2510,7 +2951,7 @@
       "class_code": "actions",
       "geo_code": null,
       "sri": null,
-      "source": "gronier_categories",
+      "source": "excel_categories_run_reel",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2520,7 +2961,7 @@
       "class_code": "actions",
       "geo_code": "amerique_du_nord",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2530,7 +2971,7 @@
       "class_code": "obligations",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2540,7 +2981,7 @@
       "class_code": "obligations",
       "geo_code": null,
       "sri": null,
-      "source": "gronier_categories",
+      "source": "excel_categories_run_reel",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2550,7 +2991,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2560,7 +3001,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2570,7 +3011,7 @@
       "class_code": "actions",
       "geo_code": "amerique_du_nord",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2580,7 +3021,7 @@
       "class_code": "actions",
       "geo_code": "amerique_du_nord",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2590,7 +3031,7 @@
       "class_code": "actions",
       "geo_code": "amerique_du_nord",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2600,7 +3041,7 @@
       "class_code": "actions",
       "geo_code": "emergents",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2610,7 +3051,7 @@
       "class_code": "actions",
       "geo_code": "emergents",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2620,7 +3061,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "interagyr_valide",
+      "source": "reporting_mandat_valide",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -2630,7 +3071,7 @@
       "class_code": "actions",
       "geo_code": "amerique_du_nord",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2640,7 +3081,7 @@
       "class_code": "actions",
       "geo_code": "amerique_du_nord",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2650,7 +3091,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2660,7 +3101,7 @@
       "class_code": "obligations",
       "geo_code": "emergents",
       "sri": null,
-      "source": "interagyr_valide",
+      "source": "reporting_mandat_valide",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -2670,7 +3111,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2680,7 +3121,7 @@
       "class_code": "alternatifs",
       "geo_code": null,
       "sri": null,
-      "source": "gronier_categories",
+      "source": "excel_categories_run_reel",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2690,7 +3131,7 @@
       "class_code": "alternatifs",
       "geo_code": null,
       "sri": null,
-      "source": "gronier_categories",
+      "source": "excel_categories_run_reel",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2700,7 +3141,7 @@
       "class_code": "actions",
       "geo_code": null,
       "sri": null,
-      "source": "gronier_categories",
+      "source": "excel_categories_run_reel",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2710,7 +3151,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2720,7 +3161,7 @@
       "class_code": "actions",
       "geo_code": "amerique_du_nord",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2730,7 +3171,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2740,7 +3181,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2750,7 +3191,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2760,7 +3201,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2770,7 +3211,7 @@
       "class_code": "obligations",
       "geo_code": null,
       "sri": null,
-      "source": "gronier_categories",
+      "source": "excel_categories_run_reel",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2780,7 +3221,7 @@
       "class_code": "obligations",
       "geo_code": null,
       "sri": null,
-      "source": "interagyr_valide",
+      "source": "reporting_mandat_valide",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -2790,7 +3231,7 @@
       "class_code": "actions",
       "geo_code": "emergents",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2800,7 +3241,7 @@
       "class_code": "actions",
       "geo_code": "asie_pacifique",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2810,7 +3251,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2820,7 +3261,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2830,7 +3271,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2840,7 +3281,7 @@
       "class_code": "obligations",
       "geo_code": "monde",
       "sri": null,
-      "source": "interagyr_valide+geo_nom_valide_cgp_20260724",
+      "source": "reporting_mandat_valide+geo_nom_valide_cgp_20260724",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -2850,7 +3291,7 @@
       "class_code": "alternatifs",
       "geo_code": null,
       "sri": null,
-      "source": "gronier_categories",
+      "source": "excel_categories_run_reel",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2860,7 +3301,7 @@
       "class_code": "alternatifs",
       "geo_code": null,
       "sri": null,
-      "source": "gronier_categories",
+      "source": "excel_categories_run_reel",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2870,7 +3311,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2880,7 +3321,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2890,7 +3331,7 @@
       "class_code": "actions",
       "geo_code": null,
       "sri": null,
-      "source": "gronier_categories",
+      "source": "excel_categories_run_reel",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2900,7 +3341,7 @@
       "class_code": "actions",
       "geo_code": "amerique_du_nord",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2910,7 +3351,7 @@
       "class_code": "actions",
       "geo_code": "amerique_du_nord",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2920,7 +3361,7 @@
       "class_code": "actions",
       "geo_code": "amerique_du_nord",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2930,7 +3371,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "interagyr_valide",
+      "source": "reporting_mandat_valide",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -2940,7 +3381,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "interagyr_valide",
+      "source": "reporting_mandat_valide",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -2950,7 +3391,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2960,7 +3401,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "interagyr_valide",
+      "source": "reporting_mandat_valide",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -2970,7 +3411,7 @@
       "class_code": "private_equity",
       "geo_code": null,
       "sri": null,
-      "source": "gronier_categories",
+      "source": "excel_categories_run_reel",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2980,7 +3421,7 @@
       "class_code": "obligations",
       "geo_code": "emergents",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -2990,7 +3431,7 @@
       "class_code": "obligations",
       "geo_code": "emergents",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -3000,7 +3441,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "interagyr_valide",
+      "source": "reporting_mandat_valide",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -3010,7 +3451,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -3020,7 +3461,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -3030,7 +3471,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -3040,7 +3481,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -3050,7 +3491,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -3060,7 +3501,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -3070,7 +3511,7 @@
       "class_code": "private_equity",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -3080,7 +3521,7 @@
       "class_code": "actions",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -3090,7 +3531,7 @@
       "class_code": "actions",
       "geo_code": "amerique_du_nord",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -3100,7 +3541,7 @@
       "class_code": "actions",
       "geo_code": "amerique_du_nord",
       "sri": null,
-      "source": "interagyr_valide",
+      "source": "reporting_mandat_valide",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -3110,7 +3551,7 @@
       "class_code": "actions",
       "geo_code": "amerique_du_nord",
       "sri": null,
-      "source": "interagyr_valide",
+      "source": "reporting_mandat_valide",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -3120,7 +3561,7 @@
       "class_code": "actions",
       "geo_code": "amerique_du_nord",
       "sri": null,
-      "source": "interagyr_valide",
+      "source": "reporting_mandat_valide",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -3130,7 +3571,7 @@
       "class_code": "actions",
       "geo_code": "amerique_du_nord",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -3140,7 +3581,7 @@
       "class_code": "actions",
       "geo_code": "amerique_du_nord",
       "sri": null,
-      "source": "interagyr_valide",
+      "source": "reporting_mandat_valide",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -3150,7 +3591,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -3160,7 +3601,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -3170,7 +3611,7 @@
       "class_code": "actions",
       "geo_code": "amerique_du_nord",
       "sri": null,
-      "source": "interagyr_valide",
+      "source": "reporting_mandat_valide",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -3180,7 +3621,7 @@
       "class_code": "actions",
       "geo_code": "amerique_du_nord",
       "sri": null,
-      "source": "interagyr_valide",
+      "source": "reporting_mandat_valide",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -3190,7 +3631,7 @@
       "class_code": "actions",
       "geo_code": "amerique_du_nord",
       "sri": null,
-      "source": "interagyr_valide",
+      "source": "reporting_mandat_valide",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -3200,7 +3641,7 @@
       "class_code": "actions",
       "geo_code": "amerique_du_nord",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -3210,7 +3651,7 @@
       "class_code": "actions",
       "geo_code": "emergents",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -3220,7 +3661,7 @@
       "class_code": "actions",
       "geo_code": "amerique_du_nord",
       "sri": null,
-      "source": "interagyr_valide",
+      "source": "reporting_mandat_valide",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -3230,7 +3671,7 @@
       "class_code": "actions",
       "geo_code": "amerique_du_nord",
       "sri": null,
-      "source": "interagyr_valide",
+      "source": "reporting_mandat_valide",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -3240,7 +3681,7 @@
       "class_code": "actions",
       "geo_code": "amerique_du_nord",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -3250,7 +3691,7 @@
       "class_code": "actions",
       "geo_code": "amerique_du_nord",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -3260,7 +3701,7 @@
       "class_code": "actions",
       "geo_code": "amerique_du_nord",
       "sri": null,
-      "source": "interagyr_valide",
+      "source": "reporting_mandat_valide",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -3270,7 +3711,7 @@
       "class_code": "actions",
       "geo_code": "asie_pacifique",
       "sri": null,
-      "source": "interagyr_valide",
+      "source": "reporting_mandat_valide",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -3280,7 +3721,7 @@
       "class_code": "actions",
       "geo_code": "amerique_du_nord",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -3290,7 +3731,7 @@
       "class_code": "actions",
       "geo_code": "amerique_du_nord",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -3300,7 +3741,7 @@
       "class_code": "actions",
       "geo_code": "amerique_du_nord",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -3310,7 +3751,7 @@
       "class_code": "produits_structures",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -3320,7 +3761,7 @@
       "class_code": "obligations",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -3330,7 +3771,7 @@
       "class_code": "produits_structures",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -3340,7 +3781,7 @@
       "class_code": "produits_structures",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -3350,7 +3791,7 @@
       "class_code": "dette_privee",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -3360,7 +3801,7 @@
       "class_code": "produits_structures",
       "geo_code": "europe",
       "sri": null,
-      "source": "gronier_categories+geo_nom_valide_cgp_20260724",
+      "source": "excel_categories_run_reel+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -3370,7 +3811,7 @@
       "class_code": "actions",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_T2_run+geo_nom_valide_cgp_20260724",
+      "source": "run_reel_T2+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -3380,7 +3821,7 @@
       "class_code": "alternatifs",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_T2_run+geo_nom_valide_cgp_20260724",
+      "source": "run_reel_T2+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -3390,7 +3831,7 @@
       "class_code": "alternatifs",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_T2_run+geo_nom_valide_cgp_20260724",
+      "source": "run_reel_T2+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     },
@@ -3400,7 +3841,7 @@
       "class_code": "alternatifs",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_T2_run+geo_nom_valide_cgp_20260724",
+      "source": "run_reel_T2+geo_nom_valide_cgp_20260724",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -3410,7 +3851,7 @@
       "class_code": "alternatifs",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_T2_run+geo_nom_valide_cgp_20260724",
+      "source": "run_reel_T2+geo_nom_valide_cgp_20260724",
       "confiance": "high",
       "provenance": "seed"
     },
@@ -3420,7 +3861,7 @@
       "class_code": "matieres_premieres",
       "geo_code": "monde",
       "sri": null,
-      "source": "gronier_T2_run+geo_nom_valide_cgp_20260724",
+      "source": "run_reel_T2+geo_nom_valide_cgp_20260724",
       "confiance": "medium",
       "provenance": "seed"
     }
@@ -3428,7 +3869,7 @@
   "compte": {
     "acteurs": 17,
     "successions": 2,
-    "gabarits": 7,
+    "gabarits": 9,
     "isin": 261
   }
 }

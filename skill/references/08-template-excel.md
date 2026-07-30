@@ -60,8 +60,8 @@ Le fichier Excel source est la **source unique de vérité** pour la production 
 
 1. **Demander combien d'entités** composent le patrimoine du client (typiquement 1 PP + N holdings)
 2. **Demander le nom de chaque entité** en distinguant clairement :
-   - La **Personne Physique (PP)** : généralement formatée en `Prénom + Initiale nom` (ex : "Hervé G.", "Sophie L.")
-   - Les **Holdings** : nom social complet ou abréviation usuelle (ex : "SAS AX", "SCI Patrimoine", "Holding LG")
+   - La **Personne Physique (PP)** : généralement formatée en `Prénom + Initiale nom` (ex : "Client Exemple", "Camille D.")
+   - Les **Holdings** : nom social complet ou abréviation usuelle (ex : "SAS Exemple", "SCI Patrimoine", "Holding 1")
 3. **Adapter le template** :
    - Renommer les onglets : `Liq — PP` → `Liq — [Nom PP]`, `Liq — Holding 1` → `Liq — [Nom Holding 1]`, etc.
    - Renommer les titres A1 de chaque onglet en conséquence : `LIQUIDITÉS — PP` → `LIQUIDITÉS — [Nom PP]`
@@ -149,8 +149,8 @@ Si l'onglet `NC Flux` est absent ou vide pour un fonds : repli sur les colonnes 
 
 **Étape 1 — Préparation du template client**
 1. Copier `references/Reporting_data_template.xlsx` → `Reporting_[Client]_[Date].xlsx`
-2. Renommer les onglets selon les entités réelles du client (ex : `Liq — PP` → `Liq — Hervé G.` ; `Liq — Holding 1` → `Liq — SAS AX`)
-3. Mettre à jour les titres A1 de chaque onglet en cohérence (ex : `LIQUIDITÉS — Hervé G.`)
+2. Renommer les onglets selon les entités réelles du client (ex : `Liq — PP` → `Liq — Client Exemple` ; `Liq — Holding 1` → `Liq — SAS Exemple`)
+3. Mettre à jour les titres A1 de chaque onglet en cohérence (ex : `LIQUIDITÉS — Client Exemple`)
 4. Ajouter ou supprimer les onglets selon le nombre d'entités du client
 
 **Étape 2 — Paramétrage de la période**

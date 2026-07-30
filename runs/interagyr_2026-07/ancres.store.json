@@ -1,0 +1,170 @@
+{
+ "schema_version": "2.1-skill",
+ "client": {
+  "id": "tmp_c_001",
+  "label": "Interagyr",
+  "entities": [
+   {
+    "id": "interagyr",
+    "label": "Interagyr",
+    "type": "holding",
+    "order": 0
+   }
+  ]
+ },
+ "reporting": {
+  "period_short": "T3-26",
+  "period_long": "T3 2026",
+  "date_reporting": "2026-07-15",
+  "date_display": "15 juillet 2026",
+  "version": "v1",
+  "profile": "Équilibré"
+ },
+ "_provisional_ids": true,
+ "financier_cote": [
+  {
+   "entity_id": "interagyr",
+   "label": "Compte Titres — UBS (De Pury Pictet)",
+   "nature": "Compte Titres",
+   "assureur": "UBS (De Pury Pictet)",
+   "envelope_type": "cto",
+   "manager": "De Pury Pictet",
+   "management_mode": "Gestion sous mandat",
+   "risk_profile": "Dynamique",
+   "invest_date": "2026-05-01",
+   "capital_invested": 2000000,
+   "value_current": 1982034,
+   "nantissement": false,
+   "source": "excel_structure",
+   "attributes": {
+    "pockets": [
+     {
+      "id": "pck_001",
+      "label": "Compte Titres — UBS (De Pury Pictet)",
+      "value": 1982034,
+      "capital_invested": 2000000,
+      "invest_date": "2026-05-01"
+     }
+    ]
+   },
+   "id": "tmp_fc_001"
+  },
+  {
+   "entity_id": "interagyr",
+   "label": "Compte Titres — UBS (Dauphine AM — Équilibré)",
+   "nature": "Compte Titres",
+   "assureur": "UBS (Dauphine AM — Équilibré)",
+   "envelope_type": "cto",
+   "manager": "Dauphine AM",
+   "management_mode": "Gestion sous mandat",
+   "risk_profile": "Équilibré",
+   "invest_date": "2026-05-02",
+   "capital_invested": 1500000,
+   "value_current": 1501734,
+   "nantissement": false,
+   "source": "excel_structure",
+   "attributes": {
+    "pockets": [
+     {
+      "id": "pck_002",
+      "label": "Compte Titres — UBS (Dauphine AM — Équilibré)",
+      "value": 1501734,
+      "capital_invested": 1500000,
+      "invest_date": "2026-05-02"
+     }
+    ]
+   },
+   "id": "tmp_fc_002"
+  },
+  {
+   "entity_id": "interagyr",
+   "label": "Compte Titres — UBS (Dauphine AM — Prudent)",
+   "nature": "Compte Titres",
+   "assureur": "UBS (Dauphine AM — Prudent)",
+   "envelope_type": "cto",
+   "manager": "Dauphine AM",
+   "management_mode": "Gestion sous mandat",
+   "risk_profile": "Prudent",
+   "invest_date": "2026-05-03",
+   "capital_invested": 500000,
+   "value_current": 501321,
+   "nantissement": false,
+   "source": "excel_structure",
+   "attributes": {
+    "pockets": [
+     {
+      "id": "pck_003",
+      "label": "Compte Titres — UBS (Dauphine AM — Prudent)",
+      "value": 501321,
+      "capital_invested": 500000,
+      "invest_date": "2026-05-03"
+     }
+    ]
+   },
+   "id": "tmp_fc_003"
+  },
+  {
+   "entity_id": "interagyr",
+   "label": "Compte Titres — UBS (Dauphine AM — Offensif)",
+   "nature": "Compte Titres",
+   "assureur": "UBS (Dauphine AM — Offensif)",
+   "envelope_type": "cto",
+   "manager": "Dauphine AM",
+   "management_mode": "Advisory",
+   "risk_profile": "Offensif",
+   "invest_date": "2026-05-04",
+   "capital_invested": 500000,
+   "value_current": 500456,
+   "nantissement": false,
+   "source": "excel_structure",
+   "attributes": {
+    "pockets": [
+     {
+      "id": "pck_004",
+      "label": "Compte Titres — UBS (Dauphine AM — Offensif)",
+      "value": 500456,
+      "capital_invested": 500000,
+      "invest_date": "2026-05-04"
+     }
+    ]
+   },
+   "id": "tmp_fc_004"
+  }
+ ],
+ "non_cote": [
+  {
+   "entity_id": "interagyr",
+   "label": "Healthcare Co-Invest II",
+   "manager": "Essling Capital",
+   "classe_rhetores": "private_equity",
+   "capital_committed": 200000,
+   "capital_called": 200000,
+   "invest_date": "2026-05-01",
+   "source": "excel_structure",
+   "attributes": {
+    "strategy": "LBO",
+    "segment": "Co-Investissement",
+    "moic_target": 2.0,
+    "duration_target": 7
+   },
+   "id": "tmp_nc_001"
+  },
+  {
+   "entity_id": "interagyr",
+   "label": "Odyssey 2025",
+   "manager": "Altaroc",
+   "classe_rhetores": "private_equity",
+   "capital_committed": 200000,
+   "capital_called": 40000,
+   "invest_date": "2026-06-01",
+   "source": "excel_structure",
+   "attributes": {
+    "strategy": "LBO",
+    "segment": "Fonds de fonds",
+    "moic_target": 1.8,
+    "duration_target": 10
+   },
+   "id": "tmp_nc_002"
+  }
+ ]
+}

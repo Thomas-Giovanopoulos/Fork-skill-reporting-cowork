@@ -1,0 +1,151 @@
+{
+  "client_id": "tmp_c_001",
+  "source_document": "Interagyr.pdf",
+  "status": "pending_validation",
+  "extraction_profile": "skill_v1",
+  "changes": [
+    {
+      "category": "financier_cote",
+      "entry_id": "tmp_fc_001",
+      "entry_label": "Compte Titres — UBS (De Pury Pictet)",
+      "entity_id": "interagyr",
+      "action": "update",
+      "confidence": "high",
+      "notes": "Relevé de Pury Pictet Turrettini (Belgique), compte 5045739001, banque dépositaire UBS Fr, gérant Ducrey Florian — rattachement cohérent avec l'entrée 'Compte Titres — UBS (De Pury Pictet)'. Situation au 15/07/2026 (date d'arrêté ; 'Etablie au' 20/07/2026 = date d'édition, non retenue). Invariant de contrôle VÉRIFIÉ : sous-totaux « Total : » = totaux de section (Liquidités 91 429,78 ; Obligations 1 134 708,36 + 200 086,20 = 1 334 794,56 ; Actions 287 708,68 + 268 100,77 = 555 809,45) et Σ sections = 1 982 033,79, cohérent au ±1 € avec le total du Résumé (1 982 034, affiché arrondi à l'entier en convention anglo-saxonne). value_current = 1 982 033,79 (somme exacte des sections détaillées) ; l'écart de 0,21 € est un pur arrondi d'affichage du Résumé, aucune absorption nécessaire. perf_pct = colonne RESULTAT YTD, 2e ligne (résultat DEPUIS ACHAT, en EUR) conformément au profil champs_publies ; horizon retenu : depuis achat (invest ~mai 2026). Piège appliqué : UBS (CH) MONEY MARKET FUND EUR (CH0140909257), présenté sous 'Détail des Positions - Obligations', reclassé en monetaire (référentiel ISIN). Ligne iShares Trust DJ US Medical Devices en USD : valeur retenue en EUR (56 556,75). Sections 'Evolution des actifs' (p.3) et 'Evaluation de l'exposition actions' (p.10) purement graphiques — texte absent, comportement normal du gabarit. Doubles conventions numériques (Résumé anglo-saxon / détail franco-suisse) gérées.",
+      "fields": [
+        {
+          "path": "value_current",
+          "old_value": 1982034,
+          "new_value": 1982033.79,
+          "source_page": 2
+        },
+        {
+          "path": "attributes.lines",
+          "old_value": null,
+          "new_value": [
+            {
+              "label": "Compte Courant EUR",
+              "value": 91429.78,
+              "class": "monetaire",
+              "pocket": "pck_001"
+            },
+            {
+              "label": "UBS (CH) Money Market Fund EUR -I-B-",
+              "value": 1134708.36,
+              "class": "monetaire",
+              "isin": "CH0140909257",
+              "perf_pct": 0.28,
+              "pocket": "pck_001"
+            },
+            {
+              "label": "GAMA Global Short-Dated Opportunities F",
+              "value": 200086.20,
+              "class": "obligations",
+              "isin": "LU2092461800",
+              "perf_pct": 0.19,
+              "geography": "monde",
+              "pocket": "pck_001"
+            },
+            {
+              "label": "WF Enetia Energy Infrastructure Dis (clean) EUR",
+              "value": 103174.26,
+              "class": "actions",
+              "isin": "LU2385154757",
+              "perf_pct": -0.20,
+              "geography": "monde",
+              "pocket": "pck_001"
+            },
+            {
+              "label": "Veritas Asian Fund A EUR",
+              "value": 66267.12,
+              "class": "actions",
+              "isin": "IE00B02ZFR42",
+              "perf_pct": -10.29,
+              "geography": "asie_pacifique",
+              "pocket": "pck_001"
+            },
+            {
+              "label": "Decalia Sustainable Society Cap",
+              "value": 62356.50,
+              "class": "actions",
+              "isin": "LU2407358576",
+              "perf_pct": -1.67,
+              "geography": "monde",
+              "pocket": "pck_001"
+            },
+            {
+              "label": "Enetia Energy Transition Dis (clean)",
+              "value": 55910.80,
+              "class": "actions",
+              "isin": "CH1152838327",
+              "perf_pct": -10.10,
+              "geography": "monde",
+              "pocket": "pck_001"
+            },
+            {
+              "label": "SPDR MSCI World ACWI UCITS ETF EUR Hedged",
+              "value": 100811.37,
+              "class": "actions",
+              "isin": "IE00BF1B7389",
+              "perf_pct": 0.50,
+              "geography": "monde",
+              "pocket": "pck_001"
+            },
+            {
+              "label": "Xtrackers S&P 500 Equal Weight ETF EUR Hedged",
+              "value": 71661.40,
+              "class": "actions",
+              "isin": "IE0002EI5AG0",
+              "perf_pct": 2.10,
+              "geography": "amerique_du_nord",
+              "pocket": "pck_001"
+            },
+            {
+              "label": "iShares VII Nasdaq 100 ETF Hedged EUR",
+              "value": 39071.25,
+              "class": "actions",
+              "isin": "IE00BYVQ9F29",
+              "perf_pct": -2.63,
+              "geography": "amerique_du_nord",
+              "pocket": "pck_001"
+            },
+            {
+              "label": "iShares Trust DJ US Medical Devices (USD)",
+              "value": 56556.75,
+              "class": "actions",
+              "isin": "US4642888105",
+              "perf_pct": -5.57,
+              "geography": "amerique_du_nord",
+              "pocket": "pck_001"
+            }
+          ],
+          "source_page": 5
+        },
+        {
+          "path": "attributes.pockets",
+          "old_value": null,
+          "new_value": [
+            {
+              "id": "pck_001",
+              "label": "Compte Titres — UBS (De Pury Pictet)",
+              "value": 1982033.79,
+              "capital_invested": 2000000,
+              "invest_date": "2026-05-01"
+            }
+          ],
+          "source_page": 2
+        }
+      ]
+    }
+  ],
+  "unrecognized_data": [
+    {
+      "description": "Section 'Dividendes, intérêts et autres paiements' (période 01-15 juillet 2026) : la ligne de total affiche 'EUR' sans aucun montant chiffré — aucune valeur à extraire, non inventée.",
+      "source_page": 9
+    },
+    {
+      "description": "Rendement benchmark (65% MSCI ACWI Net TR EUR + 35% LEGATREH) : '%' seul sans chiffre pour Mai 26 et Juin 26 (mois sans historique) ; Juill 26 = 1,14%. Composition du benchmark dépendante du profil client (Croissance), non retenue comme donnée patrimoniale.",
+      "source_page": 4
+    }
+  ]
+}

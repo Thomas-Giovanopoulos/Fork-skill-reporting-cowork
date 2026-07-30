@@ -1,0 +1,46 @@
+{
+  "schema_version": "2.1-skill",
+  "client": {
+    "id": "tmp_c_001",
+    "label": "Anne D.",
+    "entities": [
+      {
+        "id": "anne_d",
+        "label": "Anne D.",
+        "type": "pp",
+        "order": 0
+      }
+    ]
+  },
+  "reporting": {
+    "period_short": "T2-26",
+    "period_long": "T2 2026",
+    "date_reporting": "2026-06-30",
+    "date_display": "30 juin 2026",
+    "version": "v1",
+    "profile": "Équilibré"
+  },
+  "_provisional_ids": true,
+  "financier_cote": [],
+  "liquidites": [
+    {
+      "id": "liq_001",
+      "entity_id": "anne_d",
+      "label": "Compte courant",
+      "custodian": "BNP",
+      "balance": 45000.0,
+      "source": "excel"
+    },
+    {
+      "id": "liq_002",
+      "entity_id": "anne_d",
+      "label": "Livret A",
+      "custodian": "BNP",
+      "balance": 22000.0,
+      "source": "excel"
+    }
+  ],
+  "immobilier": [],
+  "dettes": [],
+  "non_cote": []
+}

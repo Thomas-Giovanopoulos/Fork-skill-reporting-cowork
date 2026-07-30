@@ -1,0 +1,65 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mcp-referentiels"
+version = "0.1.0"
+description = "Serveur MCP des référentiels du skill de reporting (D37) — base rhetores_ref"
+authors = [
+    {name = "Thomas Giovanopoulos", email = "thomas.giovanopoulos@rhetores.com"}
+]
+requires-python = ">=3.10"
+
+# Pins alignés sur mcp-o2s-server/pyproject.toml. L'alignement n'est plus une
+# intention écrite dans un commentaire : uv.lock le rend vérifiable. Les deux
+# serveurs partagent rhetores_authz et le même registre utilisateurs — ils
+# doivent voir les mêmes versions de starlette/mcp/pyjwt sous peine de
+# comportements d'auth divergents.
+dependencies = [
+    # ⚠ BORNE HAUTE OBLIGATOIRE, ce n'est pas une précaution de style.
+    # `mcp` 2.0.0 a SUPPRIMÉ `mcp.server.fastmcp`, l'API dont server.py dépend
+    # (`from mcp.server.fastmcp import FastMCP`) : sous 2.x le serveur ne
+    # s'importe même pas. Le `>=1.0` d'origine résolvait vers 2.0.0 — vérifié le
+    # 2026-07-29, ModuleNotFoundError immédiat. La borne basse aligne sur la
+    # version verrouillée par mcp-o2s-server/uv.lock, ce qui est précisément
+    # l'intention « les deux serveurs voient les mêmes versions ».
+    "mcp[cli]>=1.27.2,<2",
+    # Même garde-fou : la pile d'auth (JWTAuthMiddleware) est du Starlette.
+    "starlette>=0.40,<2",
+    "uvicorn>=0.30",
+    "PyJWT[crypto]>=2.8",
+    # server.py fait `load_dotenv()` au niveau module : dépendance DURE ici,
+    # contrairement à mcp-o2s-server où elle vit dans le groupe dev.
+    "python-dotenv>=1.0",
+    # psycopg v3 — même pin que mcp-o2s-server et fo-data-store/validation_app.
+    # Sert DEUX bases distinctes : les référentiels (import différé dans
+    # tools/referentiels.py) et, si DATABASE_URL est défini, le registre
+    # utilisateurs via PgAuthzStore.
+    "psycopg[binary]>=3.1",
+    "rhetores-authz",
+]
+
+[tool.uv.sources]
+# rhetores_authz est IMPORTÉ, pas recopié : le fix S11 (aud ET iss vérifiés en
+# HS256 comme en RS256) y vit, et deux implémentations de validation de token
+# divergeraient. Autonomie de déploiement ≠ pile d'authentification autonome.
+#
+# Le paquet n'a pas encore de dépôt git propre — override par chemin, comme
+# dans mcp-o2s-server. Arborescence supposée :
+#
+#     Rhétorès_Finance/
+#     ├── rhetores_authz/
+#     ├── mcp-o2s-server/                        (utilise ../rhetores_authz)
+#     └── FORK-Cowork/infra/mcp_referentiels/    (ce dossier → ../../../)
+#
+# Ce dossier ayant vocation à devenir son propre dépôt, cette ligne est le
+# premier point à corriger le jour de l'extraction.
+rhetores-authz = { path = "../../../rhetores_authz", editable = true }
+
+[tool.setuptools]
+py-modules = ["server", "jwt_auth", "logging_config", "user_store"]
+
+[tool.setuptools.packages.find]
+# `tools*` seulement : `tests/` n'est pas un paquet livrable.
+include = ["tools*"]

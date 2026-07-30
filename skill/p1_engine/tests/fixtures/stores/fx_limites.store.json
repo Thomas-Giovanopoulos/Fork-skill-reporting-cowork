@@ -1,0 +1,267 @@
+{
+  "schema_version": "2.1-skill",
+  "client": {
+    "id": "tmp_c_001",
+    "label": "Édouard de Saint-Hélène",
+    "entities": [
+      {
+        "id": "edouard_de_saint_helene",
+        "label": "Édouard de Saint-Hélène",
+        "type": "pp",
+        "order": 0
+      },
+      {
+        "id": "sci_tres_long_nom_de_societe_patrimoniale_familiale",
+        "label": "SCI Très Long Nom De Société Patrimoniale Familiale",
+        "type": "holding",
+        "order": 1
+      }
+    ]
+  },
+  "reporting": {
+    "period_short": "T2-26",
+    "period_long": "T2 2026",
+    "date_reporting": "2026-06-30",
+    "date_display": "30 juin 2026",
+    "version": "v1",
+    "profile": "Équilibré"
+  },
+  "_provisional_ids": true,
+  "financier_cote": [
+    {
+      "id": "tmp_fc_001",
+      "entity_id": "edouard_de_saint_helene",
+      "label": "AV — Generali",
+      "nature": "AV",
+      "assureur": "Generali",
+      "intermediaire": "Direct",
+      "envelope_type": "av_fr",
+      "manager": "Generali",
+      "custodian": "NC",
+      "management_mode": "Déléguée",
+      "risk_profile": "Prudent",
+      "invest_date": "Janv. 2008",
+      "nantissement": false,
+      "source": "excel",
+      "attributes": {
+        "pockets": [
+          {
+            "id": "pck_001",
+            "label": "AV — Generali",
+            "type": "Mono",
+            "profile": "Prudent",
+            "manager": "Generali",
+            "custodian": "NC",
+            "value": 1880000.0,
+            "capital_invested": 2000000.0,
+            "value_jan1": 2050000.0,
+            "invest_date": "Janv. 2008",
+            "classe_rhetores": "actions",
+            "geography": "International / Monde"
+          }
+        ]
+      },
+      "value_current": 1880000.0,
+      "capital_invested": 2000000.0,
+      "value_jan1": 2050000.0
+    },
+    {
+      "id": "tmp_fc_002",
+      "entity_id": "edouard_de_saint_helene",
+      "label": "CTO — UBS",
+      "nature": "CTO",
+      "assureur": "UBS",
+      "intermediaire": "UBS",
+      "envelope_type": "cto",
+      "manager": "UBS",
+      "custodian": "UBS",
+      "management_mode": "Conseillée",
+      "risk_profile": "Dynamique",
+      "invest_date": "Avril 2026",
+      "nantissement": false,
+      "source": "excel",
+      "attributes": {
+        "pockets": [
+          {
+            "id": "pck_002",
+            "label": "CTO — UBS",
+            "type": "Mono",
+            "profile": "Dynamique",
+            "manager": "UBS",
+            "custodian": "UBS",
+            "value": 10000000.0,
+            "capital_invested": 10000000.0,
+            "invest_date": "Avril 2026",
+            "classe_rhetores": "actions",
+            "geography": "Amérique du Nord"
+          }
+        ]
+      },
+      "value_current": 10000000.0,
+      "capital_invested": 10000000.0
+    }
+  ],
+  "liquidites": [
+    {
+      "id": "liq_001",
+      "entity_id": "edouard_de_saint_helene",
+      "label": "Compte courant",
+      "custodian": "Crédit Agricole",
+      "balance": 0.0,
+      "source": "excel"
+    },
+    {
+      "id": "liq_002",
+      "entity_id": "edouard_de_saint_helene",
+      "label": "Compte clos",
+      "custodian": "Crédit Agricole",
+      "source": "excel"
+    }
+  ],
+  "immobilier": [
+    {
+      "id": "immo_001",
+      "entity_id": "edouard_de_saint_helene",
+      "label": "Château de Saint-Jurs & dépendances",
+      "function": "RS",
+      "mortgage": false,
+      "value_acquisition": 150000.0,
+      "value_current": 150000.0,
+      "source": "excel",
+      "attributes": {
+        "date_acquisition": "2003"
+      },
+      "ownership": "Usufruit Édouard / Nue-propriété enfants"
+    },
+    {
+      "id": "immo_002",
+      "entity_id": "edouard_de_saint_helene",
+      "label": "Appartement Paris 7e",
+      "function": "RP",
+      "mortgage": true,
+      "value_acquisition": 2800000.0,
+      "value_current": 4200000.0,
+      "source": "excel",
+      "attributes": {
+        "date_acquisition": "2010"
+      },
+      "ownership": "Pleine propriété"
+    },
+    {
+      "id": "immo_003",
+      "entity_id": "sci_tres_long_nom_de_societe_patrimoniale_familiale",
+      "label": "Local commercial",
+      "function": "Rendement",
+      "mortgage": false,
+      "value_acquisition": 900000.0,
+      "value_current": 900000.0,
+      "source": "excel",
+      "attributes": {
+        "date_acquisition": "2019"
+      },
+      "ownership": "SCI (50% Édouard · 50% conjoint)"
+    }
+  ],
+  "dettes": [
+    {
+      "id": "dette_001",
+      "entity_id": "edouard_de_saint_helene",
+      "label": "Crédit Lombard XXL",
+      "bank": "UBS",
+      "type": "In fine",
+      "capital_remaining": 15000000.0,
+      "maturity": "2031",
+      "frequency": "In fine",
+      "guarantee": "Nantissement portefeuille",
+      "adossement": "financier_cote",
+      "source": "excel",
+      "date_souscription": "2026",
+      "montant_initial": 15000000.0,
+      "taux": "SOFR+0,9%"
+    },
+    {
+      "id": "dette_002",
+      "entity_id": "sci_tres_long_nom_de_societe_patrimoniale_familiale",
+      "label": "Prêt amortissable",
+      "bank": "Banque Populaire",
+      "type": "Amortissable",
+      "capital_remaining": 0.0,
+      "maturity": "2034",
+      "frequency": "Mensuelle",
+      "guarantee": "Hypothèque",
+      "adossement": "immobilier",
+      "source": "excel",
+      "date_souscription": "2019",
+      "montant_initial": 600000.0,
+      "taux": "1,9%"
+    }
+  ],
+  "non_cote": [],
+  "valuations": [
+    {
+      "position_id": "pck_001",
+      "date": "2026-01-01",
+      "value": 2050000.0
+    },
+    {
+      "position_id": "pck_001",
+      "date": "2026-06-30",
+      "value": 1880000.0
+    },
+    {
+      "position_id": "pck_002",
+      "date": "2026-06-30",
+      "value": 10000000.0
+    }
+  ],
+  "courbe_performance": [
+    {
+      "date": "2026-01-01",
+      "cote": 2050000.0
+    },
+    {
+      "date": "2026-01-15",
+      "cote": 2034545.0
+    },
+    {
+      "date": "2026-02-01",
+      "cote": 2019091.0
+    },
+    {
+      "date": "2026-02-15",
+      "cote": 2003636.0
+    },
+    {
+      "date": "2026-03-01",
+      "cote": 1988182.0
+    },
+    {
+      "date": "2026-03-15",
+      "cote": 1972727.0
+    },
+    {
+      "date": "2026-04-01",
+      "cote": 11957273.0
+    },
+    {
+      "date": "2026-04-15",
+      "cote": 11941818.0
+    },
+    {
+      "date": "2026-05-01",
+      "cote": 11926364.0
+    },
+    {
+      "date": "2026-05-15",
+      "cote": 11910909.0
+    },
+    {
+      "date": "2026-06-01",
+      "cote": 11895455.0
+    },
+    {
+      "date": "2026-06-15",
+      "cote": 11880000.0
+    }
+  ]
+}

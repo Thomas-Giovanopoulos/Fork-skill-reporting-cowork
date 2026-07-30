@@ -54,14 +54,14 @@ Pour les contrats avec plusieurs poches (Wealins, Cardif Lux, etc.) :
   - ✅ "Sous-total — Financier coté"
   - ✅ "Sous-total — Financier non coté"
   - ✅ "Sous-total — Dettes"
-  - ❌ "Sous-total Liquidités Hervé G." (jamais mentionner l'entité)
+  - ❌ "Sous-total Liquidités Client Exemple" (jamais mentionner l'entité)
   - ❌ "Sous-total Liquidités" (manque le tiret long)
-  - ❌ "Sous-total PE SAS AX" (jamais l'entité, et "PE" n'est pas une catégorie de Bloc 03)
+  - ❌ "Sous-total PE SAS Exemple" (jamais l'entité, et "PE" n'est pas une catégorie de Bloc 03)
 
 - Total entité (ligne `rst`) : "Total [Nom entité]" — l'entité DOIT figurer ici
-  - ✅ "Total Hervé G."
-  - ✅ "Total SAS AX"
-  - ✅ "Total SAS LG"
+  - ✅ "Total Client Exemple"
+  - ✅ "Total SAS Exemple"
+  - ✅ "Total SAS Exemple 2"
 
 **Pourquoi cette rigidité** : le sous-total est une agrégation de catégorie indépendamment de l'entité (la catégorie "Liquidités" est la même pour tous). Le total d'entité est par nature spécifique à une entité. Mélanger les deux brouille la hiérarchie visuelle.
 
@@ -196,7 +196,7 @@ Cette règle est **critique pour l'exactitude réglementaire** du reporting.
 
 **Pour les contrats d'assurance-vie de droit luxembourgeois** :
 - Toujours identifier la **banque dépositaire nommée**, distincte de l'assureur
-- Exemples : Wealins contrats FR056470 / FC056913 → dépositaire **UBS** · Cardif Lux Vie / Aster Horizon → dépositaire **Indosuez** · Cardif Lux 2 → dépositaire **Edmond de Rothschild**
+- Exemples : Wealins contrats XX000001 / XX000002 → dépositaire **UBS** · Cardif Lux Vie / Aster Horizon → dépositaire **Indosuez** · Cardif Lux 2 → dépositaire **Edmond de Rothschild**
 - Cette information figure obligatoirement dans le contrat (triangle de sécurité luxembourgeois)
 
 **Pour les contrats d'assurance-vie de droit français** :
@@ -208,8 +208,8 @@ Cette règle est **critique pour l'exactitude réglementaire** du reporting.
 
 | Type de contrat | Exemple | Dépositaire à inscrire |
 |---|---|---|
-| AV Luxembourg multi-poches | Wealins FR056470 (Hervé G.) | UBS |
-| Capi Luxembourg multi-poches | Wealins FC056913 (SAS AX) | UBS |
+| AV Luxembourg multi-poches | Wealins XX000001 (Client Exemple) | UBS |
+| Capi Luxembourg multi-poches | Wealins XX000002 (SAS Exemple) | UBS |
 | AV Luxembourg | Cardif Lux 1 / Aster Horizon | Indosuez |
 | AV Luxembourg | Cardif Lux 2 (EdR) | Edmond de Rothschild |
 | AV France | Prédica, CNP, Generali | **NC** |
@@ -227,7 +227,7 @@ Toujours confirmé explicitement par le CGP.
 
 ## Standard de présentation — V10 (référence absolue)
 
-Le fichier `consolidé_HG_v10.html` est le **standard de présentation absolu** pour Hervé G.
+Le fichier `consolidé_client_exemple_v10.html` est le **standard de présentation absolu** pour Client Exemple.
 Toute évolution du Bloc 03 doit respecter sa structure visuelle :
 
 ### Structure générale du Bloc 03

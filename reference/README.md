@@ -24,12 +24,30 @@
 cd /tmp && mkdir -p rejeu && cd rejeu          # PAS depuis skill/ : voir l'avertissement ci-dessous
 python3 <fork>/skill/p1_engine/p2_fill.py \
     <fork>/reference/gronier_T2/Reporting_Gronier_T2_2026.xlsx \
-    <fork>/reference/gronier_T2/manifest.json  sortie.html
+    <fork>/reference/gronier_T2/manifest.json  sortie.html \
+    "<fork>/reference/gronier_T2/contexte_T2 2026.json"
 ```
 
+> ⚠ **Le 4ᵉ argument n'est pas optionnel pour cette comparaison.** Cette commande l'omettait, et la
+> comparaison au HTML livré donnait alors **73 lignes d'écart** au lieu de 7 : sans fichier de contexte,
+> le bloc Contexte de marché reste en placeholder et les faits marquants disparaissent. L'écart avait
+> l'air d'une régression ; ce n'était qu'un argument manquant.
+
 Attendu : **contrôles comptables 9/9**, actif brut **4 608 966 €** (3 982 294,76 coté + 626 670,92 non
-coté), dettes 0. Deux avertissements normaux et attendus : 13 lignes de détail sans performance, et le
-placeholder P4 du commentaire de gestion.
+coté), dettes 0. Deux avertissements normaux : 13 lignes de détail sans performance, et le placeholder
+P4 du commentaire de gestion. Le rendu est **déterministe** — deux exécutions donnent le même md5.
+
+### L'écart attendu avec le HTML livré : 7 lignes, toutes expliquées
+
+1. **Un commentaire CSS** : `Client Exemple` chez nous, `Hervé G.` dans le livré. La purge D44 a retiré
+   ce nom du paquet — et le constat mérite d'être noté, car il va plus loin que le paquet : **le HTML
+   remis au client portait le nom d'un autre client dans un commentaire de sa feuille de style.**
+2. **Un commentaire HTML en moins** (« Widget — Historique du patrimoine »). C'est le correctif de fuite
+   de commentaire de la première session qui devient visible : le moteur ne l'émet plus.
+3. **Le commentaire de gestion P4** : placeholder chez nous, texte éditorial dans le livré — il est
+   rédigé après génération.
+
+Les deux premières sont des **améliorations**, pas des écarts à corriger.
 
 **⚠ Ne pas lancer le rendu depuis `skill/`.** `p2_fill` écrit un snapshot dans `./snapshots/` relatif au
 répertoire courant : rendre depuis `skill/` **ajoute un fichier au paquet**, ce qui fait échouer le

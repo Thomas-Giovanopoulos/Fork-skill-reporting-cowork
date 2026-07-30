@@ -43,7 +43,7 @@ Là où le store a été pensé, la correspondance est directe et sans perte.
 
 | i | Sémantique | Chemin store |
 |---|---|---|
-| 0 | Clé contrat | *implicite* — la ligne est imbriquée dans son entrée (**mais cf. M1**) |
+| 0 | Clé contrat | *implicite* — la ligne est imbriquée dans son entrée (**mais cf. MQ1**) |
 | 1 | Libellé | `lines[].label` |
 | 2 | ISIN | `lines[].isin` |
 | 3 | Valeur | `lines[].value` |
@@ -117,21 +117,28 @@ ignorée si vide**) · 4 coupon %/an · 5 date de début · 6 durée en années 
 
 ## 4 — Les manques du forme-store
 
-Classés par ce qu'ils empêchent. **M** = manque, **A** = ambiguïté.
+Classés par ce qu'ils empêchent. **MQ** = manque, **A** = ambiguïté.
+
+> **Renumérotés de `M1`…`M11` en `MQ1`…`MQ11` le 2026-07-29.** Le préfixe `M` désignait déjà le **chantier M**
+> du CDC (fork, registre, protocole de merge, `M1`–`M7`), si bien qu'une référence à « M4 » ne
+> permettait pas de savoir s'il s'agissait du TRI manquant sur le non coté ou du maintien du suffixe
+> `-skill`. C'est exactement le défaut que la dette T1 relevait sur la clé `historique` : deux sens pour
+> un même nom, et rien dans le nom qui les sépare. Le renommage porte sur ce document,
+> `REGISTRE_ECARTS.md`, `REPRISE.md` et le CDC ; les numéros ne changent pas, seul le préfixe.
 
 ### Bloquants — le rendu actuel est irreproductible sans eux
 
 | # | Manque | Conséquence |
 |---|---|---|
-| **M1** | `Fin coté` 1 **assureur/banque** et 2 **intermédiaire**. Le store n'a que `label`, texte libre. | M1 n'est pas une colonne d'affichage : c'est la **clé de jointure** `Lignes`/`Mouvements` (`f"{nature} — {assureur}"`), le libellé de contrat, et la clé du donut « participants ». Sans elle, ni les lignes ni les mouvements ne se rattachent à leur contrat. **C'est le manque le plus lourd.** |
-| **M2** | `Fin coté` 13/14/15 — classe dominante, géographie, SRI **au niveau contrat**. | Le store ne les porte qu'au niveau `lines[]`. Or le moteur a un repli explicite pour les contrats **sans** lignes classées (L622). Ce repli perd sa source : tout contrat sans lignes tomberait sur le défaut « Actions », silencieusement. |
-| **M3** | **`NC Flux` en entier.** | `mouvements.type` est un enum fermé `versement\|retrait\|frais` : **`Appel`, `Distribution`, `Appel prévu`, `Distribution prévue` n'ont aucun logement**. Sans eux : plus de séries trimestrielles par fonds, plus de TVPI/DPI/RVPI, plus d'échéancier prévisionnel. |
-| **M4** | `Non coté` 11 **TRI**. | Valeur fournie par le GP, jamais calculée. Alimente `summary.tri`, `stats.tri` et le TRI consolidé pondéré. |
-| **M5** | **ISIN du produit structuré**, et **`Cours PS`**. | L'ISIN est la clé de `Cours PS` *et* du snapshot `ps_status` (gel des coupons N-1). `financierCoteEntry` n'a pas d'`isin`. La jointure est impossible en l'état. |
-| **M6** | `Liq`, `Immo`, `Dettes` : `genericEntry` ne déclare **aucune colonne de valeur**. | Il n'expose que `id`, `entity_id`, `label`, `source`, `source_document`, `validated_by`, `validation_note`. Manquent notamment `Dettes` 9 (capital restant dû), `Dettes` 10 (adossement) et `Immo` 7 (valeur courante) — **les trois entrent dans les contrôles comptables** (L1688-1692). `additionalProperties: true` tolère des clés libres, mais rien n'est normé, donc rien n'est fiable. |
-| **M7** | Séries **`Valorisations`** (agrégat coté / non coté par date) et **`Historique`** (perf annuelle coté, non coté, commentaire). | `valuations[]` est **par position** (`position_id`) : reconstituer l'agrégat exigerait une valorisation de *chaque* position à *chaque* date, ce que rien ne garantit. `historique_annuel` est un `genericEntry` sans champ de perf, et son `entity_id` est *requis* alors que la donnée est un agrégat patrimonial. |
-| **M8** | **`Arbitrages`** en entier. | Aucun logement pour les (date, libellé) des faits marquants de gestion. |
-| **M9** | Commutateurs de rendu : `mode`, `show_benchmark`, `show_ps_corrige`, `subtitle`, `blocs_enabled`, et `entities[].categories`. | Vivent aujourd'hui au manifeste. `categories` est **dérivable** (les catégories ayant au moins une entrée pour cette entité) ; les autres sont des choix de rendu, pas de la donnée client — **ils ont probablement raison de rester au manifeste**, cf. §5. |
+| **MQ1** | `Fin coté` 1 **assureur/banque** et 2 **intermédiaire**. Le store n'a que `label`, texte libre. | MQ1 n'est pas une colonne d'affichage : c'est la **clé de jointure** `Lignes`/`Mouvements` (`f"{nature} — {assureur}"`), le libellé de contrat, et la clé du donut « participants ». Sans elle, ni les lignes ni les mouvements ne se rattachent à leur contrat. **C'est le manque le plus lourd.** |
+| **MQ2** | `Fin coté` 13/14/15 — classe dominante, géographie, SRI **au niveau contrat**. | Le store ne les porte qu'au niveau `lines[]`. Or le moteur a un repli explicite pour les contrats **sans** lignes classées (L622). Ce repli perd sa source : tout contrat sans lignes tomberait sur le défaut « Actions », silencieusement. |
+| **MQ3** | **`NC Flux` en entier.** | `mouvements.type` est un enum fermé `versement\|retrait\|frais` : **`Appel`, `Distribution`, `Appel prévu`, `Distribution prévue` n'ont aucun logement**. Sans eux : plus de séries trimestrielles par fonds, plus de TVPI/DPI/RVPI, plus d'échéancier prévisionnel. |
+| **MQ4** | `Non coté` 11 **TRI**. | Valeur fournie par le GP, jamais calculée. Alimente `summary.tri`, `stats.tri` et le TRI consolidé pondéré. |
+| **MQ5** | **ISIN du produit structuré**, et **`Cours PS`**. | L'ISIN est la clé de `Cours PS` *et* du snapshot `ps_status` (gel des coupons N-1). `financierCoteEntry` n'a pas d'`isin`. La jointure est impossible en l'état. |
+| **MQ6** | `Liq`, `Immo`, `Dettes` : `genericEntry` ne déclare **aucune colonne de valeur**. | Il n'expose que `id`, `entity_id`, `label`, `source`, `source_document`, `validated_by`, `validation_note`. Manquent notamment `Dettes` 9 (capital restant dû), `Dettes` 10 (adossement) et `Immo` 7 (valeur courante) — **les trois entrent dans les contrôles comptables** (L1688-1692). `additionalProperties: true` tolère des clés libres, mais rien n'est normé, donc rien n'est fiable. |
+| **MQ7** | Séries **`Valorisations`** (agrégat coté / non coté par date) et **`Historique`** (perf annuelle coté, non coté, commentaire). | `valuations[]` est **par position** (`position_id`) : reconstituer l'agrégat exigerait une valorisation de *chaque* position à *chaque* date, ce que rien ne garantit. `historique_annuel` est un `genericEntry` sans champ de perf, et son `entity_id` est *requis* alors que la donnée est un agrégat patrimonial. |
+| **MQ8** | **`Arbitrages`** en entier. | Aucun logement pour les (date, libellé) des faits marquants de gestion. |
+| **MQ9** | Commutateurs de rendu : `mode`, `show_benchmark`, `show_ps_corrige`, `subtitle`, `blocs_enabled`, et `entities[].categories`. | Vivent aujourd'hui au manifeste. `categories` est **dérivable** (les catégories ayant au moins une entrée pour cette entité) ; les autres sont des choix de rendu, pas de la donnée client — **ils ont probablement raison de rester au manifeste**, cf. §5. |
 
 ### Ambiguïtés — à trancher, pas à deviner
 
@@ -155,7 +162,7 @@ même genre : les informations **d'origine documentaire** que le CGP recopie d'u
 intermédiaire, TRI communiqué, flux d'appels et de distributions, adossement d'une dette. Le pivot a
 modélisé les *positions* ; il a sous-modélisé la *provenance*.
 
-**M6 est le plus révélateur.** Trois catégories entières — liquidités, immobilier, dettes — reposent sur
+**MQ6 est le plus révélateur.** Trois catégories entières — liquidités, immobilier, dettes — reposent sur
 `genericEntry`, qui ne déclare aucune valeur. Elles fonctionnent aujourd'hui parce que
 `additionalProperties: true` laisse passer n'importe quelle clé. C'est-à-dire qu'elles ne sont pas
 modélisées : elles sont tolérées. Et deux d'entre elles entrent dans les contrôles comptables.
@@ -187,7 +194,7 @@ l'état, faute de données. L3a l'est entièrement.
    validé par son propre usage, jamais par anticipation.
 5. **L3b** quand les données Gronier seront disponibles.
 
-Sur **M9**, un avis : les commutateurs de rendu (`mode`, `show_benchmark`, `blocs_enabled`) n'ont **pas**
+Sur **MQ9**, un avis : les commutateurs de rendu (`mode`, `show_benchmark`, `blocs_enabled`) n'ont **pas**
 leur place au store. Le store porte ce qui est vrai du client ; le manifeste porte ce qu'on a choisi de
 montrer. Les confondre ferait du store le réceptacle de décisions éditoriales, et rendrait deux rendus
 différents du même patrimoine impossibles à exprimer. Seul `entities[].categories` mérite d'être dérivé
@@ -327,28 +334,28 @@ même poche.
 
 | # | Verdict | Ce que le run apporte |
 |---|---|---|
-| **M1** | **Confirmé, et aggravé** | L'assureur est **fusionné dans `label`** en texte libre : `"Capitalisation — Wealins FC051727"` au store contre `Nature="Capi"` + `Assureur="Wealins (FC051727)"` au classeur. **Le découpage est irréversible sans heuristique.** Et `p2_fill` L629 confirme la gravité : le donut « participants » est indexé sur la colonne assureur, pas sur le libellé. |
-| **M2** | Confirmé, **non exercé** | `Classe dominante` est `None` sur les 8 lignes du classeur, `Géographie` et `SRI` n'existent pas au niveau contrat dans le v5 produit. Le repli de L622 n'est jamais emprunté sur ce run : le manque tient en théorie, la donnée ne l'objective pas. |
-| **M3** | Confirmé, **non exercé** | Les 3 onglets `NC Flux` du classeur sont **vides** (en-têtes seuls). `capital_called` suffit à ce run ; il ne suffirait pas à un échéancier. |
-| **M4** | **Confirmé — perte PROUVÉE** | Le classeur porte `TRI (%)` = **10** (OCA MGM1) et **7** (SOMNOO S Invest Hotels 4). Rien dans le store. Le manque le mieux démontré. |
-| **M5** | **Partiellement comblé, par un autre chemin** | Gronier ne passe pas par la machinerie PS : ses 3 produits structurés sont des **`lines[]` ordinaires** avec `class:"produits_structures"` **et leur ISIN**. L'ISIN a donc un logement ; la **série de niveaux en %** n'en a aucun, et le snapshot `ps_status` reste sans clé. |
-| **M6** | Confirmé, **non testable** | Les trois tableaux sont absents du store, les trois onglets absents du classeur : `genericEntry` n'est **jamais instancié**. Aucune observation, ni contre-exemple, ni précédent de forme. |
-| **M7** | **Confirmé — perte prouvée, et donnée orpheline** | `Valorisations` (6 lignes) et `Historique` (2025 = +6,34 %, 2024 = +4,08 %) existent au classeur, absents du store. Pire : **`cp_valos.json` porte 9 séries par contrat × 5 dates** — exactement le grain `position_id` + `date` de `valuations[]` — **hors du forme-store**. La donnée existe, le logement existe, ils ne se sont pas rencontrés. *Note : l'onglet `Historique` n'a pas de colonne « perf non coté ».* |
-| **M8** | Confirmé, non exercé | Aucun onglet `Arbitrages`. |
-| **M9** | **Tranché par la donnée** | Le store ne porte que `reporting.profile` ; le manifeste porte `mode`, `show_benchmark`, `show_ps_corrige`, `subtitle`, `blocs_enabled`, `entities[].categories`. **Zéro recouvrement.** Et `categories` est **exactement dérivable** du store — vérifié sur les 4 entités. L'avis du §6 se confirme : les commutateurs restent au manifeste, `categories` se dérive. |
+| **MQ1** | **Confirmé, et aggravé** | L'assureur est **fusionné dans `label`** en texte libre : `"Capitalisation — Wealins FC051727"` au store contre `Nature="Capi"` + `Assureur="Wealins (FC051727)"` au classeur. **Le découpage est irréversible sans heuristique.** Et `p2_fill` L629 confirme la gravité : le donut « participants » est indexé sur la colonne assureur, pas sur le libellé. |
+| **MQ2** | Confirmé, **non exercé** | `Classe dominante` est `None` sur les 8 lignes du classeur, `Géographie` et `SRI` n'existent pas au niveau contrat dans le v5 produit. Le repli de L622 n'est jamais emprunté sur ce run : le manque tient en théorie, la donnée ne l'objective pas. |
+| **MQ3** | Confirmé, **non exercé** | Les 3 onglets `NC Flux` du classeur sont **vides** (en-têtes seuls). `capital_called` suffit à ce run ; il ne suffirait pas à un échéancier. |
+| **MQ4** | **Confirmé — perte PROUVÉE** | Le classeur porte `TRI (%)` = **10** (OCA MGM1) et **7** (SOMNOO S Invest Hotels 4). Rien dans le store. Le manque le mieux démontré. |
+| **MQ5** | **Partiellement comblé, par un autre chemin** | Gronier ne passe pas par la machinerie PS : ses 3 produits structurés sont des **`lines[]` ordinaires** avec `class:"produits_structures"` **et leur ISIN**. L'ISIN a donc un logement ; la **série de niveaux en %** n'en a aucun, et le snapshot `ps_status` reste sans clé. |
+| **MQ6** | Confirmé, **non testable** | Les trois tableaux sont absents du store, les trois onglets absents du classeur : `genericEntry` n'est **jamais instancié**. Aucune observation, ni contre-exemple, ni précédent de forme. |
+| **MQ7** | **Confirmé — perte prouvée, et donnée orpheline** | `Valorisations` (6 lignes) et `Historique` (2025 = +6,34 %, 2024 = +4,08 %) existent au classeur, absents du store. Pire : **`cp_valos.json` porte 9 séries par contrat × 5 dates** — exactement le grain `position_id` + `date` de `valuations[]` — **hors du forme-store**. La donnée existe, le logement existe, ils ne se sont pas rencontrés. *Note : l'onglet `Historique` n'a pas de colonne « perf non coté ».* |
+| **MQ8** | Confirmé, non exercé | Aucun onglet `Arbitrages`. |
+| **MQ9** | **Tranché par la donnée** | Le store ne porte que `reporting.profile` ; le manifeste porte `mode`, `show_benchmark`, `show_ps_corrige`, `subtitle`, `blocs_enabled`, `entities[].categories`. **Zéro recouvrement.** Et `categories` est **exactement dérivable** du store — vérifié sur les 4 entités. L'avis du §6 se confirme : les commutateurs restent au manifeste, `categories` se dérive. |
 
 ### 7.9 — Deux manques que l'analyse de schéma n'avait pas vus
 
 | # | Manque | Pourquoi il compte |
 |---|---|---|
-| **M10** | `invest_date` sur `nonCoteEntry` **n'est pas déclaré au schéma**. Le classeur porte `21/03/2025` et `30/07/2025` ; le store les a rangés **dans le texte de `validation_note`** (`"Date d'investissement 2025-03-21"`). | Une date métier réfugiée dans un commentaire libre. Non requêtable, non validable, invisible à tout contrôle. C'est le symptôme exact du diagnostic du §5 : faute de champ pour la provenance, elle se réfugie où elle peut. |
-| **M11** | `moic_realise` **est déclaré au schéma et jamais rempli** (0/8), alors que le classeur porte `1,42x`, `1,79x`, `1,0x`. | Un manque d'un genre différent des dix autres : ici le logement existe. Ce n'est pas le schéma qui a échoué, c'est le remplissage. À traiter comme un défaut du constructeur de store, pas comme une extension. |
+| **MQ10** | `invest_date` sur `nonCoteEntry` **n'est pas déclaré au schéma**. Le classeur porte `21/03/2025` et `30/07/2025` ; le store les a rangés **dans le texte de `validation_note`** (`"Date d'investissement 2025-03-21"`). | Une date métier réfugiée dans un commentaire libre. Non requêtable, non validable, invisible à tout contrôle. C'est le symptôme exact du diagnostic du §5 : faute de champ pour la provenance, elle se réfugie où elle peut. |
+| **MQ11** | `moic_realise` **est déclaré au schéma et jamais rempli** (0/8), alors que le classeur porte `1,42x`, `1,79x`, `1,0x`. | Un manque d'un genre différent des dix autres : ici le logement existe. Ce n'est pas le schéma qui a échoué, c'est le remplissage. À traiter comme un défaut du constructeur de store, pas comme une extension. |
 
 ### 7.10 — Rectification d'une erreur du §4
 
 Le §4 (**A1**, tableau des ambiguïtés) laissait entendre que `Fin coté` index 2 « Intermédiaire » était
 sans consommateur. **C'est faux** : `rows_financier_cote` l'utilise comme **troisième terme de sa clé de
 regroupement** `(nature, assureur, intermédiaire)` et l'affiche dans le `cdet`. La moitié
-« intermédiaire » de M1 est donc plus sévère qu'écrit — deux contrats du même assureur passant par des
+« intermédiaire » de MQ1 est donc plus sévère qu'écrit — deux contrats du même assureur passant par des
 intermédiaires différents seraient **fusionnés** par le lecteur. Corrigé.
 

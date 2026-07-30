@@ -69,8 +69,14 @@ def build_sample_client() -> dict:
         {
             "entity_id": holding_id,
             "label": "Contrat AV Lux Multisupport",
+            # MQ1 (2.1-skill) : assureur requis, intermediaire optionnel — la semantique
+            # sort du label, qui redevient un simple libelle.
+            "assureur": "wealins",
+            "intermediaire": "Rhetores",
             "source": "releve_assureur",
-            "envelope_type": "assurance_vie_lux",
+            # envelope_type en code norme (confrontation §2.1) — la table code -> libelle
+            # moteur vit dans le lecteur, pas ici.
+            "envelope_type": "av_lu",
             "manager": "Gestion Pilotee Rhetores",
             "custodian": "Depositaire XYZ",
             "management_mode": "gestion_pilotee",
@@ -81,7 +87,7 @@ def build_sample_client() -> dict:
             "value_jan1": 540000,
             # value_projected volontairement absent (donnee non disponible)
             "value_projected": None,
-            "pledged": False,
+            "nantissement": False,
             "attributes": {
                 "lines": [
                     {
@@ -91,7 +97,8 @@ def build_sample_client() -> dict:
                         "class": "actions",
                         "geography": "monde",
                         "sri": 4,
-                        "pocket": "Poche Dynamique",
+                        # C7/D16 (2.1-skill) : la jointure vise l'ID de poche, plus le libelle
+                        "pocket": "pck_001",
                     },
                     {
                         "isin": "FR0000000002",
@@ -105,6 +112,9 @@ def build_sample_client() -> dict:
                 ],
                 "pockets": [
                     {
+                        # C7/D16 : id de poche REQUIS — c'est lui que visent
+                        # lines[].pocket et valuations[].position_id.
+                        "id": "pck_001",
                         "label": "Poche Dynamique",
                         "manager": "Gestion Pilotee Rhetores",
                         "profile": "dynamique",
@@ -158,7 +168,9 @@ def build_sample_client() -> dict:
             "entry_ref": fc_id,
             "date": "2025-11-10",
             "type": "retrait",
-            "amount": -20000,
+            # A4 fige (spec §7.6) : amount >= 0, le sens vient du type. L'ancienne
+            # valeur -20000 etait exactement la fixture fautive que §7.6 condamnait.
+            "amount": 20000,
             # comment absent (pas de commentaire pour ce retrait)
             "comment": None,
         },
@@ -234,7 +246,7 @@ def run() -> bool:
             "entry_ref": "tmp_fc_999",
             "date": "2026-01-01",
             "type": "frais",
-            "amount": -100,
+            "amount": 100,
         }
     )
     broken_problems = check_refs(broken_client)
@@ -281,16 +293,145 @@ def run() -> bool:
         "custodian": "CA Indosuez (Switzerland) S.A.",
         "value_jan1": 290000,
         "invest_date": "2024-11-05",
-        "pledged": False,
+        "nantissement": False,
+        # MQ2 (2.1-skill) : classe/geo/SRI par poche — le repli du moteur pour un
+        # contrat sans lignes classees lit la poche 0.
+        "classe_rhetores": "actions",
+        "geography": "monde",
+        "sri": 4,
     })
     erreurs_poche_riche = validate_all(poche_riche)
     if erreurs_poche_riche:
-        print(f"[FAIL] les champs A5 de pocket sont refuses: {erreurs_poche_riche}")
+        print(f"[FAIL] les champs A5/MQ2 de pocket sont refuses: {erreurs_poche_riche}")
         ok = False
     else:
-        print("[PASS] pocket accepte type/custodian/value_jan1/invest_date/pledged (A5)")
+        print("[PASS] pocket accepte type/custodian/value_jan1/invest_date/nantissement + classe/geo/sri (A5, MQ2)")
+
+    # ------------------------------------------------------------------
+    # Format converge 2.1-skill (D48) : les invariants nouveaux se prouvent,
+    # sinon ils ne sont que des commentaires — meme logique que l'invariant A5.
+    # ------------------------------------------------------------------
+
+    # MQ1 : un contrat sans assureur est refuse (le label ne porte plus la semantique).
+    sans_assureur = _copy.deepcopy(client)
+    del sans_assureur["financier_cote"][0]["assureur"]
+    if not validate_all(sans_assureur):
+        print("[FAIL] un contrat SANS assureur aurait du etre refuse (MQ1)")
+        ok = False
+    else:
+        print("[PASS] contrat sans assureur refuse (MQ1)")
+
+    # C7/D16 : une poche sans id est refusee (la jointure par libelle est morte).
+    poche_sans_id = _copy.deepcopy(client)
+    del poche_sans_id["financier_cote"][0]["attributes"]["pockets"][0]["id"]
+    if not validate_all(poche_sans_id):
+        print("[FAIL] une poche SANS id aurait du etre refusee (C7/D16)")
+        ok = False
+    else:
+        print("[PASS] poche sans id refusee (C7/D16)")
+
+    # A4 : un montant negatif est refuse — le sens vient du type, jamais du signe.
+    mvt_negatif = _copy.deepcopy(client)
+    mvt_negatif["mouvements"][0]["amount"] = -500
+    if not validate_all(mvt_negatif):
+        print("[FAIL] un montant negatif aurait du etre refuse (A4)")
+        ok = False
+    else:
+        print("[PASS] montant de mouvement negatif refuse (A4)")
+
+    # MQ3 : les flux non cote entrent dans l'enum des mouvements.
+    flux_nc = _copy.deepcopy(client)
+    flux_nc["mouvements"].append({
+        "id": "tmp_mv_003", "entry_ref": ids["nc_id"], "date": "2026-03-01",
+        "type": "appel", "amount": 25000,
+    })
+    flux_nc["mouvements"].append({
+        "id": "tmp_mv_004", "entry_ref": ids["nc_id"], "date": "2026-09-30",
+        "type": "distribution_prevue", "amount": 40000,
+    })
+    erreurs_flux = validate_all(flux_nc)
+    if erreurs_flux:
+        print(f"[FAIL] les types de flux non cote sont refuses (MQ3): {erreurs_flux}")
+        ok = False
+    else:
+        print("[PASS] mouvements acceptent appel / distribution_prevue (MQ3)")
+
+    # MQ6 : les trois categories sont MODELEES — une dette sans capital restant du
+    # est refusee (elle entre dans les controles comptables), un genericEntry ne
+    # suffit plus.
+    dette_vide = _copy.deepcopy(client)
+    dette_vide["dettes"] = [{
+        "id": "tmp_dt_001", "entity_id": holding_id_for_checks(client),
+        "label": "Credit test",
+    }]
+    if not validate_all(dette_vide):
+        print("[FAIL] une dette sans capital_remaining aurait du etre refusee (MQ6)")
+        ok = False
+    else:
+        print("[PASS] dette sans capital_remaining refusee (MQ6)")
+
+    # MQ6/MQ7/MQ8 : les formes typees passent — liq, immo, dette completes,
+    # historique sans entity_id, courbe agregee, arbitrages.
+    complet = _copy.deepcopy(client)
+    eid = holding_id_for_checks(complet)
+    complet["liquidites"] = [{
+        "id": "tmp_lq_001", "entity_id": eid, "label": "Compte courant",
+        "custodian": "CIC", "balance": 12000,
+    }]
+    complet["immobilier"] = [{
+        "id": "tmp_im_001", "entity_id": eid, "label": "Appartement",
+        "function": "RP", "ownership": "Pleine propriete", "mortgage": True,
+        "value_acquisition": 900000, "value_current": 1200000,
+        "attributes": {"date_acquisition": "2015-01-01", "loyer_annuel": 0},
+    }]
+    complet["dettes"] = [{
+        "id": "tmp_dt_001", "entity_id": eid, "label": "Credit immobilier",
+        "bank": "CIC", "type": "amortissable", "date_souscription": "2015-01-01",
+        "montant_initial": 700000, "rate": 1.45, "maturity": "2035-01-01",
+        "frequency": "mensuelle", "guarantee": "hypotheque",
+        "capital_remaining": 350000, "adossement": "immobilier",
+    }]
+    complet["historique_annuel"] = [
+        {"year": 2025, "rendement": 0.0634, "rendement_nc": 0.041, "commentaire": "bonne annee"},
+        {"year": 2024, "rendement": 0.0408},
+    ]
+    complet["courbe_performance"] = [
+        {"date": "2026-01-31", "cote": 3900000, "nc": 610000},
+        {"date": "2026-02-28", "cote": 3950000},
+    ]
+    complet["arbitrages"] = [{"date": "2026-04-15", "label": "Reduction poche actions US"}]
+    complet["non_cote"][0]["tri_pct"] = 10
+    complet["non_cote"][0]["invest_date"] = "2025-03-21"
+    complet["non_cote"][0]["attributes"]["uncalled_reel"] = 60000
+    erreurs_complet = validate_all(complet)
+    if erreurs_complet:
+        print("[FAIL] formes typees du format converge refusees:")
+        for e in erreurs_complet:
+            print(f"    - {e}")
+        ok = False
+    else:
+        print("[PASS] liq/immo/dettes types, historique sans entity_id, courbe, arbitrages, tri_pct, invest_date NC (MQ3-MQ8, MQ10)")
+
+    # D49 : la provenance d'extraction est acceptee sur une entree.
+    prov = _copy.deepcopy(client)
+    prov["financier_cote"][0].update({
+        "source_document": "releve_test.pdf",
+        "source_empreinte": "a" * 64,
+        "source_gabarit": "situation_contrat_capi_pm",
+        "source_arrete": "2026-06-30",
+    })
+    erreurs_prov = validate_all(prov)
+    if erreurs_prov:
+        print(f"[FAIL] la provenance D49 est refusee: {erreurs_prov}")
+        ok = False
+    else:
+        print("[PASS] provenance D49 acceptee (source_empreinte/gabarit/arrete)")
 
     return ok
+
+
+def holding_id_for_checks(client: dict) -> str:
+    return client["client"]["entities"][0]["id"]
 
 
 if __name__ == "__main__":

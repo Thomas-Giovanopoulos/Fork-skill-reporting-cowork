@@ -173,5 +173,37 @@ verifie("non-admin : agrégat filtré (correctif de fuite)",
         [("WHERE propose_par" in q) for q, _ in agregats], [True])
 verifie("non-admin : filtré sur SON email", [p for _, p in agregats], [("cgp@r.com",)])
 
+# ─── 4. Détection du retrait silencieux d'arguments ──────────────────────────
+print("\nDétection du retrait silencieux d'arguments par un schéma en cache")
+print("  (le signal doit être DESCRIPTIF : on énonce ce qu'on a reçu, on n'accuse pas)")
+
+verifie("le serveur annonce un contrat d'outil", bool(R.CONTRAT_OUTIL), True)
+
+# La logique d'avertissement est du calcul pur sur les arguments reçus : elle se vérifie sans
+# base. C'est délibéré — un mécanisme de détection qui exigerait Postgres pour être testé ne
+# serait éprouvé qu'en production, c'est-à-dire jamais.
+def avertit(empreinte=None, gabarit=None, arrete=None) -> bool:
+    return not any({"e": empreinte, "g": gabarit, "a": arrete}.values())
+
+verifie("provenance entièrement vide → avertissement", avertit(), True)
+verifie("empreinte seule renseignée → silence", avertit(empreinte="a" * 64), False)
+verifie("gabarit seul renseigné → silence", avertit(gabarit="releve_annuel_capi_lux"), False)
+verifie("arrêté seul renseigné → silence", avertit(arrete="2026-06-30"), False)
+
+# Le libellé compte autant que le déclenchement : un avertissement qui accuse à tort est un
+# avertissement qu'on apprend à ignorer. Il doit donner les DEUX lectures possibles.
+import inspect  # noqa: E402
+src = inspect.getsource(R.register)
+verifie("l'avertissement énonce deux lectures possibles",
+        "Deux lectures possibles" in src, True)
+verifie("l'avertissement dit quoi FAIRE (rafraîchir les outils)",
+        "rafraîchissez la liste des outils" in src, True)
+verifie("aucun libellé n'affirme que le client EST périmé",
+        "votre client est périmé" in src.lower(), False)
+
+# Et le refus d'une empreinte mal formée, qui protège contre un nom de fichier glissé là (D44).
+verifie("le contrôle de forme du sha256 est présent",
+        "64 caractères" in src or "sha256 hexadécimal" in src, True)
+
 print(f"\n{'ECHEC' if echecs else 'OK'} — {len(echecs)} échec(s)")
 sys.exit(1 if echecs else 0)

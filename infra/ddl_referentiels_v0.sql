@@ -17,6 +17,16 @@
 -- La séparation « proposer ≠ canoniser » (D34) est portée par des RÔLES
 -- POSTGRES, pas par une convention applicative : voir §6.
 --
+-- PARITÉ AVEC LES MIGRATIONS — ce DDL sert aux installations NEUVES, les
+-- migrations aux bases déjà créées ; les deux doivent aboutir au MÊME schéma.
+-- Sont donc intégrées ici :
+--   migration_001  fenêtre de validité des gabarits (D42) ;
+--   migration_002  aucun identifiant client dans le store (D44) — trois
+--                  colonnes `source_*` sur `adjudications` en remplacement de
+--                  `source_document`, et le CHECK
+--                  `succession_contexte_sans_reference` sur `contexte`.
+-- Toute modification ici doit être répercutée là-bas, et réciproquement.
+--
 -- Ordre d'exécution :
 --   1. §0 hors de la base cible (connecté à `postgres`)
 --   2. §1 à §7 connecté à la base cible
@@ -135,23 +145,38 @@ CREATE TRIGGER acteurs_touch BEFORE UPDATE ON acteurs
 -- §4 — Successions d'acteurs  [K5]
 -- ---------------------------------------------------------------------
 -- Sans succession datée, un relevé antérieur à un changement de dépositaire
--- est irréconciliable. Cas de référence : Wealins FC051727 — poche FAS
--- Intesa → CA Indosuez ; poche FID CIC → Quintet, clôturée le 30/12/2025.
+-- est irréconciliable. Cas de référence, chez un assureur luxembourgeois :
+-- poche FAS Intesa → CA Indosuez ; poche FID CIC → Quintet, clôturée le
+-- 30/12/2025. Le CONTRAT où on l'a observé n'a pas sa place ici (D44) : c'est
+-- la succession qui est un fait de marché, pas l'instance qui l'a révélée.
 CREATE TABLE acteur_successions (
     id                uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     predecesseur_code text NOT NULL REFERENCES acteurs(code) ON UPDATE CASCADE,
     successeur_code   text NOT NULL REFERENCES acteurs(code) ON UPDATE CASCADE,
     date_effet        date,                          -- NULL = date inconnue, à demander
     date_cloture      date,
-    contexte          text,                          -- ex. 'Wealins FC051727 — poche FID'
+    contexte          text,                          -- le FAIT, ex. 'reprise de la poche FID ex-CIC'
     payload           jsonb NOT NULL DEFAULT '{}'::jsonb,
     provenance        provenance_t NOT NULL,
     confiance         confiance_t  NOT NULL,
     validated_by      text,
     created_at        timestamptz NOT NULL DEFAULT now(),
     updated_at        timestamptz NOT NULL DEFAULT now(),
-    CONSTRAINT succession_non_reflexive CHECK (predecesseur_code <> successeur_code)
+    CONSTRAINT succession_non_reflexive CHECK (predecesseur_code <> successeur_code),
+
+    -- D44, repris de migration_002. Un `contexte` ne doit pas ressembler à une référence
+    -- de contrat : deux lettres suivies de cinq à huit chiffres, forme des références
+    -- rencontrées chez Wealins et Quintet. Volontairement ÉTROIT : une contrainte trop
+    -- large rejetterait des descriptions légitimes et serait désactivée au premier faux
+    -- positif — ce qui est pire qu'aucune contrainte.
+    CONSTRAINT succession_contexte_sans_reference
+        CHECK (contexte IS NULL OR contexte !~ '[A-Z]{2}[0-9]{5,8}')
 );
+
+COMMENT ON COLUMN acteur_successions.contexte IS
+    'Description du FAIT DE MARCHÉ, jamais de l''instance où on l''a observé (D44). Interdit : '
+    'numéro de contrat, nom de client, identifiant de poche. Le store est rendu en entier à '
+    'chaque CGP par ref_bundle : ce qui entre ici est visible de tous.';
 
 CREATE INDEX succ_pred_idx ON acteur_successions (predecesseur_code);
 CREATE INDEX succ_succ_idx ON acteur_successions (successeur_code);
@@ -162,10 +187,21 @@ CREATE TRIGGER succ_touch BEFORE UPDATE ON acteur_successions
 -- ---------------------------------------------------------------------
 -- §5 — Gabarits  [chantier N]
 -- ---------------------------------------------------------------------
--- La clé est le COUPLE émetteur × gabarit × périodicité (D22). Motif : un même
--- émetteur peut publier plusieurs mises en page (Cardif mensuel ≠ trimestriel),
--- et la périodicité se discrimine par un TOKEN de libellé, pas par la date
--- d'arrêté (un trimestriel peut tomber au 31/12).
+-- La clé est le TRIPLET émetteur × gabarit × valide_depuis (D42). Ce DDL et
+-- infra/migration_001_d42_fenetre_validite.sql doivent aboutir au MÊME schéma :
+-- le DDL sert aux installations neuves, la migration aux bases déjà créées.
+-- Toute modification ici doit être répercutée là-bas, et réciproquement.
+--
+-- Deux motifs, tirés du corpus du 2026-07-29 :
+--  (a) la périodicité n'est PAS LISIBLE dans le document chez trois émetteurs sur
+--      quatre, et ses tokens candidats sont des faux amis — elle ne peut pas
+--      porter une clé d'appariement, elle devient informative ;
+--  (b) un émetteur change de maquette : Cardif a produit deux gabarits en douze
+--      mois, une seule ancre sur onze survit de l'un à l'autre. Sans fenêtre de
+--      validité, le nouveau format ÉCRASE l'ancien et les relevés archivés
+--      deviennent inparsables — or un run réel lit des relevés jusqu'à 2022.
+--      À l'inverse Himalia n'a pas bougé en treize mois : la fenêtre est une
+--      CAPACITÉ, pas une règle.
 CREATE TABLE gabarits (
     id                 uuid PRIMARY KEY DEFAULT gen_random_uuid(),
 
@@ -173,15 +209,32 @@ CREATE TABLE gabarits (
     -- substituent pas (D22).
     emetteur_code      text NOT NULL REFERENCES acteurs(code) ON UPDATE CASCADE,
     gabarit            text NOT NULL,                -- ex. 'releve_annuel_capi'
-    periodicite        text NOT NULL,                -- annuel|trimestriel|mensuel|hebdomadaire|a_la_demande|inconnu
 
-    -- ID de template natif quand l'émetteur en expose un : signature parfaite,
-    -- court-circuite le matching en couches. Ex. Cardif : TYPE_MODELE 66.
+    -- Fenêtre de validité (D42). '0001-01-01' = « depuis toujours ».
+    -- ⚠ `valide_depuis` est NOT NULL À DESSEIN, et ce n'est pas du style : en SQL
+    --   deux NULL sont DISTINCTS dans une contrainte d'unicité, donc deux profils
+    --   (cardif, x, NULL) passeraient tous les deux et l'unicité ne protégerait
+    --   plus rien. Pire, une cible d'ON CONFLICT contenant un NULL ne matche
+    --   jamais : chaque adjudication acceptée par `ref_arbitrer` insérerait un
+    --   doublon au lieu de mettre à jour, silencieusement. On préfère cette
+    --   convention de date à `UNIQUE NULLS NOT DISTINCT` (PostgreSQL 15+) :
+    --   elle ne dépend d'aucune version et se lit dans les données.
+    valide_depuis      date NOT NULL DEFAULT '0001-01-01',
+    valide_jusqu_a     date,                         -- NULL = toujours en cours
+
+    -- INFORMATIVE, hors matching (D42) : donc nullable.
+    periodicite        text,                         -- annuel|trimestriel|mensuel|hebdomadaire|a_la_demande|inconnu
+
+    -- ID de template natif quand l'émetteur en expose un. PRÉ-FILTRE de famille de
+    -- document, il ne court-circuite PAS le matching. Ex. Cardif : TYPE_MODELE 66.
     template_id_natif  text,
 
-    -- La signature en trois couches (couche 1 metadata_pdf, couche 2
-    -- ancres_texte, couche 3 marqueurs_structure) + token_periodicite.
-    -- ⚠ Le nombre de pages est HORS matching : Dauphine 3→6 p., Wealins 15↔26 p.
+    -- La signature : `couche1` (métadonnées PDF) est un PRÉ-FILTRE D'ÉMETTEUR qui
+    -- ne peut que restreindre ; `sections_requises` est une barrière (toutes
+    -- présentes ou rejet), `sections_optionnelles` n'ajoute que de la confiance,
+    -- `discriminants` pèse lourd. `_token_periodicite_refute` et
+    -- `_marqueurs_structure_observes` sont de la DOCUMENTATION, non consommée.
+    -- ⚠ Le nombre de pages est HORS matching : Dauphine 3→6 p., Wealins 10↔26 p.
     --   pour le même gabarit. `n_pages_indicatif` est informatif seulement.
     signature          jsonb NOT NULL,
     n_pages_indicatif  text,
@@ -208,8 +261,29 @@ CREATE TABLE gabarits (
     created_at         timestamptz  NOT NULL DEFAULT now(),
     updated_at         timestamptz  NOT NULL DEFAULT now(),
 
-    CONSTRAINT gabarit_couple_unique UNIQUE (emetteur_code, gabarit, periodicite)
+    -- Plusieurs profils peuvent partager (emetteur_code, gabarit) et se
+    -- distinguer par leur début de validité : c'est le cas Cardif v1 / v2.
+    CONSTRAINT gabarit_version_unique UNIQUE (emetteur_code, gabarit, valide_depuis),
+    CONSTRAINT gabarit_fenetre_coherente
+        CHECK (valide_jusqu_a IS NULL OR valide_jusqu_a >= valide_depuis)
 );
+
+COMMENT ON COLUMN gabarits.valide_depuis IS
+    'Début de validité du gabarit. ''0001-01-01'' = depuis toujours. NOT NULL à dessein : '
+    'un NULL casserait l''unicité (deux NULL sont distincts) et ferait insérer des doublons '
+    'par l''ON CONFLICT de ref_arbitrer. Cf. migration_001.';
+COMMENT ON COLUMN gabarits.valide_jusqu_a IS
+    'Fin de validité, NULL = toujours en cours. Sert à CHOISIR entre versions, jamais à '
+    'retirer un profil : un ancien gabarit doit rester lisible pour parser les archives '
+    '(un run réel du corpus remonte à 2022). Limite L5 de l''étude de corpus.';
+COMMENT ON COLUMN gabarits.periodicite IS
+    'INFORMATIVE, hors matching (D42). Non lisible dans le document chez 3 émetteurs sur 4 — '
+    'trois faux amis constatés : offre commerciale (Spirica), fenêtre de cumul YTD (Cardif), '
+    'durée de contrat (Himalia). Renseignée par le contexte du run, jamais déduite du texte.';
+COMMENT ON COLUMN gabarits.template_id_natif IS
+    'Identifiant de template exposé par l''émetteur, quand il en expose un (Cardif : '
+    'TYPE_MODELE=66). PRÉ-FILTRE de famille de document — il ne court-circuite PAS le '
+    'matching en couches : vérifié identique de part et d''autre de la refonte Cardif 2025.';
 
 CREATE INDEX gabarits_emetteur_idx  ON gabarits (emetteur_code);
 CREATE INDEX gabarits_template_idx  ON gabarits (template_id_natif)
@@ -222,15 +296,20 @@ CREATE TRIGGER gabarits_touch BEFORE UPDATE ON gabarits
 -- ---------------------------------------------------------------------
 -- §6 — ISIN  [chantier E]
 -- ---------------------------------------------------------------------
--- Reprend exactement les colonnes de l'asset v0 (261 entrées) pour que la
--- promotion soit un simple COPY : isin,label,class_code,geo_code,sri,source,confidence.
+-- Reprend exactement les colonnes de l'asset v0 (261 entrées) :
+-- isin,label,class_code,geo_code,sri,source,confidence.
+-- ATTENTION (D44) : ce n'est PLUS un simple COPY depuis le CSV. La colonne `source` de
+-- l'asset nomme des CLIENTS (un nom de client suivi d'un suffixe) ; elle est
+-- dé-identifiée à l'assemblage par seed/construire_bundle.py (SOURCE_ISIN_DEIDENTIFIEE).
+-- Charger par seed/seed.sql, jamais par \copy sur le CSV brut.
 CREATE TABLE isin (
     isin          char(12) PRIMARY KEY,
     label         text,
     class_code    text,                    -- 13 classes provisoires
     geo_code      text,                    -- 5 géographies provisoires ; NULL = non tagué (jamais de géo fausse)
     sri           smallint CHECK (sri IS NULL OR sri BETWEEN 1 AND 7),
-    source        text,                    -- ex. 'interagyr_valide', 'gronier_categories'
+    source        text,                    -- TYPE de source, jamais un client (D44) :
+                                           -- ex. 'reporting_mandat_valide', 'run_reel_T2'
     provenance    provenance_t NOT NULL,
     confiance     confiance_t  NOT NULL,
     version       integer      NOT NULL DEFAULT 1,
@@ -256,7 +335,8 @@ CREATE TABLE adjudications (
     nature                nature_adj_t NOT NULL,
 
     -- Identifiant proposé, forme dépendante de la cible.
-    -- ex. gabarit : {"emetteur_code": "...", "gabarit": "...", "periodicite": "..."}
+    -- ex. gabarit : {"emetteur_code": "...", "gabarit": "...", "valide_depuis": "..."}
+    -- (la clé suit gabarit_version_unique : la périodicité n'en fait plus partie, D42)
     cle                   jsonb NOT NULL,
 
     -- Le contenu proposé, mappé sur les colonnes de la table canonique à l'accept.
@@ -264,7 +344,17 @@ CREATE TABLE adjudications (
 
     motif                 text,             -- pourquoi : drift détecté, ISIN inconnu, alias nouveau…
     run_id                text,             -- trace du run d'origine
-    source_document       text,
+
+    -- D44, repris de migration_002 : PAS de `source_document`. Un nom de fichier porte le
+    -- client en clair (« Relevé … <NOM DU CLIENT>.pdf ») et ce store est rendu EN ENTIER à
+    -- chaque CGP par ref_bundle (D36) : la colonne était une divulgation entre confrères.
+    -- Le remplacement est à la fois moins révélateur et PLUS UTILE — ce qu'un arbitre a
+    -- besoin de savoir est de quel TYPE de document vient la proposition et à quelle date
+    -- d'arrêté, pas de qui ; et l'empreinte du CONTENU reconnaît deux propositions issues
+    -- du même document, ce qu'un nom de fichier ne garantit jamais.
+    source_empreinte      text,             -- sha256 du CONTENU du document
+    source_gabarit        text,             -- gabarit apparié, ex. 'releve_annuel_capi_lux'
+    source_arrete         date,             -- date d'arrêté, non identifiante
 
     propose_par           text NOT NULL,    -- email de session du proposant
     propose_le            timestamptz NOT NULL DEFAULT now(),
@@ -283,6 +373,21 @@ CREATE TABLE adjudications (
 CREATE INDEX adj_statut_idx  ON adjudications (statut, propose_le DESC);
 CREATE INDEX adj_proposant_idx ON adjudications (propose_par);
 CREATE INDEX adj_cible_idx   ON adjudications (cible, nature);
+
+COMMENT ON COLUMN adjudications.source_empreinte IS
+    'sha256 du CONTENU du document source. Remplace le nom de fichier, qui portait le nom du '
+    'client en clair (D44). Permet de reconnaître deux propositions issues du même document — '
+    'ce qu''un nom de fichier ne garantit pas.';
+COMMENT ON COLUMN adjudications.source_gabarit IS
+    'Gabarit apparié au document source. C''est la traçabilité utile à l''arbitre : de quel TYPE '
+    'de relevé vient la proposition.';
+COMMENT ON COLUMN adjudications.source_arrete IS
+    'Date d''arrêté du document source. Non identifiante, et nécessaire pour choisir la version '
+    'de gabarit applicable (D42).';
+
+-- Les e-mails de CGP (`propose_par`, `arbitre_par`, `validated_by`) sont CONSERVÉS : ce sont
+-- des données professionnelles, et la responsabilité nominative est la contrepartie exacte du
+-- privilège d'arbitrage (D34). Les retirer affaiblirait le dispositif sans protéger personne.
 
 
 -- ---------------------------------------------------------------------

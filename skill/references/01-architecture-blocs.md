@@ -34,7 +34,7 @@ Pour éviter toute ambiguïté dans les échanges et le code :
 
 | Niveau | Terme | Définition | Exemple |
 |---|---|---|---|
-| 1 | **Reporting** | Le document HTML complet | `consolide_HG_v15.html` |
+| 1 | **Reporting** | Le document HTML complet | `consolide_client_exemple_v15.html` |
 | 2 | **Bloc** | Une grande partie numérotée du reporting | Bloc 00, Bloc 01, Bloc 02, Bloc 03 |
 | 3 | **Widget** | Un sous-élément autonome à l'intérieur d'un bloc | Tableau global, card entité, donut |
 | 4 | **Élément** | Un composant à l'intérieur d'un widget | Ligne du tableau, part de donut |
@@ -381,7 +381,7 @@ Une card par entité (PP + Holdings). **Chaque card respecte une structure de 6 
 - Les 6 lignes sont **toujours présentes** dans cet ordre, même si une catégorie est vide pour l'entité (afficher `—`)
 - La ligne **Dettes** ne se ventile **jamais** entre les autres catégories — c'est une ligne globale, en rouge
 - Les **valeurs sont uniformes** : pas de muted sur les libellés, pas de muted sur les zéros (afficher `—` plutôt que `0 €`)
-- Le label de la ligne 6 reprend le nom exact de l'entité : "Total Hervé G.", "Total SAS AX", etc.
+- Le label de la ligne 6 reprend le nom exact de l'entité : "Total Client Exemple", "Total SAS Exemple", etc.
 
 **Pourquoi cette rigidité** : la cohérence visuelle entre les cards permet au client de comparer instantanément la composition patrimoniale des différentes entités. Si une card a 4 lignes et l'autre 5, l'œil ne sait plus comparer.
 

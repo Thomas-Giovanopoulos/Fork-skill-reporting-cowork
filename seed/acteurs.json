@@ -16,7 +16,7 @@
       "payload": {
         "libelle_affichage": "De Pury Pictet",
         "convention": "Écrire « De Pury Pictet ». Jamais « PPT », jamais le nom complet avec Turrettini.",
-        "source": "relevé Interagyr — pied de page présent sur 100 % des pages"
+        "source": "relevé d'évaluation de portefeuille sous mandat — pied de page présent sur 100 % des pages"
       },
       "provenance": "seed",
       "confiance": "high"
@@ -35,7 +35,7 @@
         "agrement_amf": "GP-17000033",
         "adresse": "18bis rue d'Anjou, 75008 Paris",
         "note": "Société de gestion du groupe. Publie aussi un commentaire de marché hebdomadaire, source du bloc Contexte.",
-        "source": "reportings hebdomadaires INTERAGYR"
+        "source": "reportings hebdomadaires de gestion sous mandat (3 au corpus)"
       },
       "provenance": "seed",
       "confiance": "high"
@@ -49,7 +49,7 @@
       "alias": ["SPIRICA", "Spirica"],
       "payload": {
         "note": "Émetteur réel des relevés distribués sous la marque UAF Life Patrimoine. Émetteur ≠ distributeur (D24).",
-        "source": "relevés « UAF » Cerise et Pollux — mentions légales SPIRICA"
+        "source": "deux relevés « UAF » du corpus, même gabarit — mentions légales SPIRICA"
       },
       "provenance": "seed",
       "confiance": "high"
@@ -110,7 +110,7 @@
         "tva": "LU 166 094 20",
         "adresse": "12 rue Léon Laval, L-3372 Leudelange",
         "note": "Assurance-vie luxembourgeoise : le triangle de sécurité impose un dépositaire tiers nommé par fonds dédié (FID). Un contrat peut donc porter PLUSIEURS dépositaires, et ils changent dans le temps (voir successions).",
-        "source": "relevés annuels FC051727 et FC055211"
+        "source": "deux relevés annuels du même émetteur"
       },
       "provenance": "seed",
       "confiance": "high"
@@ -138,7 +138,7 @@
       "domiciliation": "LU",
       "est_depositaire_tiers": true,
       "alias": ["Quintet Private Bank (Europe) S.A.", "Quintet Private Bank", "Quintet"],
-      "payload": {"note": "Dépositaire d'un FID Wealins. Successeur de CIC sur la poche FID du contrat FC051727."},
+      "payload": {"note": "Dépositaire d'un FID Wealins. Successeur de CIC sur la poche FID d'un contrat Wealins observé au corpus."},
       "provenance": "seed",
       "confiance": "high"
     },
@@ -150,7 +150,7 @@
       "est_depositaire_tiers": true,
       "alias": ["CA Indosuez", "Indosuez", "Crédit Agricole Indosuez"],
       "payload": {
-        "note": "Dépositaire d'un FID Wealins. Successeur d'Intesa sur la poche FAS du contrat FC051727.",
+        "note": "Dépositaire d'un FID Wealins. Successeur d'Intesa sur la poche FAS d'un contrat Wealins observé au corpus.",
         "question_ouverte": "K7 — CA Indosuez et Banque Thaler sont-ils la même entité, ou deux repreneurs distincts de la poche ex-Intesa ? Le salvage ne permet pas de trancher. AskUser au CGP."
       },
       "provenance": "seed",
@@ -164,7 +164,7 @@
       "est_depositaire_tiers": true,
       "alias": ["Banque Thaler SA", "Banque Thaler", "Thaler"],
       "payload": {
-        "note": "Apparaît comme dépositaire d'un FID du contrat FC051727. Relation avec CA Indosuez non établie — voir K7.",
+        "note": "Apparaît comme dépositaire d'un FID d'un contrat Wealins observé au corpus. Relation avec CA Indosuez non établie — voir K7.",
         "question_ouverte": "K7 (identique à ca_indosuez)"
       },
       "provenance": "seed",
@@ -177,7 +177,7 @@
       "domiciliation": null,
       "est_depositaire_tiers": true,
       "alias": ["Intesa Sanpaolo", "Intesa Sanpaolo Wealth Management", "Intesa"],
-      "payload": {"note": "Prédécesseur sur la poche FAS du contrat Wealins FC051727. Conservé pour réconcilier les relevés antérieurs au changement (K5)."},
+      "payload": {"note": "Prédécesseur sur la poche FAS d'un contrat Wealins. Conservé pour réconcilier les relevés antérieurs au changement (K5)."},
       "provenance": "seed",
       "confiance": "medium"
     },
@@ -188,7 +188,7 @@
       "domiciliation": "FR",
       "est_depositaire_tiers": true,
       "alias": ["CIC"],
-      "payload": {"note": "Prédécesseur sur la poche FID du contrat Wealins FC051727. Conservé pour réconcilier les relevés antérieurs (K5)."},
+      "payload": {"note": "Prédécesseur sur la poche FID d'un contrat Wealins. Conservé pour réconcilier les relevés antérieurs (K5)."},
       "provenance": "seed",
       "confiance": "medium"
     },
@@ -236,7 +236,7 @@
       "est_depositaire_tiers": false,
       "alias": ["Altaroc"],
       "payload": {
-        "note": "Société de gestion de fonds de private equity. Deux fonds chez Gronier, cible 1,8× sur 10 ans, MOIC réels constatés 1,42× et 1,79×.",
+        "note": "Société de gestion de fonds de private equity. Deux fonds observés chez un client, cible 1,8× sur 10 ans, MOIC réels constatés 1,42× et 1,79×.",
         "rappel_metier": "Le PE représente peu d'actifs à forte importance individuelle : le bloc PE n'a jamais de seuil de pertinence (D32)."
       },
       "provenance": "seed",

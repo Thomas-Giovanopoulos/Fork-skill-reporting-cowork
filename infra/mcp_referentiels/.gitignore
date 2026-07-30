@@ -3,3 +3,5 @@ __pycache__/
 .env
 users.json
 .venv/
+# Artefact de l'install editable par uv (setuptools) — regénéré à chaque sync.
+*.egg-info/

@@ -1,0 +1,431 @@
+{
+  "_a_propos": {
+    "objet": "Table de vérité de l'EXTRACTION — points de contrôle par document. FIXTURE, écrite AVANT tout prompt de subagent (B-iii, méthode table-de-vérité-d'abord, 3e application).",
+    "date": "2026-07-30",
+    "methode": "Chaque valeur a été RELEVÉE dans le PDF réel (pdftotext -layout, lecture humaine du 30/07) — jamais déduite, jamais inventée. Ce ne sont PAS des extractions de référence complètes : des points de contrôle choisis pour être discriminants (totaux imprimés, valeurs de lignes identifiables par ISIN, poches). Un subagent qui les rate a mal lu ; un subagent qui ne rend QUE ces points a triché — le harnais ne mesure pas l'exhaustivité, les invariants de gabarit (B8) et la réconciliation (B3) s'en chargent.",
+    "tolerances": "0.01 (centime) par défaut — décision Thomas du 30/07 : au centime sauf déclaration contraire. Les documents qui n'impriment que des euros ronds (Dauphine, bloc Résumé PPT) portent tolerance: 1.",
+    "certitude": {
+      "etabli": "points relevés sur le document réel le 30/07",
+      "a_etablir": "document du corpus non encore dépouillé — le harnais le SIGNALE, ne le fait pas échouer (même convention que la table d'appariement)"
+    },
+    "piege_encodage": "Les noms de fichiers Dauphine portent le mojibake CP437 réel du disque (« Releve╠ü ») — résoudre par le nom inscrit ICI, jamais reconstruit (leçon de la table d'appariement).",
+    "porte_des_points": "ligne = attributes.lines[] (cherche par isin ou label) · poche = attributes.pockets[] (cherche par label) · contrat = entrée financier_cote (cherche par label/assureur) · agregat = somme sur le sélecteur",
+    "scope_contrat": "Chaque document avec points porte un sélecteur `contrat` : sur un store multi-contrats, les portes ligne/poche/invariant/agregat/champ_promis ne jugent QUE le(s) contrat(s) du document (correction du 30/07, premier run réel)."
+  },
+  "documents": [
+    {
+      "fichier": "2024.12 Relevé Himalia Capi HANAMI.pdf",
+      "dossier": "assureur",
+      "emetteur_code": "himalia_emetteur_a_confirmer",
+      "gabarit": "releve_situation_capi",
+      "arrete": "2024-12-31",
+      "certitude": "etabli",
+      "points": [
+        {
+          "nom": "épargne atteinte au 31/12/2024",
+          "porte": "contrat",
+          "cherche": {
+            "label": "Himalia"
+          },
+          "champ": "value_current",
+          "attendu": 220545.63,
+          "tolerance": 0.01,
+          "verbatim": "Epargne atteinte au 31/12/2024 : 220 545,63 €"
+        },
+        {
+          "nom": "fonds euro Actif Général Generali Vie",
+          "porte": "ligne",
+          "cherche": {
+            "label": "Actif Général Generali"
+          },
+          "champ": "value",
+          "attendu": 37690.92,
+          "tolerance": 0.01
+        },
+        {
+          "nom": "ligne CARMIGNAC PTF Credit A Eur",
+          "porte": "ligne",
+          "cherche": {
+            "label": "CARMIGNAC"
+          },
+          "champ": "value",
+          "attendu": 29467.15,
+          "tolerance": 0.01
+        },
+        {
+          "nom": "invariant D25 : Σ lignes = épargne atteinte",
+          "porte": "invariant",
+          "somme_de": "lines",
+          "egal_a": 220545.63,
+          "tolerance": 0.01,
+          "note": "prouvé au centime par l'étude du 27/07 (Σ 9 lignes) — le total n'est PAS imprimé en pied de tableau, il se recalcule"
+        }
+      ],
+      "contrat": {
+        "label": "Himalia"
+      }
+    },
+    {
+      "fichier": "2024.12 relevé Cardif Elite Capi HANAMI.pdf",
+      "dossier": "assureur",
+      "emetteur_code": "cardif",
+      "gabarit": "situation_contrat_capi_pm",
+      "valide_depuis": "2024-01-01",
+      "arrete": "2024-12-31",
+      "certitude": "etabli",
+      "points": [
+        {
+          "nom": "situation Gestion libre au 31/12/2024",
+          "porte": "contrat",
+          "cherche": {
+            "label": "Cardif"
+          },
+          "champ": "value_current",
+          "attendu": 502246.58,
+          "tolerance": 0.01,
+          "verbatim": "Gestion libre … 502 246,58 (v1 : unité « euros », capitales)"
+        },
+        {
+          "nom": "versements bruts de l'année",
+          "porte": "info",
+          "attendu": 500000.0,
+          "tolerance": 0.01,
+          "note": "SYNTHÈSE DES OPÉRATIONS DE L'ANNÉE 2024 — logement : mouvements (versement) si le run les capte"
+        },
+        {
+          "nom": "ligne FONDS GENERAL (sans ISIN — les tirets sont un fait, pas un manque)",
+          "porte": "ligne",
+          "cherche": {
+            "label": "FONDS GENERAL"
+          },
+          "champ": "value",
+          "attendu": 301595.48,
+          "tolerance": 0.01
+        },
+        {
+          "nom": "ligne ABERDEEN ASIAN SMALLER LU0231459107",
+          "porte": "ligne",
+          "cherche": {
+            "isin": "LU0231459107"
+          },
+          "champ": "value",
+          "attendu": 20348.37,
+          "tolerance": 0.01
+        },
+        {
+          "nom": "ligne IVO FIXED INCOME LU1165644672",
+          "porte": "ligne",
+          "cherche": {
+            "isin": "LU1165644672"
+          },
+          "champ": "value",
+          "attendu": 19985.84,
+          "tolerance": 0.01
+        },
+        {
+          "nom": "invariant D25 : Σ lignes = Gestion libre",
+          "porte": "invariant",
+          "somme_de": "lines",
+          "egal_a": 502246.58,
+          "tolerance": 0.01
+        }
+      ],
+      "contrat": {
+        "label": "Cardif"
+      }
+    },
+    {
+      "fichier": "2025.12 Relevé Cardif Elite Capi HANAMI.pdf",
+      "dossier": "assureur",
+      "emetteur_code": "cardif",
+      "gabarit": "situation_contrat_capi_pm",
+      "valide_depuis": "2025-12-31",
+      "arrete": "2025-12-31",
+      "certitude": "etabli",
+      "points": [
+        {
+          "nom": "situation Gestion libre au 31/12/2025 (v2 : unité « € », casse mixte, col Répartition)",
+          "porte": "contrat",
+          "cherche": {
+            "label": "Cardif"
+          },
+          "champ": "value_current",
+          "attendu": 328263.19,
+          "tolerance": 0.01
+        },
+        {
+          "nom": "rachats bruts de l'année",
+          "porte": "info",
+          "attendu": 200633.23,
+          "tolerance": 0.01,
+          "note": "Cumul des opérations pour l'année — logement : mouvements (retrait), amount POSITIF (A4)"
+        },
+        {
+          "nom": "ligne AMUNDI MSCI EUROPE ESG LEADERS LU1940199711",
+          "porte": "ligne",
+          "cherche": {
+            "isin": "LU1940199711"
+          },
+          "champ": "value",
+          "attendu": 21795.65,
+          "tolerance": 0.01,
+          "note": "MÊME ISIN que la ligne LYXOR du relevé 2024 (renommage Lyxor→Amundi) : la jointure temporelle passe par l'ISIN, jamais le libellé"
+        },
+        {
+          "nom": "ligne AMUNDI NASDAQ-100 LU1681038599",
+          "porte": "ligne",
+          "cherche": {
+            "isin": "LU1681038599"
+          },
+          "champ": "value",
+          "attendu": 9923.4,
+          "tolerance": 0.01
+        },
+        {
+          "nom": "invariant D25 : Σ lignes = Gestion libre",
+          "porte": "invariant",
+          "somme_de": "lines",
+          "egal_a": 328263.19,
+          "tolerance": 0.01
+        }
+      ],
+      "contrat": {
+        "label": "Cardif"
+      }
+    },
+    {
+      "fichier": "2026.06 relevé UAF Cerise.pdf",
+      "dossier": "assureur",
+      "emetteur_code": "spirica",
+      "gabarit": "releve_situation_av",
+      "arrete": "2026-06-30",
+      "certitude": "etabli",
+      "points": [
+        {
+          "nom": "valeur de rachat au 30/06/2026",
+          "porte": "contrat",
+          "cherche": {
+            "label": "UAF"
+          },
+          "champ": "value_current",
+          "attendu": 79505.64,
+          "tolerance": 0.01,
+          "verbatim": "Valeur de rachat* 79 505,64 €"
+        }
+      ],
+      "contrat": {
+        "label": "UAF"
+      }
+    },
+    {
+      "fichier": "2025 Relevé annuel Wealins FC051727 HANAMI.pdf",
+      "dossier": "assureur",
+      "emetteur_code": "wealins",
+      "gabarit": "releve_annuel_capi_lux",
+      "arrete": "2025-12-31",
+      "certitude": "etabli",
+      "points": [
+        {
+          "nom": "poche FAS Banque Thaler (540709)",
+          "porte": "poche",
+          "cherche": {
+            "label": "Thaler"
+          },
+          "champ": "value",
+          "attendu": 545975.5,
+          "tolerance": 0.01,
+          "verbatim": "540709 Banque Thaler SA … 545.975,50 EUR 53,81%"
+        },
+        {
+          "nom": "poche FID Quintet Private (K00149YU)",
+          "porte": "poche",
+          "cherche": {
+            "label": "Quintet"
+          },
+          "champ": "value",
+          "attendu": 468670.81,
+          "tolerance": 0.01
+        },
+        {
+          "nom": "invariant : Σ poches = valeur du contrat",
+          "porte": "invariant",
+          "somme_de": "pockets",
+          "egal_a": 1014646.31,
+          "tolerance": 0.01,
+          "note": "545 975,50 + 468 670,81 — perf par POCHE seulement (champs_publies), pas de perf_pct de ligne à exiger"
+        }
+      ],
+      "contrat": {
+        "label": "Wealins"
+      }
+    },
+    {
+      "fichier": "FC051727-20260630.pdf",
+      "dossier": "assureur",
+      "emetteur_code": "wealins",
+      "gabarit": "situation_trimestrielle_capi_lux",
+      "arrete": "2026-06-30",
+      "certitude": "etabli",
+      "points": [
+        {
+          "nom": "poche FAS CA Indosuez (1719249) — ex-Thaler/Intesa : la SUCCESSION est un fait de marché (K5), le numéro de poche a changé",
+          "porte": "poche",
+          "cherche": {
+            "label": "Indosuez"
+          },
+          "champ": "value",
+          "attendu": 560216.42,
+          "tolerance": 0.01
+        },
+        {
+          "nom": "poche FID Quintet Private (K00149YU)",
+          "porte": "poche",
+          "cherche": {
+            "label": "Quintet"
+          },
+          "champ": "value",
+          "attendu": 480797.34,
+          "tolerance": 0.01
+        },
+        {
+          "nom": "invariant : Σ poches = valeur du contrat",
+          "porte": "invariant",
+          "somme_de": "pockets",
+          "egal_a": 1041013.76,
+          "tolerance": 0.01
+        }
+      ],
+      "contrat": {
+        "label": "Wealins"
+      }
+    },
+    {
+      "fichier": "Interagyr.pdf",
+      "dossier": "15.7.26",
+      "emetteur_code": "de_pury_pictet",
+      "gabarit": "evaluation_portefeuille_mandat",
+      "arrete": "2026-07-15",
+      "certitude": "etabli",
+      "points": [
+        {
+          "nom": "valeur totale (bloc Résumé — convention ANGLO-SAXONNE 1,982,034, euros ronds)",
+          "porte": "contrat",
+          "cherche": {
+            "label": "Pury"
+          },
+          "champ": "value_current",
+          "attendu": 1982034.0,
+          "tolerance": 1.0,
+          "note": "le piège de double convention du profil, exercé : ce total est anglo-saxon, le détail est franco-suisse"
+        },
+        {
+          "nom": "Total : Compte Courant (détail — convention FRANCO-SUISSE)",
+          "porte": "ligne",
+          "cherche": {
+            "label": "Compte Courant"
+          },
+          "champ": "value",
+          "attendu": 91429.78,
+          "tolerance": 0.01
+        },
+        {
+          "nom": "sous-total Fonds obligataires",
+          "porte": "agregat",
+          "cherche": {
+            "class": "obligations"
+          },
+          "somme_de": "lines",
+          "egal_a": 200086.2,
+          "tolerance": 0.01,
+          "note": "« Total : Fonds obligataires 200 086,20 » — si le run classe autrement, l'écart est un signal de classification, pas d'extraction"
+        },
+        {
+          "nom": "champ promis : perf_pct par ligne (RESULTAT YTD, 2e ligne = depuis achat)",
+          "porte": "champ_promis",
+          "champ": "perf_pct",
+          "note": "champs_publies = oui : toute ligne titre/fonds sans perf_pct est un échec MQ11"
+        }
+      ],
+      "contrat": {
+        "label": "Pury"
+      }
+    },
+    {
+      "fichier": "Releve╠ü - INTERAGYR Offensif 6.pdf",
+      "nom_lisible": "Relevé - INTERAGYR Offensif 6.pdf",
+      "dossier": "15.7.26",
+      "emetteur_code": "dauphine_am",
+      "gabarit": "reporting_hebdo_mandat",
+      "arrete": "2026-07-15",
+      "certitude": "etabli",
+      "points": [
+        {
+          "nom": "VALORISATION TOTALE (euros ronds)",
+          "porte": "contrat",
+          "cherche": {
+            "label": "Dauphine"
+          },
+          "champ": "value_current",
+          "attendu": 497897.0,
+          "tolerance": 1.0,
+          "verbatim": "VALORISATION TOTALE 497 897 € ; Total portefeuille 497 897 € −2 051 € −0,6 %"
+        },
+        {
+          "nom": "invariant D25 : Σ sous-totaux de classes = Total portefeuille",
+          "porte": "invariant",
+          "somme_de": "lines",
+          "egal_a": 497897.0,
+          "tolerance": 1.0,
+          "note": "au € près (profil) — les montants Dauphine sont imprimés en euros ronds"
+        },
+        {
+          "nom": "champ promis : perf_pct par ligne (« +/- % » HEBDOMADAIRE, pas YTD)",
+          "porte": "champ_promis",
+          "champ": "perf_pct",
+          "note": "l'horizon va dans validation_note — un YTD ici serait une erreur d'extraction, pas une variante"
+        }
+      ],
+      "contrat": {
+        "label": "Offensif"
+      }
+    },
+    {
+      "fichier": "Releve╠ü - INTERAGYR E 4 - ETF.pdf",
+      "nom_lisible": "Relevé - INTERAGYR E 4 - ETF.pdf",
+      "dossier": "15.7.26",
+      "emetteur_code": "dauphine_am",
+      "gabarit": "reporting_hebdo_mandat",
+      "arrete": "2026-07-15",
+      "certitude": "a_etablir",
+      "points": []
+    },
+    {
+      "fichier": "Releve╠ü - INTERAGYR Tresorerie 2.pdf",
+      "nom_lisible": "Relevé - INTERAGYR Tresorerie 2.pdf",
+      "dossier": "15.7.26",
+      "emetteur_code": "dauphine_am",
+      "gabarit": "reporting_hebdo_mandat",
+      "arrete": "2026-07-15",
+      "certitude": "a_etablir",
+      "points": []
+    },
+    {
+      "fichier": "2025 Relevé annuel Wealins FC055211 HANAMI.pdf",
+      "dossier": "assureur",
+      "emetteur_code": "wealins",
+      "gabarit": "releve_annuel_capi_lux",
+      "arrete": "2025-12-31",
+      "certitude": "a_etablir",
+      "points": []
+    },
+    {
+      "fichier": "FC055211-20260630.pdf",
+      "dossier": "assureur",
+      "emetteur_code": "wealins",
+      "gabarit": "situation_trimestrielle_capi_lux",
+      "arrete": "2026-06-30",
+      "certitude": "a_etablir",
+      "points": []
+    }
+  ]
+}

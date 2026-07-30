@@ -1,0 +1,122 @@
+{
+  "client_id": "tmp_c_001",
+  "source_document": "Releve╠ü - INTERAGYR Tresorerie 2.pdf",
+  "status": "pending_validation",
+  "extraction_profile": "skill_v1",
+  "changes": [
+    {
+      "category": "financier_cote",
+      "entry_id": "tmp_fc_003",
+      "entry_label": "Compte Titres — UBS (Dauphine AM — Prudent)",
+      "entity_id": "interagyr",
+      "action": "update",
+      "confidence": "high",
+      "notes": "Reporting hebdomadaire Dauphine AM, semaine du 13/07 au 16/07/2026, valorisation au 16/07/2026. Colonne « +/- % » = performance HEBDOMADAIRE (jamais YTD ; YTD publié séparément dans le bloc KPI : +0,2 %). Invariant de contrôle VÉRIFIÉ : Σ sous-totaux de classes (obligations 416 156 + monétaire 75 255 + liquidités 9 752) = 501 163 € = Total portefeuille, au € près ; Σ des lignes extraites = 501 163 € (écart 0 €). KPI « NOMBRE DE LIGNES » = 7 = positions hors liquidités (8 lignes extraites liquidités incluses). Rattachement : le document porte « CLIENT INTERAGYR Tresorerie 2 » sans nommer le mandat ; l'allocation 83 % obligations / 15 % monétaire / 2 % liquidités (aucune action) est cohérente avec un mandat Prudent — hypothèse « Tresorerie 2 » ↔ mandat Prudent retenue, aucune incohérence détectée avec les ancres (capital 500 000 €, investi le 03/05/2026, valorisation précédente 501 321 €). Géographies issues du référentiel ISIN uniquement (Tailor Credit 2028, Axiom SI Obligataire, LBPAM Short Term : sans geo_code au référentiel, laissées non taguées conformément à GEO_RULES). Ligne LIQUIDITÉS : « — » = non applicable, perf_pct omis. Mouvement de la semaine : 1 achat LBPAM SHORT TERM-I-(D) (FR001400P0S8) de +25 116 € le 15/07/2026, montant brut traité 25 116 € (voir unrecognized_data).",
+      "fields": [
+        {
+          "path": "value_current",
+          "old_value": 501321,
+          "new_value": 501163,
+          "source_page": 2
+        },
+        {
+          "path": "attributes.lines",
+          "old_value": null,
+          "new_value": [
+            {
+              "label": "Lazard Euro Short Duration High Yield -PVC- (C)",
+              "isin": "FR0013507019",
+              "value": 95168.0,
+              "class": "obligations",
+              "geography": "europe",
+              "perf_pct": 0.3,
+              "pocket": "pck_003"
+            },
+            {
+              "label": "Carmignac Unconstrained Euro Fixed Income -F- (C)",
+              "isin": "LU0992631217",
+              "value": 89952.0,
+              "class": "obligations",
+              "geography": "europe",
+              "perf_pct": 0.0,
+              "pocket": "pck_003"
+            },
+            {
+              "label": "Pareto-Nordic Corporate Bond -H- EUR (C)",
+              "isin": "LU1311575093",
+              "value": 80438.0,
+              "class": "obligations",
+              "geography": "europe",
+              "perf_pct": 0.5,
+              "pocket": "pck_003"
+            },
+            {
+              "label": "Tailor Credit 2028 FCP -I-",
+              "isin": "FR001400BW13",
+              "value": 75429.0,
+              "class": "obligations",
+              "perf_pct": 0.4,
+              "pocket": "pck_003"
+            },
+            {
+              "label": "abrdn Emerging Markets Corporate Bond Fund -X2- (C)",
+              "isin": "LU1725895707",
+              "value": 50104.0,
+              "class": "obligations",
+              "geography": "emergents",
+              "perf_pct": 0.1,
+              "pocket": "pck_003"
+            },
+            {
+              "label": "Axiom Lux SI Obligataire -J- 3DEC (C)",
+              "isin": "LU1876461549",
+              "value": 25065.0,
+              "class": "obligations",
+              "perf_pct": 0.3,
+              "pocket": "pck_003"
+            },
+            {
+              "label": "LBPAM Short Term -I- (D)",
+              "isin": "FR001400P0S8",
+              "value": 75255.0,
+              "class": "monetaire",
+              "perf_pct": 0.1,
+              "pocket": "pck_003"
+            },
+            {
+              "label": "Liquidités",
+              "value": 9752.0,
+              "class": "monetaire",
+              "pocket": "pck_003"
+            }
+          ],
+          "source_page": 2
+        },
+        {
+          "path": "attributes.pockets",
+          "old_value": null,
+          "new_value": [
+            {
+              "id": "pck_003",
+              "label": "Compte Titres — UBS (Dauphine AM — Prudent)",
+              "value": 501163,
+              "capital_invested": 500000,
+              "invest_date": "2026-05-03"
+            }
+          ],
+          "source_page": 2
+        }
+      ]
+    }
+  ],
+  "unrecognized_data": [
+    {
+      "description": "Section « Mouvements de la semaine » : 1 achat, 0 vente, montant brut traité 25 116 € — ACHAT LBPAM SHORT TERM-I-(D), FR001400P0S8, 15/07/2026, +25 116 €. Donnée de flux hors schéma des positions, conservée pour information.",
+      "source_page": 3,
+      "raw": {
+        "section": "Mouvements de la semaine",
+        "content": "1 achat, 0 vente, montant brut traité 25 116 € — ACHAT LBPAM SHORT TERM-I-(D), FR001400P0S8, 15/07/2026, +25 116 €. Donnée de flux hors schéma des positions, conservée pour information."
+      }
+    }
+  ]
+}

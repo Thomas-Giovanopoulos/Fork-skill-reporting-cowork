@@ -1,18 +1,18 @@
 # POC étape 2 — Banque de modules + assembleur P1
 
 Preuve de concept : transformer la phase **P1 (Structure)** en génération **par assemblage de
-modules** plutôt que par rédaction libre du HTML. Extraite de `consolide_HG_v15.html` (la cible la
+modules** plutôt que par rédaction libre du HTML. Extraite de `consolide_client_exemple_v15.html` (la cible la
 plus proche fournie par Tristan).
 
 ## Comment ça marche
 
 ```
-manifest.example.json  ──>  assemble.py  ──>  build/skeleton_HG.html
+manifest.example.json  ──>  assemble.py  ──>  build/skeleton_client_exemple.html
    (leviers variables)      (code, banque bank/)     (squelette vide)
 ```
 
 ```bash
-python3 assemble.py manifest.example.json build/skeleton_HG.html
+python3 assemble.py manifest.example.json build/skeleton_client_exemple.html
 ```
 
 L'assembleur : valide le manifeste (schéma + règles métier), applique les **ordres canoniques figés
@@ -47,9 +47,9 @@ bank/
    l'ordre des catégories dans le manifeste ne change rien : l'assembleur impose l'ordre canonique
    (Liquidités → Immobilier → Financier coté → Non coté → Dettes).
 3. **Fidélité à v15** — le squelette reproduit exactement les sections par entité de l'original :
-   - Hervé G. : Liquidités, Immobilier, Financier coté, Dettes
-   - SAS AX : Liquidités, Financier coté, Financier non coté
-   - SAS LG : Liquidités, Immobilier
+   - Client Exemple : Liquidités, Immobilier, Financier coté, Dettes
+   - SAS Exemple : Liquidités, Financier coté, Financier non coté
+   - SAS Exemple 2 : Liquidités, Immobilier
 4. **Pas de trou silencieux** — Jinja est en `StrictUndefined` : toute variable manquante lève une
    erreur au lieu de produire un HTML incomplet.
 

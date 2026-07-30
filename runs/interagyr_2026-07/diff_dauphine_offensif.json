@@ -1,0 +1,80 @@
+{
+  "client_id": "tmp_c_001",
+  "source_document": "Releve╠ü - INTERAGYR Offensif 6.pdf",
+  "status": "pending_validation",
+  "extraction_profile": "skill_v1",
+  "changes": [
+    {
+      "category": "financier_cote",
+      "entry_id": "tmp_fc_004",
+      "entry_label": "Compte Titres — UBS (Dauphine AM — Offensif)",
+      "entity_id": "interagyr",
+      "action": "update",
+      "confidence": "high",
+      "notes": "Reporting hebdomadaire Dauphine AM, semaine du 13/07 au 16/07/2026, valorisation au 16/07/2026. Rattachement : 'INTERAGYR Offensif 6' = mandat Offensif Dauphine AM du client INTERAGYR — cohérent avec l'entrée tmp_fc_004 (le suffixe '6' est un numéro de mandat, pas une incohérence). HORIZON PERF : la colonne '+/- %' est la variation HEBDOMADAIRE (13/07-16/07), PAS un YTD ; le YTD publié en KPI est -0,4 % (non reporté par ligne). INVARIANT DE CONTRÔLE EN ÉCHEC (1 €) : Σ sous-totaux publiés = 332 252 (ACTIONS) + 165 646 (LIQUIDITÉS) = 497 898 € ≠ Total portefeuille 497 897 € — écart d'arrondi. Σ des 21 lignes actions extraites = 332 253 € (1 € au-dessus du sous-total publié). Écart total de 2 € absorbé sur la ligne LIQUIDITÉS (165 646 → 165 644) pour que Σ lignes = 497 897 € exactement. Ligne LIQUIDITÉS : '—' = non applicable, perf_pct omis. KPI NOMBRE DE LIGNES = 21 = nombre de lignes actions (liquidités non comptée). Signe moins U+2212 et filigrane fragmenté filtrés. Classes/géographies : référentiel ISIN (21/21 ISIN reconnus, dont TSMC ADR → asie_pacifique). Baisse de valorisation 500 456 → 497 897 € cohérente avec la perf hebdo de -0,6 % et le YTD -0,4 %.",
+      "fields": [
+        {
+          "path": "value_current",
+          "old_value": 500456,
+          "new_value": 497897,
+          "source_page": 2
+        },
+        {
+          "path": "attributes.lines",
+          "old_value": null,
+          "new_value": [
+            {"label": "Microsoft Corp", "isin": "US5949181045", "value": 31131.0, "class": "actions", "perf_pct": -1.1, "geography": "amerique_du_nord", "pocket": "pck_004"},
+            {"label": "Amazon.com Inc", "isin": "US0231351067", "value": 30727.0, "class": "actions", "perf_pct": 0.2, "geography": "amerique_du_nord", "pocket": "pck_004"},
+            {"label": "Alphabet Inc -A-", "isin": "US02079K3059", "value": 29057.0, "class": "actions", "perf_pct": -4.1, "geography": "amerique_du_nord", "pocket": "pck_004"},
+            {"label": "Apple Inc", "isin": "US0378331005", "value": 17438.0, "class": "actions", "perf_pct": 14.4, "geography": "amerique_du_nord", "pocket": "pck_004"},
+            {"label": "Meta Platforms Inc -A-", "isin": "US30303M1027", "value": 16806.0, "class": "actions", "perf_pct": 12.0, "geography": "amerique_du_nord", "pocket": "pck_004"},
+            {"label": "S&P Global Inc", "isin": "US78409V1044", "value": 16354.0, "class": "actions", "perf_pct": 7.7, "geography": "amerique_du_nord", "pocket": "pck_004"},
+            {"label": "JPMorgan Chase & Co", "isin": "US46625H1005", "value": 15860.0, "class": "actions", "perf_pct": 3.0, "geography": "amerique_du_nord", "pocket": "pck_004"},
+            {"label": "LVMH Moët Hennessy Louis Vuitton", "isin": "FR0000121014", "value": 15596.0, "class": "actions", "perf_pct": 3.1, "geography": "europe", "pocket": "pck_004"},
+            {"label": "L'Oréal", "isin": "FR0000120321", "value": 15254.0, "class": "actions", "perf_pct": -2.7, "geography": "europe", "pocket": "pck_004"},
+            {"label": "Taiwan Semiconductor Manufacturing ADR", "isin": "US8740391003", "value": 15007.0, "class": "actions", "perf_pct": -5.4, "geography": "asie_pacifique", "pocket": "pck_004"},
+            {"label": "Airbus SE", "isin": "NL0000235190", "value": 14867.0, "class": "actions", "perf_pct": -0.1, "geography": "europe", "pocket": "pck_004"},
+            {"label": "Schneider Electric SE", "isin": "FR0000121972", "value": 14804.0, "class": "actions", "perf_pct": -3.8, "geography": "europe", "pocket": "pck_004"},
+            {"label": "EssilorLuxottica", "isin": "FR0000121667", "value": 14746.0, "class": "actions", "perf_pct": -4.5, "geography": "europe", "pocket": "pck_004"},
+            {"label": "Air Liquide", "isin": "FR0000120073", "value": 14521.0, "class": "actions", "perf_pct": 5.7, "geography": "europe", "pocket": "pck_004"},
+            {"label": "L3Harris Technologies Inc", "isin": "US5024311095", "value": 14138.0, "class": "actions", "perf_pct": -7.1, "geography": "amerique_du_nord", "pocket": "pck_004"},
+            {"label": "Vinci SA", "isin": "FR0000125486", "value": 13703.0, "class": "actions", "perf_pct": -6.1, "geography": "europe", "pocket": "pck_004"},
+            {"label": "SAP SE", "isin": "DE0007164600", "value": 12801.0, "class": "actions", "perf_pct": -13.8, "geography": "europe", "pocket": "pck_004"},
+            {"label": "Saint-Gobain", "isin": "FR0000125007", "value": 9731.0, "class": "actions", "perf_pct": -2.4, "geography": "europe", "pocket": "pck_004"},
+            {"label": "AstraZeneca PLC", "isin": "GB0009895292", "value": 9671.0, "class": "actions", "perf_pct": -4.6, "geography": "europe", "pocket": "pck_004"},
+            {"label": "Sandoz Group SA", "isin": "CH1243598427", "value": 9303.0, "class": "actions", "perf_pct": -8.4, "geography": "europe", "pocket": "pck_004"},
+            {"label": "Mobility Global", "isin": "US60744M1062", "value": 738.0, "class": "actions", "perf_pct": 0.0, "geography": "amerique_du_nord", "pocket": "pck_004"},
+            {"label": "Liquidités", "value": 165644.0, "class": "monetaire", "pocket": "pck_004"}
+          ],
+          "source_page": 2
+        },
+        {
+          "path": "attributes.pockets",
+          "old_value": null,
+          "new_value": [
+            {
+              "id": "pck_004",
+              "label": "Compte Titres — UBS (Dauphine AM — Offensif)",
+              "value": 497897,
+              "capital_invested": 500000,
+              "invest_date": "2026-05-04"
+            }
+          ],
+          "source_page": 2
+        }
+      ]
+    }
+  ],
+  "unrecognized_data": [
+    {
+      "description": "[type: mouvement_semaine] Mouvements de la semaine (page 4) : 1 achat, 0 vente, montant brut traité 14 875 €. ACHAT AIRBUS SE (NL0000235190) le 15/07/2026 pour +14 875 €. Hors périmètre attributes.lines, consigné pour information.",
+      "source_page": 4,
+      "raw": {"type": "mouvement_semaine"}
+    },
+    {
+      "description": "[type: kpi_allocation] KPI de garde et page 2 : PERFORMANCE YTD -0,4 % ; POCHE ACTIONS 67 % ; LIQUIDITÉS 33 % ; NOMBRE DE LIGNES 21. Non modélisés en champs, consignés pour information.",
+      "source_page": 2,
+      "raw": {"type": "kpi_allocation"}
+    }
+  ]
+}

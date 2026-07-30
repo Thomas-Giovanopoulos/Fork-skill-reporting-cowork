@@ -10,19 +10,42 @@ Expose quatre outils sur la base `rhetores_ref` : `ref_bundle`, `ref_propose`, `
 
 ## Démarrer
 
-```bash
+Protocole **uv**, le même que `mcp-o2s-server` depuis le 2026-07-29 (écart R8 du registre ; l'ancienne
+séquence `venv` + `pip` est décrite dans `requirements.txt`, conservé mais remplacé).
+
+```powershell
 cd infra/mcp_referentiels
-python3 -m venv .venv && source .venv/bin/activate     # Windows : .venv\Scripts\activate
-pip install -r requirements.txt                        # ⚠ lire la note rhetores_authz du fichier
-cp .env.example .env                                   # puis remplir
-uvicorn server:app --host 0.0.0.0 --port 8001
-curl http://localhost:8001/health
+$env:VIRTUAL_ENV = $null                  # si conda est actif : il pose sa propre valeur
+uv sync                                   # crée le .venv et installe (lock : 45 paquets)
+# le .env est livré = copie du .env.example → le REMPLIR, ne pas le recopier par-dessus
+uv run uvicorn server:app --host 127.0.0.1 --port 8001
+curl.exe -s http://localhost:8001/health
 ```
 
-`/health` est dispensé de JWT et répond `{"status":"ok","referentiels_configures":true|false}`. Le
-serveur **démarre même sans** `REFERENTIELS_DATABASE_URL` : l'import de psycopg est différé, le DSN
-n'est résolu qu'à l'appel d'un outil. On préfère un serveur qui répond et échoue avec un message clair
-à un serveur qui refuse de démarrer.
+Aucune activation de venv : `uv run` résout l'interpréteur du projet seul — ce qui évite au passage
+que `source .venv/bin/activate` (faux deux fois sous Windows) soit jamais nécessaire. Pas-à-pas complet
+et pièges de configuration dans [`../RUNBOOK.md`](../RUNBOOK.md) §2.0 et §2.4.
+
+`/health` est dispensé de JWT et répond
+`{"status":"ok","service":"mcp-referentiels","referentiels_configures":true|false}`. Le serveur
+**démarre même sans** `REFERENTIELS_DATABASE_URL` : l'import de psycopg est différé, le DSN n'est
+résolu qu'à l'appel d'un outil. On préfère un serveur qui répond et échoue avec un message clair à un
+serveur qui refuse de démarrer.
+
+> ⚠️ **Changer la SIGNATURE d'un outil demande de relancer Cowork, pas seulement le serveur.** Le
+> client met le schéma des outils en **cache** : après un simple redémarrage d'`uvicorn`, le nouveau
+> *code* tourne bien, mais un argument que le schéma en cache ne déclare pas est **silencieusement
+> retiré de l'appel**. Constaté le 2026-07-29 sur `ref_bundle(sections=[...])` : le corps de réponse
+> prouvait le nouveau code (`sections_retournees` présent, champs d'audit élagués) tandis que le
+> paramètre était ignoré — donc un comportement de « paramètre sans effet », le plus trompeur qui soit.
+> Modifier le corps d'un outil : redémarrer le serveur suffit. Modifier sa signature : relancer Cowork.
+
+> ⚠️ Deux points vérifiés à la première mise en service, qui coûtent une heure chacun :
+> **l'endpoint MCP est `/mcp`**, pas `/` (le mount est à la racine, mais `streamable_http_app()` place
+> sa route sur `streamable_http_path`, défaut `/mcp` — et un POST non authentifié sur `/` renvoie 401,
+> pas 404, ce qui masque l'erreur) ; et **`JWT_AUDIENCE=` / `JWT_ISSUER=` vides dans le `.env` doivent
+> être commentées**, sinon `token.py` prend `""` pour valeur attendue au lieu de son défaut et **tout**
+> token est rejeté en `Invalid issuer`.
 
 ## Les deux variables qu'il ne faut pas confondre
 
@@ -71,8 +94,73 @@ aurait rendu la piste d'audit de l'arbitrage inutilisable — « qui a accepté 
 qu'on doit pouvoir relire, et c'est la contrepartie du privilège admin (D34). `cle`, `proposition`,
 `motif`, `commentaire`, `source_document` et `run_id` restent rédigés.
 
-Aucun autre écart : `python3 tests/verifier_diff.py` compare les deux modules **hors docstrings et
-commentaires** et n'accepte que ces deux correctifs de code.
+**4 — `ref_bundle` prend un paramètre `sections`, et le payload perd ses champs d'audit.** La version
+initiale affirmait « les référentiels sont petits et lus en entier : pas de pagination ». C'était vrai
+sur une base vide, et faux au **premier chargement réel** : 185 ko sur 4 936 lignes, **au-delà de ce
+qu'un résultat d'outil MCP peut porter**. Les 261 ISIN en font près de 70 % à eux seuls, alors que la
+plupart des besoins d'un run ne portent que sur les gabarits. `created_at`, `updated_at`, `version` et
+`validated_by` sortent du bundle — ils restent en base ; `provenance` et `confiance` sont conservés,
+étant des enums courts et de l'information métier (B9). Le `compte` porte **toujours** sur les quatre
+tables, même quand une seule est demandée : sans quoi un appel partiel se lirait comme une base à moitié
+vide.
+
+**5 — D42 : la clé de conflit des gabarits devient `(emetteur_code, gabarit, valide_depuis)`.** Cf.
+`../migration_001_d42_fenetre_validite.sql`. `periodicite` cesse d'être requise — l'exiger obligerait
+l'appelant à inventer une valeur que le document ne porte pas chez trois émetteurs sur quatre.
+
+**6 — Le serveur annonce son contrat et RENVOIE ce qu'il a reçu.** Correctif du retrait silencieux
+d'arguments, constaté **deux fois** le 2026-07-29 : le client MCP met le schéma des outils en cache, et
+un client périmé **retire de l'appel un argument qu'il ne connaît pas, sans aucune erreur**. La première
+fois, `sections` a été ignoré et tout le bundle est revenu. La seconde, plus grave, une proposition a
+été enregistrée avec ses trois champs de provenance à `null` alors qu'ils avaient été passés — donc une
+provenance qui **paraissait vide par choix de l'appelant** quand elle avait été perdue en transport. Un
+arbitre n'avait aucun moyen de le savoir.
+
+**La fausse bonne idée, écartée.** Faire déclarer sa version au client : alors un appelant parfaitement
+à jour qui ne remplirait pas ce champ serait accusé d'être en retard. On échangerait un faux négatif
+silencieux contre un faux positif bruyant — et un contrôle qui accuse à tort est un contrôle qu'on
+apprend à ignorer.
+
+**Ce qui a été retenu**, en partant de ce qu'on peut savoir avec certitude : non pas ce que le client
+*est*, mais ce que le serveur *a reçu*.
+
+- Le serveur annonce **son** contrat (`contrat_outil`, valeur `2026-07-29.d44`) dans chaque réponse.
+- Chaque écriture **renvoie ce qu'elle a reçu** : `provenance_recue` pour `ref_propose`,
+  `sections_recues` pour `ref_bundle`. Un argument retiré en route se voit **immédiatement**.
+- Quand le résultat est ambigu — provenance vide, ou `sections` absent — la réponse énonce **les deux
+  lectures possibles** et dit quoi faire, sans en choisir une.
+
+C'est descriptif, donc **sans faux positif possible**, et cela couvre **tout** argument perdu, pas
+seulement ceux qu'on avait anticipés. Neuf contrôles l'ancrent dans `tests/test_portage.py`, dont un qui
+vérifie qu'aucun libellé n'affirme que le client est périmé.
+
+> **Corollaire opérationnel** : ce correctif ne change **aucune signature**, seulement des valeurs de
+> retour. Un **redémarrage du serveur suffit**, sans relancer Cowork. C'est la règle du RUNBOOK §0 dans
+> le bon sens : corps d'outil → serveur ; signature → serveur *et* client.
+
+### Le garde-fou de diff a menti deux fois, et c'était le grain à chaque fois
+
+`tests/verifier_diff.py` compare les deux modules hors docstrings et commentaires. Son histoire vaut
+d'être connue, parce qu'un contrôle qui passe à tort est pire qu'aucun contrôle.
+
+**Version 1, ligne à ligne avec des fragments admis.** Elle a validé le changement de clé D42 **sans le
+signaler** : `ast.unparse` écrase tout `_SPECS` sur une seule ligne, laquelle contient `'role'` —
+fragment admis pour une raison sans rapport (la spec `acteur` a un champ requis nommé `role`). Une
+modification de schéma approuvée par coïncidence de sous-chaîne.
+
+**Version 2, au grain de la définition.** Correcte sur `_SPECS`, mais elle a laissé passer la réécriture
+de `ref_bundle` : celle-ci vit dans `register`, déjà déclarée modifiable pour `ref_adjudications`. Une
+seule autorisation couvrait les quatre outils.
+
+**Version 3, définitions imbriquées comprises.** Les fonctions internes sont extraites sous `parent.enfant`
+et remplacées par un marqueur dans le corps du parent. `register.ref_bundle` et
+`register.ref_adjudications` sont donc deux écarts distincts, chacun avec son motif. Vérifié dans les deux
+sens : vert sur copie fidèle, et sur une copie où l'on glisse une décision `peut_etre` dans `ref_arbitrer`,
+il désigne **`register.ref_arbitrer`** nommément.
+
+Les définitions **ajoutées** doivent être déclarées elles aussi, et un écart déclaré qui ne se produit
+plus est signalé comme du bruit à retirer — c'est précisément ce qui avait permis au faux négatif de la
+version 1 d'arriver.
 
 ## Vérifier sans infra
 

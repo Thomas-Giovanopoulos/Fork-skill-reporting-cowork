@@ -1,0 +1,485 @@
+{
+  "_a_propos": {
+    "objet": "Table de vérité de l'appariement document → profil de gabarit. FIXTURE, écrite AVANT le matcher qu'elle vérifie.",
+    "date": "2026-07-29",
+    "sources": "Dérivée de docs/etude_signature_gabarits_2026-07-27.md (11 relevés) et docs/etude_corpus_2026-07-29/*.md (34 documents, 4 émetteurs). Rien n'y est deviné : un document dont le profil n'a pas été établi porte certitude=\"a_etablir\".",
+    "cle_de_gabarit": "(emetteur_code, gabarit, valide_depuis) — D42. La périodicité est INFORMATIVE et hors matching : elle n'est pas lisible dans le document chez 3 émetteurs sur 4.",
+    "champ_certitude": {
+      "etabli": "profil établi sur un ORIGINAL contemporain de son arrêté — assertion forte",
+      "presume_reedition": "le document est une RÉÉDITION du 24/07/2026 : il porte le format ACTUEL de l'émetteur, pas nécessairement celui de son arrêté. L'appariement attendu est donc celui du format courant, et ne dit RIEN du format d'époque",
+      "a_etablir": "profil non étudié — le harnais doit signaler ces documents, pas les faire échouer"
+    },
+    "avertissement": "Ne PAS traiter les lignes presume_reedition comme une preuve de stabilité d'un gabarit dans le temps. C'est le piège du §0 de la SYNTHESE : six PDF Spirica produits en quatre minutes le même jour ne témoignent pas de quatre ans d'évolution.",
+    "piege_encodage": "Trois documents de 15.7.26 portent un nom MOJIBAKE : l'accent combinant UTF-8 relu en CP437 donne U+2560 U+00FC là où le nom lisible a U+00E9. `fichier` porte le nom RÉEL sur disque, `nom_lisible` le nom attendu. Leçon pour le harnais : résoudre les documents par le nom réel inscrit ICI, jamais en reconstruisant le nom. Aucune normalisation Unicode ne réconcilie les deux formes — le mojibake conserve la lettre de base et ajoute deux caractères, le nom propre fond l'accent dans un seul : « Releve » contre « Relev ». Deux tentatives de normalisation ont échoué avant ce constat."
+  },
+  "gabarits_attendus": [
+    {
+      "emetteur_code": "cardif",
+      "gabarit": "situation_contrat_capi_pm",
+      "valide_depuis": "2024-01-01",
+      "valide_jusqu_a": "2025-12-31",
+      "libelle_interne": "v1 — Times, unité « euros », titres en capitales, 5 colonnes, sans pagination",
+      "certitude": "etabli",
+      "note": "Borne basse inconnue : 2024-01-01 est une convention, le plus ancien original observé est arrêté au 2024-12-31. La borne HAUTE est ce qui compte pour le matching."
+    },
+    {
+      "emetteur_code": "cardif",
+      "gabarit": "situation_contrat_capi_pm",
+      "valide_depuis": "2025-12-31",
+      "valide_jusqu_a": null,
+      "libelle_interne": "v2 — Helvetica + Wingdings, unité « € », casse mixte, 6 colonnes dont Répartition, pagination n/3, section Garanties au terme",
+      "certitude": "etabli",
+      "note": "Bascule située entre le 28/01/2025 et le 23/01/2026 (dates de génération des deux originaux). UNE SEULE ancre sur onze survit de v1 à v2 : c'est le cas qui justifie la fenêtre de validité de D42, et celui que le profil B.7 actuel échouerait à traiter."
+    },
+    {
+      "emetteur_code": "spirica",
+      "gabarit": "releve_situation_av",
+      "valide_depuis": null,
+      "valide_jusqu_a": null,
+      "libelle_interne": "gabarit unique — JasperReports 6.19.1 / OpenPDF 1.3.40, en-têtes SITUATION à xMin 124,00 / 368,12 / 466,67",
+      "certitude": "presume_reedition",
+      "note": "AUCUNE fenêtre de validité affirmable : les 12 documents Spirica du corpus sont tous des rééditions du 24/07/2026. Trois configurations de sections observées (sans PRM / +PRM / +DÉTAIL DES OPÉRATIONS) ne sont PAS trois gabarits mais un seul à sections conditionnelles."
+    },
+    {
+      "emetteur_code": "himalia_emetteur_a_confirmer",
+      "gabarit": "releve_situation_capi",
+      "valide_depuis": null,
+      "valide_jusqu_a": null,
+      "libelle_interne": "gabarit unique — JasperReports / iText 2.1.7, PDF 1.4, {Helvetica, Helvetica-Bold}",
+      "certitude": "etabli",
+      "note": "Deux originaux à 13 mois d'écart : 30 ancres sur 30 survivent, bbox des en-têtes identiques au centième de point. Pas de fenêtre de validité — et c'est un résultat, pas une lacune : imposer une version ici serait du bruit pur. Section « Fonds Euro » CONDITIONNELLE (absente de 3 documents sur 5)."
+    },
+    {
+      "emetteur_code": "wealins",
+      "gabarit": "releve_annuel_capi_lux",
+      "valide_depuis": null,
+      "valide_jusqu_a": null,
+      "libelle_interne": "G1 — information annuelle. Composite 4 blocs (courrier, corps réglementaire, page Loi Pacte, annexe booklet)",
+      "discriminant": "en-tête d'annexe : /^INFORMATION\\s+ANNUELLE\\s*:/ sur 100 % des pages d'annexe",
+      "certitude": "etabli",
+      "note": "Dérive de 12 mois très douce : un titre enrichi (« à la performance nette de frais ») et une phrase supprimée. Pas de fenêtre nécessaire. Ancres CONDITIONNELLES : « Arbitrages » (1 document sur 7), « Aperçu des fonds » (3 sur 7, dès 2 FID)."
+    },
+    {
+      "emetteur_code": "wealins",
+      "gabarit": "situation_trimestrielle_capi_lux",
+      "valide_depuis": null,
+      "valide_jusqu_a": null,
+      "libelle_interne": "G2 — situation de contrat trimestrielle. Composite 3 blocs (SANS la page Loi Pacte)",
+      "discriminant": "en-tête d'annexe : /^INFORMATION\\s+TRIMESTRIELLE\\s*:/ ; et 3 blocs au lieu de 4",
+      "certitude": "etabli",
+      "nouveau": true,
+      "note": "PROFIL ABSENT DU SEED — à créer. C'est le second gabarit Wealins révélé par le corpus : le seed n'en déclare qu'un."
+    },
+    {
+      "emetteur_code": "de_pury_pictet",
+      "gabarit": "evaluation_portefeuille_mandat",
+      "valide_depuis": null,
+      "valide_jusqu_a": null,
+      "libelle_interne": "mandat coté, moteur SSRS",
+      "certitude": "etabli",
+      "note": "Établi par l'étude d'origine §B.1, non réexaminé par le corpus étendu."
+    },
+    {
+      "emetteur_code": "dauphine_am",
+      "gabarit": "reporting_hebdo_mandat",
+      "valide_depuis": null,
+      "valide_jusqu_a": null,
+      "libelle_interne": "reporting hebdomadaire, moteur Word",
+      "certitude": "etabli",
+      "note": "Établi par l'étude d'origine §B.2, non réexaminé par le corpus étendu."
+    },
+    {
+      "emetteur_code": "nortia",
+      "gabarit": "releve_portefeuille_cto",
+      "valide_depuis": null,
+      "valide_jusqu_a": null,
+      "libelle_interne": "relevé de portefeuille CTO",
+      "certitude": "a_etablir",
+      "note": "Les 5 documents Nortia n'ont AUCUNE métadonnée PDF : couche 1 vide, et la distinction original / réédition n'y est pas vérifiable par pdfinfo. Le profil du seed vient de l'étude d'origine §B.4, sur un seul document. La série temporelle n'a pas été analysée."
+    }
+  ],
+  "documents": [
+    {
+      "fichier": "2022.12 relevé UAF Cerise.pdf",
+      "emetteur_code": "spirica",
+      "gabarit": "releve_situation_av",
+      "arrete": "2022-12-31",
+      "periodicite_informative": "annuel",
+      "provenance": "reedition_2026-07-24",
+      "certitude": "presume_reedition"
+    },
+    {
+      "fichier": "2023.12 relevé UAF Cerise.pdf",
+      "emetteur_code": "spirica",
+      "gabarit": "releve_situation_av",
+      "arrete": "2023-12-31",
+      "periodicite_informative": "annuel",
+      "provenance": "reedition_2026-07-24",
+      "certitude": "presume_reedition"
+    },
+    {
+      "fichier": "2024.12 relevé UAF Cerise.pdf",
+      "emetteur_code": "spirica",
+      "gabarit": "releve_situation_av",
+      "arrete": "2024-12-31",
+      "periodicite_informative": "annuel",
+      "provenance": "reedition_2026-07-24",
+      "certitude": "presume_reedition"
+    },
+    {
+      "fichier": "2025.12 relevé UAF Cerise.pdf",
+      "emetteur_code": "spirica",
+      "gabarit": "releve_situation_av",
+      "arrete": "2025-12-31",
+      "periodicite_informative": "annuel",
+      "provenance": "reedition_2026-07-24",
+      "certitude": "presume_reedition"
+    },
+    {
+      "fichier": "2026.03 relevé UAF Cerise.pdf",
+      "emetteur_code": "spirica",
+      "gabarit": "releve_situation_av",
+      "arrete": "2026-03-31",
+      "periodicite_informative": "trimestriel",
+      "provenance": "reedition_2026-07-24",
+      "certitude": "presume_reedition"
+    },
+    {
+      "fichier": "2026.06 relevé UAF Cerise.pdf",
+      "emetteur_code": "spirica",
+      "gabarit": "releve_situation_av",
+      "arrete": "2026-06-30",
+      "periodicite_informative": "trimestriel",
+      "provenance": "reedition_2026-07-24",
+      "certitude": "presume_reedition"
+    },
+    {
+      "fichier": "2022.12 relevé UAF Pollux.pdf",
+      "emetteur_code": "spirica",
+      "gabarit": "releve_situation_av",
+      "arrete": "2022-12-31",
+      "periodicite_informative": "annuel",
+      "provenance": "reedition_2026-07-24",
+      "certitude": "presume_reedition"
+    },
+    {
+      "fichier": "2023.12 relevé UAF Pollux.pdf",
+      "emetteur_code": "spirica",
+      "gabarit": "releve_situation_av",
+      "arrete": "2023-12-31",
+      "periodicite_informative": "annuel",
+      "provenance": "reedition_2026-07-24",
+      "certitude": "presume_reedition"
+    },
+    {
+      "fichier": "2024.12 relevé UAF Pollux.pdf",
+      "emetteur_code": "spirica",
+      "gabarit": "releve_situation_av",
+      "arrete": "2024-12-31",
+      "periodicite_informative": "annuel",
+      "provenance": "reedition_2026-07-24",
+      "certitude": "presume_reedition"
+    },
+    {
+      "fichier": "2025.12 relevé UAF Pollux.pdf",
+      "emetteur_code": "spirica",
+      "gabarit": "releve_situation_av",
+      "arrete": "2025-12-31",
+      "periodicite_informative": "annuel",
+      "provenance": "reedition_2026-07-24",
+      "certitude": "presume_reedition"
+    },
+    {
+      "fichier": "2026.03 relevé UAF Pollux.pdf",
+      "emetteur_code": "spirica",
+      "gabarit": "releve_situation_av",
+      "arrete": "2026-03-31",
+      "periodicite_informative": "trimestriel",
+      "provenance": "reedition_2026-07-24",
+      "certitude": "presume_reedition"
+    },
+    {
+      "fichier": "2026.06 relevé UAF Pollux.pdf",
+      "emetteur_code": "spirica",
+      "gabarit": "releve_situation_av",
+      "arrete": "2026-06-30",
+      "periodicite_informative": "trimestriel",
+      "provenance": "reedition_2026-07-24",
+      "certitude": "presume_reedition"
+    },
+    {
+      "fichier": "2024.12 relevé Cardif Elite Capi HANAMI.pdf",
+      "emetteur_code": "cardif",
+      "gabarit": "situation_contrat_capi_pm",
+      "valide_depuis_attendu": "2024-01-01",
+      "arrete": "2024-12-31",
+      "periodicite_informative": "annuel",
+      "provenance": "original",
+      "date_creation_pdf": "2025-01-28",
+      "certitude": "etabli",
+      "note": "PIVOT DU TEST : ce document doit s'apparier à v1 et NON à v2. C'est le critère de réussite de la session."
+    },
+    {
+      "fichier": "2025.12 Relevé Cardif Elite Capi HANAMI.pdf",
+      "emetteur_code": "cardif",
+      "gabarit": "situation_contrat_capi_pm",
+      "valide_depuis_attendu": "2025-12-31",
+      "arrete": "2025-12-31",
+      "periodicite_informative": "annuel",
+      "provenance": "original",
+      "date_creation_pdf": "2026-01-23",
+      "certitude": "etabli"
+    },
+    {
+      "fichier": "2026.03 Relevé Cardif Elite Capi HANAMI.pdf",
+      "emetteur_code": "cardif",
+      "gabarit": "situation_contrat_capi_pm",
+      "valide_depuis_attendu": "2025-12-31",
+      "arrete": "2026-03-31",
+      "periodicite_informative": "trimestriel",
+      "provenance": "reedition_2026-07-24",
+      "certitude": "presume_reedition"
+    },
+    {
+      "fichier": "2026.06 Relevé Cardif Elite Capi HANAMI.pdf",
+      "emetteur_code": "cardif",
+      "gabarit": "situation_contrat_capi_pm",
+      "valide_depuis_attendu": "2025-12-31",
+      "arrete": "2026-06-30",
+      "periodicite_informative": "trimestriel",
+      "provenance": "reedition_2026-07-24",
+      "certitude": "presume_reedition"
+    },
+    {
+      "fichier": "2023.12 Relevé Himalia Capi HANAMI.pdf",
+      "emetteur_code": "himalia_emetteur_a_confirmer",
+      "gabarit": "releve_situation_capi",
+      "arrete": "2023-12-31",
+      "periodicite_informative": "annuel",
+      "provenance": "reedition_2026-07-24",
+      "certitude": "presume_reedition"
+    },
+    {
+      "fichier": "2024.12 Relevé Himalia Capi HANAMI.pdf",
+      "emetteur_code": "himalia_emetteur_a_confirmer",
+      "gabarit": "releve_situation_capi",
+      "arrete": "2024-12-31",
+      "periodicite_informative": "annuel",
+      "provenance": "original",
+      "date_creation_pdf": "2025-01-28",
+      "certitude": "etabli"
+    },
+    {
+      "fichier": "2025.12.31 Relevé Himalia Cpai HANAMI.pdf",
+      "emetteur_code": "himalia_emetteur_a_confirmer",
+      "gabarit": "releve_situation_capi",
+      "arrete": "2025-12-31",
+      "periodicite_informative": "annuel",
+      "provenance": "original",
+      "date_creation_pdf": "2026-03-05",
+      "certitude": "etabli",
+      "note": "Coquille dans le nom du fichier (« Cpai ») : c'est bien le bon document. Illustre A.1-3 — ne jamais identifier par le nom."
+    },
+    {
+      "fichier": "2026.03 Relevé Himalia Capi HANAMI.pdf",
+      "emetteur_code": "himalia_emetteur_a_confirmer",
+      "gabarit": "releve_situation_capi",
+      "arrete": "2026-03-31",
+      "periodicite_informative": "trimestriel",
+      "provenance": "reedition_2026-07-24",
+      "certitude": "presume_reedition"
+    },
+    {
+      "fichier": "2026.06 Relevé Himalia Capi HANAMI.pdf",
+      "emetteur_code": "himalia_emetteur_a_confirmer",
+      "gabarit": "releve_situation_capi",
+      "arrete": "2026-06-30",
+      "periodicite_informative": "trimestriel",
+      "provenance": "reedition_2026-07-24",
+      "certitude": "presume_reedition"
+    },
+    {
+      "fichier": "2025 Relevé annuel Wealins FC051727 HANAMI.pdf",
+      "emetteur_code": "wealins",
+      "gabarit": "releve_annuel_capi_lux",
+      "arrete": "2025-12-31",
+      "periodicite_informative": "annuel",
+      "provenance": "original",
+      "date_creation_pdf": "2026-01-27",
+      "certitude": "etabli"
+    },
+    {
+      "fichier": "2025 Relevé annuel Wealins FC055211 HANAMI.pdf",
+      "emetteur_code": "wealins",
+      "gabarit": "releve_annuel_capi_lux",
+      "arrete": "2025-12-31",
+      "periodicite_informative": "annuel",
+      "provenance": "original",
+      "date_creation_pdf": "2026-01-27",
+      "certitude": "etabli",
+      "note": "Réplicat du précédent : un autre contrat sous le même moule. Ce qui varie entre les deux doit être EXCLU du matching."
+    },
+    {
+      "fichier": "Information annuelle FC055211_31 12 24.pdf",
+      "emetteur_code": "wealins",
+      "gabarit": "releve_annuel_capi_lux",
+      "arrete": "2024-12-31",
+      "periodicite_informative": "annuel",
+      "provenance": "original",
+      "date_creation_pdf": "2025-01-28",
+      "certitude": "etabli",
+      "note": "PIÈGE : le nom suggère un sous-template isolé. C'est le composite COMPLET à 4 blocs (11 pages). Les sous-templates ne circulent jamais seuls — 7/7 des documents Wealins sont composites."
+    },
+    {
+      "fichier": "Situation trimestrielle FC051727_31 03 26.pdf",
+      "emetteur_code": "wealins",
+      "gabarit": "situation_trimestrielle_capi_lux",
+      "arrete": "2026-03-31",
+      "periodicite_informative": "trimestriel",
+      "provenance": "original",
+      "date_creation_pdf": "2026-04-22",
+      "certitude": "etabli"
+    },
+    {
+      "fichier": "Situation trimestrielle FC055211.pdf",
+      "emetteur_code": "wealins",
+      "gabarit": "situation_trimestrielle_capi_lux",
+      "arrete": "2026-03-31",
+      "periodicite_informative": "trimestriel",
+      "provenance": "original",
+      "date_creation_pdf": "2026-04-22",
+      "certitude": "etabli",
+      "note": "Arrêté déduit de la date de génération (22/04/2026) — le nom ne le porte pas. À confirmer par le contenu."
+    },
+    {
+      "fichier": "FC051727-20260630.pdf",
+      "emetteur_code": "wealins",
+      "gabarit": "situation_trimestrielle_capi_lux",
+      "arrete": "2026-06-30",
+      "periodicite_informative": "trimestriel",
+      "provenance": "original",
+      "date_creation_pdf": "2026-07-17",
+      "certitude": "etabli",
+      "note": "PIÈGE : le nom ne dit RIEN du type de document, et c'est une situation trimestrielle. Le nom de fichier se trompe 2 fois sur 4 chez Wealins."
+    },
+    {
+      "fichier": "FC055211-20260630.pdf",
+      "emetteur_code": "wealins",
+      "gabarit": "situation_trimestrielle_capi_lux",
+      "arrete": "2026-06-30",
+      "periodicite_informative": "trimestriel",
+      "provenance": "original",
+      "date_creation_pdf": "2026-07-17",
+      "certitude": "etabli"
+    },
+    {
+      "fichier": "Relevé Nortia 31 10 24.pdf",
+      "emetteur_code": "nortia",
+      "gabarit": "releve_portefeuille_cto",
+      "arrete": "2024-10-31",
+      "periodicite_informative": "a_la_demande",
+      "provenance": "indetermine",
+      "certitude": "a_etablir"
+    },
+    {
+      "fichier": "Relevé Nortia 31 12 24.pdf",
+      "emetteur_code": "nortia",
+      "gabarit": "releve_portefeuille_cto",
+      "arrete": "2024-12-31",
+      "periodicite_informative": "a_la_demande",
+      "provenance": "indetermine",
+      "certitude": "a_etablir"
+    },
+    {
+      "fichier": "Relevé Nortia 31 12 25.pdf",
+      "emetteur_code": "nortia",
+      "gabarit": "releve_portefeuille_cto",
+      "arrete": "2025-12-31",
+      "periodicite_informative": "a_la_demande",
+      "provenance": "indetermine",
+      "certitude": "a_etablir"
+    },
+    {
+      "fichier": "Relevé Nortia 31 03 26.pdf",
+      "emetteur_code": "nortia",
+      "gabarit": "releve_portefeuille_cto",
+      "arrete": "2026-03-31",
+      "periodicite_informative": "a_la_demande",
+      "provenance": "indetermine",
+      "certitude": "a_etablir"
+    },
+    {
+      "fichier": "Relevé Nortia 30 06 26.pdf",
+      "emetteur_code": "nortia",
+      "gabarit": "releve_portefeuille_cto",
+      "arrete": "2026-06-30",
+      "periodicite_informative": "a_la_demande",
+      "provenance": "indetermine",
+      "certitude": "a_etablir"
+    },
+    {
+      "fichier": "Interagyr.pdf",
+      "dossier": "15.7.26",
+      "emetteur_code": "de_pury_pictet",
+      "gabarit": "evaluation_portefeuille_mandat",
+      "arrete": null,
+      "periodicite_informative": "a_la_demande",
+      "provenance": "indetermine",
+      "certitude": "etabli",
+      "note": "PIÈGE MAJEUR : « Interagyr » est un CLIENT, pas un partenaire ni un émetteur. Ce document est un relevé de Pury Pictet Turrettini. Cœur de la décision A.1-3."
+    },
+    {
+      "fichier": "Releve╠ü - INTERAGYR E 4 - ETF.pdf",
+      "dossier": "15.7.26",
+      "emetteur_code": "dauphine_am",
+      "gabarit": "reporting_hebdo_mandat",
+      "arrete": null,
+      "periodicite_informative": "hebdomadaire",
+      "provenance": "indetermine",
+      "certitude": "etabli",
+      "nom_lisible": "Relevé - INTERAGYR E 4 - ETF.pdf",
+      "note_encodage": "Nom MOJIBAKE sur disque : l'octet de l'accent combinant UTF-8 a été relu en CP437, donnant U+2560 U+00FC (« ╠ü ») là où le nom lisible porte U+00E9 (« é »). `fichier` = nom réel, `nom_lisible` = nom attendu."
+    },
+    {
+      "fichier": "Releve╠ü - INTERAGYR Offensif 6.pdf",
+      "dossier": "15.7.26",
+      "emetteur_code": "dauphine_am",
+      "gabarit": "reporting_hebdo_mandat",
+      "arrete": null,
+      "periodicite_informative": "hebdomadaire",
+      "provenance": "indetermine",
+      "certitude": "etabli",
+      "nom_lisible": "Relevé - INTERAGYR Offensif 6.pdf",
+      "note_encodage": "Nom MOJIBAKE sur disque : l'octet de l'accent combinant UTF-8 a été relu en CP437, donnant U+2560 U+00FC (« ╠ü ») là où le nom lisible porte U+00E9 (« é »). `fichier` = nom réel, `nom_lisible` = nom attendu."
+    },
+    {
+      "fichier": "Releve╠ü - INTERAGYR Tresorerie 2.pdf",
+      "dossier": "15.7.26",
+      "emetteur_code": "dauphine_am",
+      "gabarit": "reporting_hebdo_mandat",
+      "arrete": null,
+      "periodicite_informative": "hebdomadaire",
+      "provenance": "indetermine",
+      "certitude": "etabli",
+      "nom_lisible": "Relevé - INTERAGYR Tresorerie 2.pdf",
+      "note_encodage": "Nom MOJIBAKE sur disque : l'octet de l'accent combinant UTF-8 a été relu en CP437, donnant U+2560 U+00FC (« ╠ü ») là où le nom lisible porte U+00E9 (« é »). `fichier` = nom réel, `nom_lisible` = nom attendu."
+    }
+  ],
+  "hors_perimetre": [
+    {
+      "fichier": "Positions Overview (1).xlsx",
+      "motif": "Classeur, pas un PDF. À rapprocher de D40 (export O2S comme source documentaire) s'il s'agit d'un export de dépositaire. Non analysé."
+    }
+  ],
+  "comptes": {
+    "documents_pdf": 37,
+    "hors_perimetre": 1,
+    "par_certitude": {
+      "etabli": 15,
+      "presume_reedition": 17,
+      "a_etablir": 5
+    },
+    "gabarits_attendus": 9,
+    "gabarits_absents_du_seed": 1
+  }
+}

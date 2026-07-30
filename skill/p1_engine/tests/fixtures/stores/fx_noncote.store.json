@@ -1,0 +1,457 @@
+{
+  "schema_version": "2.1-skill",
+  "client": {
+    "id": "tmp_c_001",
+    "label": "Inès M.",
+    "entities": [
+      {
+        "id": "ines_m",
+        "label": "Inès M.",
+        "type": "pp",
+        "order": 0
+      },
+      {
+        "id": "sas_patrimonia",
+        "label": "SAS Patrimonia",
+        "type": "holding",
+        "order": 1
+      }
+    ]
+  },
+  "reporting": {
+    "period_short": "T2-26",
+    "period_long": "T2 2026",
+    "date_reporting": "2026-06-30",
+    "date_display": "30 juin 2026",
+    "version": "v1",
+    "profile": "Équilibré"
+  },
+  "_provisional_ids": true,
+  "financier_cote": [
+    {
+      "id": "tmp_fc_001",
+      "entity_id": "ines_m",
+      "label": "AV — Wealins Lux",
+      "nature": "AV",
+      "assureur": "Wealins Lux",
+      "intermediaire": "Rhétorès",
+      "envelope_type": "av_lu",
+      "manager": "Tobam",
+      "custodian": "UBS",
+      "management_mode": "Déléguée",
+      "risk_profile": "Dynamique",
+      "invest_date": "Févr. 2024",
+      "nantissement": false,
+      "source": "excel",
+      "attributes": {
+        "pockets": [
+          {
+            "id": "pck_001",
+            "label": "AV — Wealins Lux",
+            "type": "FID",
+            "profile": "Dynamique",
+            "manager": "Tobam",
+            "custodian": "UBS",
+            "value": 540000.0,
+            "capital_invested": 500000.0,
+            "value_jan1": 520000.0,
+            "invest_date": "Févr. 2024",
+            "classe_rhetores": "crypto"
+          }
+        ]
+      },
+      "value_current": 540000.0,
+      "capital_invested": 500000.0,
+      "value_jan1": 520000.0
+    },
+    {
+      "id": "tmp_fc_002",
+      "entity_id": "ines_m",
+      "label": "CTO — UBS",
+      "nature": "CTO",
+      "assureur": "UBS",
+      "intermediaire": "UBS",
+      "envelope_type": "cto",
+      "manager": "iShares",
+      "custodian": "UBS",
+      "management_mode": "Conseillée",
+      "risk_profile": "Dynamique",
+      "invest_date": "Mars 2024",
+      "nantissement": false,
+      "source": "excel",
+      "attributes": {
+        "pockets": [
+          {
+            "id": "pck_002",
+            "label": "CTO — UBS",
+            "type": "Mono",
+            "profile": "Dynamique",
+            "manager": "iShares",
+            "custodian": "UBS",
+            "value": 360000.0,
+            "capital_invested": 300000.0,
+            "value_jan1": 280000.0,
+            "invest_date": "Mars 2024",
+            "classe_rhetores": "crypto"
+          },
+          {
+            "id": "pck_003",
+            "label": "CTO — UBS",
+            "type": "Mono",
+            "profile": "Équilibré",
+            "manager": "Amundi Physical Gold",
+            "custodian": "UBS",
+            "value": 468000.0,
+            "capital_invested": 400000.0,
+            "value_jan1": 420000.0,
+            "invest_date": "Janv. 2023",
+            "classe_rhetores": "matieres_premieres"
+          }
+        ]
+      },
+      "value_current": 828000.0,
+      "capital_invested": 700000.0,
+      "value_jan1": 700000.0
+    },
+    {
+      "id": "tmp_fc_003",
+      "entity_id": "ines_m",
+      "label": "AV — Spirica",
+      "nature": "AV",
+      "assureur": "Spirica",
+      "intermediaire": "Rhétorès",
+      "envelope_type": "av_fr",
+      "manager": "Fonds euros",
+      "custodian": "NC",
+      "management_mode": "Déléguée",
+      "risk_profile": "Sécuritaire",
+      "invest_date": "Janv. 2021",
+      "nantissement": false,
+      "source": "excel",
+      "attributes": {
+        "pockets": [
+          {
+            "id": "pck_004",
+            "label": "AV — Spirica",
+            "type": "FE",
+            "profile": "Sécuritaire",
+            "manager": "Fonds euros",
+            "custodian": "NC",
+            "value": 1000000.0,
+            "capital_invested": 1000000.0,
+            "value_jan1": 1000000.0,
+            "invest_date": "Janv. 2021",
+            "classe_rhetores": "fonds_euros"
+          }
+        ]
+      },
+      "value_current": 1000000.0,
+      "capital_invested": 1000000.0,
+      "value_jan1": 1000000.0
+    },
+    {
+      "id": "tmp_fc_004",
+      "entity_id": "ines_m",
+      "label": "AV — Cardif Lux Vie",
+      "nature": "AV",
+      "assureur": "Cardif Lux Vie",
+      "intermediaire": "Indosuez",
+      "envelope_type": "av_lu",
+      "manager": "BNP",
+      "custodian": "Indosuez",
+      "management_mode": "Déléguée",
+      "risk_profile": "Équilibré",
+      "invest_date": "Sept. 2022",
+      "nantissement": false,
+      "source": "excel",
+      "attributes": {
+        "pockets": [
+          {
+            "id": "pck_005",
+            "label": "AV — Cardif Lux Vie",
+            "type": "Mono",
+            "profile": "Équilibré",
+            "manager": "BNP",
+            "custodian": "Indosuez",
+            "value": 598000.0,
+            "capital_invested": 600000.0,
+            "value_jan1": 610000.0,
+            "invest_date": "Sept. 2022",
+            "classe_rhetores": "actions",
+            "geography": "International / Monde"
+          }
+        ]
+      },
+      "value_current": 598000.0,
+      "capital_invested": 600000.0,
+      "value_jan1": 610000.0
+    },
+    {
+      "id": "tmp_fc_005",
+      "entity_id": "sas_patrimonia",
+      "label": "Capi — Wealins Lux",
+      "nature": "Capi",
+      "assureur": "Wealins Lux",
+      "intermediaire": "Rhétorès",
+      "envelope_type": "capi_lu",
+      "manager": "Dauphine AM",
+      "custodian": "UBS",
+      "management_mode": "Déléguée",
+      "risk_profile": "Équilibré",
+      "invest_date": "Avril 2025",
+      "nantissement": false,
+      "source": "excel",
+      "attributes": {
+        "pockets": [
+          {
+            "id": "pck_006",
+            "label": "Capi — Wealins Lux",
+            "type": "FID",
+            "profile": "Équilibré",
+            "manager": "Dauphine AM",
+            "custodian": "UBS",
+            "value": 3180000.0,
+            "capital_invested": 3000000.0,
+            "value_jan1": 3050000.0,
+            "invest_date": "Avril 2025",
+            "classe_rhetores": "actions",
+            "geography": "Europe développée"
+          }
+        ]
+      },
+      "value_current": 3180000.0,
+      "capital_invested": 3000000.0,
+      "value_jan1": 3050000.0
+    }
+  ],
+  "liquidites": [
+    {
+      "id": "liq_001",
+      "entity_id": "ines_m",
+      "label": "Compte courant",
+      "custodian": "UBS",
+      "balance": 260000.0,
+      "source": "excel"
+    }
+  ],
+  "immobilier": [],
+  "dettes": [],
+  "non_cote": [
+    {
+      "id": "nc_001",
+      "entity_id": "ines_m",
+      "label": "Altaroc Odyssey 2026",
+      "manager": "Altaroc",
+      "classe_rhetores": "private_equity",
+      "capital_committed": 1000000.0,
+      "capital_called": 300000.0,
+      "value_current": 300000.0,
+      "source": "excel",
+      "attributes": {
+        "strategy": "Co-invest",
+        "moic_target": 2.2,
+        "moic_realise": 1.0,
+        "uncalled_estime": 700000.0
+      }
+    },
+    {
+      "id": "nc_002",
+      "entity_id": "ines_m",
+      "label": "Essling Co-Invest III",
+      "manager": "Essling Capital",
+      "classe_rhetores": "private_equity",
+      "capital_committed": 500000.0,
+      "capital_called": 500000.0,
+      "value_current": 700000.0,
+      "source": "excel",
+      "attributes": {
+        "strategy": "Co-invest",
+        "moic_target": 2.5,
+        "moic_realise": 1.4,
+        "uncalled_estime": 0.0
+      }
+    },
+    {
+      "id": "nc_003",
+      "entity_id": "ines_m",
+      "label": "Tikehau Direct Lending V",
+      "manager": "Tikehau",
+      "classe_rhetores": "dette_privee",
+      "capital_committed": 800000.0,
+      "capital_called": 640000.0,
+      "value_current": 704000.0,
+      "source": "excel",
+      "attributes": {
+        "strategy": "Dette privée",
+        "moic_target": 1.4,
+        "moic_realise": 1.1,
+        "uncalled_estime": 160000.0
+      }
+    },
+    {
+      "id": "nc_004",
+      "entity_id": "ines_m",
+      "label": "SCPI Primonial REIM",
+      "manager": "Primonial",
+      "classe_rhetores": "immo_non_cote",
+      "capital_committed": 300000.0,
+      "capital_called": 300000.0,
+      "value_current": 315000.0,
+      "source": "excel",
+      "attributes": {
+        "strategy": "Immo rendement",
+        "moic_target": 1.3,
+        "moic_realise": 1.05,
+        "uncalled_estime": 0.0
+      }
+    },
+    {
+      "id": "nc_005",
+      "entity_id": "ines_m",
+      "label": "Meridiam Infra IV",
+      "manager": "Meridiam",
+      "classe_rhetores": "infrastructures",
+      "capital_committed": 600000.0,
+      "capital_called": 420000.0,
+      "value_current": 504000.0,
+      "source": "excel",
+      "attributes": {
+        "strategy": "Infrastructure",
+        "moic_target": 1.8,
+        "moic_realise": 1.2,
+        "uncalled_estime": 180000.0
+      }
+    },
+    {
+      "id": "nc_006",
+      "entity_id": "sas_patrimonia",
+      "label": "Ardian Secondary IX",
+      "manager": "Ardian",
+      "classe_rhetores": "private_equity",
+      "capital_committed": 2000000.0,
+      "capital_called": 1400000.0,
+      "value_current": 1820000.0,
+      "source": "excel",
+      "attributes": {
+        "strategy": "Secondaire",
+        "moic_target": 1.7,
+        "moic_realise": 1.3,
+        "uncalled_estime": 600000.0
+      }
+    }
+  ],
+  "valuations": [
+    {
+      "position_id": "pck_001",
+      "date": "2026-01-01",
+      "value": 520000.0
+    },
+    {
+      "position_id": "pck_001",
+      "date": "2026-06-30",
+      "value": 540000.0
+    },
+    {
+      "position_id": "pck_002",
+      "date": "2026-01-01",
+      "value": 280000.0
+    },
+    {
+      "position_id": "pck_002",
+      "date": "2026-06-30",
+      "value": 360000.0
+    },
+    {
+      "position_id": "pck_003",
+      "date": "2026-01-01",
+      "value": 420000.0
+    },
+    {
+      "position_id": "pck_003",
+      "date": "2026-06-30",
+      "value": 468000.0
+    },
+    {
+      "position_id": "pck_004",
+      "date": "2026-01-01",
+      "value": 1000000.0
+    },
+    {
+      "position_id": "pck_004",
+      "date": "2026-06-30",
+      "value": 1000000.0
+    },
+    {
+      "position_id": "pck_005",
+      "date": "2026-01-01",
+      "value": 610000.0
+    },
+    {
+      "position_id": "pck_005",
+      "date": "2026-06-30",
+      "value": 598000.0
+    },
+    {
+      "position_id": "pck_006",
+      "date": "2026-01-01",
+      "value": 3050000.0
+    },
+    {
+      "position_id": "pck_006",
+      "date": "2026-06-30",
+      "value": 3180000.0
+    }
+  ],
+  "courbe_performance": [
+    {
+      "date": "2026-01-01",
+      "cote": 5880000.0,
+      "nc": 3995560.0
+    },
+    {
+      "date": "2026-01-15",
+      "cote": 5904182.0
+    },
+    {
+      "date": "2026-02-01",
+      "cote": 5928364.0
+    },
+    {
+      "date": "2026-02-15",
+      "cote": 5952545.0
+    },
+    {
+      "date": "2026-03-01",
+      "cote": 5976727.0
+    },
+    {
+      "date": "2026-03-15",
+      "cote": 6000909.0
+    },
+    {
+      "date": "2026-04-01",
+      "cote": 6025091.0,
+      "nc": 4343000.0
+    },
+    {
+      "date": "2026-04-15",
+      "cote": 6049273.0
+    },
+    {
+      "date": "2026-05-01",
+      "cote": 6073455.0
+    },
+    {
+      "date": "2026-05-15",
+      "cote": 6097636.0
+    },
+    {
+      "date": "2026-06-01",
+      "cote": 6121818.0
+    },
+    {
+      "date": "2026-06-15",
+      "cote": 6146000.0
+    }
+  ]
+}

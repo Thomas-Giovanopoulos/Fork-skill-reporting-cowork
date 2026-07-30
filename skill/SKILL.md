@@ -32,9 +32,63 @@ requis par `store_builder.py`). **Si le self-check échoue : STOP** — le paque
 (bug connu de copie à l'installation : fichiers tronqués en fin) ; ne pas réparer à la main en
 silence, signaler au CGP et réinstaller le `.skill` (ou relancer l'application) avant de continuer.
 
+### Étape 0-bis — charger les référentiels partagés (D36)
+
+**Toi, l'agent, appelles le MCP ; le pipeline, non.** Les scripts Python tournent dans un sandbox sans
+réseau : ils ne peuvent joindre ni Postgres ni un serveur MCP. C'est à toi de rapatrier les
+référentiels et de les **écrire sur disque** — après quoi le pipeline les lit comme un fichier. C'est
+ce qui rend un run **reproductible** : deux exécutions du même dossier rendent le même HTML, et le
+bundle devient une pièce du dossier archivé.
+
+Si le connecteur **`referentiels-rhetores`** est disponible :
+
+1. appeler `ref_bundle(sections=["gabarits", "acteurs", "successions"])` — **demander les sections**,
+   ne pas tout prendre : le bundle complet dépasse la taille qu'un résultat d'outil peut porter, les
+   ISIN en faisant à eux seuls près de 70 % ;
+2. écrire la réponse telle quelle dans **`referentiels.json`**, à la racine du dossier de run ;
+3. le pipeline la trouvera seul (`pipeline/referentiels.py`).
+
+Si le connecteur est **absent ou en échec** : ne pas bloquer. Le paquet embarque un repli,
+`assets/referentiels_snapshot.json` — mais **le dire au CGP**, en une phrase :
+
+> « Référentiels lus depuis le snapshot embarqué (figé à l'installation) : un gabarit validé depuis
+> n'y figure pas. »
+
+Ce n'est pas une formalité. Tout l'objet de D36 est qu'un gabarit validé par un CGP soit visible au
+run suivant d'un autre **sans réinstallation** ; un repli silencieux annulerait ce bénéfice sans que
+personne ne s'en aperçoive. `pipeline/referentiels.py` signale la provenance de son côté — ton rôle est
+de la relayer au CGP.
+
+**Les ISIN restent hors de ce bundle**, à dessein : ils vivent dans `assets/isin_referentiel_v0.csv`
+(§7), qui reste leur source et que tu continues de lire comme avant. Les charger deux fois créerait
+deux copies à faire diverger.
+
+### Étape finale — relayer les propositions de gabarit (D36 / N5)
+
+La lecture du bundle (0-bis) ouvre la boucle ; ceci la referme. Pendant l'identification des relevés,
+`pipeline/producteur_propositions.py` compare chaque document aux gabarits connus et, quand un document
+**ne s'apparie à aucun** ou reste **ambigu**, écrit une entrée dans **`propositions.json`** à la racine
+du dossier de run. Le pipeline n'a pas le réseau : ces propositions sont donc à **toi** de les relayer.
+
+En fin de run, si `propositions.json` existe :
+
+1. pour chaque entrée de `propositions`, appeler **`ref_propose`** avec ses champs
+   (`cible`, `nature`, `cle`, `proposition`, `source_empreinte`, `source_gabarit`, `source_arrete`,
+   `run_id`) — ils sont déjà au bon format ;
+2. **vérifier la réponse** : `provenance_recue` doit renvoyer l'empreinte que tu as passée. Si un
+   `avertissement_provenance` apparaît, ton client ne connaît pas le contrat d'outil courant —
+   rafraîchir la liste des outils (relancer Cowork) avant de rejouer, sinon la provenance est perdue ;
+3. les entrées de `illisibles` ne sont **pas** des propositions : les remonter au CGP (document image,
+   OCR requis), sans appeler le MCP.
+
+Un run ne **canonise jamais** un gabarit : il propose (D34). C'est l'admin qui arbitre. Et une
+proposition ne porte **aucune donnée client** (D44) — seulement une empreinte, des codes de gabarit et
+des scores ; le texte des relevés reste dans le dossier de run. Ne complète jamais une proposition avec
+un extrait de document pour « aider » l'arbitre : ce serait rouvrir la fuite que D44 ferme.
+
 | Signal en entrée | Mode | Action |
 |---|---|---|
-| Un `{client}.json` conforme à `store_client.schema.json` (PJ, ou plus tard servi par le MCP datahub) | **CONSOMMATION** | Sauter directement à l'**Egress** (§2.e) : writer → moteur P1/P2 → HTML. Ne pas relancer l'extraction. |
+| Un `{client}.json` conforme à `store_client.schema.json` (PJ, ou plus tard servi par le MCP datahub) | **CONSOMMATION** | Sauter directement à l'**Egress** (§2.e) : `store_to_manifest.py` + `p2_fill.py` **directement sur le JSON** — aucun Excel intermédiaire. Ne pas relancer l'extraction. |
 | Un Excel de structure (3 feuilles) + des PDFs de relevés du coté (le PE vient de la feuille Non coté, jamais de PDFs — §2.a) | **AGRÉGATION** | Dérouler la **boucle complète** (§2). |
 | Les deux à la fois (JSON existant + nouveaux PDFs) | **AGRÉGATION en ré-entrée** | Le JSON fourni devient la base « old » de la réconciliation (§2.c) au lieu de l'Excel de structure. |
 | Rien de tout ça | — | AskUser : demander l'Excel de structure + les relevés, ou le JSON forme-store existant. En cas de doute, demander confirmation plutôt que supposer. |
@@ -61,7 +115,7 @@ Fork **`reporting.mode`** : `presentee` (défaut, figée, animation Hero) ou `en
 animation) — toute divergence de l'envoyée passe par une condition `mode`, jamais par une modif du
 chemin `presentee`.
 
-**Nomenclature** — Reporting (`consolide_HG_v15.html`) › Bloc (00, 01, Hero…) › Widget (tableau,
+**Nomenclature** — Reporting (`consolide_client_exemple_v15.html`) › Bloc (00, 01, Hero…) › Widget (tableau,
 card, donut) › Élément (ligne, part de donut, KPI) › Ligne/Colonne/Cellule (HTML standard).
 
 → Détails : `references/01-architecture-blocs.md`, `references/03-tableau-exhaustif.md`,
@@ -127,12 +181,25 @@ fonds de PE sont **hors périmètre** — le non coté vient exclusivement de la
 
 1. Lister **tous** les documents PDF du run, sans en ouvrir aucun. Écarter d'office les rapports
    de fonds PE (les signaler au CGP comme non traités, sans les ouvrir).
-2. Dans **un seul message**, émettre **N blocs d'appel Agent (Task)** — un par document. Ne jamais
+2. **Identifier chaque document AVANT de dispatcher** (B10 — déterministe, pas un jugement) :
+   ```
+   python3 pipeline/producteur_propositions.py <profils> <doc.pdf> [arrêté AAAA-MM-JJ]
+   ```
+   ou par lot via `pipeline/matcher_gabarit.py` (`apparier`), les profils venant du
+   `referentiels.json` du run (étape 0-bis), l'arrêté du contexte du run — jamais du nom de
+   fichier. Quatre verdicts, quatre traitements :
+   - **`apparie`** → le subagent sera **primé** par ce profil (étape 4 ci-dessous) ;
+   - **`ambigu` / `aucun`** → le document est **extrait quand même**, en prompt générique
+     (sans hints — signaler dans le diff `notes` que l'extraction n'était pas primée), et la
+     proposition part dans `propositions.json` (étape finale, §0) ;
+   - **`illisible`** → OCR requis : signaler au CGP, ne pas dispatcher.
+3. Dans **un seul message**, émettre **N blocs d'appel Agent (Task)** — un par document. Ne jamais
    envoyer un premier subagent, attendre son retour, puis en envoyer un second : les N appels
    partent ensemble.
-3. **Ne jamais lire ou parser le contenu d'un PDF dans le fil principal** — même « pour se faire une
+4. **Ne jamais lire ou parser le contenu d'un PDF dans le fil principal** — même « pour se faire une
    idée » avant de déléguer. C'est strictement le rôle du subagent. Le fil principal ne fait que
-   lister, dispatcher, puis consolider les diffs reçus (§2.c).
+   lister, identifier (métadonnées et texte via le matcher, jamais d'interprétation), dispatcher,
+   puis consolider les diffs reçus (§2.c).
 
 **Pourquoi cette règle est non négociable** : un run traité PDF-par-PDF en série (lecture inline ou
 subagents lancés un par un) a été mesuré à **~25 min pour 4 documents**. En parallèle réel (étape 1
@@ -158,26 +225,29 @@ Le prompt de chaque subagent doit inclure, sans les paraphraser :
    `produits_structures`, `alternatifs`, `matieres_premieres`, `crypto`, `private_equity`,
    `actions_non_cotees`, `dette_privee`, `immo_non_cote`, `infrastructures` ; géo `monde`,
    `amerique_du_nord`, `europe`, `asie_pacifique`, `emergents`.
-4. **Pièges de parsing par source** (à reprendre tels quels, pas à redécouvrir) :
-   - **PPT (de Pury Pictet)** — pas de filets de tableau ; « RESULTAT YTD » affiche deux %, le bon
-     est la **2ᵉ ligne** (résultat depuis achat) ; fonds monétaires classés à tort « Obligations » →
-     reclasser `monetaire`.
-   - **Dauphine AM** — filigrane vertical qui pollue le texte extrait (« U s e a x g … ») ; totaux
-     imprimés ne somment pas exactement (**±1-2 €**, à absorber sur Liquidités) ; +/-value affichée
-     **hebdomadaire, pas YTD** — ne pas confondre avec un autre relevé YTD du même run.
-   - **Excel CGP en entrée** — formules saisies par le CGP → charger `data_only=True` depuis le
-     fichier **original** (une resauvegarde openpyxl détruit le cache de formules) ; ignorer les
-     lignes de légende `ℹ`/`•` en zone de données.
-5. **Performance par ligne (obligatoire dès que le relevé la publie)** :
-   - **PPT (de Pury Pictet)** — colonne « RESULTAT YTD » : deux valeurs empilées, retenir la
-     **2ᵉ ligne** (résultat *depuis achat*, en EUR). Reporter en `perf_pct` de la ligne.
-   - **Dauphine AM** — colonne « +/- % » du détail des positions : c'est la variation *de la
-     période du relevé* (hebdomadaire ici), **pas** un YTD. Reporter en `perf_pct` et préciser
-     l'horizon dans `validation_note`.
-   - Renseigner `perf_pct` pour **toute ligne titre/fonds**. Seules les lignes de **liquidités /
-     compte courant** peuvent rester sans performance. Une perf % absente produit un `0 €` / `—`
-     silencieux dans le rendu (la Perf € est dérivée par le moteur) — ne jamais laisser vide par
-     défaut.
+4. **Le PROFIL DE GABARIT apparié (B10/N3) — c'est lui qui porte les pièges, plus ce fichier.**
+   Depuis le `referentiels.json` du run, section `gabarits`, l'entrée du verdict d'appariement.
+   Copier dans le prompt du subagent, **verbatim, sans paraphrase ni tri** :
+   - `extraction_hints.pieges` — les pièges de parsing de CE gabarit (filigranes, colonnes
+     ambiguës, lignes repliées, conventions numériques…). Ils ont été établis sur documents
+     réels ; un piège « qui ne semble pas s'appliquer » se copie quand même.
+   - `extraction_hints.ancrage_tableaux` et `extraction_hints.format_numerique` — où sont les
+     tableaux, comment se lisent les nombres.
+   - `champs_publies` — ce que CE gabarit publie : `perf_par_ligne` = `oui` → `perf_pct`
+     obligatoire sur toute ligne titre/fonds, la `forme` dit quelle colonne et l'`horizon` va
+     dans `validation_note` ; `derivable` → dériver (la forme dit comment) ; `non` → ne pas
+     inventer, le comblement éventuel est un choix explicite (D40). Seules les lignes de
+     liquidités/compte courant peuvent rester sans perf.
+   - `invariant_controle` — à vérifier **avant** d'émettre le diff (B8/D25) : au centime sauf
+     tolérance déclarée dans l'invariant lui-même. Invariant en échec = le diff part quand même,
+     avec l'échec **signalé** dans `notes` — un signal, jamais une correction silencieuse.
+   Un document non apparié (verdict `ambigu`/`aucun`) s'extrait **sans** ce bloc, en le disant
+   dans `notes`. Mettre à jour un piège = mettre à jour le **profil** (proposition → arbitrage,
+   §0 étape finale), jamais ce fichier : c'est ce qui fait qu'un piège appris par un CGP profite
+   au suivant.
+5. **Excel CGP en entrée** (générique, hors profils) — formules saisies par le CGP → charger
+   `data_only=True` depuis le fichier **original** (une resauvegarde openpyxl détruit le cache de
+   formules) ; ignorer les lignes de légende `ℹ`/`•` en zone de données.
 6. **Σ lignes = total ± 1 €** : tout écart est **absorbé sur une ligne Liquidités** du contrat
    (jamais réparti au prorata, jamais ignoré) et **documenté** dans les `notes` du diff.
 
@@ -196,7 +266,7 @@ clé de jointure contrat `Nature — Banque` ne les distingue pas. **Ne jamais t
 un **AskUserQuestion obligatoire** : « poches d'un même contrat, ou comptes séparés ? ». Si le CGP
 répond *poches* → un contrat unique à N poches (une poche par mandat/gérant, lignes rattachées).
 Si *comptes séparés* → garder N contrats distincts, en désambiguïsant la colonne banque pour que les
-clés diffèrent (ex. « UBS (Dauphine — Offensif) », « UBS (De Pury Pictet) »). Indice mais pas
+clés diffèrent (ex. « UBS (Gérant A — Offensif) », « UBS (Gérant B) »). Indice mais pas
 preuve : des lignes séparées dans l'Excel de structure suggèrent des comptes séparés — la question
 reste obligatoire.
 
@@ -207,9 +277,27 @@ Comparer chaque diff à la valeur d'ancre de l'Excel de structure (ou du JSON en
 correction silencieuse. Le CGP tranche. **S'il dit d'ignorer un écart, on ignore — mais on trace**
 (dans les `notes` du diff et le rapport d'apply) : qui a décidé, et pourquoi.
 
-### d. Apply — consolidation forme-store
+### d. Apply — consolidation forme-store (outillé depuis B-ii, 30/07)
 
-Consolider les diffs validés en dict client **forme-store** via `pipeline/store_builder.py` (§7) :
+L'apply n'est plus un geste manuel : deux outils déterministes portent la consolidation.
+
+```
+python3 pipeline/valider_diff.py diff1.json diff2.json …          # forme + règles (A4, vocabulaire)
+python3 pipeline/appliquer_diffs.py base.json sortie.json diff*.json \
+    --arrete 2026-06-30 --referentiels referentiels.json \
+    --documents contexte_docs.json --rapport rapport_apply.json
+```
+
+`--documents` vient de l'étape d'identification (§2.b étape 2) : `{source_document: {empreinte,
+gabarit, arrete}}`. L'apply pose la **provenance D49** sur chaque entrée touchée, attribue les
+**`pocket.id`** (la jointure par libellé meurt à l'entrée), résout **`assureur` → code acteur**
+par les alias (non résolu = verbatim conservé + à proposer via K3, jamais de code inventé), et
+signale les lignes sans `perf_pct` quand le gabarit la publie (**MQ11**). Règle dure : un
+`old_value` qui ne correspond pas au store est un **CONFLIT** — champ non appliqué, rapporté
+pour la réconciliation (§2.c), **jamais de last-write-wins**. Lire le rapport avant de
+continuer : conflits et acteurs non résolus sont des décisions à prendre, pas du bruit.
+
+Rappels qui restent à la charge du run :
 
 - Chaque ligne classée (`attributes.lines[]`) doit porter `perf_pct` dès que la source la publie
   (chemin de diff : `attributes.lines[].perf_pct`). Le champ existe déjà au schéma
@@ -229,18 +317,25 @@ Consolider les diffs validés en dict client **forme-store** via `pipeline/store
 - Tout ISIN classé pendant le run et absent du référentiel → **proposition d'ajout** en diff distinct
   (§4), jamais écrit directement dans `isin_referentiel_v0.csv`.
 
-### e. Egress — writer, moteur, HTML
+### e. Egress — moteur direct sur le store (bascule ⑤, 30/07)
 
-1. **Writer** : projeter le dict forme-store vers l'**Excel de transition** (format
-   `Reporting_data_template` v5 : Identité/Coté/Non coté + Lignes classées + Mouvements + PS +
-   Contrôles). Projection **lossy**, interne au skill, rectifiable par le CGP **sur demande** — pas
-   l'artefact d'archive (§3).
-   > **Note d'étape** : le writer officiel `json_to_excel.py` n'est **pas encore vendoré** (chantier D
-   > du CDC, arbitrage de gouvernance en attente). En attendant, générer l'Excel de transition selon
-   > le format v5 existant (`p1_engine/colmap.py` lit les deux formats). Correction du CGP sur cet
-   > Excel → **repasse par le circuit diff**, jamais d'écriture directe dans le pivot.
-2. **Moteur** : `excel_to_manifest.py` puis `p2_fill.py` sur l'Excel de transition — pipeline P1-P4 inchangé (§5).
-3. Avant de livrer : les **9 contrôles comptables** de `p2_fill.py` doivent tous passer (« Contrôles comptables : X/9 OK »). Ne pas livrer sur un contrôle en échec sans le signaler.
+1. **Moteur, directement sur le store** — plus aucun Excel intermédiaire (D45/D46) :
+   ```
+   python3 p1_engine/store_to_manifest.py {client}.json manifest.json --quarter T2 --year 2026
+   python3 p1_engine/p2_fill.py {client}.json manifest.json reporting.html
+   ```
+   `p2_fill` reconnaît un `.json` comme forme-store (2.1-skill) et le lit par la façade
+   `lecteur_store.py` ; le moteur lui-même est inchangé. **Équivalence prouvée** avec l'ancien
+   chemin Excel : manifeste et HTML identiques à l'octet près sur les 7 fixtures
+   (`p1_engine/tests/test_l3a.py`, rejouable).
+   > Un store qui échoue au lecteur (enveloppe inconnue, poche non résolue, `attributes.ps`
+   > présent — machinerie PS pas encore lisible depuis le store) échoue **bruyamment** avec le
+   > chemin exact : signaler au CGP, ne jamais contourner en regénérant un Excel à la main.
+   > L'ancien chemin (`excel_to_manifest.py` + `p2_fill.py` sur un Excel de transition) reste
+   > fonctionnel pour la **reprise de classeurs historiques** uniquement — il n'est plus le
+   > chemin nominal, et le writer `json_to_excel` est abandonné (D46) : on ne produit plus
+   > d'Excel de transition. Correction du CGP → **circuit diff**, jamais un classeur.
+2. Avant de livrer : les **9 contrôles comptables** de `p2_fill.py` doivent tous passer (« Contrôles comptables : X/9 OK »). Ne pas livrer sur un contrôle en échec sans le signaler.
 
 ---
 

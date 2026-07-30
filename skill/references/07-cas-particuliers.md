@@ -12,7 +12,7 @@ Un retrait ou versement important (typiquement > 100 K€) doit apparaître **ex
 - La performance YTD doit être calculée selon Modified Dietz (voir `references/08-template-excel.md`,
   section "Onglet Mouvements") sur le capital pondéré, pas sur la valo globale
 
-Exemple validé : retrait de −2 320 000 € sur la SAS AX le 10/01/2026 (poche FAS Rhétorès Wealins),
+Exemple validé : retrait de −2 320 000 € sur la SAS Exemple le 10/01/2026 (poche FAS Rhétorès Wealins),
 documenté dans l'onglet Mouvements du fichier Excel source.
 
 ---
@@ -78,7 +78,7 @@ Les transferts internes EdR (entre comptes du même client) ne sont **PAS** des 
 dans Modified Dietz. Convention : ces opérations apparaissent dans le relevé EdR mais ne doivent
 pas figurer dans l'onglet Mouvements du fichier Excel source.
 
-Exemple : transfert de fonds entre CTO EdR et FAS EdR au sein de la même AV Cardif Lux 2 d'Hervé G.
+Exemple : transfert de fonds entre CTO EdR et FAS EdR au sein de la même AV Cardif Lux 2 de Client Exemple.
 
 ---
 
@@ -112,6 +112,6 @@ Pour un contrat souscrit dans l'année (ex: Lombard Utmost ouvert en avril 2026)
 Les prêts Lombard sont **toujours** classés en "In fine" (pas amortissable).
 Le contrat servant de garantie doit avoir la mention "Nantissement = Oui".
 
-Cas validés Hervé G. :
+Cas validés Client Exemple :
 - Prêt Lombard UBS → garanti par les contrats Wealins Lux (toutes poches)
 - Prêt Lombard Indosuez → garanti par Cardif Lux 1 uniquement (PAS Cardif Lux 2)

@@ -1,0 +1,653 @@
+{
+  "schema_version": "2.1-skill",
+  "client": {
+    "id": "tmp_c_001",
+    "label": "Interagyr",
+    "entities": [
+      {
+        "id": "interagyr",
+        "label": "Interagyr",
+        "type": "holding",
+        "order": 0
+      }
+    ]
+  },
+  "reporting": {
+    "period_short": "T3-26",
+    "period_long": "T3 2026",
+    "date_reporting": "2026-07-15",
+    "date_display": "15 juillet 2026",
+    "version": "v1",
+    "profile": "Équilibré"
+  },
+  "_provisional_ids": true,
+  "financier_cote": [
+    {
+      "entity_id": "interagyr",
+      "label": "Compte Titres — UBS (De Pury Pictet)",
+      "nature": "Compte Titres",
+      "assureur": "UBS (De Pury Pictet)",
+      "envelope_type": "cto",
+      "manager": "De Pury Pictet",
+      "management_mode": "Gestion sous mandat",
+      "risk_profile": "Dynamique",
+      "invest_date": "2026-05-01",
+      "capital_invested": 2000000,
+      "value_current": 1982033.79,
+      "nantissement": false,
+      "source": "excel_structure",
+      "attributes": {
+        "pockets": [
+          {
+            "id": "pck_001",
+            "label": "Compte Titres — UBS (De Pury Pictet)",
+            "value": 1982033.79,
+            "capital_invested": 2000000,
+            "invest_date": "2026-05-01"
+          }
+        ],
+        "lines": [
+          {
+            "label": "Compte Courant EUR",
+            "value": 91429.78,
+            "class": "monetaire",
+            "pocket": "pck_001"
+          },
+          {
+            "label": "UBS (CH) Money Market Fund EUR -I-B-",
+            "value": 1134708.36,
+            "class": "monetaire",
+            "isin": "CH0140909257",
+            "perf_pct": 0.28,
+            "pocket": "pck_001"
+          },
+          {
+            "label": "GAMA Global Short-Dated Opportunities F",
+            "value": 200086.2,
+            "class": "obligations",
+            "isin": "LU2092461800",
+            "perf_pct": 0.19,
+            "geography": "monde",
+            "pocket": "pck_001"
+          },
+          {
+            "label": "WF Enetia Energy Infrastructure Dis (clean) EUR",
+            "value": 103174.26,
+            "class": "actions",
+            "isin": "LU2385154757",
+            "perf_pct": -0.2,
+            "geography": "monde",
+            "pocket": "pck_001"
+          },
+          {
+            "label": "Veritas Asian Fund A EUR",
+            "value": 66267.12,
+            "class": "actions",
+            "isin": "IE00B02ZFR42",
+            "perf_pct": -10.29,
+            "geography": "asie_pacifique",
+            "pocket": "pck_001"
+          },
+          {
+            "label": "Decalia Sustainable Society Cap",
+            "value": 62356.5,
+            "class": "actions",
+            "isin": "LU2407358576",
+            "perf_pct": -1.67,
+            "geography": "monde",
+            "pocket": "pck_001"
+          },
+          {
+            "label": "Enetia Energy Transition Dis (clean)",
+            "value": 55910.8,
+            "class": "actions",
+            "isin": "CH1152838327",
+            "perf_pct": -10.1,
+            "geography": "monde",
+            "pocket": "pck_001"
+          },
+          {
+            "label": "SPDR MSCI World ACWI UCITS ETF EUR Hedged",
+            "value": 100811.37,
+            "class": "actions",
+            "isin": "IE00BF1B7389",
+            "perf_pct": 0.5,
+            "geography": "monde",
+            "pocket": "pck_001"
+          },
+          {
+            "label": "Xtrackers S&P 500 Equal Weight ETF EUR Hedged",
+            "value": 71661.4,
+            "class": "actions",
+            "isin": "IE0002EI5AG0",
+            "perf_pct": 2.1,
+            "geography": "amerique_du_nord",
+            "pocket": "pck_001"
+          },
+          {
+            "label": "iShares VII Nasdaq 100 ETF Hedged EUR",
+            "value": 39071.25,
+            "class": "actions",
+            "isin": "IE00BYVQ9F29",
+            "perf_pct": -2.63,
+            "geography": "amerique_du_nord",
+            "pocket": "pck_001"
+          },
+          {
+            "label": "iShares Trust DJ US Medical Devices (USD)",
+            "value": 56556.75,
+            "class": "actions",
+            "isin": "US4642888105",
+            "perf_pct": -5.57,
+            "geography": "amerique_du_nord",
+            "pocket": "pck_001"
+          }
+        ]
+      },
+      "id": "tmp_fc_001",
+      "source_document": "Interagyr.pdf",
+      "source_empreinte": "541daa3dbdde1dc816dc5f37e049d2810f8a246bc93b46658f53c409e759d638",
+      "source_gabarit": "evaluation_portefeuille_mandat",
+      "source_arrete": "2026-07-15"
+    },
+    {
+      "entity_id": "interagyr",
+      "label": "Compte Titres — UBS (Dauphine AM — Équilibré)",
+      "nature": "Compte Titres",
+      "assureur": "UBS (Dauphine AM — Équilibré)",
+      "envelope_type": "cto",
+      "manager": "Dauphine AM",
+      "management_mode": "Gestion sous mandat",
+      "risk_profile": "Équilibré",
+      "invest_date": "2026-05-02",
+      "capital_invested": 1500000,
+      "value_current": 1502062,
+      "nantissement": false,
+      "source": "excel_structure",
+      "attributes": {
+        "pockets": [
+          {
+            "id": "pck_002",
+            "label": "Compte Titres — UBS (Dauphine AM — Équilibré)",
+            "value": 1502062,
+            "capital_invested": 1500000,
+            "invest_date": "2026-05-02"
+          }
+        ],
+        "lines": [
+          {
+            "label": "AMUNDI IS-MSCI WORLD UCITS ETF (D)",
+            "value": 153100,
+            "class": "actions",
+            "isin": "LU2655993207",
+            "perf_pct": 2.5,
+            "geography": "monde",
+            "pocket": "pck_002"
+          },
+          {
+            "label": "AMUNDI IS-EUROSTOXX50-UETF DR EUR C",
+            "value": 74761,
+            "class": "actions",
+            "isin": "LU1681047236",
+            "perf_pct": -1.2,
+            "geography": "europe",
+            "pocket": "pck_002"
+          },
+          {
+            "label": "XTRACKERS-S&P 500 EQ.W.UETF-2C-HDG-",
+            "value": 37410,
+            "class": "actions",
+            "isin": "IE0002EI5AG0",
+            "perf_pct": -1.4,
+            "geography": "amerique_du_nord",
+            "pocket": "pck_002"
+          },
+          {
+            "label": "CANDRIAM EQ.L-BIOTECH-R-(C)",
+            "value": 35988,
+            "class": "actions",
+            "isin": "LU1269736838",
+            "perf_pct": 16.2,
+            "geography": "monde",
+            "pocket": "pck_002"
+          },
+          {
+            "label": "L&G ROBO GL.ROBOT.AND AUTOM.-A-UETF",
+            "value": 34861,
+            "class": "actions",
+            "isin": "IE00BMW3QX54",
+            "perf_pct": -5.0,
+            "geography": "monde",
+            "pocket": "pck_002"
+          },
+          {
+            "label": "PARETO-NORDIC CORPORATE BD-H EUR(C)",
+            "value": 150327,
+            "class": "obligations",
+            "isin": "LU1311575093",
+            "perf_pct": 0.5,
+            "geography": "europe",
+            "pocket": "pck_002"
+          },
+          {
+            "label": "LAZARD EURO SH.FD.HIGH YIELD-PVC-(C",
+            "value": 150198,
+            "class": "obligations",
+            "isin": "FR0013507019",
+            "perf_pct": 0.1,
+            "geography": "europe",
+            "pocket": "pck_002"
+          },
+          {
+            "label": "CARMIGNAC UNC.EURO FIXED INC-F-(C)",
+            "value": 135832,
+            "class": "obligations",
+            "isin": "LU0992631217",
+            "perf_pct": -0.1,
+            "geography": "europe",
+            "pocket": "pck_002"
+          },
+          {
+            "label": "TAILOR CREDIT 2028 FCP -I-",
+            "value": 90950,
+            "class": "obligations",
+            "isin": "FR001400BW13",
+            "perf_pct": 0.8,
+            "pocket": "pck_002"
+          },
+          {
+            "label": "ABRDN EMER.MRKTS CORP.BD.FD-X2-(C)",
+            "value": 75783,
+            "class": "obligations",
+            "isin": "LU1725895707",
+            "perf_pct": 0.8,
+            "geography": "emergents",
+            "pocket": "pck_002"
+          },
+          {
+            "label": "CM-CIC MONEPLUS FCP -RC- 3DEC(C)",
+            "value": 352084,
+            "class": "monetaire",
+            "isin": "FR0013354230",
+            "perf_pct": 0.3,
+            "pocket": "pck_002"
+          },
+          {
+            "label": "LIQUIDITÉS",
+            "value": 210768,
+            "class": "monetaire",
+            "pocket": "pck_002"
+          }
+        ]
+      },
+      "id": "tmp_fc_002",
+      "source_document": "Releve╠ü - INTERAGYR E 4 - ETF.pdf",
+      "source_empreinte": "ef290de6baffe342ac2d46db6628e6a89910345e743f574a0ad03b073936e8f8",
+      "source_gabarit": "reporting_hebdo_mandat",
+      "source_arrete": "2026-07-15"
+    },
+    {
+      "entity_id": "interagyr",
+      "label": "Compte Titres — UBS (Dauphine AM — Prudent)",
+      "nature": "Compte Titres",
+      "assureur": "UBS (Dauphine AM — Prudent)",
+      "envelope_type": "cto",
+      "manager": "Dauphine AM",
+      "management_mode": "Gestion sous mandat",
+      "risk_profile": "Prudent",
+      "invest_date": "2026-05-03",
+      "capital_invested": 500000,
+      "value_current": 501163,
+      "nantissement": false,
+      "source": "excel_structure",
+      "attributes": {
+        "pockets": [
+          {
+            "id": "pck_003",
+            "label": "Compte Titres — UBS (Dauphine AM — Prudent)",
+            "value": 501163,
+            "capital_invested": 500000,
+            "invest_date": "2026-05-03"
+          }
+        ],
+        "lines": [
+          {
+            "label": "Lazard Euro Short Duration High Yield -PVC- (C)",
+            "isin": "FR0013507019",
+            "value": 95168.0,
+            "class": "obligations",
+            "geography": "europe",
+            "perf_pct": 0.3,
+            "pocket": "pck_003"
+          },
+          {
+            "label": "Carmignac Unconstrained Euro Fixed Income -F- (C)",
+            "isin": "LU0992631217",
+            "value": 89952.0,
+            "class": "obligations",
+            "geography": "europe",
+            "perf_pct": 0.0,
+            "pocket": "pck_003"
+          },
+          {
+            "label": "Pareto-Nordic Corporate Bond -H- EUR (C)",
+            "isin": "LU1311575093",
+            "value": 80438.0,
+            "class": "obligations",
+            "geography": "europe",
+            "perf_pct": 0.5,
+            "pocket": "pck_003"
+          },
+          {
+            "label": "Tailor Credit 2028 FCP -I-",
+            "isin": "FR001400BW13",
+            "value": 75429.0,
+            "class": "obligations",
+            "perf_pct": 0.4,
+            "pocket": "pck_003"
+          },
+          {
+            "label": "abrdn Emerging Markets Corporate Bond Fund -X2- (C)",
+            "isin": "LU1725895707",
+            "value": 50104.0,
+            "class": "obligations",
+            "geography": "emergents",
+            "perf_pct": 0.1,
+            "pocket": "pck_003"
+          },
+          {
+            "label": "Axiom Lux SI Obligataire -J- 3DEC (C)",
+            "isin": "LU1876461549",
+            "value": 25065.0,
+            "class": "obligations",
+            "perf_pct": 0.3,
+            "pocket": "pck_003"
+          },
+          {
+            "label": "LBPAM Short Term -I- (D)",
+            "isin": "FR001400P0S8",
+            "value": 75255.0,
+            "class": "monetaire",
+            "perf_pct": 0.1,
+            "pocket": "pck_003"
+          },
+          {
+            "label": "Liquidités",
+            "value": 9752.0,
+            "class": "monetaire",
+            "pocket": "pck_003"
+          }
+        ]
+      },
+      "id": "tmp_fc_003",
+      "source_document": "Releve╠ü - INTERAGYR Tresorerie 2.pdf",
+      "source_empreinte": "62edab7db141eb659bc860019a6b4244c59e2f1958962914422d1e94e1402b15",
+      "source_gabarit": "reporting_hebdo_mandat",
+      "source_arrete": "2026-07-15"
+    },
+    {
+      "entity_id": "interagyr",
+      "label": "Compte Titres — UBS (Dauphine AM — Offensif)",
+      "nature": "Compte Titres",
+      "assureur": "UBS (Dauphine AM — Offensif)",
+      "envelope_type": "cto",
+      "manager": "Dauphine AM",
+      "management_mode": "Advisory",
+      "risk_profile": "Offensif",
+      "invest_date": "2026-05-04",
+      "capital_invested": 500000,
+      "value_current": 497897,
+      "nantissement": false,
+      "source": "excel_structure",
+      "attributes": {
+        "pockets": [
+          {
+            "id": "pck_004",
+            "label": "Compte Titres — UBS (Dauphine AM — Offensif)",
+            "value": 497897,
+            "capital_invested": 500000,
+            "invest_date": "2026-05-04"
+          }
+        ],
+        "lines": [
+          {
+            "label": "Microsoft Corp",
+            "isin": "US5949181045",
+            "value": 31131.0,
+            "class": "actions",
+            "perf_pct": -1.1,
+            "geography": "amerique_du_nord",
+            "pocket": "pck_004"
+          },
+          {
+            "label": "Amazon.com Inc",
+            "isin": "US0231351067",
+            "value": 30727.0,
+            "class": "actions",
+            "perf_pct": 0.2,
+            "geography": "amerique_du_nord",
+            "pocket": "pck_004"
+          },
+          {
+            "label": "Alphabet Inc -A-",
+            "isin": "US02079K3059",
+            "value": 29057.0,
+            "class": "actions",
+            "perf_pct": -4.1,
+            "geography": "amerique_du_nord",
+            "pocket": "pck_004"
+          },
+          {
+            "label": "Apple Inc",
+            "isin": "US0378331005",
+            "value": 17438.0,
+            "class": "actions",
+            "perf_pct": 14.4,
+            "geography": "amerique_du_nord",
+            "pocket": "pck_004"
+          },
+          {
+            "label": "Meta Platforms Inc -A-",
+            "isin": "US30303M1027",
+            "value": 16806.0,
+            "class": "actions",
+            "perf_pct": 12.0,
+            "geography": "amerique_du_nord",
+            "pocket": "pck_004"
+          },
+          {
+            "label": "S&P Global Inc",
+            "isin": "US78409V1044",
+            "value": 16354.0,
+            "class": "actions",
+            "perf_pct": 7.7,
+            "geography": "amerique_du_nord",
+            "pocket": "pck_004"
+          },
+          {
+            "label": "JPMorgan Chase & Co",
+            "isin": "US46625H1005",
+            "value": 15860.0,
+            "class": "actions",
+            "perf_pct": 3.0,
+            "geography": "amerique_du_nord",
+            "pocket": "pck_004"
+          },
+          {
+            "label": "LVMH Moët Hennessy Louis Vuitton",
+            "isin": "FR0000121014",
+            "value": 15596.0,
+            "class": "actions",
+            "perf_pct": 3.1,
+            "geography": "europe",
+            "pocket": "pck_004"
+          },
+          {
+            "label": "L'Oréal",
+            "isin": "FR0000120321",
+            "value": 15254.0,
+            "class": "actions",
+            "perf_pct": -2.7,
+            "geography": "europe",
+            "pocket": "pck_004"
+          },
+          {
+            "label": "Taiwan Semiconductor Manufacturing ADR",
+            "isin": "US8740391003",
+            "value": 15007.0,
+            "class": "actions",
+            "perf_pct": -5.4,
+            "geography": "asie_pacifique",
+            "pocket": "pck_004"
+          },
+          {
+            "label": "Airbus SE",
+            "isin": "NL0000235190",
+            "value": 14867.0,
+            "class": "actions",
+            "perf_pct": -0.1,
+            "geography": "europe",
+            "pocket": "pck_004"
+          },
+          {
+            "label": "Schneider Electric SE",
+            "isin": "FR0000121972",
+            "value": 14804.0,
+            "class": "actions",
+            "perf_pct": -3.8,
+            "geography": "europe",
+            "pocket": "pck_004"
+          },
+          {
+            "label": "EssilorLuxottica",
+            "isin": "FR0000121667",
+            "value": 14746.0,
+            "class": "actions",
+            "perf_pct": -4.5,
+            "geography": "europe",
+            "pocket": "pck_004"
+          },
+          {
+            "label": "Air Liquide",
+            "isin": "FR0000120073",
+            "value": 14521.0,
+            "class": "actions",
+            "perf_pct": 5.7,
+            "geography": "europe",
+            "pocket": "pck_004"
+          },
+          {
+            "label": "L3Harris Technologies Inc",
+            "isin": "US5024311095",
+            "value": 14138.0,
+            "class": "actions",
+            "perf_pct": -7.1,
+            "geography": "amerique_du_nord",
+            "pocket": "pck_004"
+          },
+          {
+            "label": "Vinci SA",
+            "isin": "FR0000125486",
+            "value": 13703.0,
+            "class": "actions",
+            "perf_pct": -6.1,
+            "geography": "europe",
+            "pocket": "pck_004"
+          },
+          {
+            "label": "SAP SE",
+            "isin": "DE0007164600",
+            "value": 12801.0,
+            "class": "actions",
+            "perf_pct": -13.8,
+            "geography": "europe",
+            "pocket": "pck_004"
+          },
+          {
+            "label": "Saint-Gobain",
+            "isin": "FR0000125007",
+            "value": 9731.0,
+            "class": "actions",
+            "perf_pct": -2.4,
+            "geography": "europe",
+            "pocket": "pck_004"
+          },
+          {
+            "label": "AstraZeneca PLC",
+            "isin": "GB0009895292",
+            "value": 9671.0,
+            "class": "actions",
+            "perf_pct": -4.6,
+            "geography": "europe",
+            "pocket": "pck_004"
+          },
+          {
+            "label": "Sandoz Group SA",
+            "isin": "CH1243598427",
+            "value": 9303.0,
+            "class": "actions",
+            "perf_pct": -8.4,
+            "geography": "europe",
+            "pocket": "pck_004"
+          },
+          {
+            "label": "Mobility Global",
+            "isin": "US60744M1062",
+            "value": 738.0,
+            "class": "actions",
+            "perf_pct": 0.0,
+            "geography": "amerique_du_nord",
+            "pocket": "pck_004"
+          },
+          {
+            "label": "Liquidités",
+            "value": 165644.0,
+            "class": "monetaire",
+            "pocket": "pck_004"
+          }
+        ]
+      },
+      "id": "tmp_fc_004",
+      "source_document": "Releve╠ü - INTERAGYR Offensif 6.pdf",
+      "source_empreinte": "e56f5f3a4d5dc77f974d6746666e6001e1b30d799570588b1dfda919a8860f39",
+      "source_gabarit": "reporting_hebdo_mandat",
+      "source_arrete": "2026-07-15"
+    }
+  ],
+  "non_cote": [
+    {
+      "entity_id": "interagyr",
+      "label": "Healthcare Co-Invest II",
+      "manager": "Essling Capital",
+      "classe_rhetores": "private_equity",
+      "capital_committed": 200000,
+      "capital_called": 200000,
+      "invest_date": "2026-05-01",
+      "source": "excel_structure",
+      "attributes": {
+        "strategy": "LBO",
+        "segment": "Co-Investissement",
+        "moic_target": 2.0,
+        "duration_target": 7
+      },
+      "id": "tmp_nc_001"
+    },
+    {
+      "entity_id": "interagyr",
+      "label": "Odyssey 2025",
+      "manager": "Altaroc",
+      "classe_rhetores": "private_equity",
+      "capital_committed": 200000,
+      "capital_called": 40000,
+      "invest_date": "2026-06-01",
+      "source": "excel_structure",
+      "attributes": {
+        "strategy": "LBO",
+        "segment": "Fonds de fonds",
+        "moic_target": 1.8,
+        "duration_target": 10
+      },
+      "id": "tmp_nc_002"
+    }
+  ]
+}

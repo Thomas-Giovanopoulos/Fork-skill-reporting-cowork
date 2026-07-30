@@ -1,8 +1,7 @@
 # Fork — Référentiels & consommation du forme-store
 
-> **Nouvelle session ? Commencez par [`REPRISE.md`](REPRISE.md).** Il contient l'amorçage en trois
-> commandes, les deux décisions de fin de session pas encore appliquées au code (D37 serveur MCP dédié,
-> O5 clos), l'état de l'infra chez Thomas, et les pièges d'environnement à ne pas redécouvrir.
+> **Nouvelle session ? Commencez par [`REPRISE.md`](REPRISE.md).** Il contient l'amorçage, l'état vérifié
+> de l'infra, où reprendre, et les pièges d'environnement à ne pas redécouvrir.
 
 > **Sujet du fork** : sortir les référentiels du paquet vendoré vers un store partagé, et faire lire
 > le forme-store au moteur de rendu. *Nommé par son sujet, pas par un client* (M1) — le dossier
@@ -98,22 +97,25 @@ Le plan complet est dans `docs/roadmap_2026-07-27.md`, en deux voies : le **skil
 l'**infra référentiels** (parallèle, dépendance externe). Rien dans la voie skill n'attend l'infra,
 grâce à D35 — seed vendoré d'abord, promotion ensuite.
 
-**Un seul point bloquant** dans tout le plan : **O5/C4**, les ids provisoires de Gronier, prérequis du
-lecteur de forme-store. Tout le reste est ordonnançable.
+**Aucun point n'est plus strictement bloquant.** O5/C4 est clos **pour Gronier** — donc A1 est
+ordonnançable, mais A9 (banc d'essai INTERAGYR) ne l'est pas, faute de store INTERAGYR.
 
-État des livrables déjà produits :
+État des livrables, au 2026-07-29. *Ce tableau est daté à dessein : un état non daté finit par mentir.*
 
 | Livrable | Où | État |
 |---|---|---|
-| Étude empirique de signature (11 relevés) | `docs/etude_signature_gabarits_2026-07-27.md` | fait — contient le seed v0 des gabarits |
-| CDC v4 | `docs/CDC_v4_2026-07-27.md` | fait |
-| Spécification du tri à trois étages | `docs/spec_tri_blocs_widgets_2026-07-27.md` | fait — réalise J2 |
-| DDL du store des référentiels | `infra/ddl_referentiels_v0.sql` | écrit (332 l., rejouable) — exécuté chez Thomas selon `REPRISE.md`, non vérifiable depuis l'agent |
-| **Serveur MCP dédié** (D37) | `infra/mcp_referentiels/` | écrit, 14 contrôles au vert, **non déployé**. Supplante `infra/referentiels_skill.py`, conservé le temps du garde-fou de diff |
-| Seed des référentiels | `seed/` | **produit** — 17 acteurs, 2 successions, 7 profils, 261 ISIN, `seed.sql` idempotent (302 l.). ⚠️ **ne pas charger avant d'avoir levé O11 et O15** |
-| Référence de rendu client réel | `reference/gronier_T2/` | **produite** — rejoue en QC 9/9, 4 608 966 € |
-| Spécification du lecteur de forme-store | `docs/spec_lecteur_forme_store_2026-07-28.md` | écrite — manques M1–M11, ambiguïtés A1–A5 |
-| **Lecteur de forme-store** (A1/L2) | — | **AUCUNE LIGNE DE CODE.** C'est le vide central du fork : la « colonne vertébrale » de D20 n'existe qu'en spécification |
+| Étude de signature (11 relevés) | `docs/etude_signature_gabarits_2026-07-27.md` | fait — seed v0 des gabarits |
+| **Étude de corpus (34 documents, 4 ans)** | `docs/etude_corpus_2026-07-29/` | fait — 4 études d'émetteur, synthèse, **8 limites du système (LIM1–LIM8)**, table de vérité |
+| CDC v4 | `docs/CDC_v4_2026-07-27.md` | recoché le 29/07 — **20 cases sur 82**, 7 annotées « à moitié » |
+| Spécification du tri à trois étages | `docs/spec_tri_blocs_widgets_2026-07-27.md` | fait (réalise J2), **partiellement périmée** — décrit un bloc supprimé depuis |
+| DDL + migration 001 (D42) | `infra/ddl_referentiels_v0.sql`, `infra/migration_001_d42_fenetre_validite.sql` | **joués en base** le 29/07 |
+| **Serveur MCP dédié** (D37) | `infra/mcp_referentiels/` | **en service** — 4 outils, 15 contrôles de portage, séparation D34 démontrée en base |
+| Seed des référentiels | `seed/` | **chargé en base** — 17 acteurs, 2 successions, **9 gabarits**, 261 ISIN |
+| **Filet A — appariement** | `outils_appariement/` | **fait et exercé** — matcher, 32 appariés + 5 signalés, 15 contrôles négatifs |
+| Référence de rendu client réel | `reference/gronier_T2/` | produite — rejoue en QC 9/9, 4 608 966 € |
+| Spécification du lecteur de forme-store | `docs/spec_lecteur_forme_store_2026-07-28.md` | écrite — manques MQ1–MQ11, ambiguïtés A1–A5 |
+| **Lecteur de forme-store** (A1/L2) | — | **AUCUNE LIGNE DE CODE.** Le vide central du fork : la « colonne vertébrale » de D20 n'existe qu'en spécification |
+| **Client de lecture du bundle + producteur de propositions** | — | **AUCUNE LIGNE DE CODE**, et `grep -rn 'ref_bundle' skill/` le confirme. Ce sont les deux briques qui manquent au test de réussite |
 
 ## Protocole de merge (M6) — écrit avant d'en avoir besoin
 

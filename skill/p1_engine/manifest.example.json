@@ -1,7 +1,7 @@
 {
   "manifest_version": "1.0",
   "reporting": {
-    "client_label": "Hervé G.",
+    "client_label": "Client Exemple",
     "subtitle": "Family office - Reporting",
     "period_long": "4M 2026",
     "period_short": "4M-26",
@@ -20,8 +20,8 @@
   },
   "entities": [
     {
-      "id": "pp_hg",
-      "label": "Hervé G.",
+      "id": "client_exemple",
+      "label": "Client Exemple",
       "type": "pp",
       "categories": [
         "liquidites",
@@ -31,8 +31,8 @@
       ]
     },
     {
-      "id": "sas_ax",
-      "label": "SAS AX",
+      "id": "sas_exemple",
+      "label": "SAS Exemple",
       "type": "holding",
       "categories": [
         "liquidites",
@@ -41,8 +41,8 @@
       ]
     },
     {
-      "id": "sas_lg",
-      "label": "SAS LG",
+      "id": "sas_exemple_2",
+      "label": "SAS Exemple 2",
       "type": "holding",
       "categories": [
         "liquidites",

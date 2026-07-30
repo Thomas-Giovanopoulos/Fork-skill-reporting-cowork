@@ -1,0 +1,159 @@
+{
+  "schema_version": "2.1-skill",
+  "client": {
+    "id": "tmp_c_001",
+    "label": "Test L.",
+    "entities": [
+      {
+        "id": "pp",
+        "label": "Test L.",
+        "type": "pp",
+        "order": 0
+      }
+    ]
+  },
+  "reporting": {
+    "period_short": "T2-26",
+    "period_long": "T2 2026",
+    "date_reporting": "2026-06-30",
+    "date_display": "30 juin 2026",
+    "version": "v1",
+    "profile": "Équilibré"
+  },
+  "_provisional_ids": true,
+  "financier_cote": [
+    {
+      "id": "tmp_fc_001",
+      "entity_id": "pp",
+      "label": "CTO — Banque Alpha",
+      "nature": "CTO",
+      "assureur": "Banque Alpha",
+      "intermediaire": "Rhétorès",
+      "envelope_type": "cto",
+      "manager": "Gérant A",
+      "custodian": "Dépo A",
+      "management_mode": "Conseillée",
+      "risk_profile": "Équilibré",
+      "invest_date": "2024-01-15",
+      "nantissement": false,
+      "source": "excel",
+      "attributes": {
+        "pockets": [
+          {
+            "id": "pck_001",
+            "label": "CTO — Banque Alpha",
+            "type": "Mono",
+            "profile": "Équilibré",
+            "manager": "Gérant A",
+            "custodian": "Dépo A",
+            "value": 100000.0,
+            "capital_invested": 90000.0,
+            "value_jan1": 95000.0,
+            "invest_date": "2024-01-15"
+          }
+        ],
+        "lines": [
+          {
+            "isin": "LU0000000001",
+            "label": "Fonds Actions Monde",
+            "value": 60000.0,
+            "class": "actions",
+            "geography": "International / Monde",
+            "perf_pct": 4.2
+          },
+          {
+            "isin": "LU0000000002",
+            "label": "Fonds Oblig Euro",
+            "value": 30000.0,
+            "class": "obligations",
+            "perf_pct": 1.1
+          },
+          {
+            "label": "Cash",
+            "value": 10000.0,
+            "class": "monetaire"
+          }
+        ]
+      },
+      "value_current": 100000.0,
+      "capital_invested": 90000.0,
+      "value_jan1": 95000.0
+    },
+    {
+      "id": "tmp_fc_002",
+      "entity_id": "pp",
+      "label": "AV — Assureur Beta",
+      "nature": "AV",
+      "assureur": "Assureur Beta",
+      "intermediaire": "Rhétorès",
+      "envelope_type": "av_lu",
+      "manager": "Gérant B",
+      "custodian": "Dépo B",
+      "management_mode": "Gestion sous mandat",
+      "risk_profile": "Prudent",
+      "invest_date": "2023-06-01",
+      "nantissement": false,
+      "source": "excel",
+      "attributes": {
+        "pockets": [
+          {
+            "id": "pck_002",
+            "label": "AV — Assureur Beta",
+            "type": "Mono",
+            "profile": "Prudent",
+            "manager": "Gérant B",
+            "custodian": "Dépo B",
+            "value": 52000.0,
+            "capital_invested": 50000.0,
+            "value_jan1": 50500.0,
+            "invest_date": "2023-06-01",
+            "classe_rhetores": "obligations"
+          }
+        ]
+      },
+      "value_current": 52000.0,
+      "capital_invested": 50000.0,
+      "value_jan1": 50500.0
+    }
+  ],
+  "liquidites": [],
+  "immobilier": [],
+  "dettes": [],
+  "non_cote": [],
+  "valuations": [
+    {
+      "position_id": "pck_001",
+      "date": "2026-01-01",
+      "value": 95000.0
+    },
+    {
+      "position_id": "pck_001",
+      "date": "2026-06-30",
+      "value": 100000.0
+    },
+    {
+      "position_id": "pck_002",
+      "date": "2026-01-01",
+      "value": 50500.0
+    },
+    {
+      "position_id": "pck_002",
+      "date": "2026-06-30",
+      "value": 52000.0
+    }
+  ],
+  "courbe_performance": [
+    {
+      "date": "2026-01-01",
+      "cote": 145500.0
+    },
+    {
+      "date": "2026-03-31",
+      "cote": 148000.0
+    },
+    {
+      "date": "2026-06-30",
+      "cote": 152000.0
+    }
+  ]
+}

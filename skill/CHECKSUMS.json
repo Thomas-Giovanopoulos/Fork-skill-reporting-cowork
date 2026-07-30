@@ -4,8 +4,8 @@
     "md5": "6edf19e4e34eb790a78d775c81899cf8"
   },
   "SKILL.md": {
-    "size": 24257,
-    "md5": "564e5579d6fd0b11ac6443f33b86c46a"
+    "size": 30649,
+    "md5": "5d123db39e9c6e7e003614017de856cf"
   },
   "assets/Excel_structure_v2.xlsx": {
     "size": 10336,
@@ -16,20 +16,24 @@
     "md5": "ad81cfbc440bb371501a25f441a58854"
   },
   "assets/isin_referentiel_v0.README.md": {
-    "size": 5303,
-    "md5": "628fafd76f38cc0fcd5aa26339e37445"
+    "size": 5434,
+    "md5": "acd489b7f974103a47719c0f29814018"
   },
   "assets/isin_referentiel_v0.csv": {
-    "size": 28330,
-    "md5": "b65038fd4654562b683aa11666fbc87a"
+    "size": 29835,
+    "md5": "9be2143403820d843768ac1b8dd6fe2f"
+  },
+  "assets/referentiels_snapshot.json": {
+    "size": 79947,
+    "md5": "7831b9f17225c7b838e290f05a43f6f4"
   },
   "contexte/S1-26.json": {
     "size": 2446,
     "md5": "fe9b883f6bcb153421926282bad44154"
   },
   "contexte/S29 2026.json": {
-    "size": 4045,
-    "md5": "ec7e9fcc0823b019de214ca48e634be7"
+    "size": 4060,
+    "md5": "4075351a637283dbc105bd8b568cac81"
   },
   "contexte/T1-26.json": {
     "size": 2446,
@@ -48,12 +52,12 @@
     "md5": "ab30d9eaf25a44696a8d309644a596ef"
   },
   "p1_engine/README-pont-P2.md": {
-    "size": 4838,
-    "md5": "7564a75e4588b5256d19ba5dec36ff69"
+    "size": 4872,
+    "md5": "5f3269d079e410c589654d91e170ec0b"
   },
   "p1_engine/README.md": {
-    "size": 5215,
-    "md5": "9a4cbf50c62e33b517c840cd9c73bd06"
+    "size": 5268,
+    "md5": "1dd7d3ad06d80df4d3c10b61369cdf4b"
   },
   "p1_engine/assemble.py": {
     "size": 3976,
@@ -132,8 +136,8 @@
     "md5": "a3822bfd793701f69bd5e141b895a177"
   },
   "p1_engine/bank/partials/_styles.html": {
-    "size": 32406,
-    "md5": "2e43ea77a1f79d258758babfa35473e4"
+    "size": 32411,
+    "md5": "da6a2b899780c5b343975e148f0ea601"
   },
   "p1_engine/bank/partials/foot.html.j2": {
     "size": 2591,
@@ -155,21 +159,25 @@
     "size": 2746,
     "md5": "ca4cf26ca0f65466f178ef498d5ab771"
   },
+  "p1_engine/lecteur_store.py": {
+    "size": 18533,
+    "md5": "a563073a01d3c6e3966b4ace9360f885"
+  },
   "p1_engine/lint.py": {
     "size": 11117,
     "md5": "60c339bf797a674132611b7c8861253b"
   },
   "p1_engine/manifest.example.json": {
-    "size": 1029,
-    "md5": "1e498e82cc48ff29370ac0ff1dae9ba5"
+    "size": 1072,
+    "md5": "0501a96de60c2b5ebadde2f6ee5b6581"
   },
   "p1_engine/manifest.schema.json": {
     "size": 6475,
     "md5": "dd26c486431546734861b0411548d28a"
   },
   "p1_engine/p2_fill.py": {
-    "size": 108027,
-    "md5": "ddb5c5625768e47dd902c5f943a8dbd6"
+    "size": 109822,
+    "md5": "003496109204b5584b61705ef85ff70e"
   },
   "p1_engine/requirements.txt": {
     "size": 77,
@@ -186,6 +194,10 @@
   "p1_engine/snapshots/pp_ps_T2-26.json": {
     "size": 497,
     "md5": "fd7fafa0d8b70cc86e9aa33b22764354"
+  },
+  "p1_engine/store_to_manifest.py": {
+    "size": 5188,
+    "md5": "06066e9b5d0bd1da77ad843a30a6c324"
   },
   "p1_engine/tests/fixtures/fx_lignes_classes.xlsx": {
     "size": 8083,
@@ -215,6 +227,34 @@
     "size": 10273,
     "md5": "007ed7861626653683edf0eb82677c74"
   },
+  "p1_engine/tests/fixtures/stores/fx_lignes_classes.store.json": {
+    "size": 3812,
+    "md5": "00add9d6f8ae2e5839013a409f9c0f0f"
+  },
+  "p1_engine/tests/fixtures/stores/fx_limites.store.json": {
+    "size": 6578,
+    "md5": "100eb57d4e8b6bcd7d8a69a623ab83bf"
+  },
+  "p1_engine/tests/fixtures/stores/fx_minimal.store.json": {
+    "size": 3023,
+    "md5": "24bffe3ae6c235c8324d18fe055a4413"
+  },
+  "p1_engine/tests/fixtures/stores/fx_multiholdings.store.json": {
+    "size": 8226,
+    "md5": "64ba8c579febc297887fe9e404cc0bf4"
+  },
+  "p1_engine/tests/fixtures/stores/fx_no_portfolio.store.json": {
+    "size": 908,
+    "md5": "827b4bed4b8e4db679e554c5d9e2828a"
+  },
+  "p1_engine/tests/fixtures/stores/fx_noncote.store.json": {
+    "size": 11375,
+    "md5": "00324a56e31e80bf1243b74fb7dc44ee"
+  },
+  "p1_engine/tests/fixtures/stores/fx_simple.store.json": {
+    "size": 7518,
+    "md5": "efb7aa779e04b53b1626677adb0401f1"
+  },
   "p1_engine/tests/golden.json": {
     "size": 1319,
     "md5": "df7409f52a65fec843c046952a453f06"
@@ -231,6 +271,10 @@
     "size": 4786,
     "md5": "a049bdc86ea33f7a9152db08d142f94d"
   },
+  "p1_engine/tests/test_l3a.py": {
+    "size": 5210,
+    "md5": "a7912f9d7dabe47dd8de3896c587a01b"
+  },
   "p1_engine/tests/test_pnc.mjs": {
     "size": 4434,
     "md5": "5b0d45a8455ec017ea0d8cbe16c6c98d"
@@ -239,53 +283,85 @@
     "size": 2785,
     "md5": "14e2296581be28e6fa5704a871c46042"
   },
+  "pipeline/appliquer_diffs.py": {
+    "size": 16495,
+    "md5": "dc9b807ea08a4340f52af0f9fa0c4819"
+  },
   "pipeline/diff_contract.schema.json": {
     "size": 2418,
     "md5": "01d17de8ab5babbba8611bbdffa4b6fd"
   },
+  "pipeline/matcher_gabarit.py": {
+    "size": 15364,
+    "md5": "7c80a4246b77784e6bcfed43f5ead5a5"
+  },
+  "pipeline/producteur_propositions.py": {
+    "size": 10747,
+    "md5": "fcbbaa3eb7ab149d9076ee2ef75f33bb"
+  },
+  "pipeline/referentiels.py": {
+    "size": 10815,
+    "md5": "1d92c21094334e402f46cb2c0bb21aa3"
+  },
   "pipeline/store_builder.py": {
-    "size": 9805,
-    "md5": "e797467bba3e3e00ea2d7bfa221153c5"
+    "size": 10229,
+    "md5": "6bb2eae6a70c0ea5427081cbd5d09031"
   },
   "pipeline/store_client.schema.json": {
-    "size": 13312,
-    "md5": "28759f51fc5c93841d3fed15eb41c5d4"
+    "size": 29242,
+    "md5": "83dc47dcb462bf2c13b2e83bc48e0cde"
+  },
+  "pipeline/test_apply.py": {
+    "size": 8414,
+    "md5": "c662689f45df62a4526213c44ba256dc"
+  },
+  "pipeline/test_producteur.py": {
+    "size": 5866,
+    "md5": "a8ba47262fbdb5d7cea0f1eadbcf320a"
+  },
+  "pipeline/test_referentiels.py": {
+    "size": 6546,
+    "md5": "9b1ad4af4257a30fa0b3987bf32106ab"
   },
   "pipeline/test_store_builder.py": {
-    "size": 10313,
-    "md5": "dd3e4d6ae610fd3ddf7478e2e14c5042"
+    "size": 16870,
+    "md5": "ccea33cc27f3c814f2a028b965cf1b18"
+  },
+  "pipeline/valider_diff.py": {
+    "size": 5552,
+    "md5": "153eaa31b517583cb5f2ee93bbd608e2"
   },
   "references/01-architecture-blocs.md": {
-    "size": 21672,
-    "md5": "2171059d3b49fc456501cc0da1335de2"
+    "size": 21694,
+    "md5": "a77f751ee9d2a367dedeeb28a3280fac"
   },
   "references/02-classification.md": {
     "size": 7621,
     "md5": "5bd8640b52e851be83c123e4afe00697"
   },
   "references/03-tableau-exhaustif.md": {
-    "size": 10675,
-    "md5": "e194cd9f86187ab88b3ec59721a6b4cf"
+    "size": 10730,
+    "md5": "ddc6b762b0c8b097e17a435b87913391"
   },
   "references/04-charte-visuelle.md": {
     "size": 6770,
     "md5": "49bacf77f4baca154b038dfd02a075b1"
   },
   "references/05-coherence-globale.md": {
-    "size": 3754,
-    "md5": "d4834998a81d8de377f4482f10c33e67"
+    "size": 3782,
+    "md5": "072c062a68e7043c8d0e63815a8dcec8"
   },
   "references/06-mappings-fonds.md": {
-    "size": 5328,
-    "md5": "35c945a5fd6f50d2f0aae712a639717e"
+    "size": 5420,
+    "md5": "4b93b5d7f371aaf32aba3b30a0d4defd"
   },
   "references/07-cas-particuliers.md": {
-    "size": 4693,
-    "md5": "a5355b68a5b4dfc77cd84e75742cac08"
+    "size": 4710,
+    "md5": "4072cdc3967d0031f76b31083d9ee964"
   },
   "references/08-template-excel.md": {
-    "size": 18583,
-    "md5": "f835f67f275a661d6b050d55092e16aa"
+    "size": 18608,
+    "md5": "6920e6705040040b9088be2e50c69348"
   },
   "references/09-formalisme.md": {
     "size": 9982,
@@ -326,10 +402,6 @@
   "snapshots/gaelle_p_T2-26.json": {
     "size": 278,
     "md5": "8ee9cfd9ff3579092776b4aece3e22f8"
-  },
-  "snapshots/hanami_T2-26.json": {
-    "size": 322,
-    "md5": "b5674505abc5f9eaeb019d42aa725d89"
   },
   "snapshots/holding_1_S29 2026.json": {
     "size": 347,
@@ -410,10 +482,6 @@
   "snapshots/pp_ev_T2-26.json": {
     "size": 321,
     "md5": "391f0eb5f32d2414bd7c625348c47e24"
-  },
-  "snapshots/pp_gronier_T2-26.json": {
-    "size": 320,
-    "md5": "c8c32b7373aaac0b689709bb88063170"
   },
   "snapshots/pp_ht_T2-26.json": {
     "size": 346,

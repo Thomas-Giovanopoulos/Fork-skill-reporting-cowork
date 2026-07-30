@@ -1,5 +1,12 @@
 # Spécification du tri — blocs, sous-sections et widgets
 
+> ⚠️ **Partiellement périmée (constaté le 2026-07-29).** Tout ce que ce document dit du bloc
+> `rendement_annuel` ne s'applique plus : le bloc a été **supprimé** le 2026-07-28, son tableau
+> synthétique relocalisé sous le tableau *Historique du patrimoine*, et `BLOCK_ORDER` est passé de neuf
+> à **huit** blocs (cf. `JOURNAL.md`, entrées « A2 » et « Suppression du bloc Rendement annuel »). Les
+> passages concernés sont annotés sur place. Le reste — les trois étages, les widgets, le protocole
+> d'AskUser — tient.
+
 > **2026-07-27.** Réalise le livrable **J2** du CDC (« établir le tableau de faisabilité bloc par
 > bloc »), étendu aux deux étages que la v4 ne couvrait pas. Arbitré en atelier (Thomas × Cowork).
 > Amende le CDC v4 : décisions **D28–D31**, clôture **O8** et **T1**, élargit le chantier **J**.
@@ -10,7 +17,7 @@
 
 | Étage | Exemples | Gouverné aujourd'hui par | Dans le manifeste ? |
 |---|---|---|---|
-| **Bloc** | `historique`, `performance_nc` | `blocs_enabled`, littéral de dict dans `excel_to_manifest.py` | oui |
+| **Bloc** | `historique` ⚠️ *(supprimé depuis le 28/07)*, `performance_nc` | `blocs_enabled`, littéral de dict dans `excel_to_manifest.py` | oui |
 | **Sous-section** | « Fonds de private equity », « Titres non cotés » | `{% if pnc.detail %}` / `{% if pnc.detail_titres %}` | **non** |
 | **Widget** | « Disponibilités par contrat », « Positions — Matières premières » | `{% if perf and (perf.dispo or perf.mp) %}` | **non** |
 
@@ -36,16 +43,21 @@ jusqu'au bout : le forme-store devient la source unique de *ce qui apparaît*, c
 |---|---|---|---|
 | `hero` | intention actée | toujours | identité client ; le `True` en dur devient explicite |
 | `contexte` | intention + donnée externe | **store de période présent**, sinon désactivé | jamais de squelette (D17). Aucun logement au store → C6/O7 |
-| `supervision` | faisabilité | valuations + classification présentes | porte le tableau *Historique du patrimoine* (≠ bloc `rendement_annuel`, cf. §5) |
+| `supervision` | faisabilité | valuations + classification présentes | porte le tableau *Historique du patrimoine* (≠ bloc `rendement_annuel`, cf. §5) — ⚠️ *depuis le 28/07 il porte **aussi** le tableau synthétique annualisé, relocalisé sous lui ; la distinction que cette note rappelait n'a plus d'objet* |
 | `performance` | faisabilité | ≥ 1 contrat coté avec lignes | hôte des widgets de l'étage 3 |
 | `performance_nc` | faisabilité | ≥ 1 entrée `non_cote` — **jamais de seuil de pertinence** | titre et KPI **adaptatifs**, cf. §3. Voir D32 |
-| `rendement_annuel` *(ex-`historique`)* | faisabilité | **≥ 2 points** d'historique | 1 seul point → candidat pertinence (§4), pas un tableau d'une ligne |
+| ~~`rendement_annuel` *(ex-`historique`)*~~ | ~~faisabilité~~ | ~~**≥ 2 points** d'historique~~ | ⚠️ **PÉRIMÉ — bloc supprimé le 28/07.** Il n'y a plus que **huit** blocs. Le tableau synthétique est rendu sous le tableau Historique, donc sous la faisabilité de `supervision` |
 | `repartition` | intention (`mode`) | `mode != presentee` | inchangé |
 | `exhaustif` | intention (`mode`) | `mode != presentee` | inchangé |
 | `footer` | intention actée | toujours | |
 
 **Décision D29a** : `rendement_annuel` est **automatique sur faisabilité** — si la donnée est là, il
 s'affiche, sans question. (Réponse explicite de Thomas : « si la donnée est là afficher l'historique ».)
+
+> ⚠️ *Périmé sur la forme, tenu sur le fond.* D29a portait sur un bloc qui n'existe plus. Ce qui l'a
+> remplacé va dans le même sens : le tableau synthétique suit désormais la faisabilité de `supervision`,
+> donc il s'affiche dès que la donnée est là — et sans la condition `mode != 'presentee'` qui, dans
+> l'ancien template, l'empêchait d'apparaître en version présentée, contre D29a précisément.
 
 ---
 
@@ -115,7 +127,7 @@ Au run, après l'apply et avant store_to_manifest :
   2. Constituer la liste des CANDIDATS :
        • la paire dispo/MP, si la donnée existe (D29b) ;
        • tout bloc faisable mais sous seuil de pertinence
-         (ex. PE à faible part du patrimoine, rendement_annuel à 1 point,
+         (ex. PE à faible part du patrimoine, rendement_annuel à 1 point,   ← périmé : bloc supprimé
           matières premières à part marginale).
   3. Si la liste est vide  → aucune question, on continue.
      Si elle est non vide  → UN SEUL AskUser, tous les candidats en une fois.
@@ -139,6 +151,11 @@ une question de trop, jamais un reporting faux.
 
 ## 5 — La collision de noms (T1), tranchée
 
+> ⚠️ **Section entièrement périmée (28/07).** T1 est bien clos, mais **autrement** : le bloc a été
+> renommé *puis supprimé*. `blocs_enabled` n'accepte donc plus ni `historique` ni `rendement_annuel`, et
+> les manifestes antérieurs se **migrent** (`migrer_reference.py`) au lieu de se renommer. La portée de
+> renommage listée plus bas a été exécutée, puis défaite par le retrait du bloc.
+
 **Décision D31** : `blocs_enabled.historique` est **renommé `rendement_annuel`** avant l'écriture de
 `store_to_manifest`.
 
@@ -158,10 +175,10 @@ fixtures de régression. À faire d'un bloc, avec la régression 7/7 comme filet
 | # | Décision |
 |---|---|
 | **D28** | Le tri est à **trois étages** (bloc / sous-section / widget) et les trois sont **déclarés au manifeste**. Les templates ne décident plus de ce qui s'affiche. J couvre 100 % du tri. |
-| **D29a** | `rendement_annuel` est **automatique sur faisabilité** (≥ 2 points). Aucune question. |
+| **D29a** | `rendement_annuel` est **automatique sur faisabilité** (≥ 2 points). Aucune question. ⚠️ *Périmé sur la forme (bloc supprimé le 28/07), tenu sur le fond : le tableau synthétique suit la faisabilité de `supervision`.* |
 | **D29b** | `dispo` et `matières premières` relèvent de l'**intention** : jamais automatiques, décidés par AskUser, et traités comme une **paire liée** (contrainte de mise en page : une rangée partagée). |
 | **D30** | Pertinence et intention d'étage 3 → **un seul AskUser batché au run**, réponses **persistées au manifeste** (`tri_decisions`) et archivées au dossier de run. Réutilisées aux runs suivants. **Clôt O8.** |
-| **D31** | `blocs_enabled.historique` → **`rendement_annuel`**, avant J. **Clôt T1.** |
+| **D31** | `blocs_enabled.historique` → **`rendement_annuel`**, avant J. **Clôt T1.** ⚠️ *Exécuté le 28/07 puis **dépassé** : le bloc a été supprimé, pas seulement renommé. Cf. §5.* |
 | **D32** | **Le bloc PE n'a jamais de seuil de pertinence** : il s'affiche dès qu'il existe du non coté. Motif métier : le PE représente **peu d'actifs à forte importance individuelle**, et l'entrée en portefeuille suit souvent un événement où le client a été invité. La part du patrimoine est donc la **mauvaise métrique** pour ce bloc. |
 
 ### Seuils de déclenchement retenus (clôt O13)
@@ -169,7 +186,7 @@ fixtures de régression. À faire d'un bloc, avec la régression 7/7 comme filet
 | Candidat | Seuil | Statut |
 |---|---|---|
 | Bloc PE (`performance_nc`) | **aucun** — toujours affiché s'il existe | D32 |
-| `rendement_annuel` | exactement **1 point** | D29a (≥ 2 = auto) |
+| ~~`rendement_annuel`~~ | ~~exactement **1 point**~~ | ⚠️ **sans objet — bloc supprimé le 28/07**, plus de candidat à seuiller |
 | Matières premières | part **< 1 %** du patrimoine net OU une seule ligne | candidat |
 | Disponibilités | **toujours candidat** | intention, D29b |
 
@@ -181,8 +198,9 @@ les sous-sections Fonds/Titres** — elles restent en faisabilité pure (§3), l
 - **Chantier J élargi** : J1 déclare les trois étages ; J2 est réalisé par ce document ; J3 (séparer
   l'intention) s'étend aux widgets ; **J7 nouveau** — porter le tri d'étage 2 et 3 dans le manifeste
   et retirer les conditions correspondantes des templates.
-- **Chantier G** : G3 inclut le renommage D31. **G6 nouveau** — corriger le calcul des disponibilités
-  (`Court terme`, matching par libellé, définition du fonds euros).
+- **Chantier G** : G3 inclut le renommage D31. ⚠️ *G3 est clos depuis le 28/07 — par la suppression du
+  bloc, pas par son renommage.* **G6 nouveau** — corriger le calcul des disponibilités (`Court terme`,
+  matching par libellé, définition du fonds euros).
 - **Chantier C** : le manifeste gagne `tri_decisions` — à inscrire au **registre des écarts** (M2/M3),
   statut « invention réelle ».
 - **O8 clôturé** par D30. **T1 clôturé** par D31.
