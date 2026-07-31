@@ -68,8 +68,8 @@
     "md5": "7d9e0b245d3a9f54d095ac3ff3e7d179"
   },
   "p1_engine/bank/blocs/contexte.html.j2": {
-    "size": 2848,
-    "md5": "579910c05b74bb2decc52d8d31c322a6"
+    "size": 3065,
+    "md5": "c047984502bd2da4133520618fc6090b"
   },
   "p1_engine/bank/blocs/exhaustif.html.j2": {
     "size": 393,
@@ -80,20 +80,20 @@
     "md5": "b7c449bbbc2d0958f918e76f7a934f62"
   },
   "p1_engine/bank/blocs/performance.html.j2": {
-    "size": 22523,
-    "md5": "3c10cd644ffa4f20ba6f47de0c6e64fc"
+    "size": 21258,
+    "md5": "b7ea089478acde964e90e9432441bf47"
   },
   "p1_engine/bank/blocs/performance_nc.html.j2": {
-    "size": 7289,
-    "md5": "3b6e814478bb3a55b044c16ef434fe88"
+    "size": 15774,
+    "md5": "429d5594199b4ec9106ec7d86c44a36b"
   },
   "p1_engine/bank/blocs/repartition.html.j2": {
     "size": 1713,
     "md5": "68543009c7e780759c6706c490fa56e7"
   },
   "p1_engine/bank/blocs/supervision.html.j2": {
-    "size": 5500,
-    "md5": "26d90780d2df11edfa58db48faa74eb5"
+    "size": 5638,
+    "md5": "94702d27183b2fca33f218b7b150b564"
   },
   "p1_engine/bank/columns/cols_dettes.html.j2": {
     "size": 346,
@@ -160,8 +160,8 @@
     "md5": "ca4cf26ca0f65466f178ef498d5ab771"
   },
   "p1_engine/lecteur_store.py": {
-    "size": 18533,
-    "md5": "a563073a01d3c6e3966b4ace9360f885"
+    "size": 19195,
+    "md5": "11858b3e59c81c40b03b1707d97ed28d"
   },
   "p1_engine/lint.py": {
     "size": 11117,
@@ -176,8 +176,8 @@
     "md5": "dd26c486431546734861b0411548d28a"
   },
   "p1_engine/p2_fill.py": {
-    "size": 109822,
-    "md5": "003496109204b5584b61705ef85ff70e"
+    "size": 120820,
+    "md5": "9b44a5f4856832a58fd42ece48dd8d35"
   },
   "p1_engine/requirements.txt": {
     "size": 77,
@@ -198,6 +198,10 @@
   "p1_engine/store_to_manifest.py": {
     "size": 5188,
     "md5": "06066e9b5d0bd1da77ad843a30a6c324"
+  },
+  "p1_engine/tests/fixtures/fx_courbe2pts.xlsx": {
+    "size": 9382,
+    "md5": "992af835105c3ec451a347332d2929f6"
   },
   "p1_engine/tests/fixtures/fx_lignes_classes.xlsx": {
     "size": 8083,
@@ -226,6 +230,10 @@
   "p1_engine/tests/fixtures/fx_simple.xlsx": {
     "size": 10273,
     "md5": "007ed7861626653683edf0eb82677c74"
+  },
+  "p1_engine/tests/fixtures/stores/fx_courbe2pts.store.json": {
+    "size": 6587,
+    "md5": "0f36637ccd224acdd9c8eb7e12736def"
   },
   "p1_engine/tests/fixtures/stores/fx_lignes_classes.store.json": {
     "size": 3812,
@@ -256,8 +264,8 @@
     "md5": "efb7aa779e04b53b1626677adb0401f1"
   },
   "p1_engine/tests/golden.json": {
-    "size": 1319,
-    "md5": "df7409f52a65fec843c046952a453f06"
+    "size": 3190,
+    "md5": "61339380e71c32b96733e24573355022"
   },
   "p1_engine/tests/package-lock.json": {
     "size": 18653,
@@ -268,16 +276,16 @@
     "md5": "14df15f84a109605c34dc85150e31314"
   },
   "p1_engine/tests/run_tests.py": {
-    "size": 4786,
-    "md5": "a049bdc86ea33f7a9152db08d142f94d"
+    "size": 5611,
+    "md5": "3dc1e982c370d0f64c28a9f842112d3f"
   },
   "p1_engine/tests/test_l3a.py": {
     "size": 5210,
     "md5": "a7912f9d7dabe47dd8de3896c587a01b"
   },
   "p1_engine/tests/test_pnc.mjs": {
-    "size": 4434,
-    "md5": "5b0d45a8455ec017ea0d8cbe16c6c98d"
+    "size": 6947,
+    "md5": "beca0fe787e1c229656c1aba5e73f5c8"
   },
   "pipeline/GEO_RULES.md": {
     "size": 2785,

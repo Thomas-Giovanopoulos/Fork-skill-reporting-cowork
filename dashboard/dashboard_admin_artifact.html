@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Référentiels Rhétorès — Dashboard admin</title>
+<style>
+  :root { color-scheme: light;
+    --navy:#14324F; --navy2:#3E6188; --gold:#B8975A; --gold-bg:#F6F0E4;
+    --bg:#F7F8FA; --card:#FFFFFF; --bl:#E3E8EE; --txt:#1E2A36; --mut:#6B7A89;
+    --pos:#4F7D64; --neg:#8B2E2E; --warn:#B26A00; }
+  * { box-sizing:border-box; }
+  body { margin:0; padding:20px; background:var(--bg); color:var(--txt);
+         font:14px/1.45 "Segoe UI", "DM Sans", system-ui, sans-serif; }
+  h1 { font-size:19px; color:var(--navy); margin:0; letter-spacing:.2px; }
+  .hd { display:flex; justify-content:space-between; align-items:flex-end; gap:12px; flex-wrap:wrap; margin-bottom:6px; }
+  .lastread { font-size:12px; color:var(--mut); text-align:right; }
+  .lastread strong { color:var(--navy); font-variant-numeric:tabular-nums; }
+  .lastread .note { display:block; font-size:11px; opacity:.8; }
+  .kpis { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:14px 0; }
+  .kpi { background:var(--card); border:1px solid var(--bl); border-radius:8px; padding:10px 14px; }
+  .kpi .v { font-size:22px; font-weight:600; color:var(--navy); font-variant-numeric:tabular-nums; }
+  .kpi .l { font-size:11px; color:var(--mut); text-transform:uppercase; letter-spacing:.4px; }
+  .tabs { display:flex; gap:6px; margin:14px 0 10px; }
+  .tab { border:1px solid var(--bl); background:var(--card); color:var(--navy);
+         border-radius:20px; padding:6px 14px; cursor:pointer; font-size:13px; }
+  .tab.on { background:var(--navy); color:#fff; border-color:var(--navy); }
+  .tab .n { font-weight:600; margin-left:5px; }
+  .card { background:var(--card); border:1px solid var(--bl); border-radius:10px; padding:14px 16px; margin-bottom:12px; }
+  .row1 { display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; align-items:center; }
+  .badges span { display:inline-block; font-size:11px; border-radius:4px; padding:2px 8px; margin-right:6px; }
+  .b-cible { background:var(--gold-bg); color:#7A5F2C; border:1px solid #E4D6B8; }
+  .b-nature { background:#EAF0F6; color:var(--navy2); border:1px solid #D3DFEA; }
+  .b-statut { border:1px solid var(--bl); color:var(--mut); }
+  .b-statut.accepte { color:var(--pos); border-color:#CBDDD2; background:#EFF6F1; }
+  .b-statut.rejete { color:var(--neg); border-color:#E4CFCF; background:#F9F0F0; }
+  .b-statut.en_attente { color:var(--warn); border-color:#EBDCC3; background:#FBF5EA; }
+  .when { font-size:12px; color:var(--mut); }
+  .motif { margin:10px 0 6px; }
+  pre { background:#F2F4F7; border:1px solid var(--bl); border-radius:6px; padding:8px 10px;
+        font-size:12px; overflow:auto; max-height:180px; margin:8px 0; }
+  .prov { font-size:12px; color:var(--mut); }
+  .prov code { background:#F2F4F7; padding:1px 5px; border-radius:4px; }
+  .prov .absent { color:var(--warn); }
+  .arb { margin-top:10px; padding-top:10px; border-top:1px dashed var(--bl); display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+  .arb input { flex:1 1 260px; padding:7px 10px; border:1px solid var(--bl); border-radius:6px; font:inherit; }
+  button { font:inherit; border-radius:6px; padding:7px 14px; cursor:pointer; border:1px solid transparent; }
+  .b-rej { background:#fff; color:var(--neg); border-color:#D8B9B9; }
+  .b-rej:hover { background:#F9F0F0; }
+  .b-acc { background:var(--pos); color:#fff; }
+  .b-acc:hover { background:#436D56; }
+  button:disabled { opacity:.5; cursor:default; }
+  .verdict { margin-top:8px; font-size:12px; }
+  .verdict .who { color:var(--mut); }
+  .empty { text-align:center; color:var(--mut); padding:34px 0; }
+  .err { background:#F9F0F0; border:1px solid #E4CFCF; color:var(--neg); border-radius:8px; padding:10px 14px; margin:10px 0; white-space:pre-wrap; }
+  .foot { font-size:11px; color:var(--mut); margin-top:18px; border-top:1px solid var(--bl); padding-top:10px; }
+</style>
+</head>
+<body>
+  <div class="hd">
+    <div>
+      <h1>Référentiels Rhétorès — Dashboard admin</h1>
+      <div class="when">File d'adjudication · arbitrage admin-only (D34) · MCP local (D55)</div>
+    </div>
+    <div class="lastread">Dernière lecture : <strong id="lastread">—</strong>
+      <span class="note">Les données datent de cette lecture — pas du temps réel. Recharger la vue pour relire.</span>
+    </div>
+  </div>
+
+  <div class="kpis" id="kpis"></div>
+  <div class="tabs" id="tabs"></div>
+  <div id="err"></div>
+  <div id="list"><div class="empty">Chargement…</div></div>
+
+  <div class="foot">Les rejets sont tracés, jamais supprimés. « Accepter » écrit la table canonique et marque
+  la proposition dans la même transaction — visible au prochain <code>ref_bundle</code> de n'importe quel CGP (D36).
+  La provenance ne porte jamais de nom de fichier (D44) : empreinte de contenu, gabarit apparié, date d'arrêté.</div>
+
+<script>
+(function(){
+  const TOOLS = {
+    list: "mcp__referentiels-rhetores__ref_adjudications",
+    arbitrer: "mcp__referentiels-rhetores__ref_arbitrer",
+    bundle: "mcp__referentiels-rhetores__ref_bundle"
+  };
+  const STATUTS = [["en_attente","En attente"],["accepte","Acceptées"],["rejete","Rejetées"]];
+  let statut = localStorage.getItem("dash_statut") || "en_attente";
+  let repartition = {};
+
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s==null?"":s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+  async function mcp(name, args){
+    const r = await window.cowork.callMcpTool(name, args || {});
+    if (r.isError) throw new Error((r.content && r.content[0] && r.content[0].text) || "erreur MCP");
+    if (r.structuredContent) return r.structuredContent;
+    return JSON.parse(r.content[0].text);
+  }
+  function stampLastRead(){
+    $("lastread").textContent = new Date().toLocaleString("fr-FR", {dateStyle:"medium", timeStyle:"medium"});
+  }
+  function showErr(e){ $("err").innerHTML = e ? '<div class="err">'+esc(e.message||e)+"</div>" : ""; }
+
+  async function loadKpis(){
+    try {
+      const b = await mcp(TOOLS.bundle, {sections:["successions"]});
+      const c = b.compte || {};
+      $("kpis").innerHTML = [["acteurs","Acteurs"],["successions","Successions"],["gabarits","Gabarits"],["isin","ISIN"]]
+        .map(([k,l]) => '<div class="kpi"><div class="v">'+esc(c[k] ?? "—")+'</div><div class="l">'+l+' au canonique</div></div>').join("");
+    } catch(e){ $("kpis").innerHTML = '<div class="kpi" style="grid-column:1/-1"><div class="l">Compteurs indisponibles — '+esc(e.message)+'</div></div>'; }
+  }
+
+  function renderTabs(){
+    $("tabs").innerHTML = STATUTS.map(([k,l]) =>
+      '<button class="tab'+(k===statut?" on":"")+'" data-s="'+k+'">'+l+
+      (repartition[k]!=null?'<span class="n">'+repartition[k]+"</span>":(k==="en_attente"?'<span class="n" id="n_att"></span>':""))+"</button>").join("");
+    $("tabs").querySelectorAll(".tab").forEach(b => b.addEventListener("click", () => {
+      statut = b.dataset.s; localStorage.setItem("dash_statut", statut); refresh();
+    }));
+  }
+
+  function provHtml(a){
+    const emp = a.source_empreinte ? "<code>"+esc(a.source_empreinte.slice(0,12))+"…</code>"
+                                   : '<span class="absent">empreinte absente</span>';
+    const gab = a.source_gabarit ? esc(a.source_gabarit) : '<span class="absent">gabarit non apparié</span>';
+    const arr = a.source_arrete ? esc(a.source_arrete) : '<span class="absent">arrêté absent</span>';
+    return '<div class="prov">Provenance (D44) : '+emp+" · "+gab+" · arrêté "+arr+"</div>";
+  }
+
+  function cardHtml(a){
+    const dt = (a.propose_le||"").slice(0,16).replace("T"," ");
+    let h = '<div class="card" data-id="'+esc(a.id)+'">'
+      + '<div class="row1"><div class="badges">'
+      + '<span class="b-cible">'+esc(a.cible)+'</span>'
+      + '<span class="b-nature">'+esc(a.nature)+'</span>'
+      + '<span class="b-statut '+esc(a.statut)+'">'+esc(a.statut)+"</span></div>"
+      + '<div class="when">'+esc(a.propose_par||"?")+" · "+esc(dt)+(a.run_id?" · run "+esc(a.run_id):"")+"</div></div>"
+      + '<div class="motif">'+esc(a.motif||"(sans motif)")+"</div>"
+      + "<pre>"+esc(JSON.stringify({cle:a.cle, proposition:a.proposition}, null, 2))+"</pre>"
+      + provHtml(a);
+    if (a.statut === "en_attente"){
+      h += '<div class="arb"><input type="text" placeholder="Commentaire d\'arbitrage (obligatoire — qui décide dit pourquoi)" />'
+         + '<button class="b-rej">Rejeter</button><button class="b-acc">Accepter → canonique</button></div>';
+    } else {
+      h += '<div class="verdict"><span class="b-statut '+esc(a.statut)+'">'+(a.statut==="accepte"?"Acceptée":"Rejetée")+"</span> "
+         + '<span class="who">par '+esc(a.arbitre_par||"?")+" le "+esc((a.arbitre_le||"").slice(0,16))+"</span>"
+         + (a.commentaire_arbitrage ? "<div>"+esc(a.commentaire_arbitrage)+"</div>" : "")+"</div>";
+    }
+    return h+"</div>";
+  }
+
+  async function arbitrer(id, decision, commentaire, btns){
+    if (!commentaire){ alert("Le commentaire d'arbitrage est obligatoire — un arbitrage se motive."); return; }
+    if (decision==="accepte" && !confirm("Accepter écrit la table CANONIQUE dans la même transaction, et sera visible de tout CGP au prochain ref_bundle. Confirmer ?")) return;
+    btns.forEach(b => b.disabled = true);
+    try {
+      await mcp(TOOLS.arbitrer, {adjudication_id:id, decision:decision, commentaire:commentaire});
+      await refresh(); await loadKpis();
+    } catch(e){ showErr(e); btns.forEach(b => b.disabled = false); }
+  }
+
+  function bindCards(items){
+    document.querySelectorAll(".card").forEach(card => {
+      const id = card.dataset.id;
+      const rej = card.querySelector(".b-rej"), acc = card.querySelector(".b-acc"), inp = card.querySelector("input");
+      if (!rej) return;
+      rej.addEventListener("click", () => arbitrer(id, "rejete", inp.value.trim(), [rej,acc]));
+      acc.addEventListener("click", () => arbitrer(id, "accepte", inp.value.trim(), [rej,acc]));
+    });
+  }
+
+  async function refresh(){
+    showErr(null);
+    $("list").innerHTML = '<div class="empty">Lecture de la file…</div>';
+    try {
+      const d = await mcp(TOOLS.list, {statut:statut, limit:50});
+      stampLastRead();
+      repartition = d.repartition || {};
+      const items = d.adjudications || [];
+      repartition["en_attente"] = (statut==="en_attente") ? items.length : repartition["en_attente"];
+      renderTabs();
+      $("list").innerHTML = items.length ? items.map(cardHtml).join("")
+        : '<div class="empty">Aucune proposition « '+statut.replace("_"," ")+' » — la file est nette.</div>';
+      bindCards(items);
+    } catch(e){ showErr(e); $("list").innerHTML = '<div class="empty">Lecture impossible.</div>'; }
+  }
+
+  renderTabs();
+  loadKpis();
+  refresh();
+})();
+</script>
+</body>
+</html>

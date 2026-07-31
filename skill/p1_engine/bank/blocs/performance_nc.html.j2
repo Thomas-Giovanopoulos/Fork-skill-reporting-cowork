@@ -18,25 +18,63 @@
     <div class="card card-gold"><div class="card-lbl">Valeur du non coté</div><div class="card-val" data-pnc="k-value">{{ K.value if K else '&mdash;' }}</div><div class="card-sub">au {{ reporting.date_display }} · base TVPI</div></div>
   </div>
 
+  <!-- Widgets 2 & 3 — graphe trimestriel + composition. Supprimés le 23/07/2026 à la demande
+       du CGP, RÉTABLIS le 30/07/2026 sur arbitrage de Thomas (chantier UI, D-UI-1) : la
+       plomberie p2_fill n'avait jamais cessé de les calculer. Gabarit : contrôle d'époque A. -->
+  {%- if pnc and pnc.has_funds %}
+  <div class="alloc-grid">
+    <!-- Widget 2 — Graphique de valorisation trimestrielle (graphe seul, sans onglet Détails) -->
+    <div class="chart-card" data-pnc="card">
+      <div class="pnc-chart-hd">
+        <div class="chart-title" data-pnc="chart-title">Valorisation trimestrielle du non coté{{ pnc.cout_note }} — depuis {{ nc_start }}</div>
+      </div>
+      <div class="pnc-page" data-pnc-page="chart">
+        <canvas id="perf_nc_bars" height="200" data-slot="perf_nc_bars_chart"></canvas>
+      </div>
+    </div>
+
+    <!-- Widget 3 — Composition du portefeuille non coté (cliquable ; multiples MOIC + TVPI) -->
+    <div class="bench-card">
+      <div class="bench-title">Composition du portefeuille non coté — multiples au {{ reporting.date_display }}</div>
+      <div class="pnc-mlegend"><span><i class="sw" style="background:#DCC79A"></i>MOIC (brut)</span><span><i class="sw" style="background:#4F7D64"></i>TVPI (net)</span><span><i class="tk"></i>Cible</span></div>
+      {%- for c in pnc.compo %}
+      <div class="pnc-crow pnc-row{% if c.is_port %} pnc-active{% else %} pnc-sub{% endif %}" data-pnc-view="{{ c.view }}" role="button" tabindex="0">
+        <div class="bench-name" style="font-weight:{% if c.is_port %}600{% else %}500{% endif %};color:var(--navy);">{{ c.name }}{% if c.weight is not none %} <span class="pnc-w">({{ c.weight }}%)</span>{% endif %}</div>
+        <div class="pnc-mults"><span class="mm">{{ c.moic | safe }}</span><span class="mt">{{ c.tvpi | safe }}</span>{% if c.cible %}<span class="mc">&#9670; {{ c.cible }}</span>{% endif %}</div>
+        <div class="pnc-bar-wrap pnc-bar-single">
+          <div class="pnc-bar-moic" style="width:{{ c.moic_w }}%"></div>
+          <div class="pnc-bar-tvpi" style="width:{{ c.tvpi_w }}%"></div>
+          {%- if c.cible_w %}<div class="pnc-bar-tick" style="left:{{ c.cible_w }}%"></div>{%- endif %}
+        </div>
+      </div>
+      {%- endfor %}
+      {%- if pnc.pitch %}<div class="pnc-pitch">{{ pnc.pitch | safe }}</div>{%- endif %}
+    </div>
+  </div>
+  {%- endif %}
+
   <!-- Widget 4 — Détail par contrat (accordéon ligne à ligne) -->
   {%- if pnc and pnc.detail %}
   <div class="cote-exh exh-card">
-    <div class="cote-exh-hd">Fonds de private equity — détail par véhicule</div>
+    {#- D-UI-2 (31/07) : chapeau adaptatif aux classes présentes ; colonne « Cible (MOIC/TRI) »
+        SUPPRIMÉE — redondante avec le sous-texte du fonds (« … · Cible 2,0x · 7y »), retour au
+        jeu de 8 colonnes du contrôle d'époque A. -#}
+    <div class="cote-exh-hd">{{ pnc.detail_title or "Fonds non cotés — détail par véhicule" }}</div>
     <table class="synth-table cote-acc-tbl nc-acc-tbl">
       <thead><tr>
         <th style="text-align:left;width:26%">Fonds / Véhicule</th>
-        <th>Date d'inv.</th><th>Cap. engagé</th><th>Cap. appelé</th><th>Non appelé réel</th><th>Non appelé estimé</th><th>MOIC</th><th>Cible (MOIC/TRI)</th><th style="padding-right:12px">Valeur (dern. constat.)</th>
+        <th>Date d'inv.</th><th>Cap. engagé</th><th>Cap. appelé</th><th>Non appelé réel</th><th>Non appelé estimé</th><th>MOIC</th><th style="padding-right:12px">Valeur (dern. constat.)</th>
       </tr></thead>
       <tbody>
         {%- for blk in pnc.detail %}
-        {%- if blk.entity %}<tr class="acc-ent-row"><td colspan="9">{{ blk.entity }}</td></tr>{%- endif %}
+        {%- if blk.entity %}<tr class="acc-ent-row"><td colspan="8">{{ blk.entity }}</td></tr>{%- endif %}
         {%- for d in blk.rows %}
         <tr class="acc-head{% if d.flux and reporting.mode != 'presentee' %} acc-clickable{% endif %}">
           <td><span class="acc-chev{% if not (d.flux and reporting.mode != 'presentee') %} acc-chev-off{% endif %}">{% if d.flux and reporting.mode != 'presentee' %}&#9656;{% endif %}</span><span class="acc-name"><span class="cname">{{ d.name }}</span>{% if d.sub %}<span class="cdet">{{ d.sub }}</span>{% endif %}</span></td>
-          <td>{{ d.date_inv }}</td><td>{{ d.eng }}</td><td>{{ d.called }}</td><td>{{ d.na_reel }}</td><td>{{ d.na_est }}</td><td>{{ d.moic }}</td><td>{{ d.cible }}</td><td style="padding-right:12px;font-weight:600">{{ d.vl }}</td>
+          <td>{{ d.date_inv }}</td><td>{{ d.eng }}</td><td>{{ d.called }}</td><td>{{ d.na_reel }}</td><td>{{ d.na_est }}</td><td>{{ d.moic }}</td><td style="padding-right:12px;font-weight:600">{{ d.vl }}</td>
         </tr>
         {%- if d.flux and reporting.mode != 'presentee' %}
-        <tr class="acc-detail" hidden><td colspan="9">
+        <tr class="acc-detail" hidden><td colspan="8">
           <div class="nc-acc-stats"><span>TVPI&nbsp;<strong>{{ d.stats.tvpi }}</strong></span><span>DPI&nbsp;<strong>{{ d.stats.dpi }}</strong></span><span>RVPI&nbsp;<strong>{{ d.stats.rvpi }}</strong></span><span>TRI&nbsp;<strong>{{ d.stats.tri }}</strong></span></div>
           <table class="acc-lines"><thead><tr><th style="text-align:left;width:34%">Date</th><th>Type</th><th>Montant</th><th style="padding-right:8px">Reste à appeler</th></tr></thead><tbody>
             {%- for fx in d.flux %}
@@ -50,7 +88,7 @@
         {%- endfor %}
         {%- if pnc.detail_total %}
         {%- set t = pnc.detail_total %}
-        <tr class="total-row"><td>TOTAL</td><td></td><td>{{ t.eng }}</td><td>{{ t.called }}</td><td>{{ t.na_reel }}</td><td>{{ t.na_est }}</td><td>{{ t.moic }}</td><td></td><td style="padding-right:12px" class="c-gold">{{ t.vl }}</td></tr>
+        <tr class="total-row"><td>TOTAL</td><td></td><td>{{ t.eng }}</td><td>{{ t.called }}</td><td>{{ t.na_reel }}</td><td>{{ t.na_est }}</td><td>{{ t.moic }}</td><td style="padding-right:12px" class="c-gold">{{ t.vl }}</td></tr>
         {%- endif %}
       </tbody>
     </table>
@@ -81,6 +119,100 @@
   </div>
   {%- endif %}
 
+  {%- if pnc and pnc.has_funds %}
+  <script>
+  (function(){
+    const el=document.getElementById('perf_nc_bars'); if(!el||!window.Chart) return;
+    const VIEWS={{ pnc.views_js | safe }};
+    const byId={}; VIEWS.forEach(function(v){byId[v.id]=v;});
+    let cur=VIEWS[0];
+    const segPct={id:'segPct',afterDatasetsDraw(chart){
+      const ctx=chart.ctx;
+      ctx.save(); ctx.font="600 11px 'DM Sans',sans-serif"; ctx.textAlign='center'; ctx.textBaseline='middle';
+      chart.data.datasets.forEach(function(ds,di){
+        if(ds.type!=='line'||!ds.trueData) return;
+        const pts=chart.getDatasetMeta(di).data, d=ds.trueData;
+        for(let i=1;i<pts.length;i++){
+          const a=d[i-1],b=d[i]; if(a==null||b==null||!a) continue;
+          const pc=(b-a)/a*100, txt=(pc>=0?'+':'−')+Math.abs(pc).toFixed(1).replace('.',',')+'%';
+          const x0=pts[i-1].x,y0=pts[i-1].y,x1=pts[i].x,y1=pts[i].y;
+          let dx=x1-x0,dy=y1-y0,L=Math.hypot(dx,dy)||1;
+          let nx=-dy/L,ny=dx/L; if(ny>0){nx=-nx;ny=-ny;}
+          ctx.fillStyle=(pc>=0?'#0D1B2A':'#8B2E2E');
+          ctx.fillText(txt,(x0+x1)/2+nx*20,(y0+y1)/2+ny*20);
+        }
+      });
+      ctx.restore();
+    }};
+    const ANIM=1000;
+    const fmt=function(v){return Number(v).toFixed(cur.bars.dec)+' '+cur.bars.unit;};
+    const chart=new Chart(el.getContext('2d'),{type:'bar',
+      data:{labels:cur.bars.labels.slice(),datasets:[
+        {type:'bar',label:'Valorisation',data:cur.bars.data.slice(),
+          backgroundColor:'rgba(184,151,90,0.85)',borderColor:'#B8975A',borderWidth:1,borderRadius:4,maxBarThickness:54,order:2},
+        {type:'line',label:'Portefeuille',data:cur.bars.line.slice(),trueData:cur.bars.data.slice(),borderColor:'#8A6D2E',borderWidth:2.5,
+          fill:false,tension:0,pointRadius:3.5,pointHoverRadius:5,pointBackgroundColor:'#8A6D2E',pointBorderColor:'#8A6D2E',order:1}]},
+      options:{maintainAspectRatio:false,animation:{duration:ANIM},interaction:{mode:'nearest',intersect:true},layout:{padding:{top:30,bottom:18}},
+        plugins:{legend:{display:true,position:'top',align:'end',labels:{boxWidth:18,boxHeight:2,font:{size:11},filter:function(it){return it.datasetIndex!==0;},usePointStyle:false}},
+          tooltip:{filter:function(i){return i.datasetIndex!==0;},callbacks:{label:function(c){var td=c.dataset.trueData,v=(td&&td[c.dataIndex]!=null)?td[c.dataIndex]:c.parsed.y;return ' '+c.dataset.label+': '+fmt(v);}}}},
+        scales:{y:{beginAtZero:false,min:cur.bars.ymin,grace:'8%',ticks:{maxTicksLimit:7,callback:function(v){return fmt(v);}},grid:{color:'rgba(13,27,42,0.05)'}},x:{grid:{display:false}}}},
+      plugins:[segPct]});
+    function q(s){return document.querySelector('[data-pnc="'+s+'"]');}
+    const RAF=(typeof requestAnimationFrame!=='undefined') && !(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches);
+    function flowTo(el, html){
+      if(!el) return;
+      if(!RAF){el.innerHTML=html;return;}
+      const tmp=document.createElement('span'); tmp.innerHTML=html;
+      const txt=tmp.textContent, re=/[+\-−]?\d[\d   ]*(?:,\d+)?/;
+      const mN=txt.match(re), mO=(el.textContent||'').match(re);
+      const toN=function(m){return parseFloat(m[0].replace(/[   ]/g,'').replace('−','-').replace(',','.'));};
+      if(!mN||!mO){el.innerHTML=html;return;}
+      const a=toN(mO), b=toN(mN);
+      if(!isFinite(a)||!isFinite(b)||a===b){el.innerHTML=html;return;}
+      const dec=(mN[0].split(',')[1]||'').length, plus=/^\s*\+/.test(mN[0]);
+      const t0=performance.now(), D=ANIM, TICK=90;
+      let last=-1e9;
+      function fm(v){
+        let s=Math.abs(v).toFixed(dec).replace('.',',');
+        const parts=s.split(','); s=parts[0].replace(/\B(?=(\d{3})+(?!\d))/g,' ')+(parts[1]?','+parts[1]:'');
+        return (v<0?'−':(plus?'+':''))+s;
+      }
+      (function step(now){
+        now=now||performance.now();
+        const p=Math.min(1,(now-t0)/D), e=1-Math.pow(1-p,3);
+        if(p>=1){el.innerHTML=html;return;}
+        if(now-last>=TICK){el.textContent=txt.replace(re, fm(a+(b-a)*e)); last=now;}
+        requestAnimationFrame(step);
+      })(t0);
+    }
+    function setView(id){
+      cur=byId[id]||VIEWS[0];
+      chart.data.labels=cur.bars.labels.slice();
+      chart.data.datasets[0].data=cur.bars.data.slice();
+      chart.data.datasets[1].data=cur.bars.line.slice();
+      chart.data.datasets[1].trueData=cur.bars.data.slice();
+      chart.data.datasets[1].label=(cur.id==='port'?'Portefeuille':cur.label);
+      chart.options.scales.y.min=cur.bars.ymin;
+      chart.update();
+      const K=cur.kpis;
+      flowTo(q('k-start'),K.start_value);
+      const cm=q('c-moic'); if(cm) cm.className='card '+K.moic_card;
+      const mm=q('moic-mult'); if(mm){flowTo(mm,K.moic_mult); mm.className='card-val '+K.moic_cls;}
+      const ms=q('moic-sub'); if(ms) ms.innerHTML=K.moic_eur+' · '+K.moic_pct;
+      const ctv=q('c-tvpi'); if(ctv) ctv.className='card '+K.tvpi_card;
+      const tm=q('tvpi-mult'); if(tm){flowTo(tm,K.tvpi_mult); tm.className='card-val '+K.tvpi_cls;}
+      const ts=q('tvpi-sub'); if(ts) ts.innerHTML=K.tvpi_eur+' · '+K.tvpi_pct;
+      flowTo(q('k-value'),K.value);
+      const ct=q('chart-title'); if(ct) ct.textContent=(cur.id==='port'?'Valorisation trimestrielle du non coté':'Valorisation trimestrielle — '+cur.label)+(cur.cout_note||'')+' — depuis {{ nc_start }}';
+      document.querySelectorAll('[data-pnc-view]').forEach(function(r){r.classList.toggle('pnc-active',r.getAttribute('data-pnc-view')===cur.id);});
+    }
+    document.querySelectorAll('[data-pnc-view]').forEach(function(r){
+      r.addEventListener('click',function(){setView(r.getAttribute('data-pnc-view'));});
+      r.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();setView(r.getAttribute('data-pnc-view'));}});
+    });
+  })();
+  </script>
+  {%- endif %}
   {%- if pnc %}
   <script>
   (function(){

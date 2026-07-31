@@ -1,0 +1,282 @@
+{
+  "schema_version": "2.1-skill",
+  "client": {
+    "id": "tmp_c_001",
+    "label": "Paul S.",
+    "entities": [
+      {
+        "id": "pp_ps",
+        "label": "Paul S.",
+        "type": "pp",
+        "order": 0
+      }
+    ]
+  },
+  "reporting": {
+    "period_short": "T2-26",
+    "period_long": "T2 2026",
+    "date_reporting": "2026-06-30",
+    "date_display": "30 juin 2026",
+    "version": "v1",
+    "profile": "Équilibré"
+  },
+  "_provisional_ids": true,
+  "financier_cote": [
+    {
+      "id": "tmp_fc_001",
+      "entity_id": "pp_ps",
+      "label": "AV — Wealins Lux",
+      "nature": "AV",
+      "assureur": "Wealins Lux",
+      "intermediaire": "Rhétorès",
+      "envelope_type": "av_lu",
+      "manager": "Tobam",
+      "custodian": "UBS",
+      "management_mode": "Déléguée",
+      "risk_profile": "Dynamique",
+      "invest_date": "Févr. 2024",
+      "nantissement": false,
+      "source": "excel",
+      "attributes": {
+        "pockets": [
+          {
+            "id": "pck_001",
+            "label": "AV — Wealins Lux",
+            "type": "FID",
+            "profile": "Dynamique",
+            "manager": "Tobam",
+            "custodian": "UBS",
+            "value": 540000.0,
+            "capital_invested": 500000.0,
+            "value_jan1": 520000.0,
+            "invest_date": "Févr. 2024",
+            "classe_rhetores": "actions",
+            "geography": "Amérique du Nord"
+          }
+        ]
+      },
+      "value_current": 540000.0,
+      "capital_invested": 500000.0,
+      "value_jan1": 520000.0
+    },
+    {
+      "id": "tmp_fc_002",
+      "entity_id": "pp_ps",
+      "label": "CTO — UBS",
+      "nature": "CTO",
+      "assureur": "UBS",
+      "intermediaire": "UBS",
+      "envelope_type": "cto",
+      "manager": "iShares",
+      "custodian": "UBS",
+      "management_mode": "Conseillée",
+      "risk_profile": "Dynamique",
+      "invest_date": "Mars 2024",
+      "nantissement": false,
+      "source": "excel",
+      "attributes": {
+        "pockets": [
+          {
+            "id": "pck_002",
+            "label": "CTO — UBS",
+            "type": "Mono",
+            "profile": "Dynamique",
+            "manager": "iShares",
+            "custodian": "UBS",
+            "value": 360000.0,
+            "capital_invested": 300000.0,
+            "value_jan1": 280000.0,
+            "invest_date": "Mars 2024",
+            "classe_rhetores": "actions",
+            "geography": "International / Monde"
+          }
+        ]
+      },
+      "value_current": 360000.0,
+      "capital_invested": 300000.0,
+      "value_jan1": 280000.0
+    }
+  ],
+  "liquidites": [
+    {
+      "id": "liq_001",
+      "entity_id": "pp_ps",
+      "label": "Compte courant",
+      "custodian": "UBS",
+      "balance": 260000.0,
+      "source": "excel"
+    }
+  ],
+  "immobilier": [],
+  "dettes": [],
+  "non_cote": [
+    {
+      "id": "nc_001",
+      "entity_id": "pp_ps",
+      "label": "Altaroc Odyssey 2024",
+      "manager": "Altaroc",
+      "classe_rhetores": "private_equity",
+      "capital_committed": 1000000.0,
+      "capital_called": 400000.0,
+      "value_current": 425000.0,
+      "source": "excel",
+      "attributes": {
+        "strategy": "Co-invest",
+        "moic_target": 2.2,
+        "moic_realise": 1.06,
+        "uncalled_estime": 600000.0
+      }
+    },
+    {
+      "id": "nc_002",
+      "entity_id": "pp_ps",
+      "label": "Essling Co-Invest III",
+      "manager": "Essling Capital",
+      "classe_rhetores": "private_equity",
+      "capital_committed": 500000.0,
+      "capital_called": 500000.0,
+      "value_current": 640000.0,
+      "source": "excel",
+      "attributes": {
+        "strategy": "Co-invest",
+        "moic_target": 2.5,
+        "moic_realise": 1.4,
+        "uncalled_estime": 0.0
+      }
+    },
+    {
+      "id": "nc_003",
+      "entity_id": "pp_ps",
+      "label": "Tikehau Direct Lending VI",
+      "manager": "Tikehau",
+      "classe_rhetores": "dette_privee",
+      "capital_committed": 800000.0,
+      "capital_called": 640000.0,
+      "value_current": 704000.0,
+      "source": "excel",
+      "attributes": {
+        "strategy": "Dette privée",
+        "moic_target": 1.4,
+        "moic_realise": 1.1,
+        "uncalled_estime": 160000.0
+      }
+    }
+  ],
+  "mouvements": [
+    {
+      "id": "tmp_mv_001",
+      "entry_ref": "nc_001",
+      "date": "2025-11-15",
+      "type": "appel",
+      "amount": 150000.0
+    },
+    {
+      "id": "tmp_mv_002",
+      "entry_ref": "nc_001",
+      "date": "2026-02-10",
+      "type": "appel",
+      "amount": 150000.0
+    },
+    {
+      "id": "tmp_mv_003",
+      "entry_ref": "nc_001",
+      "date": "2026-05-15",
+      "type": "appel",
+      "amount": 100000.0
+    },
+    {
+      "id": "tmp_mv_004",
+      "entry_ref": "nc_001",
+      "date": "2026-09-15",
+      "type": "appel_prevu",
+      "amount": 150000.0
+    },
+    {
+      "id": "tmp_mv_005",
+      "entry_ref": "nc_001",
+      "date": "2027-01-15",
+      "type": "appel_prevu",
+      "amount": 200000.0
+    },
+    {
+      "id": "tmp_mv_006",
+      "entry_ref": "nc_001",
+      "date": "2028-06-30",
+      "type": "distribution_prevue",
+      "amount": 250000.0
+    },
+    {
+      "id": "tmp_mv_007",
+      "entry_ref": "nc_002",
+      "date": "2025-12-10",
+      "type": "appel",
+      "amount": 500000.0
+    },
+    {
+      "id": "tmp_mv_008",
+      "entry_ref": "nc_002",
+      "date": "2026-04-15",
+      "type": "distribution",
+      "amount": 60000.0
+    },
+    {
+      "id": "tmp_mv_009",
+      "entry_ref": "nc_002",
+      "date": "2026-12-31",
+      "type": "distribution_prevue",
+      "amount": 120000.0
+    }
+  ],
+  "valuations": [
+    {
+      "position_id": "pck_001",
+      "date": "2026-01-01",
+      "value": 520000.0
+    },
+    {
+      "position_id": "pck_001",
+      "date": "2026-06-30",
+      "value": 540000.0
+    },
+    {
+      "position_id": "pck_002",
+      "date": "2026-01-01",
+      "value": 280000.0
+    },
+    {
+      "position_id": "pck_002",
+      "date": "2026-06-30",
+      "value": 360000.0
+    },
+    {
+      "position_id": "nc_001",
+      "date": "2025-12-20",
+      "value": 150000.0
+    },
+    {
+      "position_id": "nc_001",
+      "date": "2026-03-31",
+      "value": 310000.0
+    },
+    {
+      "position_id": "nc_001",
+      "date": "2026-06-30",
+      "value": 425000.0
+    },
+    {
+      "position_id": "nc_002",
+      "date": "2025-12-31",
+      "value": 520000.0
+    },
+    {
+      "position_id": "nc_002",
+      "date": "2026-03-31",
+      "value": 580000.0
+    },
+    {
+      "position_id": "nc_002",
+      "date": "2026-06-30",
+      "value": 640000.0
+    }
+  ]
+}

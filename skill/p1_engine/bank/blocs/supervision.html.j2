@@ -27,7 +27,8 @@
     <div class="card">
       <div class="card-lbl">Profil de risque moyen</div>
       <div class="card-val" data-slot="sup_profil">{{ sup.kpis.profil if (sup and sup.kpis and sup.kpis.get('profil')) else '&mdash;' }}</div>
-      <div class="card-sub">{% if sup and sup.kpis and sup.kpis.get('sri') %}SRI {{ sup.kpis.sri }}/7 · moyen pondéré{% else %}SRI moyen pondéré (1-7){% endif %}</div>
+      {#- E4 (contrôle d'époque corrigé du 31/07) : une métrique à périmètre ambigu porte son périmètre. -#}
+      <div class="card-sub">{% if sup and sup.kpis and sup.kpis.get('sri') %}SRI {{ sup.kpis.sri }}/7 · moyen pondéré (coté + non coté){% else %}SRI moyen pondéré (1-7){% endif %}</div>
     </div>
   </div>
 

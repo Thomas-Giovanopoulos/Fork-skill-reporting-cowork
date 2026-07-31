@@ -21,7 +21,9 @@
   <div class="macro-cards">
     <!-- Widget 2 — Faits marquants (5 puces, store de période) -->
     <div class="facts-card">
-      <div class="facts-title">{{ reporting.period_short }} - Faits marquants</div>
+      {#- D-UI-8 (arbitré 31/07) : le chapeau dit « Reporting au [date] » — trois conventions
+          coexistaient dans les pièces (S29 2026 / T2 2026 / T3-26), une seule survit. -#}
+      <div class="facts-title">Reporting au {{ reporting.date_display }} - Faits marquants</div>
       {%- if ctx and ctx.faits %}
       {%- for f in ctx.faits %}
       <div class="fact-item">
@@ -41,7 +43,7 @@
 
     <!-- Widget 3 — Performance des indices (panorama technique : variation + % YTD, SANS portefeuille) -->
     <div class="bench-card">
-      <div class="bench-title">{{ reporting.period_short }} - Performance des indices</div>
+      <div class="bench-title">Reporting au {{ reporting.date_display }} - Performance des indices</div>
       {%- if ctx and ctx.indices %}
       {%- for r in ctx.indices %}
       <div class="bench-row">

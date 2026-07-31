@@ -123,6 +123,20 @@ def _moic(v):
     return t.replace(".", ",") + "x"
 
 
+def _duree(v):
+    """Nombre → « 7y » / « 7,5y » : même contrat que _moic — le classeur écrit la durée en
+    texte suffixé (« 10y ») et le template ne formate pas (« valeurs pré-formatées de
+    l'Excel »). Le store porte le nombre sémantique (`duration_target: 7`) ; sans ce suffixe,
+    le sous-texte du fonds perdait son unité (« Cible 2,0x · 7 » — revue D-UI-2, 31/07).
+    Une chaîne déjà formatée passe verbatim."""
+    if v is None:
+        return None
+    if isinstance(v, str):
+        return v or None
+    t = f"{float(v):.2f}".rstrip("0").rstrip(".")
+    return t.replace(".", ",") + "y"
+
+
 def _classe(v):
     """Code → libellé ; un verbatim déjà lisible (non mappé) passe tel quel."""
     if v is None:
@@ -364,7 +378,7 @@ class ClasseurStore:
                 _classe(n.get("classe_rhetores")),        # 10
                 n.get("tri_pct"),                         # 11 — MQ4
                 attrs.get("segment"),                     # 12
-                attrs.get("duration_target"),             # 13
+                _duree(attrs.get("duration_target")),     # 13 — verbatim « 7y » (D-UI-2)
                 _jjmmaaaa(n.get("invest_date")),          # 14 — MQ10
                 attrs.get("instrument_type"),             # 15
             ))

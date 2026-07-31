@@ -1,8 +1,38 @@
 {
+  "fx_courbe2pts.xlsx": {
+    "qc_pass": true,
+    "qc": "8/8",
+    "deterministic": true,
+    "curve_degraded": true,
+    "cote_cols": [
+      "Contrat / Poche",
+      "Date d'inv.",
+      "Capital investi",
+      "Valeur",
+      "Perf € YTD",
+      "Perf % YTD",
+      "Perf € origine",
+      "Perf % origine"
+    ],
+    "actif_brut": "2 929 000 €",
+    "dettes": "0 €",
+    "actif_net": "2 929 000 €"
+  },
   "fx_lignes_classes.xlsx": {
     "qc_pass": true,
-    "qc": "9/9",
+    "qc": "10/10",
     "deterministic": true,
+    "curve_degraded": false,
+    "cote_cols": [
+      "Contrat / Poche",
+      "Date d'inv.",
+      "Capital investi",
+      "Valeur",
+      "Perf € YTD",
+      "Perf % YTD",
+      "Perf € origine",
+      "Perf % origine"
+    ],
     "actif_brut": "152 000 €",
     "dettes": "0 €",
     "actif_net": "152 000 €"
@@ -11,6 +41,17 @@
     "qc_pass": true,
     "qc": "9/9",
     "deterministic": true,
+    "curve_degraded": false,
+    "cote_cols": [
+      "Contrat / Poche",
+      "Date d'inv.",
+      "Capital investi",
+      "Valeur",
+      "Perf € YTD",
+      "Perf % YTD",
+      "Perf € origine",
+      "Perf % origine"
+    ],
     "actif_brut": "17 130 000 €",
     "dettes": "−15 000 000 €",
     "actif_net": "2 130 000 €"
@@ -19,6 +60,17 @@
     "qc_pass": true,
     "qc": "9/9",
     "deterministic": true,
+    "curve_degraded": false,
+    "cote_cols": [
+      "Contrat / Poche",
+      "Date d'inv.",
+      "Capital investi",
+      "Valeur",
+      "Perf € YTD",
+      "Perf % YTD",
+      "Perf € origine",
+      "Perf % origine"
+    ],
     "actif_brut": "235 500 €",
     "dettes": "0 €",
     "actif_net": "235 500 €"
@@ -27,6 +79,17 @@
     "qc_pass": true,
     "qc": "9/9",
     "deterministic": true,
+    "curve_degraded": false,
+    "cote_cols": [
+      "Contrat / Poche",
+      "Date d'inv.",
+      "Capital investi",
+      "Valeur",
+      "Perf € YTD",
+      "Perf % YTD",
+      "Perf € origine",
+      "Perf % origine"
+    ],
     "actif_brut": "7 957 000 €",
     "dettes": "−1 440 000 €",
     "actif_net": "6 517 000 €"
@@ -35,6 +98,8 @@
     "qc_pass": true,
     "qc": "4/4",
     "deterministic": true,
+    "curve_degraded": false,
+    "cote_cols": null,
     "actif_brut": "67 000 €",
     "dettes": "0 €",
     "actif_net": "67 000 €"
@@ -43,6 +108,17 @@
     "qc_pass": true,
     "qc": "9/9",
     "deterministic": true,
+    "curve_degraded": false,
+    "cote_cols": [
+      "Contrat / Poche",
+      "Date d'inv.",
+      "Capital investi",
+      "Valeur",
+      "Perf € YTD",
+      "Perf % YTD",
+      "Perf € origine",
+      "Perf % origine"
+    ],
     "actif_brut": "10 749 000 €",
     "dettes": "0 €",
     "actif_net": "10 749 000 €"
@@ -51,6 +127,17 @@
     "qc_pass": true,
     "qc": "9/9",
     "deterministic": true,
+    "curve_degraded": false,
+    "cote_cols": [
+      "Contrat / Poche",
+      "Date d'inv.",
+      "Capital investi",
+      "Valeur",
+      "Perf € YTD",
+      "Perf % YTD",
+      "Perf € origine",
+      "Perf % origine"
+    ],
     "actif_brut": "2 929 000 €",
     "dettes": "0 €",
     "actif_net": "2 929 000 €"

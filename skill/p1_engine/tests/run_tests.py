@@ -72,6 +72,14 @@ def measure(xlsx):
         "qc_pass": (qc.group(1)==qc.group(2)) if qc else False,
         "qc": f"{qc.group(1)}/{qc.group(2)}" if qc else "?",
         "deterministic": h1==h2,
+        # D-UI-7 : la courbe dégradée à 2 points doit se DIRE (note de sincérité au rendu).
+        # Enregistré au golden pour CHAQUE fixture : True seulement quand le repli s'applique
+        # (fx_courbe2pts) — un repli qui cesserait de s'annoncer serait une régression muette.
+        "curve_degraded": ("Courbe simplifiée" in html),
+        # D-UI-3 : le jeu de colonnes du tableau détail est ADAPTATIF (union, colonne vide
+        # non imprimée) — enregistré au golden : un jeu qui change sans décision est une
+        # régression. None si le widget est absent de la fixture.
+        "cote_cols": (lambda m: ([re.sub(r"<[^>]*>","",t) for t in re.findall(r"<th[^>]*>(.*?)</th>", m.group(1))] if m else None))(re.search(r'cote-acc-tbl">\s*<thead><tr>(.*?)</tr></thead>', html, re.S)),
         "actif_brut": slot(html,"actif_brut"),
         "dettes": (re.search(r"dettes ([\d\s\u202f−-]+€)", sout).group(1).strip() if re.search(r"dettes ([\d\s\u202f−-]+€)", sout) else None),
         "actif_net": (re.search(r"net ([\d\s\u202f−-]+€)", sout).group(1).strip() if re.search(r"net ([\d\s\u202f−-]+€)", sout) else None),
@@ -86,7 +94,7 @@ def main():
     gold = json.load(open(GOLD)); fails = 0
     for name, r in results.items():
         exp = gold.get(name, {})
-        key_ok = all(r[k]==exp.get(k) for k in ("actif_brut","dettes","actif_net"))
+        key_ok = all(r[k]==exp.get(k) for k in ("actif_brut","dettes","actif_net","curve_degraded"))
         ok = r["qc_pass"] and r["deterministic"] and key_ok
         print(f"  {'✓' if ok else '✗'} {name}  (QC {r['qc']}, déterministe={r['deterministic']})")
         if not ok:

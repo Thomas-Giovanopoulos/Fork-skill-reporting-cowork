@@ -66,23 +66,55 @@ NATURE = {"av":"Assurance-vie","capi":"Contrat de capitalisation","cto":"CTO"}
 
 # ---------- donuts (allocation consolidée) ----------
 import json as _json
-CLASS_COLORS = {"Actions":"#14324F","Produits structurés":"#3E6188","Obligations":"#6E93B5","Fonds euros":"#B8975A","Court terme":"#D8C6A0","Monétaire":"#D8C6A0","Alternatifs":"#7C6E99","Matières premières":"#C0824F","Crypto":"#D9A441","Private Equity":"#4F7D64","Actions non cotées":"#8E6C88","Dette privée":"#A98A63","Immo non coté":"#7FA07E","Infrastructures":"#5E7A88"}
+CLASS_COLORS = {"Actions":"#14324F","Produits structurés":"#3E6188","Obligations":"#6E93B5","Fonds euros":"#B8975A","Court terme":"#D8C6A0","Monétaire":"#D8C6A0","Liquidités":"#C7CFD9","Alternatifs":"#7C6E99","Matières premières":"#C0824F","Crypto":"#D9A441","Private Equity":"#4F7D64","Actions non cotées":"#8E6C88","Dette privée":"#A98A63","Immo non coté":"#7FA07E","Infrastructures":"#5E7A88"}
 DEPO_COLORS = {"UBS":"#14324F","Wealins Lux":"#B8975A","Indosuez":"#3E6188","Edmond de Rothschild":"#6E93B5","NC":"#94A2AD","Tilvest":"#7FA07E"}
-ENV_COLORS = {"Assurance-vie LU":"#14324F","Assurance-vie FR":"#B8975A","Capitalisation LU":"#3E6188","Capitalisation FR":"#6E93B5","Compte Titres":"#7FA07E","PEA":"#4F7D64","Nominatif pur":"#A98A63"}
+ENV_COLORS = {"Assurance-vie LU":"#14324F","Assurance-vie FR":"#B8975A","Capitalisation LU":"#3E6188","Capitalisation FR":"#6E93B5","Compte Titres":"#7FA07E","PEA":"#4F7D64","Nominatif pur":"#A98A63","Autre (à qualifier)":"#8B2E2E"}
 GEO_COLORS = {"Europe développée":"#14324F","Amérique du Nord":"#B8975A","Asie-Pacifique":"#3E6188","Émergents":"#6E93B5","International / Monde":"#D8C6A0"}
 FALLBACK = ["#14324F","#B8975A","#3E6188","#6E93B5","#D8C6A0","#4F7D64","#C0824F","#7C6E99","#A98A63","#7FA07E","#5E7A88","#D9A441"]
+# D-UI-9 (31/07) : borne de plausibilité d'une perf de LIGNE sur la période — au-delà, la
+# valeur est réputée calculée sur données manquantes et se caviarde (la ligne reste).
+PERF_LIGNE_MAX_PCT = 100.0
 NCOTE_CLASS = {"PE":"Private Equity","Private Equity":"Private Equity","Actions non cotées":"Actions non cotées","Actions non cotées en direct":"Actions non cotées","Titres non cotés":"Actions non cotées","Dette privée":"Dette privée","Immo non coté":"Immo non coté","Immobilier non coté":"Immo non coté","Infrastructures":"Infrastructures"}
+
+# D-UI-6 (31/07) : cascade DÉCLARATIVE — ajouter une enveloppe = une ligne ici + sa couleur
+# dans ENV_COLORS (les deux devaient s'éditer ensemble à chaque patch de la fonction ; noté au
+# dossier de design). Formes exactes + préfixes ; l'assurance-vie est désormais NOMMÉE (elle
+# vivait du repli), et l'inconnu ne tombe PLUS en Assurance-vie en silence : catégorie visible
+# « Autre (à qualifier) » + signalement au rapport de run — un inconnu doit se voir (L5).
+ENV_TABLE = (
+    ("PEA",            ("pea",),                                                    ()),
+    ("Nominatif pur",  ("nominatif","nominatif pur","np"),                          ()),
+    ("Compte Titres",  ("cto","compte titres","compte-titres","compte titres ordinaire"), ()),
+    ("Capitalisation", ("capi",),                                                   ("capitalisation","contrat de capitalisation")),
+    ("Assurance-vie",  ("av","vie"),                                                ("assurance",)),
+)
+ENV_INCONNUES = []   # natures non reconnues du run (vidé à l'entrée du rendu, signalé à la fin)
 
 def envelope(nature, depo):
     # Reconnaît les formes COURTES ('cto') et LONGUES ('Compte Titres') : depuis que la nature
     # verbatim du client fait foi (30/07), 'Compte Titres' arrivait ici, ne matchait rien et
     # tombait dans le repli Assurance-vie — le donut Enveloppes mentait en silence.
-    nat=(nature or "").lower(); fr = (str(depo).strip().upper()=="NC")
-    if nat=="pea": return "PEA"
-    if nat in ("nominatif","nominatif pur","np"): return "Nominatif pur"
-    if nat in ("cto","compte titres","compte-titres","compte titres ordinaire"): return "Compte Titres"
-    if nat=="capi" or nat.startswith("capitalisation"): return "Capitalisation FR" if fr else "Capitalisation LU"
-    return "Assurance-vie FR" if fr else "Assurance-vie LU"
+    nat=" ".join(str(nature or "").split()).lower(); fr = (str(depo).strip().upper()=="NC")
+    for env, exact, prefixes in ENV_TABLE:
+        if nat in exact or (prefixes and nat.startswith(prefixes)):
+            return f"{env} {'FR' if fr else 'LU'}" if env in ("Capitalisation","Assurance-vie") else env
+    ENV_INCONNUES.append(str(nature or "(vide)"))
+    return "Autre (à qualifier)"
+
+
+def classe_liquidite(cls, libelle=""):
+    """Règle UNIQUE de liquidité (D-UI-5, 31/07 ; spec_tri_blocs §4.b) — deux consommateurs,
+    une seule vérité : le donut Classes (catégories « Monétaire » / « Liquidités ») et le
+    widget Disponibilités. Corrige les trous documentés de la spec : les lignes classées
+    « Court terme » (liquidités de contrats, G6) étaient EXCLUES du widget, « Trésorerie » et
+    « Solde en espèces » non captés par les préfixes. Retourne la catégorie ou None."""
+    if (cls or "") == "Monétaire": return "Monétaire"
+    if (cls or "") == "Court terme": return "Liquidités"
+    l=" ".join(str(libelle or "").split()).casefold()
+    if l.startswith(("liquid","compte courant","comptes courants","espèces","especes","cash",
+                     "trésorerie","tresorerie","solde en espèces","solde en especes")):
+        return "Liquidités"
+    return None
 
 def _norm(x):
     return " ".join(str(x or "").split()).casefold()
@@ -113,7 +145,7 @@ def eur_compact(v):
     return f"{sg}{a:.0f} €"
 
 SRI_BY_CLASS = {"Actions":6,"Produits structurés":4,"Obligations":3,"Fonds euros":2,
-                "Monétaire":1,"Court terme":1,"Alternatifs":4,"Matières premières":5,"Crypto":7,
+                "Monétaire":1,"Court terme":1,"Liquidités":1,"Alternatifs":4,"Matières premières":5,"Crypto":7,
                 "Private Equity":6,"Actions non cotées":7,"Dette privée":4,"Immo non coté":3,"Infrastructures":3}
 
 def sri_of(raw_val, cls, default=4):
@@ -465,6 +497,7 @@ BUILDERS = {"liquidites":rows_liquidites,"immobilier":rows_immobilier,
 
 def main():
     if len(sys.argv) < 4: raise SystemExit("Usage: python3 p2_fill.py source.xlsx manifest.json sortie.html")
+    del ENV_INCONNUES[:]   # signalement D-UI-6 : propre à CE rendu
     xlsx, manp, outp = sys.argv[1], sys.argv[2], sys.argv[3]
     ctx_path = sys.argv[4] if len(sys.argv) > 4 else None
     manifest = A.load_json(manp)
@@ -517,6 +550,7 @@ def main():
     sri_num=0.0; sri_den=0.0; sri_num_cote=0.0; sri_den_cote=0.0
     agg_nc_cls={}  # non coté par classe (PE / Dette privée / Immo non coté / Infra) -> benchmark de pairs
     g_nom=0.0; g_valnow=0.0; nc_total=0.0
+    _dinv_cote_all=[]   # dates d'investissement coté (repli courbe 2 points, D-UI-7)
     pos_raw=[]    # positions financier coté (une par poche/ligne) : (eid, row)
     nc_funds=[]   # positions non coté (une par fonds) : {name, gest, eng, app, vl, cls, tri, eid}
     nc_flux={}    # nom de fonds -> [{d:(y,m,d), t:type canonique, m:montant}]
@@ -586,6 +620,8 @@ def main():
                             if _cap>0: g_v01+=_cap; g_val+=val
                     nm=num(g(r,10));
                     if nm is not None: g_nom+=nm; g_valnow+=val
+                    _dic=pdate(g(r,8))
+                    if _dic: _dinv_cote_all.append(_dic)
                     cls=s(g(r,13)) or "Actions"; geo=s(g(r,14)); depo=s(g(r,5)) or "NC"
                     # clé contrat (mêmes variantes que le Widget 4) -> lignes classées ?
                     _cknat=NATURE.get(s(g(r,0)).lower(), s(g(r,0)))
@@ -878,6 +914,7 @@ def main():
 
     # courbe d'évolution du PATRIMOINE GLOBAL : financier(t) + actif non-financier net (quasi-constant)
     const_nonfin = (tot_assets - pf_value) - tot_debt  # liquidités + immobilier − dettes
+    fin_eur=[]   # ligne « Poche financière » (la seule dessinée par le template) — vide sans historique
     if "Valorisations" in wb.sheetnames:
         vs = wb["Valorisations"]; last_nc=0.0; _curve_end=None
         _ry,_rm,_rd = (int(x) for x in manifest["reporting"]["date_reporting"].split("-"))
@@ -902,6 +939,23 @@ def main():
             _curve_end = fin_eur and (series[-1]*U_SCALE) or _curve_end
             perf["curve"]={"labels_js":_json.dumps(labels),"data_js":_json.dumps(series),"unit":U_SUFFIX,"dec":U_DEC}
             perf["curve_end_eur"]=_curve_end
+    # D-UI-7 (arbitré 31/07) : SANS aucun historique de valorisation (nouveau client), courbe
+    # dégradée à DEUX POINTS — capital investi coté (au mois du plus ancien investissement)
+    # -> valeur à l'arrêté — AFFICHÉE COMME TELLE (degraded=True, le template le dit). Même
+    # philosophie de sincérité que le PE au coût (D53) : deux points honnêtes plutôt qu'un
+    # canvas muet. Le vrai remède reste D50 : chaque arrêté épaissira la courbe du run suivant.
+    # curve_end_eur N'EST PAS posé : le QC « courbe ≈ actif net » juge le patrimoine global,
+    # cette courbe-ci est la poche cotée seule.
+    if not perf.get("curve") and g_nom and g_valnow and _dinv_cote_all:
+        _d0=min(_dinv_cote_all)
+        _ryd,_rmd,_rdd = (int(x) for x in manifest["reporting"]["date_reporting"].split("-"))
+        if (_d0[0],_d0[1]) < (_ryd,_rmd):   # deux mois distincts minimum, sinon pas de courbe
+            perf["curve"]={"labels_js":_json.dumps([f"{_d0[1]:02d}/{str(_d0[0])[-2:]}",
+                                                    f"{_rmd:02d}/{str(_ryd)[-2:]}"]),
+                           "data_js":_json.dumps([round(g_nom/U_SCALE,U_DEC),
+                                                  round(g_valnow/U_SCALE,U_DEC)]),
+                           "unit":U_SUFFIX,"dec":U_DEC,"degraded":True}
+            fin_eur=[g_nom, g_valnow]   # la ligne dessinée = poche financière ; l'échelle ±2,5 % s'applique en aval
     # comparaison vs indices (onglet Indices)
     BAR_FULL_PCT = 40.0  # échelle absolue : 40% YTD remplit la barre (réserve en marché haussier)
     def bar(p):
@@ -1130,15 +1184,24 @@ def main():
                 "gpct":badge(gp),"gpct_ytd":(badge(ytd) if ytd is not None else "&mdash;"),
                 "gpct_ann":"&mdash;",
                 "date_inv":dinv,"nant":"&mdash;"}
+    _caviardees=[]   # D-UI-9 : lignes dont la perf calculée est hors bornes (donnée assureur manquante probable)
     def _fmt_lines(rows, base):
         out=[]
         for L in rows:
             vr=L["_vraw"]; pr=L["_praw"]
+            # D-UI-9 (arbitrage Thomas 31/07) : « garder les lignes et caviarder les valeurs
+            # aberrantes » — les positions très actives sans data assureur donnaient des perfs
+            # CALCULÉES absurdes (+350 % vus en production). Au-delà de la borne, la ligne RESTE
+            # (le cœur du reporting ne se cache pas), ses perfs s'affichent « — », et le run
+            # le SIGNALE. Le vrai remède est un Modified Dietz sur mouvements datés (à venir).
+            if pr is not None and abs(pr) > PERF_LIGNE_MAX_PCT:
+                _caviardees.append((L["libelle"], pr)); pr=None
             pe=(vr - vr/(1+pr/100.0)) if (pr is not None and (1+pr/100.0)) else None
             al=(vr/base*100) if base else None
             out.append({"libelle":L["libelle"],"isin":L["isin"],"valeur":eur(vr),
                 "alloc":(f"{al:.1f}%".replace(".",",") if al is not None else "&mdash;"),
-                "perfe":(_signed_eur(eur(pe)) if pe else eur(0)),"perf":badge(pr)})
+                "perfe":(_signed_eur(eur(pe)) if pe else eur(0)),
+                "perf":(badge(pr) if pr is not None else "&mdash;")})
         return out
     _dispo=[]; _mp=[]; _dispo_tot=0.0; _mp_tot=0.0   # demandes client : disponibilités par contrat + détail matières premières
     _entlbl={_e["id"]: _e["label"] for _e in manifest["entities"]}
@@ -1213,16 +1276,33 @@ def main():
             "valeur_proj": (eur(_vp_in) if _vp_in else (eur(_val+_psd) if _psd else eur(_val)))}
         _c.update(_cm)
         _ent_c.setdefault(_eid, []).append(_c)
-        _dv=sum(L["_vraw"] for L in _clines
-                if (L.get("cls")=="Monétaire") or L["libelle"].lower().startswith(("liquid","compte courant","espèces","especes","cash")))
+        # D-UI-5 (31/07) : règle UNIQUE partagée avec le donut Classes — Monétaire (quasi-liquide)
+        # + Liquidités. Corrige l'exclusion des lignes « Court terme » et les préfixes manquants
+        # (« Trésorerie », « Solde en espèces ») documentés par spec_tri_blocs §4.b.
+        _dv=sum(L["_vraw"] for L in _clines if classe_liquidite(L.get("cls"), L["libelle"]))
         if _dv:
             _dispo.append({"contrat":_label,"entity":(_entlbl.get(_eid,"") if len(manifest["entities"])>1 else ""),
                            "montant":eur(_dv),"part":(f"{_dv/_val*100:.1f}%".replace(".",",") if _val else "&mdash;")})
             _dispo_tot+=_dv
+            # E6 (contrôle d'époque corrigé du 31/07) : la hiérarchie contrat -> poche se REND dans les
+            # tableaux — lignes de poche indentées ↳, sous-total recomposable à l'œil.
+            _liq_pk={}
+            for L in _clines:
+                if classe_liquidite(L.get("cls"), L["libelle"]) and L.get("pk"):
+                    _k=L.get("pk_raw") or L["pk"]
+                    _liq_pk[_k]=_liq_pk.get(_k,0.0)+L["_vraw"]
+            if len(_liq_pk)>=2:
+                for _pn,_pv in _liq_pk.items():
+                    _dispo.append({"contrat":f"↳ {_pn}","entity":"poche","poche":True,
+                                   "montant":eur(_pv),"part":(f"{_pv/_val*100:.1f}%".replace(".",",") if _val else "&mdash;")})
         for L in _clines:
             if L.get("cls")=="Matières premières":
+                # E5 (contrôle d'époque corrigé du 31/07) : « Perf % » répétait la même valeur pour des
+                # montants différents — colonne non discriminante. Le POIDS dans le contrat
+                # (« % Contrat ») discrimine, lui.
                 _mp.append({"libelle":L["libelle"],"isin":L["isin"],"contrat":_label,
-                            "valeur":eur(L["_vraw"]),"perf":badge(L["_praw"])})
+                            "valeur":eur(L["_vraw"]),
+                            "part":(f"{L['_vraw']/_val*100:.1f}%".replace(".",",") if _val else "&mdash;")})
                 _mp_tot+=L["_vraw"]
     _multi_c = len(manifest["entities"]) > 1
     _cote_table = []
@@ -1230,6 +1310,27 @@ def main():
         _cs = _ent_c.get(_e["id"])
         if _cs: _cote_table.append({"entity": (_e["label"] if _multi_c else ""), "contracts": _cs})
     perf["cote_table"] = _cote_table
+    # D-UI-3 (arbitré par Thomas le 31/07 : « profils adaptatifs ») : le jeu de colonnes du
+    # tableau détail est une DONNÉE — union des jeux des deux contrôles d'époque (A ∪ B/C),
+    # et une colonne dont TOUTES les cellules sont vides ne s'imprime pas. Le template obéit
+    # (D28), il ne décide plus. Chaque client garde son jeu naturel, par la donnée : un
+    # nouveau client sans historique ne voit pas « Perf origine » vide, un client suivi
+    # depuis des années ne perd rien.
+    _UNION_COLS=[("date_inv","Date d'inv.",""),("nant","Nant.",""),
+                 ("nominal","Capital investi",""),("vers","Versements",""),
+                 ("rach","Retraits",""),("valeur","Valeur","val"),
+                 ("valeur_proj","Valeur projetée","proj"),
+                 ("gain_ytd","Perf € YTD",""),("gpct_ytd","Perf % YTD",""),
+                 ("gain","Perf € origine",""),("gpct","Perf % origine",""),
+                 ("gpct_ann","Perf % ann.","")]
+    _allrows=[r for _blk in _cote_table for _c2 in _blk["contracts"]
+              for r in ([_c2]+list(_c2.get("poches") or []))]
+    _EMPTYV=(None,"","&mdash;")
+    def _col_vivante(k):
+        if k=="valeur": return True   # colonne pivot — un tableau de contrats sans valeur n'existe pas
+        if k=="valeur_proj": return bool(manifest["reporting"].get("show_ps_corrige", False))
+        return any((r.get(k) not in _EMPTYV) for r in _allrows)
+    perf["cote_cols"]=[{"key":_k,"label":_l,"kind":_kd} for _k,_l,_kd in _UNION_COLS if _col_vivante(_k)]
     perf["dispo"]=({"rows":_dispo,"total":eur(_dispo_tot),
                     "part":(f"{_dispo_tot/g_val*100:.1f}%".replace(".",",") if g_val else "&mdash;")} if _dispo else None)
     perf["mp"]=({"rows":_mp,"total":eur(_mp_tot)} if _mp else None)
@@ -1332,7 +1433,10 @@ def main():
         _typ=f.get("typ","")
         _direct=(_typ.startswith("titre") if _typ else (f.get("cls")=="Actions non cotées"))   # Titre = détention directe/support ; Fonds = véhicule à engagement
         if _direct: _moic=_tvpi=None
-        fund_rows.append({"f":f,"flux":flux,"serie":serie,"called":called,"dist":dist,"nav":nav,
+        # Provenance de la série : sans Valorisation datée ni VL déclarée, la NAV est un proxy
+        # au coût (cumul d'appels) — le rendu doit le DIRE (revue 30/07 §2-ter, arbitrage Thomas).
+        _cout = not (any(x["t"]=="Valorisation" and x["d"]<=rdate for x in flux) or f["vl"] is not None)
+        fund_rows.append({"f":f,"flux":flux,"serie":serie,"called":called,"dist":dist,"nav":nav,"cout":_cout,
                           "eng":eng,"mill":mill,"moic":_moic,"cible":(None if _direct else f.get("cible_x")),"direct":_direct,
                           "na_reel":f.get("na_reel"),"na_est":f.get("na_est"),
                           "tvpi":_tvpi,
@@ -1357,6 +1461,11 @@ def main():
         views.append(_mk_view(f"f{i}", fr["f"]["name"], fr["serie"],
                      pe={"called":fr["called"],"dist":fr["dist"],"nav":fr["nav"],
                          "moic":fr["moic"],"tvpi":fr["tvpi"]}))
+    # Note « au coût » par vue (titre du graphe W2) : le repli au coût s'affiche comme tel.
+    _note_cout=" · au coût (capital appelé)"
+    for i,fr in enumerate(fund_rows): views[i+1]["cout_note"]=(_note_cout if fr["cout"] else "")
+    _cts=[fr["cout"] for fr in fund_rows]
+    views[0]["cout_note"]=(_note_cout if (_cts and all(_cts)) else (" · tout ou partie au coût" if any(_cts) else ""))
     pv=views[0]
     pe_pct=pv["perf_pct"]                                  # réutilisé par le bloc Rendement annuel
 
@@ -1424,7 +1533,7 @@ def main():
         summary["next"]=None
 
     # texte de synthèse commercial (panneau composition), déterministe depuis les données
-    pitch=None
+    pitch=None; _detail_title=None
     if fund_rows:
         _LBLNC={"Private Equity":"private equity","Dette privée":"dette privée",
                 "Immo non coté":"immobilier non coté","Infrastructures":"infrastructures"}
@@ -1445,6 +1554,14 @@ def main():
                     "d'entrée et construit la performance dans la durée.")
         pitch+=(" Chaque ligne fait l'objet d'un suivi individualisé par nos équipes : sélectionnez un "
                 "fonds pour consulter sa valorisation et son échéancier de flux.")
+        # Chapeau W4 adaptatif (D-UI-2, 31/07) : nommer les classes réellement PRÉSENTES parmi
+        # les fonds (hors titres directs) — le chapeau disait « private equity » même devant de
+        # la dette privée, alors que le pitch savait déjà nommer les 4 classes (_LBLNC).
+        _fcls=[_LBLNC.get(c,c.lower()) for c in ["Private Equity","Dette privée","Immo non coté","Infrastructures"]
+               if any(fr["f"]["cls"]==c for fr in fund_rows if not fr["direct"])]
+        _de=lambda w:(("d'" if w[:1] in "aeiouhâàéèêëîïôöûü" else "de ")+w)
+        _detail_title=(f"Fonds {_de(_fcls[0])} — détail par véhicule" if len(_fcls)==1
+                       else "Fonds non cotés — détail par véhicule")
 
     # page « Détails » — vue fonds : échéancier de flux daté (réalisé + prévisionnel)
     schedules=[]
@@ -1526,7 +1643,8 @@ def main():
         "moic":(mult(p_moic) if p_moic is not None else "&mdash;"),"vl":eur_u(t_nav)}
 
     # objet JS embarqué (bascule de vue côté client, aucune dépendance réseau)
-    _views_js=[{"id":v["id"],"label":v["label"],"kpis":v["kpis"],"bars":v["bars"]} for v in views]
+    _views_js=[{"id":v["id"],"label":v["label"],"kpis":v["kpis"],"bars":v["bars"],
+                "cout_note":v.get("cout_note","")} for v in views]
     _pv_data=pv["bars"]["data"]
     _pv_start_idx=next((i for i,v in enumerate(_pv_data) if v is not None), None)
     _pv_start_label=labels[_pv_start_idx] if _pv_start_idx is not None else labels[-1]
@@ -1537,8 +1655,10 @@ def main():
                 "unit":pv["bars"]["unit"],"dec":pv["bars"]["dec"],"ymin":pv["bars"]["ymin"],
                 "start_label":_pv_start_label},
         "views_js":_json.dumps(_views_js,ensure_ascii=False),
+        "cout_note":views[0].get("cout_note",""),
         "compo":compo,"summary":summary,"schedules":schedules,"pitch":pitch,
         "detail":nc_detail,"detail_total":nc_detail_total,"detail_titres":nc_detail_t,
+        "detail_title":_detail_title,
         "titres_total":nc_titres_total,"detail_unit":_un,
         "has_funds":bool(fund_rows)}
 
@@ -1737,6 +1857,15 @@ def main():
               f"— vérifier la colonne « Perf % » de l\'onglet Lignes avant livraison.")
     if manifest["reporting"].get("mode","presentee")=="presentee" and data.get("perf") and not data["perf"].get("commentaire"):
         print("  ⚠ Commentaire de gestion absent (placeholder P4 encore visible) — à rédiger avant livraison en présentée.")
+    if _caviardees:
+        print(f"  ⚠ {len(_caviardees)} perf(s) de ligne caviardée(s) — hors bornes ±{PERF_LIGNE_MAX_PCT:.0f}% "
+              f"(donnée assureur manquante probable, D-UI-9 : la ligne reste, la valeur aberrante non) : "
+              + ", ".join(f"{_n} ({_p:+.0f}%)" for _n,_p in _caviardees[:6])
+              + ("…" if len(_caviardees)>6 else ""))
+    if ENV_INCONNUES:
+        print(f"  ⚠ Enveloppe non reconnue pour {len(set(ENV_INCONNUES))} nature(s) : "
+              + ", ".join(f"« {n} »" for n in sorted(set(ENV_INCONNUES)))
+              + " — classées « Autre (à qualifier) » au donut (D-UI-6 : un inconnu se VOIT, il ne tombe plus en Assurance-vie en silence).")
 
     qc_comment = "<!-- QC: " + (f"{n_ko} écart(s) — " + "; ".join(f"{lbl} ({det})" for ok,lbl,det in qc if not ok) if n_ko else "toutes identités OK") + " -->\n"
 
@@ -1795,15 +1924,28 @@ def main():
         _sri_avg = int(_math.ceil(sri_num/sri_den)); _sri_avg = max(1, min(7, _sri_avg))
         sup_kpis["profil"] = sri_label(_sri_avg)
         sup_kpis["sri"] = _sri_avg
-    # Donut 1 — double donut : classes en € (Court terme = liquidités + monétaire) + arcs Coté/Non coté
+    # Donut 1 — double donut : classes en € + arcs Coté/Non coté. D-UI-5 (31/07) : le
+    # fourre-tout « Court terme » est DÉPLIÉ en deux mots que le client comprend —
+    # « Monétaire » (fonds monétaires, sa propre classe) et « Liquidités » (liquidités de
+    # contrats G6 + comptes hors contrat). classe_liquidite() est la règle unique, partagée
+    # avec le widget Disponibilités.
     _inner = dict(agg_cls)
-    _ct = _inner.pop("Monétaire", 0) + float(cat_brut_global.get("liquidites", 0) or 0)
-    if _ct > 0: _inner["Court terme"] = _inner.get("Court terme", 0) + _ct
+    _liq = _inner.pop("Court terme", 0) + float(cat_brut_global.get("liquidites", 0) or 0)
+    if _liq > 0: _inner["Liquidités"] = _inner.get("Liquidités", 0) + _liq
     _nc_names = set(agg_nc_cls.keys())
     _double = make_double_donut(_inner, _nc_names)
     # Donuts 2-4 (avec colonne €)
     sup_donuts = {}
-    for _cid, _agg, _cm in [("sup_geo",agg_geo,GEO_COLORS),("sup_env",agg_env,ENV_COLORS),("sup_part",agg_part,DEPO_COLORS)]:
+    # E6 (contrôle d'époque corrigé du 31/07) : le donut Partenaires AGRÈGE par partenaire, pas par
+    # contrat — un suffixe parenthésé portant un chiffre est une référence de contrat
+    # (« Partenaire (n° de contrat) » -> « Partenaire »), un suffixe sans chiffre est un mandat/profil
+    # (« Banque (Mandat — Profil) ») et reste distinct. Détail par poche dans les
+    # tableaux, agrégation par partenaire dans les donuts.
+    _part_agg={}
+    for _pn,_pv in agg_part.items():
+        _m=re.match(r"^(.*?)\s*\(([^)]*\d[^)]*)\)\s*$", _pn)
+        _part_agg[(_m.group(1) if _m else _pn)]=_part_agg.get((_m.group(1) if _m else _pn),0)+_pv
+    for _cid, _agg, _cm in [("sup_geo",agg_geo,GEO_COLORS),("sup_env",agg_env,ENV_COLORS),("sup_part",_part_agg,DEPO_COLORS)]:
         _dd = make_donut(_agg, _cm)
         if _dd: sup_donuts[_cid]=_dd
     data["supervision"]={"kpis":sup_kpis,"double_donut":_double,"donuts":sup_donuts,

@@ -12,7 +12,7 @@
     <div class="card"><div class="card-lbl">Valeur début de période</div><div class="card-val" data-slot="perf_start_value">{{ perf.kpis.cote_start if perf else '&mdash;' }}</div><div class="card-sub">poche coté au 1ᵉʳ janvier</div></div>
     <div class="card {{ perf.kpis.ytd_card if perf else 'card-pos' }}"><div class="card-lbl">{{ perf.kpis.ytd_label if perf else 'Performance YTD' }}</div><div class="card-val {{ perf.kpis.ytd_cls if perf else 'c-pos' }}" data-slot="perf_ytd_pct">{{ perf.kpis.ytd_pct if perf else '&mdash;' }}</div><div class="card-sub {{ perf.kpis.ytd_cls if perf else '' }}" data-slot="perf_ytd_eur">{{ perf.kpis.ytd_eur_signed if perf else '&mdash;' }}</div></div>
     <div class="card card-gold"><div class="card-lbl">Valeur en fin de période</div><div class="card-val" data-slot="portfolio_value">{{ perf.kpis.cote_end if perf else '&mdash;' }}</div><div class="card-sub">au {{ reporting.date_display }}{% if perf and perf.kpis.flow_note %} · {{ perf.kpis.flow_note }}{% endif %}</div></div>
-    <div class="card"><div class="card-lbl">Profil de risque du coté</div><div class="card-val" data-slot="perf_profil_cote">{{ perf.kpis.profil_cote if perf else '&mdash;' }}</div><div class="card-sub">{% if perf and perf.kpis.sri_cote %}SRI {{ perf.kpis.sri_cote }}/7{% else %}SRI moyen pondéré{% endif %}</div></div>
+    <div class="card"><div class="card-lbl">Profil de risque du coté</div><div class="card-val" data-slot="perf_profil_cote">{{ perf.kpis.profil_cote if perf else '&mdash;' }}</div><div class="card-sub">{% if perf and perf.kpis.sri_cote %}SRI {{ perf.kpis.sri_cote }}/7 · portefeuille coté seul{% else %}SRI moyen pondéré{% endif %}</div></div>
   </div>
 
   <div class="alloc-grid">
@@ -29,6 +29,7 @@
       </div>
       <div class="pnc-page" data-pnc-page="chart">
         <canvas id="perf_evolution" height="200" data-slot="perf_evolution_chart"></canvas>
+        {%- if perf and perf.get('curve') and perf.get('curve').get('degraded') %}<div class="bench-note">Courbe simplifiée — deux points : capital investi (à la date du premier investissement) et valeur à l'arrêté. L'historique s'enrichira à chaque arrêté trimestriel.</div>{%- endif %}
         {%- if perf and perf.show_benchmark and perf.profile_text %}<div class="bench-note">{{ perf.profile_text | safe }}</div>{%- endif %}
       </div>
       {%- if reporting.get('mode','presentee') != 'presentee' %}
@@ -63,28 +64,47 @@
     <div class="mgmt-card">
       <div class="bench-title">Commentaire de gestion</div>
       <div class="mgmt-text" data-slot="commentaire_gestion">{% if perf and perf.commentaire %}{{ perf.commentaire | safe }}{% else %}<span class="mgmt-ph">Commentaire de gestion à rédiger en phase P4 (éditorial) — synthèse factuelle et commerciale de la période.</span>{% endif %}</div>
-      <div class="bench-title mgmt-sep">Arbitrages de la période</div>
+      {#- E3 (contrôle d'époque corrigé du 31/07) : un widget vide se SUPPRIME, il ne s'excuse pas —
+          plus de placeholder « Aucun arbitrage significatif ». -#}
       {%- if perf and perf.arbitrages %}
+      <div class="bench-title mgmt-sep">Arbitrages de la période</div>
       <div class="arb-list">
         {%- for a in perf.arbitrages %}
         <div class="arb-row"><span class="arb-date">{{ a.date }}</span><span class="arb-lbl">{{ a.label }}{% if a.entity %} <span class="arb-ent">· {{ a.entity }}</span>{% endif %}</span></div>
         {%- endfor %}
       </div>
-      {%- else %}
-      <div class="arb-empty">Aucun arbitrage significatif sur la période.</div>
       {%- endif %}
     </div>
   </div>
 
-  <!-- Widget 4 — Tableau exhaustif coté par contrat (accordéon ligne à ligne) -->
+  <!-- Widget 4 — Tableau exhaustif coté par contrat (accordéon ligne à ligne).
+       D-UI-3 (arbitré 31/07) : colonnes ADAPTATIVES — perf.cote_cols est calculé par le
+       moteur (union des contrôles d'époque, colonne vide non imprimée) ; le template OBÉIT
+       (D28). Le sous-tableau ISIN est une macro unique (dé-triplication du 31/07). -->
+  {%- macro cote_cells(row, bold, cols) -%}
+    {%- for col in cols -%}
+    <td{% if col.kind=='val' and bold %} style="font-weight:600{% if loop.last %};padding-right:12px{% endif %}"{% elif col.kind=='proj' and bold %} class="c-gold"{% if loop.last %} style="padding-right:12px"{% endif %}{% elif loop.last %} style="padding-right:12px"{% endif %}>{{ (row.get(col.key) if row.get(col.key) else '&mdash;') | safe }}</td>
+    {%- endfor -%}
+  {%- endmacro %}
+  {%- macro acc_lines_tbl(lines, ncols, extra_cls='') -%}
+        <tr class="acc-detail" hidden><td colspan="{{ ncols }}">
+          <table class="acc-lines{{ extra_cls }}"><thead><tr><th style="text-align:left">ISIN</th><th style="text-align:left;width:38%">Libellé</th><th>Évaluation</th><th>% alloc.</th><th>Perf €</th><th style="padding-right:8px">Perf % période</th></tr></thead><tbody>
+            {%- for L in lines %}
+            <tr><td style="text-align:left" class="acc-isin">{{ L.isin }}</td><td style="text-align:left">{{ L.libelle }}</td><td>{{ L.valeur }}</td><td>{{ L.alloc }}</td><td>{{ L.perfe | safe }}</td><td style="padding-right:8px">{{ L.perf | safe }}</td></tr>
+            {%- endfor %}
+          </tbody></table>
+        </td></tr>
+  {%- endmacro %}
   {%- if perf and perf.cote_table %}
+  {%- set CC = perf.cote_cols %}
+  {%- set NCOLS = CC|length + 1 %}
   <div class="cote-exh exh-card">
     <div class="cote-exh-hd">Supports — Détail par contrat</div>
     {%- for blk in perf.cote_table %}
     {%- if blk.entity %}<div class="cote-exh-ent">{{ blk.entity }}</div>{%- endif %}
     <table class="synth-table cote-acc-tbl">
       <thead><tr>
-        <th style="text-align:left;width:22%">Contrat / Poche</th><th>Date d'inv.</th><th>Capital investi</th><th>Versements</th><th>Retraits</th><th>Valeur</th>{% if reporting.show_ps_corrige %}<th>Valeur projetée</th>{% endif %}<th>Perf € YTD</th><th>Perf % YTD</th><th>Perf € origine</th><th style="padding-right:12px">Perf % origine</th>
+        <th style="text-align:left;width:22%">Contrat / Poche</th>{% for col in CC %}<th{% if loop.last %} style="padding-right:12px"{% endif %}>{{ col.label }}</th>{% endfor %}
       </tr></thead>
       <tbody>
         {%- for c in blk.contracts %}
@@ -92,51 +112,29 @@
         {#- multi-poche : poches toujours visibles, indentées ↳, simple dépliant vers les actifs #}
         <tr class="acc-head">
           <td><span class="acc-chev acc-chev-off"></span><span class="acc-name"><span class="cname">{{ c.label }}</span><span class="cdet">{{ c.npoches }} poches</span></span></td>
-          <td>{{ c.date_inv }}</td><td>{{ c.nominal }}</td><td>{{ c.vers }}</td><td>{{ c.rach }}</td><td style="font-weight:600">{{ c.valeur }}</td>{% if reporting.show_ps_corrige %}<td class="c-gold">{{ c.valeur_proj }}</td>{% endif %}<td>{{ c.gain_ytd | safe }}</td><td>{{ c.gpct_ytd | safe }}</td><td>{{ c.gain | safe }}</td><td style="padding-right:12px">{{ c.gpct | safe }}</td>
+          {{- cote_cells(c, true, CC) }}
         </tr>
         {%- for p in c.poches %}
         <tr class="acc-head acc-poche{% if p.lines %} acc-clickable{% endif %}">
           <td><span class="poche-arrow">&#8627;</span><span class="acc-chev{% if not p.lines %} acc-chev-off{% endif %}">{% if p.lines %}&#9656;{% endif %}</span><span class="acc-name"><span class="cname">{{ p.gestion }}</span>{% if p.sub %}<span class="cdet">{{ p.sub }}</span>{% endif %}</span></td>
-          <td>{{ p.date_inv }}</td><td>{{ p.nominal }}</td><td>{{ p.vers }}</td><td>{{ p.rach }}</td><td>{{ p.valeur }}</td>{% if reporting.show_ps_corrige %}<td>&mdash;</td>{% endif %}<td>{{ p.gain_ytd | safe }}</td><td>{{ p.gpct_ytd | safe }}</td><td>{{ p.gain | safe }}</td><td style="padding-right:12px">{{ p.gpct | safe }}</td>
+          {{- cote_cells(p, false, CC) }}
         </tr>
-        {%- if p.lines %}
-        <tr class="acc-detail" hidden><td colspan="{% if reporting.show_ps_corrige %}11{% else %}10{% endif %}">
-          <table class="acc-lines acc-actifs"><thead><tr><th style="text-align:left">ISIN</th><th style="text-align:left;width:38%">Libellé</th><th>Évaluation</th><th>% alloc.</th><th>Perf €</th><th style="padding-right:8px">Perf % période</th></tr></thead><tbody>
-            {%- for L in p.lines %}
-            <tr><td style="text-align:left" class="acc-isin">{{ L.isin }}</td><td style="text-align:left">{{ L.libelle }}</td><td>{{ L.valeur }}</td><td>{{ L.alloc }}</td><td>{{ L.perfe | safe }}</td><td style="padding-right:8px">{{ L.perf | safe }}</td></tr>
-            {%- endfor %}
-          </tbody></table>
-        </td></tr>
-        {%- endif %}
+        {%- if p.lines %}{{ acc_lines_tbl(p.lines, NCOLS, ' acc-actifs') }}{%- endif %}
         {%- endfor %}
         {%- if c.lines %}
         <tr class="acc-head acc-poche acc-clickable">
           <td><span class="poche-arrow">&#8627;</span><span class="acc-chev">&#9656;</span><span class="acc-name"><span class="cname">Supports non rattachés à une poche</span></span></td>
-          <td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td>{% if reporting.show_ps_corrige %}<td>&mdash;</td>{% endif %}<td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td style="padding-right:12px">&mdash;</td>
+          {{- cote_cells({}, false, CC) }}
         </tr>
-        <tr class="acc-detail" hidden><td colspan="{% if reporting.show_ps_corrige %}11{% else %}10{% endif %}">
-          <table class="acc-lines"><thead><tr><th style="text-align:left">ISIN</th><th style="text-align:left;width:38%">Libellé</th><th>Évaluation</th><th>% alloc.</th><th>Perf €</th><th style="padding-right:8px">Perf % période</th></tr></thead><tbody>
-            {%- for L in c.lines %}
-            <tr><td style="text-align:left" class="acc-isin">{{ L.isin }}</td><td style="text-align:left">{{ L.libelle }}</td><td>{{ L.valeur }}</td><td>{{ L.alloc }}</td><td>{{ L.perfe | safe }}</td><td style="padding-right:8px">{{ L.perf | safe }}</td></tr>
-            {%- endfor %}
-          </tbody></table>
-        </td></tr>
+        {{ acc_lines_tbl(c.lines, NCOLS) }}
         {%- endif %}
         {%- else %}
         {#- mono-poche : inchangé #}
         <tr class="acc-head{% if c.lines %} acc-clickable{% endif %}">
           <td><span class="acc-chev{% if not c.lines %} acc-chev-off{% endif %}">{% if c.lines %}&#9656;{% endif %}</span><span class="acc-name"><span class="cname">{{ c.label }}</span>{% if c.sub %}<span class="cdet">{{ c.sub }}</span>{% endif %}</span></td>
-          <td>{{ c.date_inv }}</td><td>{{ c.nominal }}</td><td>{{ c.vers }}</td><td>{{ c.rach }}</td><td style="font-weight:600">{{ c.valeur }}</td>{% if reporting.show_ps_corrige %}<td class="c-gold">{{ c.valeur_proj }}</td>{% endif %}<td>{{ c.gain_ytd | safe }}</td><td>{{ c.gpct_ytd | safe }}</td><td>{{ c.gain | safe }}</td><td style="padding-right:12px">{{ c.gpct | safe }}</td>
+          {{- cote_cells(c, true, CC) }}
         </tr>
-        {%- if c.lines %}
-        <tr class="acc-detail" hidden><td colspan="{% if reporting.show_ps_corrige %}11{% else %}10{% endif %}">
-          <table class="acc-lines"><thead><tr><th style="text-align:left">ISIN</th><th style="text-align:left;width:38%">Libellé</th><th>Évaluation</th><th>% alloc.</th><th>Perf €</th><th style="padding-right:8px">Perf % période</th></tr></thead><tbody>
-            {%- for L in c.lines %}
-            <tr><td style="text-align:left" class="acc-isin">{{ L.isin }}</td><td style="text-align:left">{{ L.libelle }}</td><td>{{ L.valeur }}</td><td>{{ L.alloc }}</td><td>{{ L.perfe | safe }}</td><td style="padding-right:8px">{{ L.perf | safe }}</td></tr>
-            {%- endfor %}
-          </tbody></table>
-        </td></tr>
-        {%- endif %}
+        {%- if c.lines %}{{ acc_lines_tbl(c.lines, NCOLS) }}{%- endif %}
         {%- endif %}
         {%- endfor %}
       </tbody>
@@ -155,7 +153,7 @@
         <thead><tr><th style="text-align:left;width:52%">Contrat</th><th>Montant</th><th style="padding-right:12px">% du contrat</th></tr></thead>
         <tbody>
           {%- for d in perf.dispo.rows %}
-          <tr><td style="text-align:left"><span class="acc-name"><span class="cname">{{ d.contrat }}</span>{% if d.entity %}<span class="cdet">{{ d.entity }}</span>{% endif %}</span></td>
+          <tr><td style="text-align:left{% if d.get('poche') %};padding-left:16px{% endif %}"><span class="acc-name"><span class="cname"{% if d.get('poche') %} style="font-weight:400"{% endif %}>{{ d.contrat }}</span>{% if d.entity %}<span class="cdet">{{ d.entity }}</span>{% endif %}</span></td>
               <td>{{ d.montant }}</td><td style="padding-right:12px">{{ d.part }}</td></tr>
           {%- endfor %}
           <tr class="total-row"><td style="text-align:left">TOTAL</td><td class="c-gold">{{ perf.dispo.total }}</td><td style="padding-right:12px">{{ perf.dispo.part }}</td></tr>
@@ -168,11 +166,12 @@
     <div class="exh-card">
       <div class="cote-exh-hd">Positions — Matières premières</div>
       <table class="synth-table nw-tbl">
-        <thead><tr><th style="text-align:left;width:44%">Support</th><th>Contrat</th><th>Valeur</th><th style="padding-right:12px">Perf %</th></tr></thead>
+        {#- E5 (31/07) : « Perf % » (répétée par support) → « % Contrat » (poids, discriminant). -#}
+        <thead><tr><th style="text-align:left;width:44%">Support</th><th>Contrat</th><th>Valeur</th><th style="padding-right:12px">% Contrat</th></tr></thead>
         <tbody>
           {%- for m in perf.mp.rows %}
           <tr><td style="text-align:left"><span class="acc-name"><span class="cname">{{ m.libelle }}</span><span class="cdet acc-isin">{{ m.isin }}</span></span></td>
-              <td>{{ m.contrat }}</td><td>{{ m.valeur }}</td><td style="padding-right:12px">{{ m.perf | safe }}</td></tr>
+              <td>{{ m.contrat }}</td><td>{{ m.valeur }}</td><td style="padding-right:12px">{{ m.part }}</td></tr>
           {%- endfor %}
           <tr class="total-row"><td style="text-align:left">TOTAL</td><td></td><td class="c-gold">{{ perf.mp.total }}</td><td></td></tr>
         </tbody>

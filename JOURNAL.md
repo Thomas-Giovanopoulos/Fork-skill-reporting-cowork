@@ -1935,6 +1935,261 @@ principes. C'est la prochaine grande discussion de design.
 
 ---
 
+## 2026-07-31 (14) — Chantier UI ouvert : dossier de design, et bloc 1 (canvas PE) soldé en renversant une décision d'époque
+
+4ᵉ session, contexte frais sur `REPRISE.md` (amorçage vert). Le chantier UI s'est ouvert
+par l'**instruction sur pièces** — comparaison bloc à bloc des trois rendus (contrôles A/B + run
+C) et inventaire de la banque — consignée dans `docs/chantier_ui_design_2026-07-31.md`
+(8 décisions D-UI-1…8). Trois recadrages issus de l'instruction :
+
+- **Il n'y a pas deux styles à unifier** : B (Gronier) est conforme au bit à la banque actuelle,
+  C = B moins la donnée absente ; A (INTERAGYR 23/07) n'est conforme à rien — composition
+  d'époque hors moteur. « Unifier » = décider trait par trait ce qu'on porte de A vers la banque.
+- **Le double donut coté/non coté existe déjà** (donuts_sup, arcs + classes) — le point 2b de la
+  revue se réduit à la taxonomie « Court terme » (D-UI-5).
+- **Archéologie du canvas PE** : W2/W3 n'avaient pas « jamais existé » — **supprimés le
+  23/07/2026 « à la demande du CGP »**, `test_pnc.mjs` vérifiait leur ABSENCE. Signalé à Thomas
+  avant toute ligne ; arbitrage explicite : **« Rétablir tout » → D53**.
+
+**Bloc 1 FAIT (D-UI-1/D53)** : W2 (barres + ligne, plugin segPct) + W3 (composition MOIC/TVPI/
+cible) + pitch + bascule par fonds portés dans `performance_nc.html.j2` depuis le gabarit A —
+le CSS était déjà dans `_styles.html`, la plomberie `p2_fill` n'avait jamais cessé de calculer.
+S'y ajoute la **règle de sincérité** (revue §2-ter) : `p2_fill` expose la provenance de la série
+(`cout` par fonds, `cout_note` par vue), le titre du graphe dit « · au coût (capital appelé) »
+quand la NAV est un proxy d'appels, et la note suit la bascule de vue.
+
+**Le test retourné a tout jugé** : `test_pnc.mjs` (qui était RASSIS — pas dans la suite courante,
+écrit avant le fork presentee/envoyee) vérifie désormais la PRÉSENCE de W2/W3, exerce la bascule
+(update du chart, surbrillance, restauration KPI), s'adapte au mode en le DISANT
+(`[presentee]`/`[envoyee]`), et sort par `process.exit` (les timers décoratifs le faisaient
+pendre sous jsdom). Vert dans les deux modes.
+
+**Filet complet** : golden 7/7 (QC de traversée vivant), L3a 7/7 à l'octet, re-run INTERAGYR
+depuis le store en répertoire jetable — QC 9/9, actif brut inchangé 4 723 156 €, déterministe,
+**les deux barres au coût se dessinent** (240/200/40 K€, paliers T2→T3) avec le titre sincère.
+Paquet rescellé 132 fichiers, selfcheck OK, garde N3 verte.
+
+**Et D44 a encore mordu — un faux positif instructif** : un `npm i` interrompu (lenteur OneDrive)
+avait laissé `node_modules/` DANS le paquet ; le garde a refusé de resceller sur des noms de
+clients fictifs (hanami/shida/matsu) trouvés dans... les tables tldts vendorées. Nettoyé,
+leçon prise : les dépendances de test s'installent hors paquet (sandbox), jamais dans `skill/`.
+
+Bloc suivant du chantier : **D-UI-2** (colonne cible PE + chapeau adaptatif + fix `.cdet` amont),
+puis D-UI-5/6 (taxonomie Court terme + enveloppe bruyante), puis D-UI-3 (colonnes adaptatives).
+
+---
+
+## 2026-07-31 (15) — Bloc 2 : la courbe coté vit (D-UI-7), et le filet s'est enrichi d'une fixture et d'une clé
+
+Thomas a validé D-UI-7 en séance (« Ok on peut avancer ») après avoir lui-même éclairé la
+généalogie : le graphe coté de Gronier remontait parce que Gronier avait l'onglet Historique —
+le skill en découle, INTERAGYR n'en a pas. Pas un bug de dessin : le vide D50.
+
+**Fait** : repli à 2 points dans `p2_fill` — sans aucune Valorisation, la « Poche financière »
+(la SEULE série que le template dessine — `data_js` global est calculé et jamais dessiné,
+un cousin du canvas PE) se trace du capital investi coté (mois du premier investissement) à la
+valeur à l'arrêté, `degraded=True`, **note de sincérité** sous le canvas, garde d'échelle
+±2,5 % réutilisée. `curve_end_eur` non posé — le QC « courbe ≈ actif net » juge le patrimoine
+global, pas la poche cotée.
+
+**La leçon de filet** : AUCUNE fixture n'exerçait le repli (toutes celles qui ont du coté ont
+des Valorisations) — un invariant non testé n'est qu'un commentaire. Créé `fx_courbe2pts`
+(fx_simple moins Valorisations), enseigné au harnais la clé `curve_degraded` (jugée sur CHAQUE
+fixture : un repli qui cesse de s'annoncer est une régression muette), golden ré-enregistré
+**avec diff prouvé** (7 fixtures inchangées au centime ; le « 9/9 » de fx_lignes_classes au
+golden était rassis d'avant le QC de traversée, remis à 10/10 réel). Store de vérité dérivé
+via D47 — `validation_app/ingest` remonté par Thomas en **lecture seule** (le montage de
+l'ancienne session n'existait plus ; `DEFAUT_VALIDATION_APP` dans `deriver_stores.py` pointe
+un chemin de session mort, à paramétrer au prochain passage). Golden 8/8, **L3a 8/8 à
+l'octet**, re-run INTERAGYR QC 9/9 (05/26 → 07/26, 4,50 → 4,48 M€, échelle figée), actif brut
+inchangé, paquet rescellé **134 fichiers**, selfcheck OK, N3 verte.
+
+---
+
+## 2026-07-31 (16) — Bloc 3 : D-UI-2 soldé — la cible à sa place, le chapeau qui dit vrai, la durée réparée à la racine
+
+Trois gestes, trois familles différentes — et c'est la leçon du bloc :
+
+- **Décision de style** : colonne « Cible (MOIC/TRI) » supprimée du tableau fonds (retour aux
+  8 colonnes du contrôle A) — la cible vit dans le sous-texte. Le tableau titres garde la
+  sienne (pas de redondance là-bas). La décision est un invariant : test_pnc la garde.
+- **Bug amont, réparé à la racine** : le `.cdet` tronqué (« · 7 ») n'était PAS un défaut du
+  store — le store porte le nombre sémantique (`duration_target: 7`), c'est le **lecteur** qui
+  n'apposait pas le suffixe attendu par le template (« valeurs pré-formatées »). `_duree()`
+  posé dans lecteur_store.py, même contrat que `_moic()` : préserver la valeur, jamais la
+  résumer. « Cible 2,0x · 7y » de retour au re-run.
+- **Adaptivité** : chapeau W4 calculé des classes réellement présentes (fonds hors titres) —
+  « Fonds de private equity » pour INTERAGYR, « Fonds non cotés » pour fx_simple (PE + dette
+  privée). Deuxième titre adaptatif du moteur après geo_title.
+
+Filet : test_pnc vert deux modes (dont un sélecteur corrigé — il jugeait le chapeau du bloc
+CÔTÉ, premier `.cote-exh-hd` du document : scoper au conteneur), golden 8/8, L3a 8/8 à
+l'octet, re-run INTERAGYR QC 9/9 déterministe, paquet rescellé 134 fichiers, selfcheck OK.
+
+---
+
+## 2026-07-31 (17) — Bloc 4 : « Court terme » déplié, l'enveloppe ne ment plus — et l'AV vivait du repli
+
+**D-UI-5 (option 1, validée en séance)** : le fourre-tout « Court terme » disparaît de
+l'affichage — « Monétaire » (fonds monétaires) et « Liquidités » (liquidités de contrats G6 +
+comptes hors contrat) le remplacent. La pièce maîtresse est `classe_liquidite()`, **règle
+unique à deux consommateurs** (donut Classes, widget Disponibilités) : l'incohérence documentée
+par spec_tri_blocs §4.b est soldée — les lignes « Court terme » réintègrent le widget,
+« Trésorerie » et « Solde en espèces » sont captés.
+
+**D-UI-6** : `envelope()` externalisée en table `ENV_TABLE` (ajouter une enveloppe = une ligne
++ une couleur, plus jamais un patch de fonction). **La trouvaille qui justifie tout le geste** :
+l'assurance-vie n'était RECONNUE nulle part — elle vivait du repli silencieux. Elle est nommée
+(« av », « assurance vie », préfixe « assurance »), et l'inconnu va en **« Autre (à
+qualifier) »** (bordeaux) + ⚠ au rapport listant les natures verbatim. Contrôle négatif exercé
+à l'unité (« Plan Épargne Logement » → Autre + signalé) ; formes AV/CTO/PEA/Capi vérifiées une
+à une.
+
+Filet : golden 8/8, L3a 8/8 à l'octet, re-run INTERAGYR QC 9/9 déterministe (zéro « Court
+terme », Liquidités + Monétaire au donut, Compte Titres ×10 inchangé, zéro « Autre »), paquet
+rescellé 134 fichiers, selfcheck OK, N3 verte.
+
+---
+
+## 2026-07-31 (18) — Recadrage de Thomas : le fork est le PoC (D54), l'hébergement est son Docker local (D55)
+
+Deux décisions de scope posées en séance, consignées au registre :
+
+- **D54** : le merge fork → main cesse d'être l'objectif — irréaliste en temps, dit
+  explicitement. Le fork est le **véhicule du PoC** ; on avance au maximum quand même. Le
+  registre des écarts change de titre sans changer de contenu : de plan de réconciliation à
+  **spécification documentée** de ce que main devrait apprendre du fork. La discipline du
+  filet ne bouge pas : elle protège désormais le PoC pour lui-même.
+- **D55** : aucun accès Railway — le pipeline réaliste est **MCP local + Docker local de
+  Thomas**. Les livrables d'hébergement deviennent des artefacts exécutables chez lui
+  (docker-compose Postgres + MCP, migrations dont `contexte_marche` D52, runbook), et le
+  dashboard admin D34/D52 se construira contre ce Docker.
+
+La cible concrète reformulée : **un PoC fonctionnel de bout en bout** — pipeline d'extraction
+(prouvé), rendu (chantier UI aux 4/5), référentiels + contexte sur Postgres local, dashboard
+admin en artefact live, deux clients réels (INTERAGYR fait, Gronier en B-v).
+
+---
+
+## 2026-07-31 (19) — Le Gronier corrigé instruit (E1–E8), trois arbitrages, bloc 5 livré
+
+Thomas a fourni le **Gronier corrigé** (archivé, 3ᵉ contrôle d'époque) avec la doctrine : la
+structure INTERAGYR « met tout le monde d'accord », Gronier est hyperspécifique. Dépouillé en
+E1–E8 (dossier UI §10). Trois arbitrages en séance :
+
+- **D-UI-3 : « Profils adaptatifs »** — union A∪B/C au manifeste, colonne 100 % vide masquée.
+  La tension E1 (le Gronier corrigé garde ses 10 colonnes avec « — ») est tranchée en faveur
+  de l'adaptivité. Implémentation à venir (prochain bloc).
+- **D-UI-9 : « garder les lignes et caviarder les valeurs aberrantes »** — résolution de la
+  tension E2 (le Gronier corrigé supprimait les sous-tableaux ISIN ; or les +350 % venaient de
+  perfs CALCULÉES sur données assureur manquantes). FAIT : borne ±100 % (`PERF_LIGNE_MAX_PCT`),
+  la ligne reste, la perf aberrante s'affiche « — », ⚠ au run. Remède de fond nommé : Modified
+  Dietz sur mouvements datés (lié au contrat de données de la courbe à sauts E7).
+- **Quick wins « oui, les cinq »** — FAITS : E3 widget Arbitrages supprimé quand vide (plus de
+  placeholder) ; E4 SRI porte son périmètre (« coté + non coté » / « portefeuille coté seul ») ;
+  E5 MP « Perf % » → « % Contrat » (poids, discriminant) ; E6a poches ↳ indentées aux
+  Disponibilités (si ≥ 2 poches liquides) ; E6b donut Partenaires agrégé par partenaire
+  (parenthèse À CHIFFRE = contrat → fusion ; sans chiffre = mandat → distinct — testé sur les
+  deux pièces).
+
+**Défauts de la pièce consignés au README des contrôles** : écart 300 000 € donut vs
+Historique (hérité, non corrigé) ; colonne Cible conservée contre D-UI-2 (suppression
+maintenue) ; W2/W3 PE absents (la banque est en avance, D53 — ne pas régresser).
+
+**D44 a mordu deux fois au rescellement — sur MES commentaires** : « Gronier » et une vraie
+référence de contrat étaient entrés dans le paquet par les commentaires de code ; puis sur
+l'exemple générique « AB123456 » lui-même (motif trop plausible). Dé-identifié en formes non
+appariables. Le garde protège aussi contre la documentation.
+
+Filet : golden 8/8, L3a 8/8, test_pnc OK, re-run INTERAGYR QC 9/9 déterministe (placeholder
+Arbitrages disparu, SRI suffixés), paquet rescellé 134 fichiers.
+
+Restent au chantier UI : **D-UI-3 implémentation** (profils adaptatifs — gros refactor),
+**D-UI-8** (conventions), arbitrage 1c (page Détails PE), et les chantiers E7 (courbe à sauts
+de flux — exige Valorisations+Mouvements datés, lien D50) et E6/dispo-poches côté données.
+
+---
+
+## 2026-07-31 (20) — Bloc 6 : les colonnes adaptatives vivent (D-UI-3 soldé)
+
+Le gros refactor du chantier UI, plus court que craint parce que les DONNÉES portaient déjà
+l'union : `_cmetrics` émettait `nant` et `gpct_ann` (à « — ») depuis toujours. Fait :
+
+- `perf["cote_cols"]` — le jeu de colonnes est une DONNÉE calculée (union A∪B/C, 12
+  candidates) ; `_col_vivante()` masque toute colonne dont toutes les cellules sont vides ;
+  « Valeur » est pivot (toujours là) ; « Valeur projetée » reste sur `show_ps_corrige`.
+- Template déclaratif (D28 honoré) : thead en boucle, cellules par macro `cote_cells` (gras
+  du pivot et padding du dernier th dérivés), **sous-tableau ISIN dé-triplé** en macro unique
+  `acc_lines_tbl`, colspan dérivé de la longueur du jeu.
+- **Prouvé dans les deux sens** : INTERAGYR passe de 10 colonnes (dont 4 vides) à **6
+  colonnes naturelles** — le point 4 de la revue du 30/07 est soldé — et fx_simple garde ses
+  8 avec YTD vivants. Le jeu de chaque fixture est gravé au **golden** (`cote_cols`), diff de
+  ré-enregistrement prouvé (8 fixtures inchangées sur les valeurs).
+
+Filet : golden 8/8, L3a 8/8 à l'octet, test_pnc OK, re-run INTERAGYR QC 9/9 déterministe,
+paquet rescellé 134 fichiers, selfcheck OK, N3 verte.
+
+Le chantier UI n'a plus qu'un point ouvert de design : **D-UI-8** (conventions des chapeaux
+bloc 00, libellés partenaires — quasi zéro code) et l'arbitrage 1c (page Détails PE). Les
+chantiers de données (courbe à sauts E7, Modified Dietz D-UI-9, VL non cotées D51-3) suivent.
+
+---
+
+## 2026-07-31 (21) — Bloc 7 : D-UI-8 soldé, et une leçon de livraison
+
+**D-UI-8 arbitré et fait** : les chapeaux du bloc 00 disent « Reporting au [date] » (les trois
+conventions d'époque sont mortes), et la forme du STORE fait foi pour les libellés partenaires
+(« UBS (Dauphine AM — …) », plus esthétique aux yeux de Thomas — zéro code, convention
+consignée).
+
+**La leçon** : Thomas a vu 10 colonnes dont 4 vides là où j'annonçais 6 — le rendu D-UI-3
+n'avait JAMAIS été livré. La commande composée du bloc 6 avait expiré APRÈS la copie du golden
+mais AVANT celle du rendu, et j'avais « vérifié » la livraison à la taille du fichier (102 ko ≈
+102 ko) au lieu du contenu. Règle prise : **une livraison se vérifie au CONTENU du fichier
+livré** (thead extrait, chapeau grep-é), jamais à sa taille ni au succès apparent d'un cp.
+OneDrive était innocent (tué depuis un mois côté Thomas).
+
+Filet : golden 8/8, L3a 8/8, re-run QC 9/9, rendu livré et vérifié au contenu (6 colonnes,
+chapeau daté), paquet rescellé 134 fichiers.
+
+**LE CHANTIER UI EST SOLDÉ — 8 décisions sur 8** (D-UI-1/D53, 2, 3, 5, 6, 7, 8, 9). Reste
+ouvert : arbitrage 1c (page Détails PE), et les chantiers de DONNÉES nés du chantier :
+courbe à sauts de flux (E7), Modified Dietz lignes (D-UI-9), VL non cotées (D51-3),
+Disponibilités par poche côté données. Prochains fronts : canal éditorial, D50 arrêtés,
+B-v Gronier, dashboard admin sur Docker local (D55).
+
+---
+
+## 2026-07-31 (22) — Le dashboard admin VIT : artefact live validé en conditions réelles (D34/D52/D55/D56)
+
+Premier front post-chantier-UI, choisi par Thomas pour « valider le pipeline de validation +
+le concept d'artefact live comme dashboard ». Fait dans l'heure, MCP local vivant :
+
+- **Sondé avant de construire** : formes réelles de `ref_adjudications` (répartition incluse),
+  `ref_bundle` (compte des 4 tables — 17 acteurs / 2 successions / 9 gabarits / 261 ISIN).
+- **Pipeline validé de bout en bout DEPUIS la surface admin** : proposition de démo déposée
+  par `ref_propose` → visible en file dans l'artefact → **rejetée par Thomas depuis le
+  dashboard** (13:36:28 UTC, tracée au Postgres, 7 rejetées / 1 acceptée / 0 en attente).
+  Constat au passage : le garde du commentaire obligatoire ne juge pas le TEXTE (« Lorem
+  ipsum dolor » passe) — tracé qui/quand mécanique, pourquoi sous responsabilité de l'arbitre.
+- **L'artefact** (`referentiels-admin-dashboard`) : compteurs du canonique, onglets par statut,
+  cartes avec clé/proposition/motif/provenance D44 (absences DITES), arbitrage avec
+  commentaire obligatoire et confirmation d'écriture canonique, **heure de dernière lecture**
+  affichée avec l'avertissement « pas du temps réel » (D34/RUNBOOK §0).
+- **Sémantique de visibilité posée en séance** (question de Thomas sur le remote futur) :
+  aujourd'hui local = surface admin par construction ; demain remote = les CGP n'atteignent
+  que `ref_bundle` + `ref_propose`, l'arbitrage et le contexte D52 restent admin-only, les
+  stores clients ne transitent jamais (D33/D35/D36) ; seul chantier neuf au portage : l'auth.
+- **D56 (gouvernance, point de Thomas)** : la source versionnée fait foi —
+  `dashboard/dashboard_admin_artifact.html` + `dashboard/README.md` (règles, garde-fous à
+  préserver dans tout portage) ; l'artefact Cowork n'est qu'un déploiement.
+
+Verdict de Thomas : « le rendu est très satisfaisant ». Prochains fronts dans l'ordre proposé :
+**contexte de marché T3-26** (dernier bloc vide du reporting), spec courte du canal éditorial,
+B-v Gronier (dès dépôt des pièces), D50 arrêtés.
+
+---
+
 ## À faire ensuite
 
 > Réécrit le 2026-07-29 au soir, après la CDC v5. La brique « producteur de propositions » de la
@@ -1946,13 +2201,14 @@ son premier run réel VALIDÉ** : INTERAGYR de bout en bout, corrigé après deu
 Thomas contre le contrôle d'époque (QC 9/9 dont traversée, SRI du contrôle retrouvé par la
 mécanique, enveloppes justes, 11 min vs 25).
 
-**Prochain gros morceau : le CHANTIER UI** — discussion de design dédiée, sur contexte frais.
-Pièces : les deux contrôles d'époque (`reference/controles_epoque/`), la revue complète
-(`docs/revue_controle_interagyr_2026-07-30.md`, §2-quater pour l'état final). Périmètre : canvas
-PE (plomberie prête, dessin manquant — premier candidat), double donut coté/non coté,
-sous-tableaux par contrat + **colonnes adaptatives par disponibilité de données** (principe de
-Thomas), dépliage « Court terme » (G6), repli enveloppe à rendre bruyant, courbe 2 points
-nouveaux clients (à valider), blocs explicatifs PE, colonne cible.
+**Chantier UI : blocs 1–4 FAITS le 31/07** (dossier `docs/chantier_ui_design_2026-07-31.md`,
+JOURNAL 14–17) : canvas PE rétabli (**D53**, renversement arbitré + provenance « au coût »),
+courbe coté 2 points (D-UI-7, fixture + clé golden), colonne cible/chapeau/durée (D-UI-2),
+Monétaire/Liquidités + enveloppe bruyante (D-UI-5/6, l'AV est nommée). **Reste du chantier :
+D-UI-3, les colonnes adaptatives** — le gros refactor déclaratif des blocs 02/03 (modèle :
+mécanisme d'`exhaustif`), deux arbitrages ouverts (masquage mécanique vs seuils métier ; union
+A∪B/C vs B/C) — puis **D-UI-8** (chapeaux bloc 00, libellés partenaires) et l'arbitrage 1c
+(page « Détails » PE). Le double donut existait déjà (2b clos sans template).
 
 **En parallèle / ensuite, par ordre d'utilité :**
 
@@ -1963,14 +2219,16 @@ nouveaux clients (à valider), blocs explicatifs PE, colonne cible.
 - **SRI du référentiel ISIN** : colonne vide sur 261 lignes — chantier de DONNÉE (DIC/PRIIPs).
 - **B-v** : réconciliation batchée + run Gronier (complexité croissante) — le contrôle d'époque
   est déjà archivé. Puis les questions CGP pendantes (K7, Himalia, Wealins).
-- **Hébergement D43** (Railway, côté Thomas) — le MCP a déjà servi un run réel en local.
+- **Hébergement D55** (amende D43) : **Docker local de Thomas**, pas Railway (aucun accès).
+  Livrables à produire : docker-compose (Postgres + MCP référentiels), migrations (dont
+  `contexte_marche`, D52), runbook — Thomas exécute chez lui.
 - Structure : colonnes « Dernière VL / Date de VL » (PE, D51 étage 3) + AskUser « fonds PE sans
   document » au lot batché.
 - **La 8ᵉ fixture Historique** (validée par Thomas) : couvre les lignes annuelles du tableau de
   supervision, aujourd'hui en production sans aucun test. Déplace le golden.
 - **INTERAGYR comme second client réel** : `Reporting_INTERAGYR_v4.xlsx` existe dans la session Gronier —
   en tirer un store rendrait A9 ordonnançable et donnerait un second point de comparaison à L3b.
-- **Hébergement (D43)** : Railway pour MCP + Postgres. Entièrement côté Thomas.
+- ~~Hébergement (D43) : Railway~~ — **remplacé par D55** (Docker local, cf. ci-dessus).
 - **Dashboard admin en artefact live (D34 / B5)** — rappelé par Thomas le 2026-07-29. La file
   d'adjudication a besoin d'une surface où l'admin voit les propositions, arbitre, et suit les drifts.
   C'est un live artifact (il lit le MCP, écrit via `ref_arbitrer`), et il devra **afficher l'heure de sa
